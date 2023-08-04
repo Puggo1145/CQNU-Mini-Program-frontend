@@ -1,5 +1,8 @@
+import Taro from "@tarojs/taro"
 import { View, Text, Image } from "@tarojs/components"
 import { useState, Fragment } from "react"
+
+import './TagContent.css'
 
 import likeIcon from "../../../../static/post/post-like-icon.png"
 import commentIcon from "../../../../static/post/post-comment-icon.png"
@@ -56,7 +59,13 @@ export default function TagContent() {
 
     return (
         <Fragment>
-            <View className="index-content-tags-createPost"></View>
+            <View className="index-content-tags-createPost" onClick={
+                () => {
+                    Taro.navigateTo({
+                        url: '/pages/posts/createpost/createpost'
+                    })
+                }}
+                ></View>
             <View className="index-content-tags">
                 {
                     tags.map((tag) => {

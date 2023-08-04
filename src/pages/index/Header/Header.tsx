@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { View } from "@tarojs/components"
 
 interface headerItemsType {
@@ -10,7 +11,7 @@ interface headerItemsType {
 export default function header() {
 
   const [headerItems, setHeaderItems] = useState<headerItemsType[]>([
-    {name: '话题', isCurrent: true, id: 'topic'},
+    {name: '话题', isCurrent: true, id: 'index'},
     {name: '热榜', isCurrent: false, id: 'hot'},
     {name: '消息', isCurrent: false, id: 'message'},
   ])
@@ -31,7 +32,7 @@ export default function header() {
         {
           headerItems.map((item) => {
             return (
-              <View className={`index-header-item ${item.isCurrent && 'index-header-isCurrent'}`} key={item.id} onClick={() => handleHeaderItemClick(item.id)}>{item.name}</View>
+              <Link to={`pages/index/${item.id}`} className={`index-header-item ${item.isCurrent && 'index-header-isCurrent'}`} key={item.id} onClick={() => handleHeaderItemClick(item.id)}>{item.name}</Link>
             )
           })
         }

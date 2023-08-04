@@ -3,7 +3,8 @@ export default defineAppConfig({
     'pages/index/index',
     'pages/study/study',
     'pages/mine/mine',
-    'pages/service/service'
+    'pages/service/service',
+    'pages/posts/createpost/createpost',
   ],
   window: {
     backgroundTextStyle: 'light',
