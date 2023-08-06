@@ -21,9 +21,6 @@
   font-weight: 700;
   letter-spacing: 1.2px;
   margin-left: 4px;
-<<<<<<< HEAD
-  margin-bottom: 2px;
-=======
 }
 .createpost-form {
   display: block;
@@ -136,5 +133,4 @@
   border-radius: 22px;
   background: #4E6AFF;
   color: #fff;
->>>>>>> 5e3e918 (post create ui)
 }

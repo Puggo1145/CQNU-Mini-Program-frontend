@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 dist/
 deploy_versions/
 .temp/
@@ -6,6 +5,4 @@ deploy_versions/
 node_modules/
 .DS_Store
 .swc
-=======
 node_modules
->>>>>>> 5e3e918 (post create ui)

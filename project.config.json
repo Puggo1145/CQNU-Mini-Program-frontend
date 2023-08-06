@@ -25,18 +25,10 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
-<<<<<<< HEAD
-=======
-  "appid": "wx5e10bbd063310491",
->>>>>>> 5e3e918 (post create ui)
   "libVersion": "3.0.0",
   "packOptions": {
     "ignore": [],
     "include": []
-<<<<<<< HEAD
   },
   "appid": "wx5e10bbd063310491"
-=======
-  }
->>>>>>> 5e3e918 (post create ui)
 }

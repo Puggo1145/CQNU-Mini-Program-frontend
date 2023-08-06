@@ -1,17 +1,10 @@
-<<<<<<< HEAD
-import Taro from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
-=======
 import { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
->>>>>>> 5e3e918 (post create ui)
 
 import './createpost.css'
 
 export default function createpost() {
-<<<<<<< HEAD
-=======
 
   const [tags, setTags] = useState<string[]>([
     '校园日常',
@@ -58,7 +51,6 @@ export default function createpost() {
   }
   
 
->>>>>>> 5e3e918 (post create ui)
   return (
     <View className='createpost-wrapper'>
       <View className='createpost-header'>
@@ -67,8 +59,6 @@ export default function createpost() {
         }}></View>
         <Text className='createpost-header-title'>发布</Text>
       </View>
-<<<<<<< HEAD
-=======
       <form className='createpost-form'>
         <input className='createpost-title' type="text" name='title' placeholder='填写标题会更受欢迎哦！' />
         <textarea className='createpost-content' name="content" placeholder='添加正文，不少于15个字'></textarea>
@@ -108,7 +98,6 @@ export default function createpost() {
         </View>
         <Button className='createpost-submit' formType='submit'>发布</Button>
       </form>
->>>>>>> 5e3e918 (post create ui)
     </View>
   )
 }
