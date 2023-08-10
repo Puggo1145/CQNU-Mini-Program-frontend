@@ -5,6 +5,7 @@ export default defineAppConfig({
     'pages/mine/mine',
     'pages/service/service',
     'pages/posts/createpost/createpost',
+    'pages/posts/postpage/postpage'
   ],
   window: {
     backgroundTextStyle: 'light',

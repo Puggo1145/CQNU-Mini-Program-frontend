@@ -1,0 +1,155 @@
+/*postcss-pxtransform disable*/
+.avatarStyle {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #9356F7;
+  margin-right: 8px;
+}
+.postpage-userLevel {
+  padding: 4px 8px 2px 8px;
+  border-radius: 27px;
+  background: #4E6AFF;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 8px;
+  color: #fff;
+}
+.postpage-editTime {
+  color: #BCBCBC;
+  font-size: 10px;
+  font-weight: 400;
+}
+.postpage-header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 14px;
+}
+.postpage-header .postpage-header-left {
+  display: flex;
+  align-items: center;
+}
+.postpage-header .postpage-header-left .postpage-back {
+  width: 18px;
+  height: 18px;
+  background-image: url('../../../static/post/backTo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.postpage-header .postpage-header-left .postpage-userInfo {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+}
+.postpage-header .postpage-header-left .postpage-userInfo .postpage-nickname {
+  margin-right: 8px;
+}
+.postpage-header .postpage-options {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../static/post/postOptions.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 120px;
+}
+.postpage-mainSection {
+  padding: 0 20px;
+  margin-top: 12px;
+}
+.postpage-mainSection .postpage-content {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  border-bottom: 0.5px solid #ECECEC;
+}
+.postpage-mainSection .postpage-content .postpage-title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.postpage-mainSection .postpage-content .postpage-description {
+  color: #2C2C2C;
+  font-size: 14px;
+  font-weight: 400;
+}
+.postpage-mainSection .postpage-content .postpage-image {
+  width: 100%;
+  border-radius: 8px;
+  background: #658AD9;
+  margin-top: 14px;
+  margin-bottom: 24px;
+}
+.postpage-commentsTop {
+  display: flex;
+  padding: 14px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+.postpage-commentsTop .postpage-commentsNum {
+  color: #2C2C2C;
+  font-size: 16px;
+  font-weight: 700;
+}
+.postpage-commentsTop .postpage-commentViewSwitcher {
+  z-index: 0;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100px;
+  height: 28px;
+  border-radius: 14px;
+  background-color: #efefef;
+  font-size: 12px;
+  color: #BCBCBC;
+}
+.postpage-commentsTop .postpage-commentViewSwitcher .currentCommentView {
+  position: relative;
+  color: #4E6AFF;
+}
+.postpage-commentsTop .postpage-commentViewSwitcher .currentCommentView:after {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 46px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #fff;
+}
+.postpage-comment {
+  display: flex;
+  flex-direction: column;
+}
+.postpage-comment .postpage-commentUserInfo {
+  display: flex;
+  align-items: center;
+}
+.postpage-comment .postpage-commentUserInfo Text {
+  color: #2C2C2C;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 4px;
+}
+.postpage-comment .postpage-commentContent {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-left: 44px;
+  margin-bottom: 16px;
+}
+.postpage-comment .postpage-editTime {
+  margin-left: 44px;
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid #ececec;
+}

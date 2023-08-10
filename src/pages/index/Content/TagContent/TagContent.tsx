@@ -6,6 +6,7 @@ import './TagContent.css'
 
 import likeIcon from "../../../../static/post/post-like-icon.png"
 import commentIcon from "../../../../static/post/post-comment-icon.png"
+import { log } from "console"
 
 interface postContentType {
     title: string
@@ -29,9 +30,9 @@ export default function TagContent() {
     const [order, setOrder] = useState<'reply' | 'publish'>('reply')
 
     const [posts, setPosts] = useState<postContentType[]>([
-        { title: '教务系统怎么选课？', description: '新生，不太懂教务系统怎么用...', picture: '#', userId: 'uuid-111', avatarUrl: '', nickname: '这是一个昵称', likeNum: 0, commentNum: 0 },
+        { title: '教务系统怎么选课？', description: '新生，不太懂教务系统怎么用...', picture: '#', userId: 'uuid-111', avatarUrl: '#', nickname: '这是一个昵称', likeNum: 0, commentNum: 0 },
         { title: '宿舍水电怎么充值啊？', description: '如题', userId: 'uuid-111', avatarUrl: '', nickname: '这是一个昵称', likeNum: 0, commentNum: 0 },
-        { title: '如何评价原神这款游戏', description: '我不好评价，大伙们怎么看？', userId: 'uuid-111', avatarUrl: '', nickname: '这是一个昵称', likeNum: 0, commentNum: 0 },
+        { title: '如何评价原神这款游戏', description: '我不好评价，大伙们怎么看？', userId: 'uuid-111', avatarUrl: '#', nickname: '这是一个昵称', likeNum: 0, commentNum: 0 },
     ])
 
     const [tags, setTags] = useState<tagType[]>([
@@ -55,6 +56,12 @@ export default function TagContent() {
 
     function handleOrderSwitch(order: string): void {
         setOrder(order as 'reply' | 'publish')
+    }
+
+    function enterPost() {
+        Taro.navigateTo({
+            url: '/pages/posts/postpage/postpage'
+        })
     }
 
     return (
@@ -93,7 +100,7 @@ export default function TagContent() {
                     {
                         posts.map((post) => {
                             return (
-                                <View className="index-content-post" key={post.userId}>
+                                <View className="index-content-post" key={post.userId} onClick={enterPost}>
                                     <View className="post-texts">
                                         <Text className="post-title">{post.title}</Text>
                                         <Text className="post-description">{post.description}</Text>
@@ -122,6 +129,5 @@ export default function TagContent() {
                 </View>
             </View>
         </Fragment>
-
     )
 }

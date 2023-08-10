@@ -222,6 +222,16 @@
       -ms-flex-align: center;
           align-items: center;
 }
+@media screen and (min-width: 319px) {
+  .index-tagContent {
+    height: calc(100vh - 120px);
+  }
+}
+@media screen and (min-width: 376px) {
+  .index-tagContent {
+    height: calc(100vh - 160px);
+  }
+}
 
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].oneOf[0].use[2]!./src/pages/index/Content/Hot/Hot.css ***!

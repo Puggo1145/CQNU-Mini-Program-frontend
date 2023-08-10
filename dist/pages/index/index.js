@@ -277,7 +277,7 @@ function TagContent() {
       description: '新生，不太懂教务系统怎么用...',
       picture: '#',
       userId: 'uuid-111',
-      avatarUrl: '',
+      avatarUrl: '#',
       nickname: '这是一个昵称',
       likeNum: 0,
       commentNum: 0
@@ -293,7 +293,7 @@ function TagContent() {
       title: '如何评价原神这款游戏',
       description: '我不好评价，大伙们怎么看？',
       userId: 'uuid-111',
-      avatarUrl: '',
+      avatarUrl: '#',
       nickname: '这是一个昵称',
       likeNum: 0,
       commentNum: 0
@@ -333,6 +333,11 @@ function TagContent() {
   }
   function handleOrderSwitch(order) {
     setOrder(order);
+  }
+  function enterPost() {
+    _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().navigateTo({
+      url: '/pages/posts/postpage/postpage'
+    });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.View, {
@@ -384,6 +389,7 @@ function TagContent() {
         children: posts.map(function (post) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.View, {
             className: "index-content-post",
+            onClick: enterPost,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.View, {
               className: "post-texts",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.Text, {
