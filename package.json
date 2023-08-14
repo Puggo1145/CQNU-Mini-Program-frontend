@@ -54,7 +54,8 @@
     "@tarojs/taro": "3.6.11",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.14.2"
+    "react-router-dom": "^6.14.2",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",

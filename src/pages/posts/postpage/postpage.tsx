@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
+import useStore from '@/store/store'
 
 import './postpage.css'
 
@@ -27,6 +28,8 @@ interface commentType {
 
 export default function createpost() {
 
+    const statusBarHeight = useStore((state) => state.statusBarHeight)
+
     const [currentCommentView, setCurrentCommentView] = useState<number>(0)
 
     const [postContent, setPostContent] = useState<postContentType>({
@@ -47,7 +50,7 @@ export default function createpost() {
     const [commentsNum, setCommentsNum] = useState<number>(0)
 
     return (
-        <View className='postpage-wrapper'>
+        <View className='postpage-wrapper' style={{paddingTop: statusBarHeight + 'px'}}>
             <View className='postpage-header'>
                 <View className='postpage-header-left'>
                     <View className='postpage-back' onClick={() => { Taro.navigateBack() }}></View>

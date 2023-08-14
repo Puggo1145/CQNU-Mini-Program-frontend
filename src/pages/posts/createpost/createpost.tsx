@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
+import useStore from '@/store/store'
 
 import './createpost.css'
 
 export default function createpost() {
+
+  const statusBarHeight = useStore((state) => state.statusBarHeight)
 
   const [tags, setTags] = useState<string[]>([
     '校园日常',
@@ -52,7 +55,7 @@ export default function createpost() {
   
 
   return (
-    <View className='createpost-wrapper'>
+    <View className='createpost-wrapper' style={{paddingTop: statusBarHeight + 'px'}}>
       <View className='createpost-header'>
         <View className='createpost-header-back' onClick={() => {
           Taro.navigateBack()

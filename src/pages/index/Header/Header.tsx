@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Taro from "@tarojs/taro"
 import { Link } from "react-router-dom"
 import { View } from "@tarojs/components"
 
@@ -37,6 +38,12 @@ export default function header() {
           })
         }
       </View>
+      <View className="index-header-search" onClick={() => {
+        Taro.navigateTo({
+          url: '/pages/search/search'
+        })
+      }}
+        ></View>
     </View>
   )
 }

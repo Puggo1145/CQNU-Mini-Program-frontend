@@ -13,6 +13,7 @@ require("./prebundle/remoteEntry.js");
 require("./prebundle/node_modules_taro_weapp_prebundle_react_jsx-runtime_js.js");
 require("./prebundle/node_modules_taro_weapp_prebundle_react_js.js");
 
+require("./common");
 require("./vendors");
 require("./taro");
 require("./runtime");
@@ -25,17 +26,30 @@ require("./runtime");
   \*****************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+/* harmony import */ var _Users_admin_Desktop_CQNU_mini_program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store */ "./src/store/store.ts");
+
+
 
 
 
 function App(_ref) {
   var children = _ref.children;
+  var _useStore = (0,_store_store__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
+      return [state.statusBarHeight, state.setStatusBarHeight];
+    }),
+    _useStore2 = (0,_Users_admin_Desktop_CQNU_mini_program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_useStore, 2),
+    statusBarHeight = _useStore2[0],
+    setStatusBarHeight = _useStore2[1];
   (0,_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__.useLaunch)(function () {
     _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getSystemInfo({
       success: function success(res) {
-        console.log(res.statusBarHeight);
+        // 获取全局 statusBarHeight        
+        if (res.statusBarHeight) {
+          setStatusBarHeight(res.statusBarHeight - 8);
+        }
       }
     });
   });
@@ -98,7 +112,7 @@ var inst = App((0,_tarojs_plugin_framework_react_dist_runtime__WEBPACK_IMPORTED_
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-/******/ __webpack_require__.O(0, ["common"], function() { return __webpack_exec__("./src/app.ts"); });
+/******/ __webpack_require__.O(0, ["vendors","common"], function() { return __webpack_exec__("./src/app.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);;;
