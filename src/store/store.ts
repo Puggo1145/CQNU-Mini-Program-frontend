@@ -10,7 +10,7 @@ type Action = {
 
 const useStore = create<State & Action>()((set) => ({
     statusBarHeight: 0,
-    setStatusBarHeight: (statusBarHeight) => set(() => ({ statusBarHeight: statusBarHeight }))
+    setStatusBarHeight: (statusBarHeight) => set(() => ({ statusBarHeight: statusBarHeight })),
 }))
 
 export default useStore;
