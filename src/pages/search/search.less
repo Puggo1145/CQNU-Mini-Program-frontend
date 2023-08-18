@@ -37,8 +37,73 @@
     background-size: 16px;
     background-repeat: no-repeat;
     background-position: 320px center;
-    padding: 12px;
     color: #7F7F7F;
+    padding-left: 16px;
     font-size: 14px;
     letter-spacing: 1px;
+}
+
+.search-history {
+    margin-top: 12px;
+
+    .search-history-top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        Text {
+            color: #2C2C2C;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+        }
+
+        .search-history-delete {
+            width: 14px;
+            height: 14px;
+            background-image: url(../../static/common/delete.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            margin-right: 16px;
+        }
+    }
+
+    .search-history-list {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .search-history-item {
+            padding: 8px 16px;
+            border-radius: 16px;
+            background: #EFEFEF;
+            font-size: 12px;
+            color: #2C2C2C;
+            margin-right: 8px;
+        }
+    }
+}
+
+.hotSearch {
+    margin-top: 24px;
+
+    Text {
+        color: #2C2C2C;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.7px;
+    }
+
+    .hotSearch-list {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 12px;
+
+        color: #2C2C2C;
+        font-size: 14px;
+        letter-spacing: 0.7px;
+    }
 }
