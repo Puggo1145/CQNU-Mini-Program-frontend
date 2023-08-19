@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 type State = {
+    isLogin: boolean,
     user_id: string,
     phone_number: string,
     nick_name: string,
@@ -19,6 +20,7 @@ type Action = {
 
 // 创建zustand store
 const useUser = create<State & Action>((set) => ({
+    isLogin: false,
     user_id: 'test_id',
     phone_number: '',
     nick_name: 'Puggo',

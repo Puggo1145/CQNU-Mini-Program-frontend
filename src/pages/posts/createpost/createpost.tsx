@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Text, Button } from '@tarojs/components'
+import { View, Text, Button, Input } from '@tarojs/components'
 import useStore from '@/store/store'
 
 import './createpost.css'
@@ -21,6 +21,9 @@ export default function createpost() {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedImages, setSelectedImages] = useState<string[]>([])
 
+  const titleRef = useRef<HTMLInputElement>(null)
+  const contentRef = useRef<HTMLTextAreaElement>(null)
+  
   // 处理话题选择逻辑
   function handleTagSelect(tag: string) {
     if (selectedTags.includes(tag)) {
@@ -52,6 +55,66 @@ export default function createpost() {
     newImages.splice(index, 1);
     setSelectedImages(newImages);
   }
+
+  // 发布帖子
+  function handleSubmit() {    
+    if (titleRef.current && contentRef.current) {
+
+      if (titleRef.current.value.length < 1 || contentRef.current.value.length < 15) {
+        titleRef.current.placeholder = '请填写标题'
+        contentRef.current.placeholder = '请填写正文，不少于15个字'
+
+        Taro.showToast({
+          title: '检查标题或正文',
+          icon: 'error'
+        })
+        return
+      } else if (selectedTags.length < 1) {
+        Taro.showToast({
+          title: '请选择话题',
+          icon: 'error'
+        })
+
+        return
+      }
+
+      const title = titleRef.current.value
+      const content = contentRef.current.value
+      const tags = selectedTags
+      const images = selectedImages
+
+      Taro.request({
+        url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/createpost',
+        method: 'POST',
+        data: {
+          title,
+          content,
+          tags,
+          images
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          if (res.statusCode === 200) {            
+            Taro.showToast({
+              title: '发布成功',
+              icon: 'success'
+            })
+            // 1.5秒后返回
+            setTimeout(() => {
+              Taro.navigateBack()
+            }, 1500)
+          } else {
+            Taro.showToast({
+              title: '发布失败',
+              icon: 'none'
+            })
+          }
+        }
+      })
+    }
+  }
   
 
   return (
@@ -63,8 +126,8 @@ export default function createpost() {
         <Text className='createpost-header-title'>发布</Text>
       </View>
       <form className='createpost-form'>
-        <input className='createpost-title' type="text" name='title' placeholder='填写标题会更受欢迎哦！' />
-        <textarea className='createpost-content' name="content" placeholder='添加正文，不少于15个字'></textarea>
+        <Input ref={titleRef} className='createpost-title' type="text" name='title' placeholder='填写标题会更受欢迎哦！' />
+        <textarea ref={contentRef} className='createpost-content' name="content" placeholder='添加正文，不少于15个字'></textarea>
         <View className='createpost-uploadPic-area'>
           {
             selectedImages.map((image, index) => (
@@ -99,7 +162,7 @@ export default function createpost() {
             }
           </View>
         </View>
-        <Button className='createpost-submit' formType='submit'>发布</Button>
+        <Button className='createpost-submit' formType='submit' onClick={handleSubmit}>发布</Button>
       </form>
     </View>
   )

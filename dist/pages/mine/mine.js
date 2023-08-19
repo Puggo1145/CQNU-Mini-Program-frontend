@@ -144,42 +144,6 @@ var inst = Page((0,_tarojs_runtime__WEBPACK_IMPORTED_MODULE_0__.createPageConfig
 
 /***/ }),
 
-/***/ "./src/store/userInfo.ts":
-/*!*******************************!*\
-  !*** ./src/store/userInfo.ts ***!
-  \*******************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zustand */ "webpack/container/remote/zustand");
-/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(zustand__WEBPACK_IMPORTED_MODULE_0__);
-
-
-// 创建zustand store
-var useUser = (0,zustand__WEBPACK_IMPORTED_MODULE_0__.create)(function (set) {
-  return {
-    user_id: 'test_id',
-    phone_number: '',
-    nick_name: 'Puggo',
-    avatar_url: '',
-    user_level: 6,
-    user_exp: 10,
-    student_id: '2021050919079',
-    college: '好好学院',
-    major: '好好',
-    grade: '大三',
-    // 定义setUserInfo操作，它将用户信息合并到当前状态
-    setUserInfo: function setUserInfo(userInfo) {
-      return set(function (state) {
-        return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_1__["default"])((0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state), userInfo);
-      });
-    }
-  };
-});
-/* harmony default export */ __webpack_exports__["default"] = (useUser);
-
-/***/ }),
-
 /***/ "./src/static/mine/chat.png":
 /*!**********************************!*\
   !*** ./src/static/mine/chat.png ***!

@@ -27,10 +27,14 @@ require("./runtime");
   \*****************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store */ "./src/store/store.ts");
+/* harmony import */ var _store_userInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/userInfo */ "./src/store/userInfo.ts");
+/* harmony import */ var _store_postData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/postData */ "./src/store/postData.ts");
+
+
 
 
 
@@ -38,19 +42,55 @@ require("./runtime");
 
 function App(_ref) {
   var children = _ref.children;
+  // 数据 store ————————————————————————————————————————————————————————————
   var _useStore = (0,_store_store__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
       return [state.statusBarHeight, state.setStatusBarHeight];
     }),
-    _useStore2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_useStore, 2),
+    _useStore2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_4__["default"])(_useStore, 2),
     statusBarHeight = _useStore2[0],
     setStatusBarHeight = _useStore2[1];
+  var _usePostData = (0,_store_postData__WEBPACK_IMPORTED_MODULE_3__["default"])(function (state) {
+      return [state, state.setPostData];
+    }),
+    _usePostData2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_4__["default"])(_usePostData, 2),
+    postData = _usePostData2[0],
+    setPostData = _usePostData2[1];
+  var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
+      return [state, state.setUserInfo];
+    }),
+    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_4__["default"])(_useUser, 2),
+    userInfo = _useUser2[0],
+    setUserInfo = _useUser2[1];
   (0,_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__.useLaunch)(function () {
+    // 获取全局 statusBarHeight        
     _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getSystemInfo({
       success: function success(res) {
-        // 获取全局 statusBarHeight        
         if (res.statusBarHeight) {
-          setStatusBarHeight(res.statusBarHeight - 8);
+          setStatusBarHeight(res.statusBarHeight - 10);
         }
+      }
+    });
+    _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#1e1e1e'
+    });
+
+    // 请求初始数据————————————————————————————————————————————————————————————
+    // 用户是否登录 
+    if (userInfo.user_id !== '') {
+      setUserInfo({
+        isLogin: true
+      });
+    }
+
+    // 获取所有Tags 
+    _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().request({
+      method: 'GET',
+      url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/gettags',
+      success: function success(res) {
+        setPostData({
+          tags: res.data.data.tags
+        });
       }
     });
   });
@@ -95,7 +135,7 @@ function App(_ref) {
 
 
 
-var config = {"pages":["pages/index/index","pages/study/study","pages/mine/mine","pages/service/service","pages/posts/createpost/createpost","pages/posts/postpage/postpage","pages/search/search"],"window":{"backgroundTextStyle":"light","navigationBarBackgroundColor":"#fff","navigationStyle":"custom"},"tabBar":{"color":"#1e1e1e","selectedColor":"#3236d7","backgroundColor":"#fff","borderStyle":"white","list":[{"pagePath":"pages/index/index","text":"首页","iconPath":"./static/tabBar/home-icon.png","selectedIconPath":"./static/tabBar/home-selectedIcon.png"},{"pagePath":"pages/study/study","text":"学习","iconPath":"./static/tabBar/study-icon.png","selectedIconPath":"./static/tabBar/study-selectedIcon.png"},{"pagePath":"pages/service/service","text":"服务","iconPath":"./static/tabBar/service-icon.png","selectedIconPath":"./static/tabBar/service-selectedIcon.png"},{"pagePath":"pages/mine/mine","text":"我的","iconPath":"./static/tabBar/mine-icon.png","selectedIconPath":"./static/tabBar/mine-selectedIcon.png"}]}};
+var config = {"pages":["pages/index/index","pages/study/study","pages/mine/mine","pages/service/service","pages/posts/createpost/createpost","pages/posts/postpage/postpage","pages/search/search","pages/search/searchResult/searchResult"],"window":{"backgroundTextStyle":"light","navigationBarTextStyle":"black","navigationStyle":"custom"},"tabBar":{"color":"#1e1e1e","selectedColor":"#3236d7","backgroundColor":"#fff","borderStyle":"white","list":[{"pagePath":"pages/index/index","text":"首页","iconPath":"./static/tabBar/home-icon.png","selectedIconPath":"./static/tabBar/home-selectedIcon.png"},{"pagePath":"pages/study/study","text":"学习","iconPath":"./static/tabBar/study-icon.png","selectedIconPath":"./static/tabBar/study-selectedIcon.png"},{"pagePath":"pages/service/service","text":"服务","iconPath":"./static/tabBar/service-icon.png","selectedIconPath":"./static/tabBar/service-selectedIcon.png"},{"pagePath":"pages/mine/mine","text":"我的","iconPath":"./static/tabBar/mine-icon.png","selectedIconPath":"./static/tabBar/mine-selectedIcon.png"}]}};
 _tarojs_runtime__WEBPACK_IMPORTED_MODULE_2__.window.__taroAppConfig = config
 var inst = App((0,_tarojs_plugin_framework_react_dist_runtime__WEBPACK_IMPORTED_MODULE_3__.createReactApp)(_node_modules_babel_loader_lib_index_js_ruleSet_1_rules_5_use_0_app_ts__WEBPACK_IMPORTED_MODULE_5__["default"], react__WEBPACK_IMPORTED_MODULE_6__, (react_dom__WEBPACK_IMPORTED_MODULE_7___default()), config))
 

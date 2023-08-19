@@ -6,11 +6,12 @@ export default defineAppConfig({
     'pages/service/service',
     'pages/posts/createpost/createpost',
     'pages/posts/postpage/postpage',
-    'pages/search/search'
+    'pages/search/search',
+    'pages/search/searchResult/searchResult'
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
+    navigationBarTextStyle: 'black',
     navigationStyle: "custom"
   },
   tabBar: {

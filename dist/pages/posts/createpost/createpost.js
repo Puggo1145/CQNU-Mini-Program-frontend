@@ -45,6 +45,8 @@ function createpost() {
     _useState6 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_4__["default"])(_useState5, 2),
     selectedImages = _useState6[0],
     setSelectedImages = _useState6[1];
+  var titleRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var contentRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
   // 处理话题选择逻辑
   function handleTagSelect(tag) {
@@ -80,6 +82,61 @@ function createpost() {
     newImages.splice(index, 1);
     setSelectedImages(newImages);
   }
+
+  // 发布帖子
+  function handleSubmit() {
+    if (titleRef.current && contentRef.current) {
+      if (titleRef.current.value.length < 1 || contentRef.current.value.length < 15) {
+        titleRef.current.placeholder = '请填写标题';
+        contentRef.current.placeholder = '请填写正文，不少于15个字';
+        _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
+          title: '检查标题或正文',
+          icon: 'error'
+        });
+        return;
+      } else if (selectedTags.length < 1) {
+        _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
+          title: '请选择话题',
+          icon: 'error'
+        });
+        return;
+      }
+      var title = titleRef.current.value;
+      var content = contentRef.current.value;
+      var _tags = selectedTags;
+      var images = selectedImages;
+      _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().request({
+        url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/createpost',
+        method: 'POST',
+        data: {
+          title: title,
+          content: content,
+          tags: _tags,
+          images: images
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function success(res) {
+          if (res.statusCode === 200) {
+            _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
+              title: '发布成功',
+              icon: 'success'
+            });
+            // 1.5秒后返回
+            setTimeout(function () {
+              _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().navigateBack();
+            }, 1500);
+          } else {
+            _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
+              title: '发布失败',
+              icon: 'none'
+            });
+          }
+        }
+      });
+    }
+  }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_6__.View, {
     className: "createpost-wrapper",
     style: {
@@ -98,12 +155,14 @@ function createpost() {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
       className: "createpost-form",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_6__.Input, {
+        ref: titleRef,
         className: "createpost-title",
         type: "text",
         name: "title",
         placeholder: "\u586B\u5199\u6807\u9898\u4F1A\u66F4\u53D7\u6B22\u8FCE\u54E6\uFF01"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+        ref: contentRef,
         className: "createpost-content",
         name: "content",
         placeholder: "\u6DFB\u52A0\u6B63\u6587\uFF0C\u4E0D\u5C11\u4E8E15\u4E2A\u5B57"
@@ -153,6 +212,7 @@ function createpost() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
         className: "createpost-submit",
         formType: "submit",
+        onClick: handleSubmit,
         children: "\u53D1\u5E03"
       })]
     })]
