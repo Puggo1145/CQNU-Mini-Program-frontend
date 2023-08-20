@@ -148,7 +148,7 @@
 .postpage-comment .postpage-likecomment {
   position: absolute;
   top: 8px;
-  right: 20px;
+  left: 85%;
 }
 .postpage-comment .postpage-likecomment Image {
   width: 16px;

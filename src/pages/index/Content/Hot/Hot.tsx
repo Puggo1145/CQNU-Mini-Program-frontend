@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { View, Text } from "@tarojs/components"
 import Taro from "@tarojs/taro"
 
+import useUser from "@/store/userInfo"
+
 import './Hot.css'
 
 interface hotTagtype {
@@ -11,6 +13,8 @@ interface hotTagtype {
 }
 
 export default function Hot() {
+
+  const [isLogin, toLoginPage] = useUser((state) => [state.isLogin, state.toLoginPage])
 
   const [hotTags, setHotTags] = useState<hotTagtype[]>([
     // {post_id: '1', title: '热榜1', hot_index: '1'},
@@ -42,6 +46,13 @@ export default function Hot() {
             return (
               <View className="hot-tag" key={item.post_id} onClick={
                 () => {
+
+                  if (!isLogin) {
+                    toLoginPage()
+
+                    return
+                  }
+
                   Taro.navigateTo({
                     url: '/pages/posts/postpage/postpage?' + `post_id=${item.post_id}`
                   })

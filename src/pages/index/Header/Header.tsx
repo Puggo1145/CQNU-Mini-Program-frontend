@@ -3,6 +3,8 @@ import Taro from "@tarojs/taro"
 import { Link } from "react-router-dom"
 import { View } from "@tarojs/components"
 
+import useUser from "@/store/userInfo"
+
 interface headerItemsType {
   name: string
   isCurrent: boolean,
@@ -11,13 +13,22 @@ interface headerItemsType {
 
 export default function header() {
 
+  const [isLogin, toLoginPage] = useUser((state) => [state.isLogin, state.toLoginPage])
+
   const [headerItems, setHeaderItems] = useState<headerItemsType[]>([
-    {name: '话题', isCurrent: true, id: 'index'},
-    {name: '热榜', isCurrent: false, id: 'hot'},
-    {name: '消息', isCurrent: false, id: 'message'},
+    { name: '话题', isCurrent: true, id: 'index' },
+    { name: '热榜', isCurrent: false, id: 'hot' },
+    { name: '消息', isCurrent: false, id: 'message' },
   ])
 
-  function handleHeaderItemClick(id: string):void {
+  function handleHeaderItemClick(id: string): void {
+
+    if (!isLogin && id === 'message') {
+      toLoginPage()
+
+      return
+    }
+
     const newHeaderItems = headerItems.map((item) => {
       return {
         ...item,
@@ -26,15 +37,21 @@ export default function header() {
     })
     setHeaderItems(newHeaderItems)
   }
-  
+
   return (
     <View className='index-header'>
       <View className="index-header-items">
         {
           headerItems.map((item) => {
-            return (
-              <Link to={`pages/index/${item.id}`} className={`index-header-item ${item.isCurrent && 'index-header-isCurrent'}`} key={item.id} onClick={() => handleHeaderItemClick(item.id)}>{item.name}</Link>
-            )
+            if (item.id === 'message' && !isLogin) {
+              return (
+                <View className={`index-header-item ${item.isCurrent && 'index-header-isCurrent'}`} key={item.id} onClick={() => handleHeaderItemClick(item.id)}>{item.name}</View>
+              )
+            } else {
+              return (
+                <Link to={`pages/index/${item.id}`} className={`index-header-item ${item.isCurrent && 'index-header-isCurrent'}`} key={item.id} onClick={() => handleHeaderItemClick(item.id)}>{item.name}</Link>
+              )
+            }
           })
         }
       </View>
@@ -43,7 +60,7 @@ export default function header() {
           url: '/pages/search/search'
         })
       }}
-        ></View>
+      ></View>
     </View>
   )
 }

@@ -30,7 +30,7 @@ interface tagType {
 
 export default function TagContent() {
 // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
-    const user_id = useUser((state) => state.user_id)
+    const [user_id, isLogin, toLoginPage] = useUser((state) => [state.user_id, state.isLogin, state.toLoginPage])
 
 // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
     const [posts, setPosts] = useState<postContentType[]>([
@@ -108,6 +108,13 @@ export default function TagContent() {
 
     // 跳转到帖子
     function enterPost(post_id: string) {
+
+        if (!isLogin) {
+            toLoginPage()
+
+            return
+        }
+
         Taro.navigateTo({
             url: '/pages/posts/postpage/postpage?' + `post_id=${post_id}&user_id=${user_id}`
         })
@@ -117,6 +124,11 @@ export default function TagContent() {
         <Fragment>
             <View className="index-content-tags-createPost" onClick={
                 () => {
+
+                    if (!isLogin) {
+                        toLoginPage()
+                    }
+
                     Taro.navigateTo({
                         url: '/pages/posts/createpost/createpost'
                     })

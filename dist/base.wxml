@@ -61,14 +61,6 @@
   </button>
 </template>
 
-<template name="tmpl_0_18">
-  <checkbox value="{{i.p4}}" disabled="{{i.p2}}" checked="{{xs.b(i.p0,!1)}}" color="{{xs.b(i.p1,'#09BB07')}}" name="{{i.p3}}" style="{{i.st}}" class="{{i.cl}}" bindtap="eh"  id="{{i.uid||i.sid}}" data-sid="{{i.sid}}">
-    <block wx:for="{{i.cn}}" wx:key="sid">
-      <template is="{{xs.a(c, item.nn, l)}}" data="{{i:item,c:c+1,l:xs.f(l,item.nn)}}" />
-    </block>
-  </checkbox>
-</template>
-
 <template name="tmpl_0_23">
   <form report-submit="{{xs.b(i.p1,!1)}}" bindsubmit="eh" bindreset="eh" name="{{i.p0}}" report-submit-timeout="{{xs.b(i.p2,0)}}" style="{{i.st}}" class="{{i.cl}}" bindtap="eh"  id="{{i.uid||i.sid}}" data-sid="{{i.sid}}">
     <block wx:for="{{i.cn}}" wx:key="sid">
@@ -87,14 +79,6 @@
 
 <template name="tmpl_0_27_blur">
   <input value="{{i.p24}}" type="{{xs.b(i.p23,'')}}" password="{{xs.b(i.p11,!1)}}" placeholder="{{i.p12}}" placeholder-style="{{i.p14}}" placeholder-class="{{xs.b(i.p13,'input-placeholder')}}" disabled="{{i.p7}}" maxlength="{{xs.b(i.p9,140)}}" cursor-spacing="{{xs.b(i.p6,0)}}" confirm-type="{{xs.b(i.p4,'done')}}" confirm-hold="{{xs.b(i.p3,!1)}}" cursor="{{xs.b(i.p5,i.p24?i.p24.length:-1)}}" selection-start="{{xs.b(i.p22,-1)}}" selection-end="{{xs.b(i.p21,-1)}}" bindinput="eh" bindfocus="eh" bindblur="eh" bindconfirm="eh" name="{{i.p10}}" always-embed="{{xs.b(i.p1,false)}}" adjust-position="{{xs.b(i.p0,true)}}" hold-keyboard="{{xs.b(i.p8,false)}}" safe-password-cert-path="{{i.p15}}" safe-password-length="{{i.p17}}" safe-password-time-stamp="{{i.p20}}" safe-password-nonce="{{i.p18}}" safe-password-salt="{{i.p19}}" safe-password-custom-hash="{{i.p16}}" auto-fill="{{i.p2}}" bindkeyboardheightchange="eh" bindnicknamereview="eh" style="{{i.st}}" class="{{i.cl}}" bindtap="eh"  id="{{i.uid||i.sid}}" data-sid="{{i.sid}}"></input>
-</template>
-
-<template name="tmpl_0_48">
-  <radio value="{{i.p4}}" checked="{{xs.b(i.p0,!1)}}" disabled="{{i.p2}}" color="{{xs.b(i.p1,'#09BB07')}}" name="{{i.p3}}" style="{{i.st}}" class="{{i.cl}}" bindtap="eh"  id="{{i.uid||i.sid}}" data-sid="{{i.sid}}">
-    <block wx:for="{{i.cn}}" wx:key="sid">
-      <template is="{{xs.a(c, item.nn, l)}}" data="{{i:item,c:c+1,l:xs.f(l,item.nn)}}" />
-    </block>
-  </radio>
 </template>
 
 <template name="tmpl_0_62">

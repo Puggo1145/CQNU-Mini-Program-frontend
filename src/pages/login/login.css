@@ -1,0 +1,50 @@
+/*postcss-pxtransform disable*/
+.login-header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+.login-header .login-header-back {
+  width: 16px;
+  height: 16px;
+  background-image: url('../../static/common/backTo.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 8px;
+}
+.login-header Text {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+.login-content {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-content Image {
+  margin-top: 20px;
+}
+.login-content Text {
+  font-size: 14px;
+  color: #9e9e9e;
+}
+.login-content Button {
+  margin-top: 20px;
+  padding: 0 42px;
+  border: none;
+  border-radius: 56px;
+  background-color: #4e6aff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+.login-content Button:active {
+  background-color: #3553ff;
+}

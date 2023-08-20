@@ -7,7 +7,8 @@ export default defineAppConfig({
     'pages/posts/createpost/createpost',
     'pages/posts/postpage/postpage',
     'pages/search/search',
-    'pages/search/searchResult/searchResult'
+    'pages/search/searchResult/searchResult',
+    'pages/login/login'
   ],
   window: {
     backgroundTextStyle: 'light',

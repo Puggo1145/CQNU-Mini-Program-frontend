@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import Taro from "@tarojs/taro";
 
 type State = {
     isLogin: boolean,
@@ -12,6 +13,7 @@ type State = {
     college: string,
     major: string,
     grade: string,
+    toLoginPage: () => void
 }
 
 type Action = {
@@ -21,16 +23,23 @@ type Action = {
 // 创建zustand store
 const useUser = create<State & Action>((set) => ({
     isLogin: false,
-    user_id: 'test_id',
+    user_id: '',
     phone_number: '',
-    nick_name: 'Puggo',
+    nick_name: '',
     avatar_url: '',
-    user_level: 6,
-    user_exp: 10,
-    student_id: '2021050919079',
-    college: '好好学院',
-    major: '好好',
-    grade: '大三',
+    user_level: 0,
+    user_exp: 0,
+    student_id: '',
+    college: '学院',
+    major: '',
+    grade: '年级',
+
+    toLoginPage: () => {
+        Taro.navigateTo({
+            url: '/pages/login/login'
+        })
+    },
+    
     // 定义setUserInfo操作，它将用户信息合并到当前状态
     setUserInfo: (userInfo) => set((state) => ({ ...state, ...userInfo }))
 }))

@@ -199,6 +199,7 @@
 /******/ 				"webpack/container/remote/@tarojs/plugin-platform-weapp/dist/runtime",
 /******/ 				"webpack/container/remote/@tarojs/plugin-html/dist/runtime",
 /******/ 				"webpack/container/remote/@tarojs/plugin-framework-react/dist/runtime",
+/******/ 				"webpack/container/remote/@tarojs/plugin-http/dist/runtime",
 /******/ 				"webpack/container/remote/react-dom"
 /******/ 			],
 /******/ 			"pages/index/index": [
@@ -226,6 +227,11 @@
 /******/ 			"webpack/container/remote/@tarojs/plugin-framework-react/dist/runtime": [
 /******/ 				"default",
 /******/ 				"./@tarojs/plugin-framework-react/dist/runtime",
+/******/ 				null
+/******/ 			],
+/******/ 			"webpack/container/remote/@tarojs/plugin-http/dist/runtime": [
+/******/ 				"default",
+/******/ 				"./@tarojs/plugin-http/dist/runtime",
 /******/ 				null
 /******/ 			],
 /******/ 			"webpack/container/remote/react-dom": [
