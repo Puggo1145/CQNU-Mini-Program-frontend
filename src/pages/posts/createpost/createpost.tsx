@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button, Input } from '@tarojs/components'
 
+import useUser from '@/store/userInfo'
 import useStore from '@/store/store'
 import useRequest from '@/store/request'
 
@@ -13,6 +14,8 @@ export default function createpost() {
   const statusBarHeight = useStore((state) => state.statusBarHeight)
   const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
+  const user_id = useUser((state) => state.user_id)
+
 
   const [tags, setTags] = useState<string[]>([
     '校园日常',
@@ -22,6 +25,7 @@ export default function createpost() {
     '考研',
     '实习兼职',
   ])
+
 
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedImages, setSelectedImages] = useState<string[]>([])
@@ -92,16 +96,17 @@ export default function createpost() {
         url: requestUrl + '/posts/createpost',
         method: 'POST',
         data: {
-          title,
-          content,
-          tags,
-          images
+              user_id: user_id,
+              title: title,
+              content: content,
+              post_tag: "热门"
         },
         header: {
           'content-type': 'application/json'
         },
         success: function (res) {
-          if (res.statusCode === 200) {            
+          console.log(res);
+          if (res.data.code === '200') {            
             Taro.showToast({
               title: '发布成功',
               icon: 'success'
@@ -137,7 +142,7 @@ export default function createpost() {
           {
             selectedImages.map((image, index) => (
               <View key={index} className='createpost-selectedImage-wrapper'>
-                <img className='createpost-selectedImage' src={image} alt={`Selected-${index}`} />
+                < img className='createpost-selectedImage' src={image} alt={`Selected-${index}`} />
                 <View className='createpost-delete-btn' onClick={() => handleDeleteClick(index)}>&times;</View>
               </View>
             ))
