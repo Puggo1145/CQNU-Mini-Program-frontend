@@ -10,6 +10,7 @@ import './postpage.css'
 
 import likeImg from '../../../static/post/post-like-icon.png'
 import likeActivated from '../../../static/post/post-like-activated-icon.png'
+import deleteImg from '../../../static/post/delete.png'
 
 interface postContentType {
     post_id: string
@@ -53,6 +54,9 @@ export default function postpage() {
 
     const [currentCommentView, setCurrentCommentView] = useState<number>(0) // 评论排序方式
     const [isLiked, setIsLiked] = useState<boolean>(false) // 是否点赞帖子
+
+
+    const [moreIsOpened, setMoreIsOpened] = useState<boolean>(false) // 是否打开更多选项
 
     // 帖子内容
     const [postContent, setPostContent] = useState<postContentType>({
@@ -116,6 +120,7 @@ export default function postpage() {
 
     useEffect(() => {
         setCommentsNum(comments.length)
+
     }, [comments])
 
     // 点赞帖子
@@ -207,6 +212,55 @@ export default function postpage() {
         }
     }
 
+    // 开关 more 选项
+    function handleMoreClick(event) {
+        setMoreIsOpened(!moreIsOpened)
+    }
+
+    // 删除帖子
+    let deleteCheck = 0 // 点击两次才可以删除
+    function deletePost() {
+        if (deleteCheck === 0) {
+            Taro.showToast({
+                title: '再次点击以确认删除',
+                icon: 'none',
+                duration: 2000
+            })
+            deleteCheck++
+            return
+        } else if (deleteCheck === 1) {
+            Taro.request({
+                method: 'POST',
+                url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/deletepost',
+                data: {
+                    user_id: user_id,
+                    post_id: postContent.post_id
+                },
+                success(res) {
+                    if (res.statusCode === 200) {
+                        Taro.showToast({
+                            title: '删除成功',
+                            icon: 'success',
+                            duration: 2000
+                        })
+                        setTimeout(() => {
+                            Taro.navigateBack()
+                        }, 2000)
+                    } else {
+                        Taro.showToast({
+                            title: '删除失败, 请重试',
+                            icon: 'none',
+                            duration: 2000
+                        })
+                    }
+                }
+            })
+
+            deleteCheck = 0
+        }
+    }
+
+
     return (
         <View className='postpage-wrapper' style={{ paddingTop: statusBarHeight + 'px' }}>
             <View className='postpage-header'>
@@ -218,7 +272,7 @@ export default function postpage() {
                         <View className='postpage-userLevel'>Lv.{postContent.user_level}</View>
                     </View>
                 </View>
-                <View className='postpage-options'></View>
+                <View className='postpage-options' onClick={() => setMoreIsOpened(!moreIsOpened)}></View>
             </View>
             <View className='postpage-mainSection'>
                 <View className='postpage-mainSection-wrapper'>
@@ -273,12 +327,30 @@ export default function postpage() {
                     onConfirm={sendComment}
                 >
                 </Input>
-                <View className='postpage-likePost' onClick={likePost}>
-                    <Image src={isLiked ? likeActivated : likeImg}></Image>
-                    {postContent.likes_num > 99 ? '99+' : postContent.likes_num}
-                </View>
-                <View className='postpage-sharePost'></View>
+                {
+                    keyboardHeight >= 30 ?
+                        <View className='postpage-send'
+                            onClick={sendComment}
+                        >发送</View>
+                        :
+                        <View className='postpage-right'>
+                            <View className='postpage-likePost' onClick={likePost}>
+                                <Image src={isLiked ? likeActivated : likeImg}></Image>
+                                {postContent.likes_num > 99 ? '99+' : postContent.likes_num}
+                            </View>
+                            <View className='postpage-sharePost'></View>
+                        </View>
+                }
             </View>
+            {moreIsOpened &&
+                <View className='postpage-more-backgroundMask' onClick={handleMoreClick}>
+                    <View className='postpage-more' onClick={(event) => event.stopPropagation()}>
+                        {user_id === postContent.user_id && <View className='postpage-item postpage-delete' onClick={deletePost}>
+                            <Image src={deleteImg}></Image>
+                            <Text>删除</Text>
+                        </View>}
+                    </View>
+                </View>}
         </View>
     )
 }

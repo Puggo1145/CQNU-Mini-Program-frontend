@@ -23,7 +23,7 @@ type Action = {
 // 创建zustand store
 const useUser = create<State & Action>((set) => ({
     isLogin: false,
-    user_id: '',
+    user_id: 'test_id',
     phone_number: '',
     nick_name: '',
     avatar_url: '',

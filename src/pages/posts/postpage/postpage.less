@@ -171,6 +171,8 @@
 
     .postpage-likecomment {
         position: absolute;
+        display: flex;
+        align-items: center;
         top: 8px;
         left: 85%;
         
@@ -236,7 +238,6 @@
     }
 
     .postpage-likePost{
-        margin-left: 16px;
         display: flex;
         align-items: center;
 
@@ -253,6 +254,68 @@
         background-image: url(../../../static/post/post-share-icon.png);
         background-size: 100%;
         background-repeat: no-repeat;
-        margin-left: 8px;
+        margin-left: 12px;
+    }
+
+    .postpage-send {
+        width: 72px;
+        height: 32px;
+        border-radius: 16px;
+        background-color: #4E6AFF;
+        text-align: center;
+        line-height: 32px;
+        color: #fff;
+        margin-left: 12px;
+    }
+
+    .postpage-right {
+        position: relative;
+        right: -20px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+.postpage-more-backgroundMask {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.postpage-more {
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 101;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #fff;
+
+    .postpage-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+        background-color: #f6f6f6;
+        
+        Image {
+            width: 28px;
+            height: 28px;
+        }
+
+        Text {
+            font-size: 12px;
+            color: #d9230b;
+        }
     }
 }
