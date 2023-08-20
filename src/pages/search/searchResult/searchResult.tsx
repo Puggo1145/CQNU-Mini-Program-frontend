@@ -4,6 +4,8 @@ import Taro from "@tarojs/taro"
 
 import useStore from "@/store/store"
 import useUser from "@/store/userInfo"
+import useRequest from '@/store/request'
+
 
 import './searchResult.css'
 
@@ -27,6 +29,8 @@ export default function searchResult() {
 // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
     const statusBarHeight = useStore((state) => state.statusBarHeight)
     const user_id = useUser((state) => state.user_id)
+    const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
+
 
 // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
     // 搜索关键词
@@ -52,7 +56,7 @@ export default function searchResult() {
     useEffect(() => {
         Taro.request({
             method: 'GET',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/1?keyword=' + keyWord,
+            url: requestUrl + '/posts/1?keyword=' + keyWord,
             success: (res) => {
                 setPosts(res.data.data.postsList)
             }

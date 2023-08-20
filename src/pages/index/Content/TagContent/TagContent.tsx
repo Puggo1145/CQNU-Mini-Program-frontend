@@ -4,6 +4,8 @@ import { useState, useEffect, Fragment } from "react"
 
 import useUser from "@/store/userInfo"
 import usePostData from "@/store/postData"
+import useRequest from '@/store/request'
+
 
 import './TagContent.css'
 
@@ -31,6 +33,9 @@ interface tagType {
 export default function TagContent() {
 // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
     const [user_id, isLogin, toLoginPage] = useUser((state) => [state.user_id, state.isLogin, state.toLoginPage])
+
+    const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
+
 
 // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
     const [posts, setPosts] = useState<postContentType[]>([
@@ -70,7 +75,7 @@ export default function TagContent() {
         if (tags.length === 0) return // 确保Tags已经加载
         Taro.request({
             method: 'GET',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/1',
+            url: requestUrl + '/posts/1',
             success(res) {
                 setPosts(res.data.data.postsList)
             }
@@ -94,7 +99,7 @@ export default function TagContent() {
         // 加载对应帖子
         Taro.request({
             method: 'GET',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/1' + `?tag=${tagName}`,
+            url: requestUrl + '/posts/1' + `?tag=${tagName}`,
             success(res) {
                 setPosts(res.data.data.postsList)
             }

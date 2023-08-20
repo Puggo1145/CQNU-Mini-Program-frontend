@@ -3,6 +3,7 @@ import { View, Text } from "@tarojs/components"
 import Taro from "@tarojs/taro"
 
 import useUser from "@/store/userInfo"
+import useRequest from '@/store/request'
 
 import './Hot.css'
 
@@ -15,6 +16,8 @@ interface hotTagtype {
 export default function Hot() {
 
   const [isLogin, toLoginPage] = useUser((state) => [state.isLogin, state.toLoginPage])
+  const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
+
 
   const [hotTags, setHotTags] = useState<hotTagtype[]>([
     // {post_id: '1', title: '热榜1', hot_index: '1'},
@@ -30,7 +33,7 @@ export default function Hot() {
     // 获取热榜
     Taro.request({
       method: 'GET',
-      url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/gethotlist',
+      url: requestUrl + '/posts/gethotlist',
       success: (res) => {
         setHotTags(res.data.data.hotList)
       }

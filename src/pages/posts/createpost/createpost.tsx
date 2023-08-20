@@ -1,13 +1,18 @@
 import { useState, useRef } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button, Input } from '@tarojs/components'
+
 import useStore from '@/store/store'
+import useRequest from '@/store/request'
+
 
 import './createpost.css'
 
 export default function createpost() {
 
   const statusBarHeight = useStore((state) => state.statusBarHeight)
+  const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
+
 
   const [tags, setTags] = useState<string[]>([
     '校园日常',
@@ -84,7 +89,7 @@ export default function createpost() {
       const images = selectedImages
 
       Taro.request({
-        url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/createpost',
+        url: requestUrl + '/posts/createpost',
         method: 'POST',
         data: {
           title,

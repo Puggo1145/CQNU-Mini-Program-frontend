@@ -5,6 +5,8 @@ import { View, Text, Image, Input } from '@tarojs/components'
 
 import useStore from '@/store/store'
 import useUser from '@/store/userInfo'
+import useRequest from '@/store/request'
+
 
 import './postpage.css'
 
@@ -47,6 +49,7 @@ export default function postpage() {
     // 数据store ————————————————————————————————————————————————————————————————————————————————————
     // 本用户 id
     const user_id = useUser((state) => state.user_id)
+    const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
 
     // 基本 states ————————————————————————————————————————————————————————————————————————————————————
@@ -86,7 +89,7 @@ export default function postpage() {
         const user_id = getCurrentInstance().router?.params.user_id
         Taro.request({
             method: 'POST',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/visitpost',
+            url: requestUrl + '/posts/visitpost',
             data: {
                 post_id: post_id,
                 user_id: user_id
@@ -102,7 +105,7 @@ export default function postpage() {
         const user_id = getCurrentInstance().router?.params.user_id
         Taro.request({
             method: 'POST',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/visitpost',
+            url: requestUrl + '/posts/visitpost',
             data: {
                 post_id: post_id,
                 user_id: user_id
@@ -137,7 +140,7 @@ export default function postpage() {
         // 向后端发送点赞请求
         Taro.request({
             method: 'POST',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/likepost',
+            url: requestUrl + '/posts/likepost',
             data: {
                 post_id: postContent.post_id,
                 user_id: user_id // 这是当前用户的id
@@ -170,7 +173,7 @@ export default function postpage() {
         // 向后端发送点赞请求
         Taro.request({
             method: 'POST',
-            url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/likecomment',
+            url: requestUrl + '/posts/likecomment',
             data: {
                 comment_id: comment_id,
                 user_id: user_id // 当前用户的id
@@ -196,7 +199,7 @@ export default function postpage() {
         if (commentContent) {
             Taro.request({
                 method: 'POST',
-                url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/createcomment',
+                url: requestUrl + '/posts/createcomment',
                 data: { commentContent },
                 success(res) {
                     if (res.statusCode === 200) {
@@ -231,7 +234,7 @@ export default function postpage() {
         } else if (deleteCheck === 1) {
             Taro.request({
                 method: 'POST',
-                url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/deletepost',
+                url: requestUrl + '/posts/deletepost',
                 data: {
                     user_id: user_id,
                     post_id: postContent.post_id

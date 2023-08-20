@@ -5,6 +5,7 @@ import Taro from '@tarojs/taro'
 import useStore from './store/store'
 import useUser from './store/userInfo'
 import usePostData from './store/postData'
+import useRequest from './store/request'
 
 import './app.less'
 
@@ -13,6 +14,7 @@ function App({ children }: PropsWithChildren<any>) {
   const [statusBarHeight, setStatusBarHeight] = useStore((state) => [state.statusBarHeight, state.setStatusBarHeight])  
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData])
   const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
+  const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
   useLaunch(() => {
     // 获取全局 statusBarHeight        
@@ -37,7 +39,7 @@ function App({ children }: PropsWithChildren<any>) {
     // 获取所有Tags 
     Taro.request({
         method: 'GET',
-        url: 'http://127.0.0.1:4523/m1/3097587-0-default/api/posts/gettags',
+        url: requestUrl + '/posts/gettags',
         success(res) {
             setPostData({tags: res.data.data.tags})
         }
