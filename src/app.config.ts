@@ -1,14 +1,21 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
+
     'pages/study/study',
+
     'pages/mine/mine',
+
     'pages/service/service',
+    'pages/service/classroomNav/classroomNav',
+
     'pages/posts/createpost/createpost',
     'pages/posts/postpage/postpage',
+ 
     'pages/search/search',
     'pages/search/searchResult/searchResult',
-    'pages/login/login'
+ 
+    'pages/login/login',
   ],
   window: {
     backgroundTextStyle: 'light',

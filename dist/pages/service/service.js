@@ -10,16 +10,19 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Service; }
 /* harmony export */ });
-/* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/store/store */ "./src/store/store.ts");
-/* harmony import */ var _static_service_classroomNav_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../static/service/classroomNav.png */ "./src/static/service/classroomNav.png");
-/* harmony import */ var _static_service_appointment_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../static/service/appointment.png */ "./src/static/service/appointment.png");
-/* harmony import */ var _static_service_chooseClass_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../static/service/chooseClass.png */ "./src/static/service/chooseClass.png");
-/* harmony import */ var _static_service_getWater_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../static/service/getWater.png */ "./src/static/service/getWater.png");
-/* harmony import */ var _static_service_payment_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../static/service/payment.png */ "./src/static/service/payment.png");
-/* harmony import */ var _static_service_runErrands_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../static/service/runErrands.png */ "./src/static/service/runErrands.png");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "webpack/container/remote/react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
+/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
+/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/store/store */ "./src/store/store.ts");
+/* harmony import */ var _static_service_classroomNav_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../static/service/classroomNav.png */ "./src/static/service/classroomNav.png");
+/* harmony import */ var _static_service_appointment_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../static/service/appointment.png */ "./src/static/service/appointment.png");
+/* harmony import */ var _static_service_chooseClass_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../static/service/chooseClass.png */ "./src/static/service/chooseClass.png");
+/* harmony import */ var _static_service_getWater_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../static/service/getWater.png */ "./src/static/service/getWater.png");
+/* harmony import */ var _static_service_payment_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../static/service/payment.png */ "./src/static/service/payment.png");
+/* harmony import */ var _static_service_runErrands_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../static/service/runErrands.png */ "./src/static/service/runErrands.png");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "webpack/container/remote/react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -32,62 +35,70 @@
 
 
 function Service() {
-  var statusBarHeight = (0,_store_store__WEBPACK_IMPORTED_MODULE_0__["default"])(function (state) {
+  var statusBarHeight = (0,_store_store__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
     return state.statusBarHeight;
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+  function toServicePage(path) {
+    _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().navigateTo({
+      url: "/pages/service/".concat(path, "/").concat(path)
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
     className: "service-wrapper",
     style: {
       paddingTop: statusBarHeight + 'px'
     },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
       className: "service-header",
       children: "\u670D\u52A1\u4E2D\u5FC3"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
       className: "service-content",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
         className: "service-content-section",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Text, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Text, {
           children: "\u5B66\u4E1A\u670D\u52A1"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
           className: "service-items",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
             className: "service-classroomNav service-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Image, {
-              src: _static_service_classroomNav_png__WEBPACK_IMPORTED_MODULE_1__
+            onClick: function onClick() {
+              return toServicePage('classroomNav');
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Image, {
+              src: _static_service_classroomNav_png__WEBPACK_IMPORTED_MODULE_2__
             }), "\u6559\u5BA4\u5BFC\u822A"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
             className: "service-mtAppointment service-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Image, {
-              src: _static_service_appointment_png__WEBPACK_IMPORTED_MODULE_2__
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Image, {
+              src: _static_service_appointment_png__WEBPACK_IMPORTED_MODULE_3__
             }), "\u68A6\u5385\u9884\u7EA6"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
             className: "service-choooseClass service-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Image, {
-              src: _static_service_chooseClass_png__WEBPACK_IMPORTED_MODULE_3__
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Image, {
+              src: _static_service_chooseClass_png__WEBPACK_IMPORTED_MODULE_4__
             }), "\u5FEB\u6377\u9009\u8BFE"]
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
         className: "service-content-section",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Text, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Text, {
           children: "\u751F\u6D3B\u670D\u52A1"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
           className: "service-items",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
             className: "service-getWater service-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Image, {
-              src: _static_service_getWater_png__WEBPACK_IMPORTED_MODULE_4__
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Image, {
+              src: _static_service_getWater_png__WEBPACK_IMPORTED_MODULE_5__
             }), "\u9001\u6C34\u670D\u52A1"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
             className: "service-payment service-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Image, {
-              src: _static_service_payment_png__WEBPACK_IMPORTED_MODULE_5__
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Image, {
+              src: _static_service_payment_png__WEBPACK_IMPORTED_MODULE_6__
             }), "\u751F\u6D3B\u7F34\u8D39"]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.View, {
             className: "service-runErrands service-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Image, {
-              src: _static_service_runErrands_png__WEBPACK_IMPORTED_MODULE_6__
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_9__.Image, {
+              src: _static_service_runErrands_png__WEBPACK_IMPORTED_MODULE_7__
             }), "\u8DD1\u817F\u4EE3\u53D6"]
           })]
         })]

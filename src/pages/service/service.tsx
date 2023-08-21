@@ -1,4 +1,7 @@
 import { View, Text, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+
+
 import useStore from '@/store/store'
 
 import './service.css'
@@ -14,6 +17,12 @@ export default function Service() {
 
   const statusBarHeight = useStore((state) => state.statusBarHeight)
 
+  function toServicePage(path: string) {
+    Taro.navigateTo({
+      url: `/pages/service/${path}/${path}`
+    })
+  }
+
   return (
     <View className='service-wrapper' style={{ paddingTop: statusBarHeight + 'px' }}>
       <View className='service-header'>服务中心</View>
@@ -21,7 +30,7 @@ export default function Service() {
         <View className='service-content-section'>
           <Text>学业服务</Text>
           <View className='service-items'>
-            <View className='service-classroomNav service-item'>
+            <View className='service-classroomNav service-item' onClick={() => toServicePage('classroomNav')}>
               <Image src={classRoomNavImg}></Image>
               教室导航
             </View>
