@@ -1,0 +1,203 @@
+/*postcss-pxtransform disable*/
+.study-header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #000;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    padding-left: 20px;
+}
+
+.study-content {
+    margin-top: 12px;
+    padding: 0 20px;
+
+    .study-timetable {
+        .study-timetable-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            Text {
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: 0.8px;
+            }
+
+            View {
+                letter-spacing: 0.8px;
+                color: #8D8D8D;
+                font-size: 14px;
+            }
+        }
+
+        .study-timetable-items {
+            margin-top: 14px;
+
+            .study-timetable-current {
+                position: relative;
+                box-sizing: border-box;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                height: 112px;
+                border-radius: 16px;
+                background-color: #637bfd;
+                color: #fff;
+
+                .study-timetable-left {
+                    display: flex;
+                    flex-direction: column;
+
+                    Text {
+                        font-size: 14px;
+                    }
+
+                    Text:nth-child(2) {
+                        font-size: 24px;
+                        font-weight: 800;
+                    }
+                }
+
+                .study-timetable-line {
+                    position: absolute;
+                    right: 100px;
+                    height: 70%;
+                    border-right: 2px solid #ffffff;
+                }
+
+                .study-timetable-right {
+                    position: absolute;
+                    right: 20px;
+                    font-size: 24px;
+                }
+            }
+
+            .study-timetable-following {
+                position: relative;
+                height: 80px;
+                margin-top: 12px;
+
+                .study-timetable-following-wrapper {
+                    display: flex;
+                    position: absolute;
+                    width: 100%;
+                    overflow-x: scroll;
+                    white-space: nowrap;
+                }
+
+                .study-timetable-item {
+                    box-sizing: border-box;
+                    padding: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 12px;
+                    background-color: #efefef;
+                    color: #8d8d8d;
+                    margin-right: 12px;
+
+                    Text:nth-child(1) {
+                        font-weight: 800;
+                    }
+
+                    Text:nth-child(2) {
+                        font-size: 12px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .study-reading {
+        margin-top: 16px;
+
+        .study-reading-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            Text {
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: 0.8px;
+            }
+
+            View {
+                letter-spacing: 0.8px;
+                color: #8D8D8D;
+                font-size: 14px;
+            }
+        }
+
+        .study-reading-bookShelf {
+            margin-top: 14px;
+
+            .study-reading-books-xsbd {
+                .study-reading-books-title {
+                    color: #000;
+                    font-size: 16px;
+                    font-weight: 700;
+                    letter-spacing: 0.8px;
+                }
+
+                .study-reading-books {
+                    margin-top: 12px;
+
+                    .study-reading-book {
+                        display: flex;
+                        align-items: center;
+
+                        Image {
+                            width: 65px;
+                            height: 86px;
+                            border-radius: 8px;
+                            background-color: #637bfd;
+                        }
+
+                        .study-reading-book-right {
+                            margin-left: 12px;
+                            display: flex;
+                            flex-direction: column;
+
+                            .study-reading-book-title {
+                                color: #2C2C2C;
+                                font-size: 14px;
+                                font-weight: 700;
+                                letter-spacing: 0.7px;
+                            }
+
+                            .study-reading-book-description {
+                                width: 100px;
+                                color: #7F7F7F;
+                                font-size: 12px;
+                                font-weight: 400;
+                                letter-spacing: 0.6px;
+                            }
+
+                            .study-reading-book-mark {
+                                margin-top: 12px;
+                                width: 48px;
+                                height: 16px;
+                                border-radius: 23px;
+                                background: #EFEFEF;
+
+                                color: #7F7F7F;
+                                font-size: 6px;
+                                font-weight: 400;
+                                letter-spacing: 0.3px;
+                                text-align: center;
+                                line-height: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
