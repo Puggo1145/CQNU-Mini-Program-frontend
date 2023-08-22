@@ -3,6 +3,7 @@ export default defineAppConfig({
     'pages/index/index',
 
     'pages/study/study',
+    'pages/classtable/classtable',
 
     'pages/mine/mine',
 

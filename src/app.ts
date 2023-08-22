@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 import { useLaunch } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
 
@@ -35,6 +35,7 @@ function App({ children }: PropsWithChildren<any>) {
     if (userInfo.user_id !== '') {
       setUserInfo({isLogin: true})
     }
+
 
     // 获取所有Tags 
     Taro.request({

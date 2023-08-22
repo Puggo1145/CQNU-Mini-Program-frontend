@@ -1,4 +1,5 @@
 import { View, Text, Image } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
 import useStore from '@/store/store'
 
@@ -17,7 +18,7 @@ export default function Study() {
         <View className='study-timetable'>
           <View className='study-timetable-top'>
             <Text>我的课程</Text>
-            <View className='study-timetable-toTable'>查看课表></View>
+            <View className='study-timetable-toTable' onClick={() => Taro.navigateTo({url: '/pages/classtable/classtable'})}>查看课表></View>
           </View>
           <View className='study-timetable-items'>
             <View className='study-timetable-current'>
@@ -58,6 +59,7 @@ export default function Study() {
             <View className='study-reading-books-xsbd'>
               <Text className='study-reading-books-title'>新生必读</Text>
               <View className='study-reading-books'>
+
                 <View className='study-reading-book'>
                   <Image src={bookCover} className='study0-reading-book-cover' mode='widthFix'></Image>
                   <View className='study-reading-book-right'>
@@ -66,6 +68,7 @@ export default function Study() {
                     <View className='study-reading-book-mark'>强烈推荐</View>
                   </View>
                 </View>
+              
               </View>
             </View>
           </View>
