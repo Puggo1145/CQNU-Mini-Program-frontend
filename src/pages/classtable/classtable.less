@@ -34,6 +34,10 @@
             font-size: 14px;
             text-align: center;
             line-height: 60px;
+
+            .currentDay {
+                font-weight: 700;
+            }
         }
     }
 
@@ -92,9 +96,39 @@
             }
 
             .notThisWeek {
-                opacity: 0.6;
-                color: #e7e7e7;
+                background-color: #bdbdbd!important;
+            }
+
+            .classtable-lessons-item-notThisWeek {
+                font-weight: 800;
             }
         }
+    }
+}
+
+.classtable-switchWeek {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 40px;
+
+    .classtable-switchWeek-item {
+        width: 40px;
+        height: 100%;
+        border-radius: 25px;
+        background-color: #fff;
+        background-image: url('../../static/study/prev.png');
+        background-repeat: no-repeat;
+        background-size: 50%;
+        background-position: 10px center;
+        box-shadow: 0 0 16px -4px #bdbdbd
+    }
+
+    .classtable-switchWeek-item:last-child {
+        transform: rotate(180deg);
+        margin-left: 12px;
     }
 }

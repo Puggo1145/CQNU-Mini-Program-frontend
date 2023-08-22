@@ -77,7 +77,7 @@
   font-size: 14px;
 }
 .study-content .study-timetable .study-timetable-items .study-timetable-current .study-timetable-left Text:nth-child(2) {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
 }
 .study-content .study-timetable .study-timetable-items .study-timetable-current .study-timetable-line {
