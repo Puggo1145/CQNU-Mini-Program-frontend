@@ -27,7 +27,7 @@ export default function createpost() {
   ])
 
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [selectedTag, setSelectedTag] = useState<string>()
   const [selectedImages, setSelectedImages] = useState<string[]>([])
 
   const titleRef = useRef<HTMLInputElement>(null)
@@ -35,16 +35,17 @@ export default function createpost() {
   
   // 处理话题选择逻辑
   function handleTagSelect(tag: string) {
-    if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter(t => t !== tag))
-    } else if (selectedTags.length < 2) {
-      setSelectedTags([...selectedTags, tag])
-    } else {
-      Taro.showToast({
-        title: '最多选择两项',
-        icon: 'none'
-      })
-    }
+    setSelectedTag(tag)
+    // if (selectedTags.includes(tag)) {
+    //   setSelectedTags(selectedTags.filter(t => t !== tag))
+    // } else if (selectedTags.length < 2) {
+    //   setSelectedTags([...selectedTags, tag])
+    // } else {
+    //   Taro.showToast({
+    //     title: '最多选择两项',
+    //     icon: 'none'
+    //   })
+    // }
   }
 
   // 处理图片上传
@@ -78,7 +79,7 @@ export default function createpost() {
           icon: 'error'
         })
         return
-      } else if (selectedTags.length < 1) {
+      } else if (selectedTag === '' || selectedTag === undefined) {
         Taro.showToast({
           title: '请选择话题',
           icon: 'error'
@@ -89,7 +90,7 @@ export default function createpost() {
 
       const title = titleRef.current.value
       const content = contentRef.current.value
-      const tags = selectedTags
+      const tag = selectedTag
       const images = selectedImages
 
       Taro.request({
@@ -99,7 +100,7 @@ export default function createpost() {
               user_id: user_id,
               title: title,
               content: content,
-              post_tag: "热门"
+              post_tag: tag
         },
         header: {
           'content-type': 'application/json'
@@ -161,8 +162,8 @@ export default function createpost() {
                     key={index}
                     onClick={() => handleTagSelect(item)}
                     style={{
-                      backgroundColor: selectedTags.includes(item) ? '#4E6AFF' : '#efefef',
-                      color: selectedTags.includes(item) ? '#fff' : '#8b8b8b'
+                      backgroundColor: selectedTag === item ? '#4E6AFF' : '#efefef',
+                      color: selectedTag === item ? '#fff' : '#8b8b8b'
                     }}
                   >
                     {item}

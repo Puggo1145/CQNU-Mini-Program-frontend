@@ -50,10 +50,10 @@ function createpost() {
     _useState2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState, 2),
     tags = _useState2[0],
     setTags = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
     _useState4 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState3, 2),
-    selectedTags = _useState4[0],
-    setSelectedTags = _useState4[1];
+    selectedTag = _useState4[0],
+    setSelectedTag = _useState4[1];
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState6 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState5, 2),
     selectedImages = _useState6[0],
@@ -63,18 +63,17 @@ function createpost() {
 
   // 处理话题选择逻辑
   function handleTagSelect(tag) {
-    if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter(function (t) {
-        return t !== tag;
-      }));
-    } else if (selectedTags.length < 2) {
-      setSelectedTags([].concat((0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(selectedTags), [tag]));
-    } else {
-      _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
-        title: '最多选择两项',
-        icon: 'none'
-      });
-    }
+    setSelectedTag(tag);
+    // if (selectedTags.includes(tag)) {
+    //   setSelectedTags(selectedTags.filter(t => t !== tag))
+    // } else if (selectedTags.length < 2) {
+    //   setSelectedTags([...selectedTags, tag])
+    // } else {
+    //   Taro.showToast({
+    //     title: '最多选择两项',
+    //     icon: 'none'
+    //   })
+    // }
   }
 
   // 处理图片上传
@@ -107,7 +106,7 @@ function createpost() {
           icon: 'error'
         });
         return;
-      } else if (selectedTags.length < 1) {
+      } else if (selectedTag === '' || selectedTag === undefined) {
         _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
           title: '请选择话题',
           icon: 'error'
@@ -116,7 +115,7 @@ function createpost() {
       }
       var title = titleRef.current.value;
       var content = contentRef.current.value;
-      var _tags = selectedTags;
+      var tag = selectedTag;
       var images = selectedImages;
       _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().request({
         url: requestUrl + '/posts/createpost',
@@ -125,7 +124,7 @@ function createpost() {
           user_id: user_id,
           title: title,
           content: content,
-          post_tag: "热门"
+          post_tag: tag
         },
         header: {
           'content-type': 'application/json'
@@ -216,8 +215,8 @@ function createpost() {
                 return handleTagSelect(item);
               },
               style: {
-                backgroundColor: selectedTags.includes(item) ? '#4E6AFF' : '#efefef',
-                color: selectedTags.includes(item) ? '#fff' : '#8b8b8b'
+                backgroundColor: selectedTag === item ? '#4E6AFF' : '#efefef',
+                color: selectedTag === item ? '#fff' : '#8b8b8b'
               },
               children: item
             }, index);
