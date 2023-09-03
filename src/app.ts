@@ -38,7 +38,7 @@ function App({ children }: PropsWithChildren<any>) {
       
       if (userInfo.id !== '') {
         console.log("id set");
-        setUserInfo({isLogin: true})
+        Taro.setStorageSync('isLogin', true);
       }
     }, [userInfo.id]);
 
