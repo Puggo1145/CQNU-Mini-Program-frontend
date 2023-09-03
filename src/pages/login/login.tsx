@@ -25,20 +25,24 @@ export default function login() {
             const code = loginRes.code
             
             // 获取 openid 和 session_key
-            const requestRes = await Taro.request({
-                method: 'GET',
-                url: `https://api.weixin.qq.com/sns/jscode2session?appid=${app_id}&secret=${app_secret}&js_code=${code}&grant_type=authorization_code}`,
-            })
+            // const requestRes = await Taro.request({
+            //     method: 'GET',
+            //     url: `https://api.weixin.qq.com/sns/jscode2session?appid=${app_id}&secret=${app_secret}&js_code=${code}&grant_type=authorization_code}`,
+            // })
 
-            // 向后端发送 openid 和 session_key
+            // 向后端发送 app_id / app_secret / code 
             const toBackendRes = await Taro.request({
                 method: 'POST',
-                url: 'http://localhost:3000/api/v1/login',
+                url: `${requestUrl}/v1/users/login`,
                 data: {
-                    code: code,
-                    openid: requestRes.data.openid
+                    app_id: app_id,
+                    app_secret: app_secret,
+                    code: code
                 }
             });
+
+            console.log(toBackendRes);
+            
         } catch (err) {
             console.log(err);
         }
