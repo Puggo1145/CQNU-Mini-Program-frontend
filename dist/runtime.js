@@ -207,9 +207,9 @@
 /******/ 			],
 /******/ 			"common": [
 /******/ 				"webpack/container/remote/@tarojs/runtime",
-/******/ 				"webpack/container/remote/@tarojs/taro",
-/******/ 				"webpack/container/remote/react",
 /******/ 				"webpack/container/remote/react/jsx-runtime",
+/******/ 				"webpack/container/remote/react",
+/******/ 				"webpack/container/remote/@tarojs/taro",
 /******/ 				"webpack/container/remote/zustand"
 /******/ 			]
 /******/ 		};
@@ -249,9 +249,9 @@
 /******/ 				"./@tarojs/runtime",
 /******/ 				null
 /******/ 			],
-/******/ 			"webpack/container/remote/@tarojs/taro": [
+/******/ 			"webpack/container/remote/react/jsx-runtime": [
 /******/ 				"default",
-/******/ 				"./@tarojs/taro",
+/******/ 				"./react/jsx-runtime",
 /******/ 				null
 /******/ 			],
 /******/ 			"webpack/container/remote/react": [
@@ -259,9 +259,9 @@
 /******/ 				"./react",
 /******/ 				null
 /******/ 			],
-/******/ 			"webpack/container/remote/react/jsx-runtime": [
+/******/ 			"webpack/container/remote/@tarojs/taro": [
 /******/ 				"default",
-/******/ 				"./react/jsx-runtime",
+/******/ 				"./@tarojs/taro",
 /******/ 				null
 /******/ 			],
 /******/ 			"webpack/container/remote/zustand": [

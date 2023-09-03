@@ -3,14 +3,14 @@ import Taro from "@tarojs/taro";
 
 type State = {
     isLogin: boolean,
-    user_id: string,
-    phone_number: string,
+    id: string,
+    openid: string,
+    student_id: string,
     nick_name: string,
-    avatar_url: string,
+    avatar: string,
     user_level: number,
     user_exp: number,
-    student_id: string,
-    college: string,
+    faculty: string,
     major: string,
     grade: string,
     toLoginPage: () => void
@@ -23,14 +23,14 @@ type Action = {
 // 创建zustand store
 const useUser = create<State & Action>((set) => ({
     isLogin: false,
-    user_id: '', // 56172i3h
-    phone_number: '',
+    id: '',
+    openid: '',
+    student_id: '',
     nick_name: '',
-    avatar_url: '',
+    avatar: '',
     user_level: 1,
     user_exp: 0,
-    student_id: '',
-    college: '',
+    faculty: '',
     major: '',
     grade: '',
 

@@ -1,0 +1,70 @@
+/*postcss-pxtransform disable*/
+.register-wrapper {
+
+    .register-content {
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+
+        .register-content-title {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            letter-spacing: 0.8px;
+        }
+
+        Text:nth-child(2) {
+            margin-top: 4px;
+            font-size: 14px;
+            color: #999;
+            letter-spacing: 0.56px;
+        }
+
+        .register-content-formata {
+            margin-top: 20px;
+
+            .register-content-formata-item {
+                margin-top: 20px;
+            }
+
+            .register-content-formata-item-text {
+                font-weight: 700;
+                font-size: 16px;
+                color: #333;
+                letter-spacing: 0.56px;
+            }
+
+            Input {
+                margin-top: 4px;
+                height: 40px;
+                border-bottom: 1px solid #cecece;
+                padding: 0 10px;
+                font-size: 14px;
+                letter-spacing: 0.56px;
+            }
+
+            Picker {
+                height: 40px;
+                border-bottom: 1px solid #cecece;
+                padding: 0 10px;
+                font-size: 14px;
+                color: #808080;
+                letter-spacing: 0.56px;
+                line-height: 40px;
+            }
+
+            .register-submit {
+                position: absolute;
+                left: 50%;
+                bottom: 36px;
+                transform: translateX(-50%);
+                width: 300px;
+                height: 44px;
+                border-radius: 22px;
+                background: #4E6AFF;
+                color: #fff;
+            }
+        }
+    }
+}

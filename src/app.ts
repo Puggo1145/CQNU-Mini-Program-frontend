@@ -13,8 +13,9 @@ function App({ children }: PropsWithChildren<any>) {
 // 数据 store ————————————————————————————————————————————————————————————
   const [statusBarHeight, setStatusBarHeight] = useStore((state) => [state.statusBarHeight, state.setStatusBarHeight])  
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData])
-  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
   const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
+
+  const userInfo = Taro.getStorageSync('userInfo');
 
   useLaunch(() => {
     // 获取全局 statusBarHeight        
@@ -32,9 +33,14 @@ function App({ children }: PropsWithChildren<any>) {
 
 // 请求初始数据————————————————————————————————————————————————————————————
     // 用户是否登录 
-    if (userInfo.user_id !== '') {
-      setUserInfo({isLogin: true})
-    }
+    useEffect(() => {
+      console.log("id changed");
+      
+      if (userInfo.id !== '') {
+        console.log("id set");
+        setUserInfo({isLogin: true})
+      }
+    }, [userInfo.id]);
 
 
     // 获取所有Tags 

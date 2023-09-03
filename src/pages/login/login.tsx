@@ -23,12 +23,6 @@ export default function login() {
             // 获取登录校验凭证
             const loginRes = await Taro.login()
             const code = loginRes.code
-            
-            // 获取 openid 和 session_key
-            // const requestRes = await Taro.request({
-            //     method: 'GET',
-            //     url: `https://api.weixin.qq.com/sns/jscode2session?appid=${app_id}&secret=${app_secret}&js_code=${code}&grant_type=authorization_code}`,
-            // })
 
             // 向后端发送 app_id / app_secret / code 
             const toBackendRes = await Taro.request({
@@ -41,8 +35,17 @@ export default function login() {
                 }
             });
 
-            console.log(toBackendRes);
+            // 处理用户第一次登录，自动跳转注册页面
+            if (toBackendRes.data.message === 'newUser') {
+                Taro.navigateTo({
+                    url: '/pages/register/register?openid=' + toBackendRes.data.data.openid
+                });
+            };
             
+            
+            // 用户登录成功，将 token 存入本地
+
+
         } catch (err) {
             console.log(err);
         }

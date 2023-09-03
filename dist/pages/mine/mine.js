@@ -32,7 +32,9 @@
 
 
 function Mine() {
-  var userInfo = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
+  var userInfo = JSON.parse(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('userInfo') || '{}');
+  console.log(userInfo);
+  var userInfoFn = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
     return state;
   });
   (0,_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__.useLoad)(function () {
@@ -60,7 +62,7 @@ function Mine() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.Image, {
             src: "#",
             className: "mine-avatar",
-            onClick: userInfo.toLoginPage
+            onClick: userInfoFn.toLoginPage
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.Text, {
             className: "mine-nickname",
             children: userInfo.isLogin ? userInfo.nick_name : '请登录'
@@ -77,7 +79,7 @@ function Mine() {
               children: userInfo.grade
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.View, {
               className: "mine-moreInfo-item",
-              children: userInfo.college
+              children: userInfo.faculty
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_7__.View, {

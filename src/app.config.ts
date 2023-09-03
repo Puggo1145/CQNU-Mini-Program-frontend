@@ -17,6 +17,7 @@ export default defineAppConfig({
     'pages/search/searchResult/searchResult',
  
     'pages/login/login',
+    'pages/register/register'
   ],
   window: {
     backgroundTextStyle: 'light',
