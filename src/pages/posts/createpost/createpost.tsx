@@ -70,9 +70,9 @@ export default function createpost() {
   function handleSubmit() {    
     if (titleRef.current && contentRef.current) {
 
-      if (titleRef.current.value.length < 1 || contentRef.current.value.length < 15) {
+      if (titleRef.current.value.length < 1 || contentRef.current.value.length < 5) {
         titleRef.current.placeholder = '请填写标题'
-        contentRef.current.placeholder = '请填写正文，不少于15个字'
+        contentRef.current.placeholder = '请填写正文，不少于5个字'
 
         Taro.showToast({
           title: '检查标题或正文',
@@ -94,20 +94,19 @@ export default function createpost() {
       const images = selectedImages
 
       Taro.request({
-        url: requestUrl + '/posts/createpost',
+        url: requestUrl + '/v1/posts/',
         method: 'POST',
         data: {
-              user_id: user_id,
               title: title,
               content: content,
-              post_tag: tag
+              tag: tag
         },
         header: {
-          'content-type': 'application/json'
+          authorization: Taro.getStorageSync('token')
         },
         success: function (res) {
           console.log(res);
-          if (res.data.code === '200') {            
+          if (res.statusCode === 201) {            
             Taro.showToast({
               title: '发布成功',
               icon: 'success'
@@ -138,7 +137,7 @@ export default function createpost() {
       </View>
       <form className='createpost-form'>
         <Input ref={titleRef} className='createpost-title' type="text" name='title' placeholder='填写标题会更受欢迎哦！' />
-        <textarea ref={contentRef} className='createpost-content' name="content" placeholder='添加正文，不少于15个字'></textarea>
+        <textarea ref={contentRef} className='createpost-content' name="content" placeholder='添加正文，不少于5个字'></textarea>
         <View className='createpost-uploadPic-area'>
           {
             selectedImages.map((image, index) => (
@@ -151,7 +150,7 @@ export default function createpost() {
           {selectedImages.length < 9 && <View className='createpost-uploadPic-btn' onClick={handleUploadClick}></View>}
         </View>
         <View className='createpost-postTags'>
-          <Text>选择话题*（最多选择两项）</Text>
+          <Text>选择话题*</Text>
           <Text>话题决定了你发布的内容是否会你所期望的同学看到</Text>
           <View className='createpost-tags'>
             {

@@ -39,7 +39,6 @@ export default function Mine() {
   // 修改头像
   const handleAvatarChange = async () => {
     try {
-
       // 选择图片
       const res = await Taro.chooseImage({
         count: 1,
@@ -62,9 +61,6 @@ export default function Mine() {
           url: 'https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com',
           filePath: await compressImage(selectedImagePath),
           name: 'file', // 这里必须填 file
-          header: {
-            Authorization: token
-          },
           formData: {
             key: key,
             policy,
@@ -89,7 +85,7 @@ export default function Mine() {
               avatar: avatarUrl
             },
           });
-          
+
           if (updateAvatarRes.statusCode === 200) {
             Taro.setStorageSync('avatar', avatarUrl); // 持久化 avatar
             setUserInfo({ avatar: avatarUrl }) // 同步到 userInfo

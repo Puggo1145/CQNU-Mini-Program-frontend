@@ -12,7 +12,7 @@ const getOssParams = async (requestUrl: string) => {
       }
     });
 
-    // 将 OSS params 存入缓存
+    // 将 OSS params 存入缓存 (OSSAccessKeyId, policy, signature)
     Object.keys(ossParamsRes.data.data.params).forEach(key => {
       Taro.setStorageSync(key, ossParamsRes.data.data.params[key]);
     });

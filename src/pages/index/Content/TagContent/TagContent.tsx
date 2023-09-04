@@ -13,13 +13,15 @@ import likeIcon from "../../../../static/post/post-like-icon.png"
 import commentIcon from "../../../../static/post/post-comment-icon.png"
 
 interface postContentType {
-    post_id: string
+    _id: string
     title: string
     content: string
     picture?: string
-    user_id: string
-    avatar_url: string
-    nick_name: string
+    user: {
+        _id: string
+        avatar: string
+        nick_name: string
+    }
     likes_num: number
     comments_num: number
 }
@@ -32,34 +34,21 @@ interface tagType {
 
 export default function TagContent() {
 // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
-    const [user_id, isLogin, toLoginPage] = useUser((state) => [state.user_id, state.isLogin, state.toLoginPage])
+    const [user_id, isLogin, toLoginPage] = useUser((state) => [state.id, state.isLogin, state.toLoginPage]);
 
-    const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
-
+    const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl]);
+    
+    const postData = usePostData((state) => state) // 获取Tags
 
 // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
-    const [posts, setPosts] = useState<postContentType[]>([
-        { post_id: 'x', title: '教务系统怎么选课？', content: '新生，不太懂教务系统怎么用...', picture: '#', user_id: 'uuid-111', avatar_url: '#', nick_name: '这是一个昵称', likes_num: 0, comments_num: 0 },
-        { post_id: 'x', title: '宿舍水电怎么充值啊？', content: '如题', user_id: 'uuid-111', avatar_url: '', nick_name: '这是一个昵称', likes_num: 0, comments_num: 0 },
-        { post_id: 'x', title: '如何评价原神这款游戏', content: '我不好评价，大伙们怎么看？', user_id: 'uuid-111', avatar_url: '#', nick_name: '这是一个昵称', likes_num: 0, comments_num: 0 },
-    ])
+    const [posts, setPosts] = useState<postContentType[]>([]);
 
-    const [tags, setTags] = useState<tagType[]>([
-        { tagName: '热门', isCurrent: true },
-        { tagName: '校园日常', isCurrent: false },
-        { tagName: '新生', isCurrent: false },
-        { tagName: '求助', isCurrent: false },
-        { tagName: '交友', isCurrent: false },
-        { tagName: '考研', isCurrent: false },
-    ])
+    const [tags, setTags] = useState<tagType[]>([])
 
     // 阅读顺序
     const [order, setOrder] = useState<'reply' | 'publish'>('reply')
 
 // 将社区的基本数据渲染到页面上————————————————————————————————————————————————————————————————————————————
-    
-    // 获取Tags
-    const postData = usePostData((state) => state)
     // 加载Tags
     useEffect(() => {
         let newTags = postData.tags.map((tag, index) => {
@@ -70,23 +59,25 @@ export default function TagContent() {
         })
         setTags(newTags)
     }, [postData])
+
     // 默认加载第一个tag的帖子
     useEffect(() => {
-        if (tags.length === 0) return // 确保Tags已经加载
         Taro.request({
             method: 'GET',
-            url: requestUrl + '/posts/1',
+            url: requestUrl + `/v1/posts/热门`,
             success(res) {
-                setPosts(res.data.data.postsList)
+                console.log(res);
+                
+                setPosts(res.data.data.posts)
             }
         })
-    }, [tags])
+    }, [])
 
 
 // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
 
     // 切换Tag，并加载对应帖子
-    function handleTagClick(tagName: string): void {
+    function handleTagClick(tagName: string) {
         // 切换Tag显示
         const newtags = tags.map((tag) => {
             return {
@@ -99,12 +90,14 @@ export default function TagContent() {
         // 加载对应帖子
         Taro.request({
             method: 'GET',
-            url: requestUrl + '/posts/1' + `?tag=${tagName}`,
+            url: requestUrl + `/v1/posts/${tagName}`,
             success(res) {
-                setPosts(res.data.data.postsList)
+                console.log(res);
+                
+                setPosts(res.data.data.posts)
             }
         })
-    }
+    };
 
     // 切换查看顺序
     function handleOrderSwitch(order: string): void {
@@ -166,7 +159,7 @@ export default function TagContent() {
                     {
                         posts.map((post) => {
                             return (
-                                <View className="index-content-post" key={post.post_id} onClick={() => enterPost(post.post_id)}>
+                                <View className="index-content-post" key={post._id} onClick={() => enterPost(post._id)}>
                                     <View className="post-texts">
                                         <Text className="post-title">{post.title}</Text>
                                         <Text className="post-description">{post.content}</Text>
@@ -174,8 +167,8 @@ export default function TagContent() {
                                     {post.picture && <Image src={post.picture} className="post-picture" mode="widthFix" />}
                                     <View className="post-info">
                                         <View className="post-info-user">
-                                            <Image src={post.avatar_url} className="post-user-avatar" />
-                                            <Text>{post.nick_name}</Text>
+                                            <Image src={post.user.avatar} className="post-user-avatar" />
+                                            <Text>{post.user.nick_name}</Text>
                                         </View>
                                         <View className="post-info-data">
                                             <View className="post-like">

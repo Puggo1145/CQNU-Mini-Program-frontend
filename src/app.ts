@@ -7,18 +7,22 @@ import useUser from './store/userInfo'
 import usePostData from './store/postData'
 import useRequest from './store/request'
 
+// launch Utilities
 import getOssParams from './common/launchUtilities/getOssParams'
 import initialLoginValidation from './common/launchUtilities/initialLoginValidation'
+import getAllTags from './common/launchUtilities/getAllTags'
 
 import './app.less'
 
 function App({ children }: PropsWithChildren<any>) {
-  // 数据 store ————————————————————————————————————————————————————————————
+// 数据 store ————————————————————————————————————————————————————————————
   const [statusBarHeight, setStatusBarHeight] = useStore((state) => [state.statusBarHeight, state.setStatusBarHeight])
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData])
   const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
   const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
+
+// 请求初始数据————————————————————————————————————————————————————————————
 
   useLaunch(async () => {
     // 获取全局 statusBarHeight        
@@ -34,8 +38,6 @@ function App({ children }: PropsWithChildren<any>) {
       backgroundColor: '#1e1e1e'
     })
 
-    // 请求初始数据————————————————————————————————————————————————————————————
-
     // 验证登录状态    
     initialLoginValidation(requestUrl, userInfo); // 验证登录状态，数据存入缓存
 
@@ -44,13 +46,7 @@ function App({ children }: PropsWithChildren<any>) {
 
 
     // 获取所有Tags 
-    // Taro.request({
-    //   method: 'GET',
-    //   url: requestUrl + '/posts/gettags',
-    //   success(res) {
-    //     setPostData({ tags: res.data.data.tags })
-    //   }
-    // })
+    getAllTags(requestUrl, setPostData); // 获取所有的Tags，数据存入 store
   })
 
   // children 是将要会渲染的页面

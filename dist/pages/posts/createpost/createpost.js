@@ -10,8 +10,8 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ createpost; }
 /* harmony export */ });
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "webpack/container/remote/react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
@@ -40,22 +40,22 @@ function createpost() {
   var _useRequest = (0,_store_request__WEBPACK_IMPORTED_MODULE_4__["default"])(function (state) {
       return [state.requestUrl, state.setRequestUrl];
     }),
-    _useRequest2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useRequest, 2),
+    _useRequest2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useRequest, 2),
     requestUrl = _useRequest2[0],
     setRequestUrl = _useRequest2[1];
   var user_id = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
     return state.user_id;
   });
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(['校园日常', '新生', '求助', '交友', '考研', '实习兼职']),
-    _useState2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState, 2),
+    _useState2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState, 2),
     tags = _useState2[0],
     setTags = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
-    _useState4 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState3, 2),
+    _useState4 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState3, 2),
     selectedTag = _useState4[0],
     setSelectedTag = _useState4[1];
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState6 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState5, 2),
+    _useState6 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_6__["default"])(_useState5, 2),
     selectedImages = _useState6[0],
     setSelectedImages = _useState6[1];
   var titleRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
@@ -83,14 +83,14 @@ function createpost() {
       // 最多可以选择9张图片
       success: function success(res) {
         var tempFilePaths = res.tempFilePaths;
-        setSelectedImages([].concat((0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(selectedImages), (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(tempFilePaths)));
+        setSelectedImages([].concat((0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(selectedImages), (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(tempFilePaths)));
       }
     });
   }
 
   // 处理图片删除
   function handleDeleteClick(index) {
-    var newImages = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(selectedImages);
+    var newImages = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_7__["default"])(selectedImages);
     newImages.splice(index, 1);
     setSelectedImages(newImages);
   }
@@ -98,9 +98,9 @@ function createpost() {
   // 发布帖子
   function handleSubmit() {
     if (titleRef.current && contentRef.current) {
-      if (titleRef.current.value.length < 1 || contentRef.current.value.length < 15) {
+      if (titleRef.current.value.length < 1 || contentRef.current.value.length < 5) {
         titleRef.current.placeholder = '请填写标题';
-        contentRef.current.placeholder = '请填写正文，不少于15个字';
+        contentRef.current.placeholder = '请填写正文，不少于5个字';
         _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
           title: '检查标题或正文',
           icon: 'error'
@@ -118,20 +118,19 @@ function createpost() {
       var tag = selectedTag;
       var images = selectedImages;
       _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().request({
-        url: requestUrl + '/posts/createpost',
+        url: requestUrl + '/v1/posts/',
         method: 'POST',
         data: {
-          user_id: user_id,
           title: title,
           content: content,
-          post_tag: tag
+          tag: tag
         },
         header: {
-          'content-type': 'application/json'
+          authorization: _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().getStorageSync('token')
         },
         success: function success(res) {
           console.log(res);
-          if (res.data.code === '200') {
+          if (res.statusCode === 201) {
             _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().showToast({
               title: '发布成功',
               icon: 'success'
@@ -178,7 +177,7 @@ function createpost() {
         ref: contentRef,
         className: "createpost-content",
         name: "content",
-        placeholder: "\u6DFB\u52A0\u6B63\u6587\uFF0C\u4E0D\u5C11\u4E8E15\u4E2A\u5B57"
+        placeholder: "\u6DFB\u52A0\u6B63\u6587\uFF0C\u4E0D\u5C11\u4E8E5\u4E2A\u5B57"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
         className: "createpost-uploadPic-area",
         children: [selectedImages.map(function (image, index) {
@@ -203,7 +202,7 @@ function createpost() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {
         className: "createpost-postTags",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Text, {
-          children: "\u9009\u62E9\u8BDD\u9898*\uFF08\u6700\u591A\u9009\u62E9\u4E24\u9879\uFF09"
+          children: "\u9009\u62E9\u8BDD\u9898*"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.Text, {
           children: "\u8BDD\u9898\u51B3\u5B9A\u4E86\u4F60\u53D1\u5E03\u7684\u5185\u5BB9\u662F\u5426\u4F1A\u4F60\u6240\u671F\u671B\u7684\u540C\u5B66\u770B\u5230"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_8__.View, {

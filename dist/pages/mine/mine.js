@@ -10,9 +10,9 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Mine; }
 /* harmony export */ });
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
@@ -50,7 +50,7 @@ function Mine() {
   var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
       return [state, state.setUserInfo];
     }),
-    _useUser2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__["default"])(_useUser, 2),
+    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__["default"])(_useUser, 2),
     userInfo = _useUser2[0],
     setUserInfo = _useUser2[1];
   var requestUrl = (0,_store_request__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
@@ -74,9 +74,9 @@ function Mine() {
 
   // 修改头像
   var handleAvatarChange = /*#__PURE__*/function () {
-    var _ref = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().mark(function _callee() {
+    var _ref = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__["default"])( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().mark(function _callee() {
       var res, selectedImagePath, token, key, policy, ossAccessKeyId, signature, uploadRes, avatarUrl, updateAvatarRes;
-      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().wrap(function _callee$(_context) {
+      return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
@@ -89,7 +89,7 @@ function Mine() {
           case 3:
             res = _context.sent;
             if (!(res.tempFilePaths && res.tempFilePaths[0])) {
-              _context.next = 33;
+              _context.next = 32;
               break;
             }
             selectedImagePath = res.tempFilePaths[0]; // 图片路径
@@ -106,34 +106,30 @@ function Mine() {
           case 14:
             _context.t1 = _context.sent;
             _context.t2 = {
-              Authorization: token
-            };
-            _context.t3 = {
               key: key,
               policy: policy,
               OSSAccessKeyId: ossAccessKeyId,
               signature: signature
             };
-            _context.t4 = {
+            _context.t3 = {
               url: 'https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com',
               filePath: _context.t1,
               name: 'file',
-              header: _context.t2,
-              formData: _context.t3
+              formData: _context.t2
             };
-            _context.next = 20;
-            return _context.t0.uploadFile.call(_context.t0, _context.t4);
-          case 20:
+            _context.next = 19;
+            return _context.t0.uploadFile.call(_context.t0, _context.t3);
+          case 19:
             uploadRes = _context.sent;
             console.log(uploadRes);
 
             // 上传成功，将图片URL存入数据库
             if (!(uploadRes.statusCode === 204)) {
-              _context.next = 31;
+              _context.next = 30;
               break;
             }
             avatarUrl = "https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com/".concat(key);
-            _context.next = 26;
+            _context.next = 25;
             return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().request({
               method: 'PATCH',
               url: "".concat(requestUrl, "/v1/users//updateAvatar"),
@@ -144,7 +140,7 @@ function Mine() {
                 avatar: avatarUrl
               }
             });
-          case 26:
+          case 25:
             updateAvatarRes = _context.sent;
             if (updateAvatarRes.statusCode === 200) {
               _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().setStorageSync('avatar', avatarUrl); // 持久化 avatar
@@ -159,29 +155,29 @@ function Mine() {
               });
             }
             ;
-            _context.next = 32;
+            _context.next = 31;
             break;
-          case 31:
+          case 30:
             _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showToast({
               title: '上传失败',
               icon: 'error',
               duration: 2000
             });
+          case 31:
+            ;
           case 32:
             ;
-          case 33:
-            ;
-            _context.next = 39;
+            _context.next = 38;
             break;
-          case 36:
-            _context.prev = 36;
-            _context.t5 = _context["catch"](0);
-            console.log(_context.t5);
-          case 39:
+          case 35:
+            _context.prev = 35;
+            _context.t4 = _context["catch"](0);
+            console.log(_context.t4);
+          case 38:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 36]]);
+      }, _callee, null, [[0, 35]]);
     }));
     return function handleAvatarChange() {
       return _ref.apply(this, arguments);
@@ -315,8 +311,8 @@ function Mine() {
   \*****************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
-/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -325,12 +321,12 @@ function Mine() {
 
 // quality: 压缩质量，范围0～100，数值越小，质量越低，压缩率越高（仅对jpg有效）。
 var compressImage = /*#__PURE__*/function () {
-  var _ref = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_1__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__["default"])().mark(function _callee(filePath) {
+  var _ref = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_1__["default"])( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__["default"])().mark(function _callee(filePath) {
     var quality,
       imagePath,
       imageRes,
       _args = arguments;
-    return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__["default"])().wrap(function _callee$(_context) {
+    return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__["default"])().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           quality = _args.length > 1 && _args[1] !== undefined ? _args[1] : 80;
