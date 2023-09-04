@@ -10,25 +10,32 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Mine; }
 /* harmony export */ });
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_userInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/userInfo */ "./src/store/userInfo.ts");
 /* harmony import */ var _store_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/store/request */ "./src/store/request.ts");
-/* harmony import */ var _static_mine_chat_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../static/mine/chat.png */ "./src/static/mine/chat.png");
-/* harmony import */ var _static_mine_profile_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../static/mine/profile.png */ "./src/static/mine/profile.png");
-/* harmony import */ var _static_mine_logout_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../static/mine/logout.png */ "./src/static/mine/logout.png");
-/* harmony import */ var _static_mine_login_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../static/mine/login.png */ "./src/static/mine/login.png");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "webpack/container/remote/react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _store_appInfo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/store/appInfo */ "./src/store/appInfo.ts");
+/* harmony import */ var _common_launchUtilities_compressImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/common/launchUtilities/compressImage */ "./src/common/launchUtilities/compressImage.ts");
+/* harmony import */ var _static_mine_chat_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../static/mine/chat.png */ "./src/static/mine/chat.png");
+/* harmony import */ var _static_mine_profile_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../static/mine/profile.png */ "./src/static/mine/profile.png");
+/* harmony import */ var _static_mine_logout_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../static/mine/logout.png */ "./src/static/mine/logout.png");
+/* harmony import */ var _static_mine_login_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../static/mine/login.png */ "./src/static/mine/login.png");
+/* harmony import */ var _static_mine_defaultAvatar_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../static/mine/defaultAvatar.png */ "./src/static/mine/defaultAvatar.png");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "webpack/container/remote/react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
 
 
 
 
 
+
+
+
+ // 取 accessKeyId
 
 
 
@@ -43,11 +50,14 @@ function Mine() {
   var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
       return [state, state.setUserInfo];
     }),
-    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_8__["default"])(_useUser, 2),
+    _useUser2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__["default"])(_useUser, 2),
     userInfo = _useUser2[0],
     setUserInfo = _useUser2[1];
   var requestUrl = (0,_store_request__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
     return state.requestUrl;
+  });
+  var accessKeyId = (0,_store_appInfo__WEBPACK_IMPORTED_MODULE_3__["default"])(function (state) {
+    return state.accessKey_id;
   });
   (0,_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__.useLoad)(function () {
     if (!userInfo.isLogin) {
@@ -64,9 +74,9 @@ function Mine() {
 
   // 修改头像
   var handleAvatarChange = /*#__PURE__*/function () {
-    var _ref = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_9__["default"])( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__["default"])().mark(function _callee() {
-      var res, selectedImagePath, token, uploadRes;
-      return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__["default"])().wrap(function _callee$(_context) {
+    var _ref = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().mark(function _callee() {
+      var res, selectedImagePath, token, key, policy, ossAccessKeyId, signature, uploadRes, avatarUrl, updateAvatarRes;
+      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
@@ -79,37 +89,99 @@ function Mine() {
           case 3:
             res = _context.sent;
             if (!(res.tempFilePaths && res.tempFilePaths[0])) {
-              _context.next = 11;
+              _context.next = 33;
               break;
             }
             selectedImagePath = res.tempFilePaths[0]; // 图片路径
             token = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('token'); // JWT token
-            // 上传图片
-            _context.next = 9;
-            return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().uploadFile({
-              url: "".concat(requestUrl, "/v1/users/updateAvatar"),
-              filePath: selectedImagePath,
-              name: 'avatar',
-              header: {
-                Authorization: token
-              }
-            });
-          case 9:
+            // 获取 OSS 相关信息
+            key = "avatar-".concat(userInfo.id, "-").concat(Date.now()); // 上传头像的文件名
+            policy = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('policy'); // OSS policy
+            ossAccessKeyId = accessKeyId; // 阿里云 RAM 用户 accessKeyId
+            signature = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('signature'); // OSS 签名
+            // 上传图片到阿里 OSS
+            _context.t0 = (_tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default());
+            _context.next = 14;
+            return (0,_common_launchUtilities_compressImage__WEBPACK_IMPORTED_MODULE_4__["default"])(selectedImagePath);
+          case 14:
+            _context.t1 = _context.sent;
+            _context.t2 = {
+              Authorization: token
+            };
+            _context.t3 = {
+              key: key,
+              policy: policy,
+              OSSAccessKeyId: ossAccessKeyId,
+              signature: signature
+            };
+            _context.t4 = {
+              url: 'https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com',
+              filePath: _context.t1,
+              name: 'file',
+              header: _context.t2,
+              formData: _context.t3
+            };
+            _context.next = 20;
+            return _context.t0.uploadFile.call(_context.t0, _context.t4);
+          case 20:
             uploadRes = _context.sent;
             console.log(uploadRes);
-          case 11:
+
+            // 上传成功，将图片URL存入数据库
+            if (!(uploadRes.statusCode === 204)) {
+              _context.next = 31;
+              break;
+            }
+            avatarUrl = "https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com/".concat(key);
+            _context.next = 26;
+            return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().request({
+              method: 'PATCH',
+              url: "".concat(requestUrl, "/v1/users//updateAvatar"),
+              header: {
+                Authorization: token
+              },
+              data: {
+                avatar: avatarUrl
+              }
+            });
+          case 26:
+            updateAvatarRes = _context.sent;
+            if (updateAvatarRes.statusCode === 200) {
+              _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().setStorageSync('avatar', avatarUrl); // 持久化 avatar
+              setUserInfo({
+                avatar: avatarUrl
+              }); // 同步到 userInfo
+
+              _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showToast({
+                title: '上传成功',
+                icon: 'success',
+                duration: 2000
+              });
+            }
             ;
-            _context.next = 17;
+            _context.next = 32;
             break;
-          case 14:
-            _context.prev = 14;
-            _context.t0 = _context["catch"](0);
-            console.log(_context.t0);
-          case 17:
+          case 31:
+            _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showToast({
+              title: '上传失败',
+              icon: 'error',
+              duration: 2000
+            });
+          case 32:
+            ;
+          case 33:
+            ;
+            _context.next = 39;
+            break;
+          case 36:
+            _context.prev = 36;
+            _context.t5 = _context["catch"](0);
+            console.log(_context.t5);
+          case 39:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 14]]);
+      }, _callee, null, [[0, 36]]);
     }));
     return function handleAvatarChange() {
       return _ref.apply(this, arguments);
@@ -124,7 +196,7 @@ function Mine() {
       openid: '',
       student_id: '',
       nick_name: '',
-      avatar: '',
+      avatar: 'none',
       user_level: 1,
       user_exp: 0,
       faculty: '',
@@ -133,102 +205,170 @@ function Mine() {
     });
     _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().removeStorageSync('token');
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
     className: "mine-wrapper",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
-      className: "mine-topBackground"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
       className: "mine-content",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
         className: "mine-userInfo",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
           className: "mine-basicInfo",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Image, {
-            src: "#",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Image, {
+            src: userInfo.isLogin ? userInfo.avatar : _static_mine_defaultAvatar_png__WEBPACK_IMPORTED_MODULE_9__,
             className: "mine-avatar",
             onClick: handleAvatarChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
             className: "mine-nickname",
             children: userInfo.isLogin ? userInfo.nick_name : '请登录'
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
             className: "mine-schoolID",
             children: userInfo.student_id
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
             className: "mine-moreInfo",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
               className: "mine-moreInfo-item",
               children: ["Lv.", userInfo.user_level]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
               className: "mine-moreInfo-item",
               children: userInfo.grade
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
               className: "mine-moreInfo-item",
               children: userInfo.faculty
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
           className: "mine-postInfo",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
             className: "mine-postInfo-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
               className: "mine-postInfo-item-num",
               children: postInfo.postNum
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
               className: "mine-postInfo-item-text",
               children: "\u53D1\u5E16"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
             className: "mine-postInfo-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
               className: "mine-postInfo-item-num",
               children: postInfo.collectedNum
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
               className: "mine-postInfo-item-text",
               children: "\u6536\u85CF"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
             className: "mine-postInfo-item",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
               className: "mine-postInfo-item-num",
               children: postInfo.recentView
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Text, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Text, {
               className: "mine-postInfo-item-text",
               children: "\u6700\u8FD1\u6D4F\u89C8"
             })]
           })]
         })]
-      }), userInfo.isLogin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+      }), userInfo.isLogin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
         className: "mine-functions",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
           className: "mine-function mine-contactUs",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Image, {
-            src: _static_mine_chat_png__WEBPACK_IMPORTED_MODULE_3__
+          onClick: function onClick() {
+            _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().navigateTo({
+              url: '/pages/mine/contactUs/contactUs'
+            });
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Image, {
+            src: _static_mine_chat_png__WEBPACK_IMPORTED_MODULE_5__
           }), "\u8054\u7CFB\u6211\u4EEC"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
           className: "mine-function mine-validation",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Image, {
-            src: _static_mine_profile_png__WEBPACK_IMPORTED_MODULE_4__
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Image, {
+            src: _static_mine_profile_png__WEBPACK_IMPORTED_MODULE_6__
           }), "\u8EAB\u4EFD\u8BA4\u8BC1"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
           className: "mine-function mine-logout",
           onClick: handleLogOut,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Image, {
-            src: _static_mine_logout_png__WEBPACK_IMPORTED_MODULE_5__
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Image, {
+            src: _static_mine_logout_png__WEBPACK_IMPORTED_MODULE_7__
           }), "\u9000\u51FA\u767B\u5F55"]
         })]
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
         className: "mine-functions",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.View, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
           className: "mine-function mine-login",
           onClick: userInfo.toLoginPage,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_11__.Image, {
-            src: _static_mine_login_png__WEBPACK_IMPORTED_MODULE_6__
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.Image, {
+            src: _static_mine_login_png__WEBPACK_IMPORTED_MODULE_8__
           }), "\u767B\u5F55"]
         })
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_14__.View, {
+      className: "mine-topBackground"
     })]
   });
 }
+
+/***/ }),
+
+/***/ "./src/common/launchUtilities/compressImage.ts":
+/*!*****************************************************!*\
+  !*** ./src/common/launchUtilities/compressImage.ts ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
+/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
+
+
+
+
+// quality: 压缩质量，范围0～100，数值越小，质量越低，压缩率越高（仅对jpg有效）。
+var compressImage = /*#__PURE__*/function () {
+  var _ref = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_1__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__["default"])().mark(function _callee(filePath) {
+    var quality,
+      imagePath,
+      imageRes,
+      _args = arguments;
+    return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_2__["default"])().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          quality = _args.length > 1 && _args[1] !== undefined ? _args[1] : 80;
+          imagePath = '';
+          _context.prev = 2;
+          _context.next = 5;
+          return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().compressImage({
+            src: filePath,
+            quality: quality,
+            compressedWidth: 300
+          });
+        case 5:
+          imageRes = _context.sent;
+          imagePath = imageRes.tempFilePath;
+          console.log("压缩后图片路径：", imagePath);
+          _context.next = 13;
+          break;
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](2);
+          _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showToast({
+            title: "图片处理失败",
+            icon: "error",
+            duration: 2000
+          });
+        case 13:
+          return _context.abrupt("return", imagePath);
+        case 14:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[2, 10]]);
+  }));
+  return function compressImage(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/* harmony default export */ __webpack_exports__["default"] = (compressImage);
 
 /***/ }),
 
@@ -261,6 +401,16 @@ var inst = Page((0,_tarojs_runtime__WEBPACK_IMPORTED_MODULE_0__.createPageConfig
 /***/ (function(module) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAIfSURBVHgB3VXtbdswEH2kiiBAI1cblJkgst0C/akN4m7QTtBuEHmCohO4niDuBE4GaK1MYHaCGk4LFAVE9o5kZcnf0b/kAQJF3vHe6fh4Ah47xD6jStIEpRyQ2yWETXkpmApYoWmc6Ptv41YEKukPYOyIXhPAagp4Q94/nNHiwhMKRTO25YeImsE7vU/0WBV3p+oszXb6kU11unPnS3twDMjxKmzIcSTY9ygSFffePTT4BkmcDurrYs1pzgXWy9k5WoBLCiFSSHOuF8WC1yRq2fNAB/sebWHtECwKpzwPWTNfslr0r+IGLRH2alLYFgLhNH5X36Cev04bc7oX6jRVjbXTN6pJY28p2MUmAcC6LqqNXLKonNE4CsGpfHKOEzlzF5DXOt0vOPnLMv24CuMuoNpG0IQwydrKImRYS1a88KP5iUNgBf3PtlpbLweXKGS/0yfuXXs1ejxbZUP9RSCrO+s/hW7Mg/T2+VAMKrWtzrJeoq+cwL7WcAjq7FXGA8n1epMgMhNwnYW4QltIM3JSvy/GGwTu8y24YyZoAe5h8NnnDc7KgQ9PgHv/rTtM/7kPCZ7TM6xn3yBAGWVutHRJWO/STIko3RuYklBxfxqCf9bL7/m6z0pFptSIhA4/kjGMmehlUfgM+x+ofBnZ7kISL+k9o02KJgtI+5ZKPNmWREWgf7tgO7poKejwFRH7HiMM/8XI3wwR0W9zi3yfDv4BenXNfoKcGggAAAAASUVORK5CYII=";
+
+/***/ }),
+
+/***/ "./src/static/mine/defaultAvatar.png":
+/*!*******************************************!*\
+  !*** ./src/static/mine/defaultAvatar.png ***!
+  \*******************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/mine/defaultAvatar.png";
 
 /***/ }),
 

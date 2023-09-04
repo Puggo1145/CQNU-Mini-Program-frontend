@@ -1,7 +1,8 @@
 /*postcss-pxtransform disable*/
 .mine-topBackground {
-    z-index: -1;
+    z-index: -10;
     position: fixed;
+    top: 0;
     width: 100%;
     height: 200px;
     background-color: #4e6aff;
@@ -9,7 +10,7 @@
 
 .mine-content {
     padding: 0 20px;
-    z-index: 100;
+    z-index: 10;
     position: relative;
     top: 160px;
     height: 100vh;
@@ -23,11 +24,11 @@
             flex-direction: column;
     
             .mine-avatar {
+                position: relative;
                 width: 72px;
                 height: 72px;
                 border: 2px solid #fff;
                 border-radius: 36px;
-                background-color: #4e6aff;
                 margin-top: -16px;
             }
     

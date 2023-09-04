@@ -6,6 +6,8 @@ import useAppInfo from "@/store/appInfo"
 import useRequest from "@/store/request"
 import useUser from "@/store/userInfo"
 
+import Header from "@/common/Header/Header"
+
 import './login.css'
 
 import loginImg from '../../static/login/discover.png'
@@ -84,15 +86,12 @@ export default function login() {
     }
 
     return (
-        <View className="login-wrapper" style={{ paddingTop: statusBarHeight + 'px' }}>
-            <View className="login-header">
-                <View className="login-header-back" onClick={() => { Taro.navigateBack() }}></View>
-                <Text>登录</Text>
-            </View>
+        <View className="login-wrapper">
+            <Header title={"登录"}/>
             <View className="login-content">
                 <Image src={loginImg} mode="widthFix"></Image>
                 <Text>系统将在第一次登录时自动为您注册账号</Text>
-                <Button onClick={handleLogin}>登录</Button>
+                <Button onClick={handleLogin}>微信登录</Button>
             </View>
         </View>
     )
