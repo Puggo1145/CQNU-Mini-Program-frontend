@@ -3,6 +3,7 @@ import { useLoad } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
 
 import useUser from '../../store/userInfo';
+import useRequest from '@/store/request';
 
 import './mine.css'
 
@@ -13,7 +14,8 @@ import loginImg from '../../static/mine/login.png'
 
 export default function Mine() {
 
-  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
+  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo]);
+  const requestUrl = useRequest((state) => state.requestUrl);
 
   useLoad(() => {
     if (!userInfo.isLogin) {
@@ -29,6 +31,41 @@ export default function Mine() {
     recentView: 0
   }
 
+  // 修改头像
+  const handleAvatarChange = async () => {
+    try {
+
+      // 选择图片
+      const res = await Taro.chooseImage({
+        count: 1,
+        sourceType: ['album', 'camera'],
+        sizeType: ['compressed'],
+      });
+
+      if (res.tempFilePaths && res.tempFilePaths[0]) {
+        const selectedImagePath = res.tempFilePaths[0]; // 图片路径
+        const token = Taro.getStorageSync('token'); // JWT token
+
+        // 上传图片
+        const uploadRes = await Taro.uploadFile({
+          url: `${requestUrl}/v1/users/updateAvatar`,
+          filePath: selectedImagePath,
+          name: 'avatar',
+          header: {
+            Authorization: token
+          }
+        });
+
+        console.log(uploadRes);
+        
+      };
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 登出
   const handleLogOut = () => {
     console.log(userInfo);
             
@@ -53,7 +90,7 @@ export default function Mine() {
         <View className='mine-content'>
           <View className='mine-userInfo'>
             <View className='mine-basicInfo'>
-              <Image src='#' className='mine-avatar'></Image>
+              <Image src='#' className='mine-avatar' onClick={handleAvatarChange}></Image>
               <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
               <Text className='mine-schoolID'>{userInfo.student_id}</Text>
               <View className='mine-moreInfo'>

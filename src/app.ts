@@ -39,11 +39,16 @@ function App({ children }: PropsWithChildren<any>) {
     const loginValidateRes = await Taro.request({
       method: 'POST',
       url: requestUrl + '/v1/users/checkLoginStatus',
+      header: {
+        Authorization: token,
+      },
       data: {
-        token: token,
         action: 'initialLoginValidation'
       }
     });
+
+    console.log(loginValidateRes);
+    
 
     // 验证成功， 从本地缓存中读取信息 / 失败则不会读取， isLogin 为 false
     if (loginValidateRes.statusCode.toString().startsWith('2')) {
