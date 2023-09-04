@@ -28,14 +28,19 @@ require("./runtime");
   \*****************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_defineProperty_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty.js */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
 /* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "webpack/container/remote/react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
-/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./src/store/store.ts");
+/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
+/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store */ "./src/store/store.ts");
+/* harmony import */ var _store_userInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/userInfo */ "./src/store/userInfo.ts");
 /* harmony import */ var _store_postData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/postData */ "./src/store/postData.ts");
 /* harmony import */ var _store_request__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/request */ "./src/store/request.ts");
+
+
+
 
 
 
@@ -47,7 +52,7 @@ require("./runtime");
 function App(_ref) {
   var children = _ref.children;
   // 数据 store ————————————————————————————————————————————————————————————
-  var _useStore = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
+  var _useStore = (0,_store_store__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
       return [state.statusBarHeight, state.setStatusBarHeight];
     }),
     _useStore2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useStore, 2),
@@ -65,44 +70,70 @@ function App(_ref) {
     _useRequest2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useRequest, 2),
     requestUrl = _useRequest2[0],
     setRequestUrl = _useRequest2[1];
-  var userInfo = _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().getStorageSync('userInfo');
-  (0,_tarojs_taro__WEBPACK_IMPORTED_MODULE_1__.useLaunch)(function () {
-    // 获取全局 statusBarHeight        
-    _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().getSystemInfo({
-      success: function success(res) {
-        if (res.statusBarHeight) {
-          setStatusBarHeight(res.statusBarHeight - 10);
-        }
-      }
-    });
-    _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().setNavigationBarColor({
-      frontColor: '#000000',
-      backgroundColor: '#1e1e1e'
-    });
+  var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
+      return [state, state.setUserInfo];
+    }),
+    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useUser, 2),
+    userInfo = _useUser2[0],
+    setUserInfo = _useUser2[1];
+  (0,_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__.useLaunch)( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_6__["default"])( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_7__["default"])().mark(function _callee() {
+    var token, loginValidateRes, userInfoArray;
+    return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_7__["default"])().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          // 获取全局 statusBarHeight        
+          _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getSystemInfo({
+            success: function success(res) {
+              if (res.statusBarHeight) {
+                setStatusBarHeight(res.statusBarHeight - 10);
+              }
+            }
+          });
+          _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().setNavigationBarColor({
+            frontColor: '#000000',
+            backgroundColor: '#1e1e1e'
+          });
 
-    // 请求初始数据————————————————————————————————————————————————————————————
-    // 用户是否登录 
-    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-      console.log("id changed");
-      if (userInfo.id !== '') {
-        console.log("id set");
-        setUserInfo({
-          isLogin: true
-        });
-      }
-    }, [userInfo.id]);
+          // 请求初始数据————————————————————————————————————————————————————————————
 
-    // 获取所有Tags 
-    _tarojs_taro__WEBPACK_IMPORTED_MODULE_1___default().request({
-      method: 'GET',
-      url: requestUrl + '/posts/gettags',
-      success: function success(res) {
-        setPostData({
-          tags: res.data.data.tags
-        });
+          // 验证登录状态    
+          token = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('token');
+          _context.next = 5;
+          return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().request({
+            method: 'POST',
+            url: requestUrl + '/v1/users/checkLoginStatus',
+            data: {
+              token: token,
+              action: 'initialLoginValidation'
+            }
+          });
+        case 5:
+          loginValidateRes = _context.sent;
+          // 验证成功， 从本地缓存中读取信息 / 失败则不会读取， isLogin 为 false
+          if (loginValidateRes.statusCode.toString().startsWith('2')) {
+            // 创建 userInfo 的浅拷贝，防止方法被覆写
+            userInfoArray = Object.keys(userInfo).filter(function (key) {
+              return typeof userInfo[key] !== 'function';
+            }); // 防止方法被覆写
+            userInfoArray.forEach(function (key) {
+              setUserInfo((0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_defineProperty_js__WEBPACK_IMPORTED_MODULE_8__["default"])({}, key, _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync(key)));
+            });
+          }
+
+        // 获取所有Tags 
+        // Taro.request({
+        //   method: 'GET',
+        //   url: requestUrl + '/posts/gettags',
+        //   success(res) {
+        //     setPostData({ tags: res.data.data.tags })
+        //   }
+        // })
+        case 7:
+        case "end":
+          return _context.stop();
       }
-    });
-  });
+    }, _callee);
+  })));
 
   // children 是将要会渲染的页面
   return children;

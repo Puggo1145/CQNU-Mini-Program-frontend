@@ -40,8 +40,16 @@ const useUser = create<State & Action>((set) => ({
         })
     },
     
-    // 定义setUserInfo操作，它将用户信息合并到当前状态
-    setUserInfo: (userInfo) => set((state) => ({ ...state, ...userInfo }))
+    // 定义setUserInfo操作，将用户信息合并到当前状态
+    setUserInfo: (userInfo) => {
+        // 数据发生改变时，自动更新登录状态，如果 openid 存在，则将登录状态设置为 true
+        userInfo.openid !== '' ? set((state) => ({ ...state, isLogin: true })) : set((state) => ({ ...state, isLogin: false }))
+
+        set((state) => ({ ...state, ...userInfo }))
+    }
 }))
+
+
+
 
 export default useUser;

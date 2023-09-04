@@ -4,6 +4,7 @@ import Taro from "@tarojs/taro"
 import useStore from "@/store/store"
 import useAppInfo from "@/store/appInfo"
 import useRequest from "@/store/request"
+import useUser from "@/store/userInfo"
 
 import './login.css'
 
@@ -12,10 +13,11 @@ import loginImg from '../../static/login/discover.png'
 export default function login() {
 
     const statusBarHeight = useStore((state) => state.statusBarHeight)
-    
+
     const app_id = useAppInfo((state) => state.app_id)
     const app_secret = useAppInfo((state) => state.app_secret)
 
+    const setUserInfo = useUser((state) => state.setUserInfo) // 更新 userInfo
     const requestUrl = useRequest((state) => state.requestUrl) // 后端 url
 
     async function handleLogin() {
@@ -40,10 +42,39 @@ export default function login() {
                 Taro.navigateTo({
                     url: '/pages/register/register?openid=' + toBackendRes.data.data.openid
                 });
+                return;
             };
-            
-            
-            // 用户登录成功，将 token 存入本地
+
+            if (toBackendRes.statusCode === 200) {
+                // 用户登录成功，将 token 存入本地
+                Taro.setStorageSync('token', toBackendRes.data.token);
+
+                const userInfo = toBackendRes.data.data;
+                // 持久化 userInfo
+                Object.keys(userInfo).forEach(key => {
+                    Taro.setStorageSync(key, userInfo[key]);
+                });
+                // 更新 userInfo
+                setUserInfo(userInfo);
+                
+                Taro.showToast({
+                    title: '登录成功',
+                    icon: 'success',
+                    duration: 2000
+                })
+                
+                // 跳转首页
+                setTimeout(() => {
+                    Taro.switchTab({
+                        url: '/pages/index/index'
+                    })
+                }, 2000);
+            } else {
+                Taro.showToast({
+                    title: '登录失败，请检查网络',
+                    icon: 'error'
+                })
+            }
 
 
         } catch (err) {

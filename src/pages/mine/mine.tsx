@@ -2,7 +2,7 @@ import { View, Text, Image } from '@tarojs/components'
 import { useLoad } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
 
-import useUser from '@/store/userInfo'
+import useUser from '../../store/userInfo';
 
 import './mine.css'
 
@@ -13,10 +13,7 @@ import loginImg from '../../static/mine/login.png'
 
 export default function Mine() {
 
-  const userInfo = JSON.parse(Taro.getStorageSync('userInfo') || '{}');
-  console.log(userInfo);
-  
-  const userInfoFn = useUser((state) => state);
+  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
 
   useLoad(() => {
     if (!userInfo.isLogin) {
@@ -32,58 +29,76 @@ export default function Mine() {
     recentView: 0
   }
 
-  return (
-    <View className='mine-wrapper'>
-      <View className='mine-topBackground'></View>
-      <View className='mine-content'>
-        <View className='mine-userInfo'>
-          <View className='mine-basicInfo'>
-            <Image src='#' className='mine-avatar' onClick={userInfoFn.toLoginPage}></Image>
-            <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
-            <Text className='mine-schoolID'>{userInfo.student_id}</Text>
-            <View className='mine-moreInfo'>
-              <View className='mine-moreInfo-item'>Lv.{userInfo.user_level}</View>
-              <View className='mine-moreInfo-item'>{userInfo.grade}</View>
-              <View className='mine-moreInfo-item'>{userInfo.faculty}</View>
+  const handleLogOut = () => {
+    console.log(userInfo);
+            
+    setUserInfo({
+      id: '',
+      openid: '',
+      student_id: '',
+      nick_name: '',
+      avatar: '',
+      user_level: 1,
+      user_exp: 0,
+      faculty: '',
+      major: '',
+      grade: '',
+    });
+    Taro.removeStorageSync('token');
+  };      
+
+    return (
+      <View className='mine-wrapper'>
+        <View className='mine-topBackground'></View>
+        <View className='mine-content'>
+          <View className='mine-userInfo'>
+            <View className='mine-basicInfo'>
+              <Image src='#' className='mine-avatar'></Image>
+              <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
+              <Text className='mine-schoolID'>{userInfo.student_id}</Text>
+              <View className='mine-moreInfo'>
+                <View className='mine-moreInfo-item'>Lv.{userInfo.user_level}</View>
+                <View className='mine-moreInfo-item'>{userInfo.grade}</View>
+                <View className='mine-moreInfo-item'>{userInfo.faculty}</View>
+              </View>
+            </View>
+            <View className='mine-postInfo'>
+              <View className='mine-postInfo-item'>
+                <Text className='mine-postInfo-item-num'>{postInfo.postNum}</Text>
+                <Text className='mine-postInfo-item-text'>发帖</Text>
+              </View>
+              <View className='mine-postInfo-item'>
+                <Text className='mine-postInfo-item-num'>{postInfo.collectedNum}</Text>
+                <Text className='mine-postInfo-item-text'>收藏</Text>
+              </View>
+              <View className='mine-postInfo-item'>
+                <Text className='mine-postInfo-item-num'>{postInfo.recentView}</Text>
+                <Text className='mine-postInfo-item-text'>最近浏览</Text>
+              </View>
             </View>
           </View>
-          <View className='mine-postInfo'>
-            <View className='mine-postInfo-item'>
-              <Text className='mine-postInfo-item-num'>{postInfo.postNum}</Text>
-              <Text className='mine-postInfo-item-text'>发帖</Text>
-            </View>
-            <View className='mine-postInfo-item'>
-              <Text className='mine-postInfo-item-num'>{postInfo.collectedNum}</Text>
-              <Text className='mine-postInfo-item-text'>收藏</Text>
-            </View>
-            <View className='mine-postInfo-item'>
-              <Text className='mine-postInfo-item-num'>{postInfo.recentView}</Text>
-              <Text className='mine-postInfo-item-text'>最近浏览</Text>
-            </View>
-          </View>
+          {userInfo.isLogin ?
+            <View className='mine-functions'>
+              <View className='mine-function mine-contactUs'>
+                <Image src={chatImg}></Image>
+                联系我们
+              </View>
+              <View className='mine-function mine-validation'>
+                <Image src={profileImg}></Image>
+                身份认证
+              </View>
+              <View className='mine-function mine-logout' onClick={handleLogOut}>
+                <Image src={logoutImg}></Image>
+                退出登录
+              </View>
+            </View> :
+            <View className='mine-functions'>
+              <View className='mine-function mine-login' onClick={userInfo.toLoginPage}>
+                <Image src={loginImg}></Image>
+                登录
+              </View>
+            </View>}
         </View>
-        {userInfo.isLogin ?
-          <View className='mine-functions'>
-            <View className='mine-function mine-contactUs'>
-              <Image src={chatImg}></Image>
-              联系我们
-            </View>
-            <View className='mine-function mine-contactUs'>
-              <Image src={profileImg}></Image>
-              身份认证
-            </View>
-            <View className='mine-function mine-contactUs'>
-              <Image src={logoutImg}></Image>
-              退出登录
-            </View>
-          </View> :
-          <View className='mine-functions'>
-            <View className='mine-function mine-login' onClick={userInfo.toLoginPage}>
-              <Image src={loginImg}></Image>
-              登录
-            </View>
-          </View>}
       </View>
-    </View>
-  )
-}
+    )
+  }

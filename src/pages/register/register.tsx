@@ -93,24 +93,32 @@ export default function register() {
                     title: '注册成功',
                     icon: 'success'
                 });
+                console.log(res.data.data);
+                
                 // 存储 json web token
-                Taro.setStorageSync('token', res.data.data.token);
+                Taro.setStorageSync('token', res.data.token);
 
                 // 存储用户信息
+                const newUserInfo = res.data.data;
                 const userInfo = {
-                    isLogin: true,
-                    id: res.data.data.id,
-                    openid: res.data.data.openid,
-                    nick_name: res.data.data.nick_name,
-                    student_id: res.data.data.student_id,
-                    faculty: res.data.data.faculty,
-                    major: res.data.data.major,
-                    grade: res.data.data.grade,
-                    avatar: res.data.data.avatar,
+                    id: newUserInfo.id,
+                    openid: newUserInfo.openid,
+                    avatar: newUserInfo.avatar,
+                    nick_name: newUserInfo.nick_name,
+                    student_id: newUserInfo.student_id,
+                    faculty: newUserInfo.faculty,
+                    major: newUserInfo.major,
+                    grade: newUserInfo.grade,
+                    user_exp: newUserInfo.user_exp,
+                    user_level: newUserInfo.user_level,
                 };
 
                 // 持久化 userInfo
-                Taro.setStorageSync('userInfo', JSON.stringify(userInfo));
+                Object.keys(userInfo).forEach(key => {
+                    Taro.setStorageSync(key, userInfo[key]);
+                });
+                // 更新 userInfo
+                setUserInfo(userInfo);
 
                 // 跳转首页
                 setTimeout(() => {

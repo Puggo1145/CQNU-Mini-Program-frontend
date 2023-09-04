@@ -10,14 +10,14 @@ import useRequest from './store/request'
 import './app.less'
 
 function App({ children }: PropsWithChildren<any>) {
-// 数据 store ————————————————————————————————————————————————————————————
-  const [statusBarHeight, setStatusBarHeight] = useStore((state) => [state.statusBarHeight, state.setStatusBarHeight])  
+  // 数据 store ————————————————————————————————————————————————————————————
+  const [statusBarHeight, setStatusBarHeight] = useStore((state) => [state.statusBarHeight, state.setStatusBarHeight])
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData])
   const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
-  const userInfo = Taro.getStorageSync('userInfo');
+  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
 
-  useLaunch(() => {
+  useLaunch(async () => {
     // 获取全局 statusBarHeight        
     Taro.getSystemInfo({
       success: res => {
@@ -31,26 +31,38 @@ function App({ children }: PropsWithChildren<any>) {
       backgroundColor: '#1e1e1e'
     })
 
-// 请求初始数据————————————————————————————————————————————————————————————
-    // 用户是否登录 
-    useEffect(() => {
-      console.log("id changed");
-      
-      if (userInfo.id !== '') {
-        console.log("id set");
-        Taro.setStorageSync('isLogin', true);
-      }
-    }, [userInfo.id]);
+    // 请求初始数据————————————————————————————————————————————————————————————
 
+    // 验证登录状态    
+    const token = Taro.getStorageSync('token');
+
+    const loginValidateRes = await Taro.request({
+      method: 'POST',
+      url: requestUrl + '/v1/users/checkLoginStatus',
+      data: {
+        token: token,
+        action: 'initialLoginValidation'
+      }
+    });
+
+    // 验证成功， 从本地缓存中读取信息 / 失败则不会读取， isLogin 为 false
+    if (loginValidateRes.statusCode.toString().startsWith('2')) {
+      // 创建 userInfo 的浅拷贝，防止方法被覆写
+      const userInfoArray = Object.keys(userInfo).filter(key => typeof userInfo[key] !== 'function' ) // 防止方法被覆写
+      
+      userInfoArray.forEach((key) => {
+        setUserInfo({ [key]: Taro.getStorageSync(key) });
+      });
+    }
 
     // 获取所有Tags 
-    Taro.request({
-        method: 'GET',
-        url: requestUrl + '/posts/gettags',
-        success(res) {
-            setPostData({tags: res.data.data.tags})
-        }
-    })
+    // Taro.request({
+    //   method: 'GET',
+    //   url: requestUrl + '/posts/gettags',
+    //   success(res) {
+    //     setPostData({ tags: res.data.data.tags })
+    //   }
+    // })
   })
 
   // children 是将要会渲染的页面

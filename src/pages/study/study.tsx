@@ -4,6 +4,7 @@ import Taro from '@tarojs/taro'
 
 import useStore from '@/store/store'
 import useCLasstable from '@/store/classTable'
+import useUser from '@/store/userInfo'
 
 import './study.css'
 
@@ -23,6 +24,8 @@ interface LessonType {
 }
 
 export default function Study() {
+
+  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo]) // 用户信息
 
   const statusBarHeight = useStore(state => state.statusBarHeight)
   const classTable = useCLasstable(state => state.classTable)
@@ -86,7 +89,7 @@ export default function Study() {
 
   return (
     <View className='study-wrapper' style={{ paddingTop: statusBarHeight + 'px' }}>
-      <View className='study-header'>专业名称</View>
+      <View className='study-header'>{userInfo.major}</View>
       <View className='study-content'>
         <View className='study-timetable'>
           <View className='study-timetable-top'>
