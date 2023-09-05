@@ -7,26 +7,18 @@ import useStore from '@/store/store'
 import useUser from '@/store/userInfo'
 import useRequest from '@/store/request'
 
+// utilities
+import timeStrToDate from '@/common/utilities/timeStampToDate'
 
+// types
+import { PostType } from '@/types/postType'
+
+// css
 import './postpage.css'
 
 import likeImg from '../../../static/post/post-like-icon.png'
 import likeActivated from '../../../static/post/post-like-activated-icon.png'
 import deleteImg from '../../../static/post/delete.png'
-
-interface postContentType {
-    post_id: string
-    title: string
-    content: string
-    pictures?: string[]
-    user_id: string
-    avatar_url: string
-    nick_name: string
-    user_level: number
-    likes_num: number
-    comments_num: number
-    edit_time: string
-}
 
 interface commentType {
     comment_id: string
@@ -43,12 +35,12 @@ interface commentType {
 export default function postpage() {
     useLoad(() => {
         getContent()
-        getComments()
     })
 
     // 数据store ————————————————————————————————————————————————————————————————————————————————————
-    // 本用户 id
-    const user_id = useUser((state) => state.user_id)
+    
+    const user_id = useUser((state) => state.id) // 本用户 id
+
     const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
 
@@ -58,22 +50,24 @@ export default function postpage() {
     const [currentCommentView, setCurrentCommentView] = useState<number>(0) // 评论排序方式
     const [isLiked, setIsLiked] = useState<boolean>(false) // 是否点赞帖子
 
-
     const [moreIsOpened, setMoreIsOpened] = useState<boolean>(false) // 是否打开更多选项
 
     // 帖子内容
-    const [postContent, setPostContent] = useState<postContentType>({
-        post_id: 'string',
-        title: 'string',
-        content: 'string',
+    const [postContent, setPostContent] = useState<PostType>({
+        _id: '',
+        title: '',
+        content: '',
         pictures: [],
-        user_id: 'xxx',
-        avatar_url: 'string',
-        nick_name: 'string',
-        user_level: 0,
+        tag: '',
+        user: {
+            _id: '',
+            avatar: '',
+            nick_name: '',
+            user_level: 0
+        },
         likes_num: 0,
         comments_num: 0,
-        edit_time: '2023-10-1'
+        createdAt: '',
     })
 
     // 评论内容
@@ -81,110 +75,27 @@ export default function postpage() {
         { comment_id: '', user_id: '', avatar_url: '#', nickName: '114514', user_level: 0, comment_content: '', comment_likes: 0, comment_time: '2021-10-1', isLiked: false }
     ])
 
-    const [commentsNum, setCommentsNum] = useState<number>(0) // 评论总数
+    const [commentsNum, setCommentsNum] = useState<number>(0); // 评论总数
     // 页面功能 ————————————————————————————————————————————————————————————————————————————————————
 
-    function getContent() {
-        const post_id = getCurrentInstance().router?.params.post_id
-        const user_id = getCurrentInstance().router?.params.user_id
-        Taro.request({
-            method: 'POST',
-            url: requestUrl + '/posts/visitpost',
+    async function getContent() {
+        const post_id = getCurrentInstance().router?.params.post_id;
+
+        const postRes = await Taro.request({
+            method: 'GET',
+            url: requestUrl + `/v1/posts?post_id=${post_id}&user_id=${user_id}`,
+            header: {
+                authorization: Taro.getStorageSync('token')
+            },
             data: {
                 post_id: post_id,
                 user_id: user_id
             },
-            success(res) {
-                setPostContent(res.data.data.post_info[0])
-            }
         })
-    }
-
-    function getComments() {
-        const post_id = getCurrentInstance().router?.params.post_id
-        const user_id = getCurrentInstance().router?.params.user_id
-        Taro.request({
-            method: 'POST',
-            url: requestUrl + '/posts/visitpost',
-            data: {
-                post_id: post_id,
-                user_id: user_id
-            },
-            success(res) {
-                setComments(res.data.data.commentsList.map((item) => {
-                    return {
-                        ...item,
-                        isLiked: false
-                    }
-                }))
-            }
-        })
-    }
-
-    useEffect(() => {
-        setCommentsNum(comments.length)
-
-    }, [comments])
-
-    // 点赞帖子
-    function likePost() {
-        // 更新帖子点赞数
-        setPostContent((prev) => {
-            return {
-                ...prev,
-                likes_num: isLiked ? prev.likes_num - 1 : prev.likes_num + 1
-            }
-        })
-        setIsLiked(!isLiked)
-
-        // 向后端发送点赞请求
-        Taro.request({
-            method: 'POST',
-            url: requestUrl + '/posts/likepost',
-            data: {
-                post_id: postContent.post_id,
-                user_id: user_id // 这是当前用户的id
-            },
-            // success(res) {
-            //     if (res.statusCode === 200) {
-
-            //     }
-            // }
-        })
-    }
-
-    // 点赞评论
-    function likeComment(comment_id) {
-        // 更新评论点赞数
-        setComments((prev) => {
-            return prev.map((item) => {
-                if (item.comment_id === comment_id) {
-                    return {
-                        ...item,
-                        isLiked: !item.isLiked,
-                        comment_likes: item.isLiked ? item.comment_likes - 1 : item.comment_likes + 1
-                    }
-                } else {
-                    return item
-                }
-            })
-        })
-
-        // 向后端发送点赞请求
-        Taro.request({
-            method: 'POST',
-            url: requestUrl + '/posts/likecomment',
-            data: {
-                comment_id: comment_id,
-                user_id: user_id // 当前用户的id
-            },
-            // success(res) {
-            //     if (res.statusCode === 200) {
-
-            //     }
-            // }
-        })
-    }
+        console.log(postRes.data.data.post);
+        
+        setPostContent(postRes.data.data.post)
+    };
 
     // 监听键盘弹起事件
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0)
@@ -192,76 +103,53 @@ export default function postpage() {
         setKeyboardHeight(res.height)
     })
 
-    // 发送评论
-    function sendComment(event) {
-        const commentContent = event.detail.value
-
-        if (commentContent) {
-            Taro.request({
-                method: 'POST',
-                url: requestUrl + '/posts/createcomment',
-                data: { commentContent },
-                success(res) {
-                    if (res.statusCode === 200) {
-                        getComments()
-                        Taro.showToast({
-                            title: '评论成功',
-                            icon: 'success',
-                            duration: 2000
-                        })
-                    }
-                }
-            })
-        }
-    }
-
     // 开关 more 选项
     function handleMoreClick(event) {
         setMoreIsOpened(!moreIsOpened)
     }
 
     // 删除帖子
-    let deleteCheck = 0 // 点击两次才可以删除
-    function deletePost() {
-        if (deleteCheck === 0) {
-            Taro.showToast({
-                title: '再次点击以确认删除',
-                icon: 'none',
-                duration: 2000
-            })
-            deleteCheck++
-            return
-        } else if (deleteCheck === 1) {
-            Taro.request({
-                method: 'POST',
-                url: requestUrl + '/posts/deletepost',
-                data: {
-                    user_id: user_id,
-                    post_id: postContent.post_id
-                },
-                success(res) {
-                    if (res.statusCode === 200) {
-                        Taro.showToast({
-                            title: '删除成功',
-                            icon: 'success',
-                            duration: 2000
-                        })
-                        setTimeout(() => {
-                            Taro.navigateBack()
-                        }, 2000)
-                    } else {
-                        Taro.showToast({
-                            title: '删除失败, 请重试',
-                            icon: 'none',
-                            duration: 2000
-                        })
-                    }
-                }
-            })
+    // let deleteCheck = 0 // 点击两次才可以删除
+    // function deletePost() {
+    //     if (deleteCheck === 0) {
+    //         Taro.showToast({
+    //             title: '再次点击以确认删除',
+    //             icon: 'none',
+    //             duration: 2000
+    //         })
+    //         deleteCheck++
+    //         return
+    //     } else if (deleteCheck === 1) {
+    //         Taro.request({
+    //             method: 'POST',
+    //             url: requestUrl + '/posts/deletepost',
+    //             data: {
+    //                 user_id: user_id,
+    //                 post_id: postContent.post_id
+    //             },
+    //             success(res) {
+    //                 if (res.statusCode === 200) {
+    //                     Taro.showToast({
+    //                         title: '删除成功',
+    //                         icon: 'success',
+    //                         duration: 2000
+    //                     })
+    //                     setTimeout(() => {
+    //                         Taro.navigateBack()
+    //                     }, 2000)
+    //                 } else {
+    //                     Taro.showToast({
+    //                         title: '删除失败, 请重试',
+    //                         icon: 'none',
+    //                         duration: 2000
+    //                     })
+    //                 }
+    //             }
+    //         })
 
-            deleteCheck = 0
-        }
-    }
+    //         deleteCheck = 0
+    //     }
+    // };
 
 
     return (
@@ -270,9 +158,9 @@ export default function postpage() {
                 <View className='postpage-header-left'>
                     <View className='postpage-back' onClick={() => { Taro.navigateBack() }}></View>
                     <View className='postpage-userInfo'>
-                        <Image className='postpage-avatar avatarStyle' src={postContent.avatar_url}></Image>
-                        <Text className='postpage-nickname'>{postContent.nick_name}</Text>
-                        <View className='postpage-userLevel'>Lv.{postContent.user_level}</View>
+                        <Image className='postpage-avatar avatarStyle' src={postContent.user.avatar}></Image>
+                        <Text className='postpage-nickname'>{postContent.user.nick_name}</Text>
+                        <View className='postpage-userLevel'>Lv.{postContent.user.user_level}</View>
                     </View>
                 </View>
                 <View className='postpage-options' onClick={() => setMoreIsOpened(!moreIsOpened)}></View>
@@ -289,7 +177,7 @@ export default function postpage() {
                                 )
                             })
                         }
-                        <Text className='postpage-editTime'>编辑于{postContent.edit_time}</Text>
+                        <Text className='postpage-editTime'>编辑于{timeStrToDate(postContent.createdAt)}</Text>
                     </View>
                     <View className='postpage-comments'>
                         <View className='postpage-commentsTop'>
@@ -303,7 +191,7 @@ export default function postpage() {
                             comments.map((item) => {
                                 return (
                                     <View className='postpage-comment' key={item.comment_id}>
-                                        <View className='postpage-likecomment' onClick={() => likeComment(item.comment_id)}>
+                                        <View className='postpage-likecomment' onClick={() => {}}>
                                             <Image src={item.isLiked ? likeActivated : likeImg} className='postpage-likecomment-icon'></Image>
                                             <Text className='postpage-likecomment-num'>{item.comment_likes}</Text>
                                         </View>
@@ -327,17 +215,17 @@ export default function postpage() {
                     className='postpage-commentInput'
                     placeholder='发一条友善的评论'
                     adjustPosition={false}
-                    onConfirm={sendComment}
+                    // onConfirm={sendComment}
                 >
                 </Input>
                 {
                     keyboardHeight >= 30 ?
                         <View className='postpage-send'
-                            onClick={sendComment}
+                            // onClick={sendComment}
                         >发送</View>
                         :
                         <View className='postpage-right'>
-                            <View className='postpage-likePost' onClick={likePost}>
+                            <View className='postpage-likePost' onClick={() => {}}>
                                 <Image src={isLiked ? likeActivated : likeImg}></Image>
                                 {postContent.likes_num > 99 ? '99+' : postContent.likes_num}
                             </View>
@@ -348,7 +236,7 @@ export default function postpage() {
             {moreIsOpened &&
                 <View className='postpage-more-backgroundMask' onClick={handleMoreClick}>
                     <View className='postpage-more' onClick={(event) => event.stopPropagation()}>
-                        {user_id === postContent.user_id && <View className='postpage-item postpage-delete' onClick={deletePost}>
+                        {user_id === postContent.user._id && <View className='postpage-item postpage-delete' onClick={() => {}}>
                             <Image src={deleteImg}></Image>
                             <Text>删除</Text>
                         </View>}

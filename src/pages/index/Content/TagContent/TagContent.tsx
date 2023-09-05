@@ -114,7 +114,7 @@ export default function TagContent() {
         }
 
         Taro.navigateTo({
-            url: '/pages/posts/postpage/postpage?' + `post_id=${post_id}&user_id=${user_id}`
+            url: '/pages/posts/postpage/postpage?' + `post_id=${post_id}`
         })
     }
 

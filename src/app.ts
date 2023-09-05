@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react'
+import { PropsWithChildren } from 'react'
 import { useLaunch } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
 
@@ -8,10 +8,9 @@ import usePostData from './store/postData'
 import useRequest from './store/request'
 
 // launch Utilities
-import getOssParams from './common/launchUtilities/getOssParams'
-import initialLoginValidation from './common/launchUtilities/initialLoginValidation'
-import getAllTags from './common/launchUtilities/getAllTags'
+import LaunchInitiater from './common/launchUtilities/launchInitiater'
 
+// styles
 import './app.less'
 
 function App({ children }: PropsWithChildren<any>) {
@@ -26,27 +25,21 @@ function App({ children }: PropsWithChildren<any>) {
 
   useLaunch(async () => {
     // 获取全局 statusBarHeight        
-    Taro.getSystemInfo({
-      success: res => {
-        if (res.statusBarHeight) {
-          setStatusBarHeight(res.statusBarHeight - 10)
-        }
-      }
-    })
-    Taro.setNavigationBarColor({
-      frontColor: '#000000',
-      backgroundColor: '#1e1e1e'
-    })
+    const systemInfoRes = await Taro.getSystemInfo();
+    if (systemInfoRes.statusBarHeight) {
+      setStatusBarHeight(systemInfoRes.statusBarHeight - 10)
+    };
 
+    // launchInitiater
+    const launchInitiater = new LaunchInitiater(requestUrl, userInfo, postData);
     // 验证登录状态    
-    initialLoginValidation(requestUrl, userInfo); // 验证登录状态，数据存入缓存
+    launchInitiater.initialLoginValidation();
 
     // 获取 OSS 的 parameters
-    getOssParams(requestUrl); // 获取 OSS Params，数据存入缓存
+    launchInitiater.getOssParams();
 
-
-    // 获取所有Tags 
-    getAllTags(requestUrl, setPostData); // 获取所有的Tags，数据存入 store
+    // 获取所有Tags
+    launchInitiater.getAllTags(); 
   })
 
   // children 是将要会渲染的页面
