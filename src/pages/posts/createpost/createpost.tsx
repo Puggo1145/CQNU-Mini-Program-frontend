@@ -1,21 +1,19 @@
 import { useState, useRef } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button, Input } from '@tarojs/components'
+import PubSub from 'pubsub-js';
 
 import useUser from '@/store/userInfo'
 import useStore from '@/store/store'
 import useRequest from '@/store/request'
 
-
 import './createpost.css'
+
 
 export default function createpost() {
 
   const statusBarHeight = useStore((state) => state.statusBarHeight)
   const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
-
-  const user_id = useUser((state) => state.user_id)
-
 
   const [tags, setTags] = useState<string[]>([
     '校园日常',
@@ -25,7 +23,6 @@ export default function createpost() {
     '考研',
     '实习兼职',
   ])
-
 
   const [selectedTag, setSelectedTag] = useState<string>()
   const [selectedImages, setSelectedImages] = useState<string[]>([])
@@ -49,9 +46,12 @@ export default function createpost() {
   }
 
   // 处理图片上传
-  function handleUploadClick() {
-    Taro.chooseImage({
+  async function handleUploadClick() {
+    // 选择图片
+    const res = Taro.chooseImage({
       count: 9 - selectedImages.length, // 最多可以选择9张图片
+      sourceType: ['album', 'camera'],
+      sizeType: ['compressed'],
       success: function (res) {
         const tempFilePaths = res.tempFilePaths
         setSelectedImages([...selectedImages, ...tempFilePaths])
@@ -104,35 +104,38 @@ export default function createpost() {
         header: {
           authorization: Taro.getStorageSync('token')
         },
+
         success: function (res) {
-          console.log(res);
-          if (res.statusCode === 201) {            
+          if ( res.statusCode === 201 ) {            
+            
             Taro.showToast({
               title: '发布成功',
               icon: 'success'
-            })
-            // 1.5秒后返回
+            });
+            // 1.5秒后返回，刷新首页
             setTimeout(() => {
-              Taro.navigateBack()
-            }, 1500)
+              Taro.navigateBack();
+              PubSub.publish('refreshPage');
+            }, 1500);
+
           } else {
+
             Taro.showToast({
               title: '发布失败',
               icon: 'none'
-            })
-          }
+            });
+            
+          };
+
         }
-      })
+      });
     }
   }
-  
 
   return (
     <View className='createpost-wrapper' style={{paddingTop: statusBarHeight + 'px'}}>
       <View className='createpost-header'>
-        <View className='createpost-header-back' onClick={() => {
-          Taro.navigateBack()
-        }}></View>
+        <View className='createpost-header-back' onClick={() => {Taro.navigateBack()}}></View>
         <Text className='createpost-header-title'>发布</Text>
       </View>
       <form className='createpost-form'>

@@ -5,7 +5,7 @@ export interface PostType {
     _id: string
     title: string
     content: string
-    pictures?: string[]
+    pictures: string[]
     tag: string
     user: {
         _id: string
@@ -17,4 +17,18 @@ export interface PostType {
     likes_num: number
     comments_num: number
     createdAt: string
+}
+
+export interface commentType {
+    comment_id: string
+    user: {
+        _id: string
+        nick_name: string
+        user_level: number
+        avatar: string
+    }
+    comment_content: string
+    comment_likes: number
+    createdAt: string
+    isLiked: boolean
 }

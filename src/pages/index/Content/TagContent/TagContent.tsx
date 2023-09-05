@@ -1,30 +1,20 @@
-import Taro from "@tarojs/taro"
+import Taro, { useLoad } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components"
 import { useState, useEffect, Fragment } from "react"
+import PubSub from 'pubsub-js';
 
+// stores
 import useUser from "@/store/userInfo"
 import usePostData from "@/store/postData"
 import useRequest from '@/store/request'
 
+// types
+import { PostType } from "@/types/postpage";
 
 import './TagContent.css'
 
 import likeIcon from "../../../../static/post/post-like-icon.png"
 import commentIcon from "../../../../static/post/post-comment-icon.png"
-
-interface postContentType {
-    _id: string
-    title: string
-    content: string
-    picture?: string
-    user: {
-        _id: string
-        avatar: string
-        nick_name: string
-    }
-    likes_num: number
-    comments_num: number
-}
 
 interface tagType {
     tagName: string
@@ -33,22 +23,22 @@ interface tagType {
 
 
 export default function TagContent() {
-// store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
+    // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
     const [user_id, isLogin, toLoginPage] = useUser((state) => [state.id, state.isLogin, state.toLoginPage]);
 
     const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl]);
-    
+
     const postData = usePostData((state) => state) // 获取Tags
 
-// 一些基本state——————————————————————————————————————————————————————————————————————————————————————
-    const [posts, setPosts] = useState<postContentType[]>([]);
+    // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
+    const [posts, setPosts] = useState<PostType[]>([]);
 
-    const [tags, setTags] = useState<tagType[]>([])
+    const [tags, setTags] = useState<tagType[]>([]);
 
     // 阅读顺序
-    const [order, setOrder] = useState<'reply' | 'publish'>('reply')
+    const [order, setOrder] = useState<'reply' | 'publish'>('reply');
 
-// 将社区的基本数据渲染到页面上————————————————————————————————————————————————————————————————————————————
+    // 将社区的基本数据渲染到页面上————————————————————————————————————————————————————————————————————————————
     // 加载Tags
     useEffect(() => {
         let newTags = postData.tags.map((tag, index) => {
@@ -58,25 +48,48 @@ export default function TagContent() {
             }
         })
         setTags(newTags)
-    }, [postData])
+    }, [postData]);
 
-    // 默认加载第一个tag的帖子
+    // 管理 url 参数变化，刷新页面
     useEffect(() => {
+        if (tags.length === 0 || !order) return
+
+        const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
+
         Taro.request({
             method: 'GET',
-            url: requestUrl + `/v1/posts/热门`,
+            url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}`,
             success(res) {
-                console.log(res);
-                
+                console.log(res.data.data.posts);
+
                 setPosts(res.data.data.posts)
             }
-        })
-    }, [])
+        });
+    }, [tags, order]);
 
+    // 注册刷新页面事件
+    useEffect(() => {
+        let refreshPageToken = PubSub.subscribe('refreshPage', () => {
+            const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
+            // 刷新页面
+            Taro.request({
+                method: 'GET',
+                url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}`,
+                success(res) {
+                    setPosts(res.data.data.posts)
+                }
+            });
+        });
 
-// 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
+        return () => {
+            PubSub.unsubscribe(refreshPageToken);
+        };
 
-    // 切换Tag，并加载对应帖子
+    }, [tags]);
+
+    // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
+
+    // 切换Tag
     function handleTagClick(tagName: string) {
         // 切换Tag显示
         const newtags = tags.map((tag) => {
@@ -86,17 +99,6 @@ export default function TagContent() {
             }
         })
         setTags(newtags)
-
-        // 加载对应帖子
-        Taro.request({
-            method: 'GET',
-            url: requestUrl + `/v1/posts/${tagName}`,
-            success(res) {
-                console.log(res);
-                
-                setPosts(res.data.data.posts)
-            }
-        })
     };
 
     // 切换查看顺序
@@ -148,13 +150,18 @@ export default function TagContent() {
                 }
             </View>
             <View className="index-tagContent">
-                <View className="index-tagContent-order">
-                    <Text>查看顺序</Text>
-                    <View className="index-content-orderSwitch">
-                        <View className={`index-content-orderSwitch-item ${order === 'reply' && 'order-isCurrent'}`} onClick={() => handleOrderSwitch('reply')}>回复</View>
-                        <View className={`index-content-orderSwitch-item ${order === 'publish' && 'order-isCurrent'}`} onClick={() => handleOrderSwitch('publish')}>发布</View>
+                {
+                    tags.find((tag) => tag.isCurrent)?.tagName !== '热门' &&
+                    <View className="index-tagContent-order">
+
+                        <Text>查看顺序</Text>
+                        <View className="index-content-orderSwitch">
+                            <View className={`index-content-orderSwitch-item ${order === 'reply' && 'order-isCurrent'}`} onClick={() => handleOrderSwitch('reply')}>回复</View>
+                            <View className={`index-content-orderSwitch-item ${order === 'publish' && 'order-isCurrent'}`} onClick={() => handleOrderSwitch('publish')}>发布</View>
+                        </View>
                     </View>
-                </View>
+
+                }
                 <View className="index-content-posts">
                     {
                         posts.map((post) => {
@@ -164,7 +171,11 @@ export default function TagContent() {
                                         <Text className="post-title">{post.title}</Text>
                                         <Text className="post-description">{post.content}</Text>
                                     </View>
-                                    {post.picture && <Image src={post.picture} className="post-picture" mode="widthFix" />}
+                                    {post.pictures.length !== 0 && post.pictures.map((picture) => {
+                                        return (
+                                            <Image src={picture} className="post-picture" mode="widthFix" />
+                                        )
+                                    })}
                                     <View className="post-info">
                                         <View className="post-info-user">
                                             <Image src={post.user.avatar} className="post-user-avatar" />

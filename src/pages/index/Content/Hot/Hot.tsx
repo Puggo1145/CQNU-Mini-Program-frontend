@@ -33,9 +33,17 @@ export default function Hot() {
     // 获取热榜
     Taro.request({
       method: 'GET',
-      url: requestUrl + '/posts/gethotlist',
+      url: `${requestUrl}/v1/posts/getHotList`,
       success: (res) => {
-        setHotTags(res.data.data.hotList)
+        console.log(res);
+        const hotTags = res.data.data.posts.map(post => {
+          return {
+            post_id: post._id,
+            title: post.title,
+            hot_index: Math.round(post.heat)
+          }
+        });
+        setHotTags(hotTags);
       }
     })
   }, [])
@@ -62,10 +70,10 @@ export default function Hot() {
                 }
               }>
                 <View className="hot-tag-left">
-                  <View className="hot-tag-rank" style={index < 3 ? {backgroundColor: hotTagColor[index]} : {color: hotTagColor[3]}}>{index + 1}</View>
+                  <View className="hot-tag-rank" style={index < 3 ? { backgroundColor: hotTagColor[index] } : { color: hotTagColor[3] }}>{index + 1}</View>
                   <View className="hot-tag-title">{item.title}</View>
                 </View>
-                <View className="hot-tag-index">{item.hot_index}万热度</View>
+                <View className="hot-tag-index">{item.hot_index} 热度</View>
               </View>
             )
           })
