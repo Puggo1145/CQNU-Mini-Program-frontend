@@ -82,13 +82,14 @@
   color: #000;
   font-size: 20px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 0.8px;
 }
 .postpage-mainSection .postpage-content .postpage-description {
   color: #2C2C2C;
   font-size: 14px;
   font-weight: 400;
   margin-top: 8px;
+  letter-spacing: 0.5px;
 }
 .postpage-mainSection .postpage-content .postpage-image {
   width: 100%;

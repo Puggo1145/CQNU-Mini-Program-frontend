@@ -14,7 +14,6 @@ class LaunchInitiater {
     // static properties
     token = Taro.getStorageSync('token');
 
-    // functions
     async initialLoginValidation() {
 
         const loginValidateRes = await Taro.request({
@@ -53,17 +52,21 @@ class LaunchInitiater {
         });
 
         // 将 OSS params 存入缓存 (OSSAccessKeyId, policy, signature)
-        Object.keys(ossParamsRes.data.data.params).forEach(key => {
-            Taro.setStorageSync(key, ossParamsRes.data.data.params[key]);
-        });
+        if (ossParamsRes.statusCode === 200) {
+            Object.keys(ossParamsRes.data.data.params).forEach(key => {
+                Taro.setStorageSync(key, ossParamsRes.data.data.params[key]);
+            });
+        }
     };
 
     async getAllTags() {
         const tags = await Taro.request({
             method: 'GET',
             url: this.requestUrl + '/v1/posts/tags',
-        })
+        });
+
         const tagsArray = tags.data.data.tags.map(item => item.name);
+        
         // 将所有的tags存入 store
         this.postData.setPostData({ tags: tagsArray })
     };

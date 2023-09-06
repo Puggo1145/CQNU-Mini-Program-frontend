@@ -59,7 +59,7 @@ export default function Mine() {
         // 上传图片到阿里 OSS
         const uploadRes = await Taro.uploadFile({
           url: 'https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com',
-          filePath: await compressImage(selectedImagePath),
+          filePath: await compressImage(selectedImagePath), // 压缩图片
           name: 'file', // 这里必须填 file
           formData: {
             key: key,

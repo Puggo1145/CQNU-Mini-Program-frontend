@@ -1,5 +1,5 @@
 import Taro, { useLoad } from "@tarojs/taro";
-import { View, Text, Image } from "@tarojs/components"
+import { View, Text, Image, ScrollView } from "@tarojs/components"
 import { useState, useEffect, Fragment } from "react"
 import PubSub from 'pubsub-js';
 
@@ -38,7 +38,7 @@ export default function TagContent() {
     // 阅读顺序
     const [order, setOrder] = useState<'reply' | 'publish'>('reply');
 
-    // 将社区的基本数据渲染到页面上————————————————————————————————————————————————————————————————————————————
+    // 将社区的基本数据渲染到页面上———————————————————————————————————————————————————————————————————————————
     // 加载Tags
     useEffect(() => {
         let newTags = postData.tags.map((tag, index) => {
@@ -60,7 +60,7 @@ export default function TagContent() {
             method: 'GET',
             url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}`,
             success(res) {
-                console.log(res.data.data.posts);
+                console.log(res.data);
 
                 setPosts(res.data.data.posts)
             }
@@ -104,7 +104,7 @@ export default function TagContent() {
     // 切换查看顺序
     function handleOrderSwitch(order: string): void {
         setOrder(order as 'reply' | 'publish')
-    }
+    };
 
     // 跳转到帖子
     function enterPost(post_id: string) {
@@ -118,8 +118,11 @@ export default function TagContent() {
         Taro.navigateTo({
             url: '/pages/posts/postpage/postpage?' + `post_id=${post_id}`
         })
-    }
+    };
 
+    // 下拉刷新
+    function handleScrollAndRefresh(event) {};
+ 
     return (
         <Fragment>
             <View className="index-content-tags-createPost" onClick={

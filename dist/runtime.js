@@ -14,16 +14,13 @@
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			loaded: false,
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -195,15 +192,6 @@
 /******/ 		};
 /******/ 	}();
 /******/ 	
-/******/ 	/* webpack/runtime/node module decorator */
-/******/ 	!function() {
-/******/ 		__webpack_require__.nmd = function(module) {
-/******/ 			module.paths = [];
-/******/ 			if (!module.children) module.children = [];
-/******/ 			return module;
-/******/ 		};
-/******/ 	}();
-/******/ 	
 /******/ 	/* webpack/runtime/remotes loading */
 /******/ 	!function() {
 /******/ 		var chunkMapping = {
@@ -221,6 +209,7 @@
 /******/ 				"webpack/container/remote/@tarojs/runtime",
 /******/ 				"webpack/container/remote/@tarojs/taro",
 /******/ 				"webpack/container/remote/react",
+/******/ 				"webpack/container/remote/pubsub-js",
 /******/ 				"webpack/container/remote/react/jsx-runtime",
 /******/ 				"webpack/container/remote/zustand"
 /******/ 			]
@@ -269,6 +258,11 @@
 /******/ 			"webpack/container/remote/react": [
 /******/ 				"default",
 /******/ 				"./react",
+/******/ 				null
+/******/ 			],
+/******/ 			"webpack/container/remote/pubsub-js": [
+/******/ 				"default",
+/******/ 				"./pubsub-js",
 /******/ 				null
 /******/ 			],
 /******/ 			"webpack/container/remote/react/jsx-runtime": [

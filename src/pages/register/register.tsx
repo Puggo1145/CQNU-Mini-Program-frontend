@@ -1,6 +1,7 @@
 import { View, Text, Input, Picker, Form, Button } from "@tarojs/components";
 import { useState, useRef } from "react";
 import Taro from "@tarojs/taro";
+import PubSub from 'pubsub-js';
 
 // stores
 import useRequest from "@/store/request";
@@ -119,6 +120,8 @@ export default function register() {
                 });
                 // 更新 userInfo
                 setUserInfo(userInfo);
+                // 加载 OSS 通行证
+                PubSub.publish('getOssParams');
 
                 // 跳转首页
                 setTimeout(() => {

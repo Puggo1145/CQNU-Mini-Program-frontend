@@ -1,5 +1,6 @@
 import { View, Text, Image, Button } from "@tarojs/components"
 import Taro from "@tarojs/taro"
+import PubSub from 'pubsub-js';
 
 import useStore from "@/store/store"
 import useAppInfo from "@/store/appInfo"
@@ -58,7 +59,9 @@ export default function login() {
                 });
                 // 更新 userInfo
                 setUserInfo(userInfo);
-                
+                // 重新 initiate 参数
+                PubSub.publish('getOssParams');
+
                 Taro.showToast({
                     title: '登录成功',
                     icon: 'success',
