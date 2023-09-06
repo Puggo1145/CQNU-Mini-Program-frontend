@@ -10,9 +10,9 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Mine; }
 /* harmony export */ });
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
@@ -50,7 +50,7 @@ function Mine() {
   var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_1__["default"])(function (state) {
       return [state, state.setUserInfo];
     }),
-    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__["default"])(_useUser, 2),
+    _useUser2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_11__["default"])(_useUser, 2),
     userInfo = _useUser2[0],
     setUserInfo = _useUser2[1];
   var requestUrl = (0,_store_request__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
@@ -74,9 +74,9 @@ function Mine() {
 
   // 修改头像
   var handleAvatarChange = /*#__PURE__*/function () {
-    var _ref = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__["default"])( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().mark(function _callee() {
+    var _ref = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_12__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().mark(function _callee() {
       var res, selectedImagePath, token, key, policy, ossAccessKeyId, signature, uploadRes, avatarUrl, updateAvatarRes;
-      return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().wrap(function _callee$(_context) {
+      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_13__["default"])().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
@@ -89,7 +89,7 @@ function Mine() {
           case 3:
             res = _context.sent;
             if (!(res.tempFilePaths && res.tempFilePaths[0])) {
-              _context.next = 32;
+              _context.next = 33;
               break;
             }
             selectedImagePath = res.tempFilePaths[0]; // 图片路径
@@ -99,11 +99,15 @@ function Mine() {
             policy = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('policy'); // OSS policy
             ossAccessKeyId = accessKeyId; // 阿里云 RAM 用户 accessKeyId
             signature = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('signature'); // OSS 签名
+            _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showLoading({
+              title: '上传中',
+              mask: true
+            });
             // 上传图片到阿里 OSS
             _context.t0 = (_tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default());
-            _context.next = 14;
+            _context.next = 15;
             return (0,_common_launchUtilities_compressImage__WEBPACK_IMPORTED_MODULE_4__["default"])(selectedImagePath);
-          case 14:
+          case 15:
             _context.t1 = _context.sent;
             _context.t2 = {
               key: key,
@@ -117,19 +121,19 @@ function Mine() {
               name: 'file',
               formData: _context.t2
             };
-            _context.next = 19;
+            _context.next = 20;
             return _context.t0.uploadFile.call(_context.t0, _context.t3);
-          case 19:
+          case 20:
             uploadRes = _context.sent;
             console.log(uploadRes);
 
             // 上传成功，将图片URL存入数据库
             if (!(uploadRes.statusCode === 204)) {
-              _context.next = 30;
+              _context.next = 31;
               break;
             }
             avatarUrl = "https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com/".concat(key);
-            _context.next = 25;
+            _context.next = 26;
             return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().request({
               method: 'PATCH',
               url: "".concat(requestUrl, "/v1/users//updateAvatar"),
@@ -140,7 +144,7 @@ function Mine() {
                 avatar: avatarUrl
               }
             });
-          case 25:
+          case 26:
             updateAvatarRes = _context.sent;
             if (updateAvatarRes.statusCode === 200) {
               _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().setStorageSync('avatar', avatarUrl); // 持久化 avatar
@@ -155,29 +159,29 @@ function Mine() {
               });
             }
             ;
-            _context.next = 31;
+            _context.next = 32;
             break;
-          case 30:
+          case 31:
             _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showToast({
               title: '上传失败',
               icon: 'error',
               duration: 2000
             });
-          case 31:
-            ;
           case 32:
             ;
-            _context.next = 38;
+          case 33:
+            ;
+            _context.next = 39;
             break;
-          case 35:
-            _context.prev = 35;
+          case 36:
+            _context.prev = 36;
             _context.t4 = _context["catch"](0);
             console.log(_context.t4);
-          case 38:
+          case 39:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 35]]);
+      }, _callee, null, [[0, 36]]);
     }));
     return function handleAvatarChange() {
       return _ref.apply(this, arguments);

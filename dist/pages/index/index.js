@@ -96,7 +96,7 @@ function Content() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Hot; }
 /* harmony export */ });
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "webpack/container/remote/react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
@@ -119,13 +119,13 @@ function Hot() {
   var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_2__["default"])(function (state) {
       return [state.isLogin, state.toLoginPage];
     }),
-    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useUser, 2),
+    _useUser2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useUser, 2),
     isLogin = _useUser2[0],
     toLoginPage = _useUser2[1];
   var _useRequest = (0,_store_request__WEBPACK_IMPORTED_MODULE_3__["default"])(function (state) {
       return [state.requestUrl, state.setRequestUrl];
     }),
-    _useRequest2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useRequest, 2),
+    _useRequest2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useRequest, 2),
     requestUrl = _useRequest2[0],
     setRequestUrl = _useRequest2[1];
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([
@@ -135,11 +135,11 @@ function Hot() {
       // {post_id: '4', title: '热榜4', hot_index: '4'},
       // {post_id: '5', title: '热榜5', hot_index: '5'},
     ]),
-    _useState2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useState, 2),
+    _useState2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useState, 2),
     hotTags = _useState2[0],
     setHotTags = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(['#ee5551', '#fc8623', '#e7ac67', '#ec9b3a']),
-    _useState4 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useState3, 2),
+    _useState4 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useState3, 2),
     hotTagColor = _useState4[0],
     setHotTagColor = _useState4[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -214,7 +214,7 @@ function Hot() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Message; }
 /* harmony export */ });
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "webpack/container/remote/react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
@@ -232,7 +232,7 @@ function Message() {
       reply: '23',
       officialMessages: '34'
     }),
-    _useState2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
+    _useState2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
     messageNumber = _useState2[0],
     setMessageNumber = _useState2[1];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_3__.View, {
@@ -282,10 +282,10 @@ function Message() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ TagContent; }
 /* harmony export */ });
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js */ "./node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tarojs_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tarojs/components */ "./node_modules/@tarojs/plugin-platform-weapp/dist/components-react.js");
@@ -327,104 +327,162 @@ function TagContent() {
   var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_3__["default"])(function (state) {
       return [state.id, state.isLogin, state.toLoginPage];
     }),
-    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useUser, 3),
+    _useUser2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useUser, 3),
     user_id = _useUser2[0],
     isLogin = _useUser2[1],
     toLoginPage = _useUser2[2];
   var _useRequest = (0,_store_request__WEBPACK_IMPORTED_MODULE_5__["default"])(function (state) {
       return [state.requestUrl, state.setRequestUrl];
     }),
-    _useRequest2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useRequest, 2),
+    _useRequest2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useRequest, 2),
     requestUrl = _useRequest2[0],
     setRequestUrl = _useRequest2[1];
   var postData = (0,_store_postData__WEBPACK_IMPORTED_MODULE_4__["default"])(function (state) {
     return state;
   }); // 获取Tags
 
-  // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
+  // 一些基本state ——————————————————————————————————————————————————————————————————————————————————————
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-    _useState2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState, 2),
+    _useState2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState, 2),
     posts = _useState2[0],
     setPosts = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-    _useState4 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState3, 2),
+    _useState4 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState3, 2),
     tags = _useState4[0],
     setTags = _useState4[1];
-
-  // 阅读顺序
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('reply'),
-    _useState6 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState5, 2),
+    _useState6 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState5, 2),
     order = _useState6[0],
-    setOrder = _useState6[1];
+    setOrder = _useState6[1]; // 阅读顺序
 
-  // page：当前所在的页数，用于下拉刷新
+  // 刷新相关state ——————————————————————————————————————————————————————————————————————————————————————
+
   // 分块传输内容，每次刷新5条，该 page 用于计算要跳过的内容的数量，以定位到正确的位置返回数据
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
-    _useState8 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState7, 2),
+    _useState8 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState7, 2),
     page = _useState8[0],
-    setPage = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('正在加载...'),
-    _useState10 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState9, 2),
-    spacerText = _useState10[0],
-    setSpacerText = _useState10[1];
+    setPage = _useState8[1]; // page：接下来要请求的页数，用于下拉刷新时跳过已获取的数据，请求新数据
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState10 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState9, 2),
+    isRefresh = _useState10[0],
+    setIsRefresh = _useState10[1]; // 刷新锁，防止上一次刷新未完成就重复刷新
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState12 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState11, 2),
-    isRefresh = _useState12[0],
-    setIsRefresh = _useState12[1]; // 刷新锁，防止上一次刷新未完成就重复刷新
+    _useState12 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState11, 2),
+    contentLoaded = _useState12[0],
+    setContentLoaded = _useState12[1]; // 所有 posts 是否已经加载完毕，加载完毕则不再触发请求
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState14 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_9__["default"])(_useState13, 2),
+    shouldRefresh = _useState14[0],
+    setShouldRefresh = _useState14[1]; // 在重置数据并刷新的方法中，检查以上state是否已经完成更新，完成更新后再刷新
 
-  // 核心方法：获取 posts 方法
+  // 核心方法：
+  // 1. 请求 posts
   var getPosts = /*#__PURE__*/function () {
-    var _ref = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_10__["default"])( /*#__PURE__*/(0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().mark(function _callee() {
-      var _tags$find;
-      var currentTag, res, prevPosts, updatedPosts;
-      return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().wrap(function _callee$(_context) {
+    var _ref = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_10__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().mark(function _callee() {
+      var _tags$find, currentTag, res, prevPosts, updatedPosts;
+      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            if (!isRefresh) {
-              _context.next = 2;
+            _context.prev = 0;
+            if (!(isRefresh || contentLoaded)) {
+              _context.next = 3;
               break;
             }
             return _context.abrupt("return");
-          case 2:
+          case 3:
             // 防止重复刷新
+
+            setIsRefresh(true); // 禁止下一次刷新
+
+            // 获取当前选中的 tag 并请求
             currentTag = (_tags$find = tags.find(function (tag) {
               return tag.isCurrent;
             })) === null || _tags$find === void 0 ? void 0 : _tags$find.tagName;
-            _context.next = 5;
+            _context.next = 7;
             return _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().request({
               method: 'GET',
-              url: "".concat(requestUrl, "/v1/posts/").concat(currentTag, "?sort=").concat(order, "&page=").concat(page)
+              url: "".concat(requestUrl, "/v1/posts/").concat(currentTag, "?sort=").concat(order, "&page=").concat(page),
+              timeout: 5000 // 超时时间
             });
-          case 5:
+          case 7:
             res = _context.sent;
-            if (res.statusCode === 200) {
-              console.log(res.data);
-              prevPosts = posts;
-              updatedPosts = prevPosts.concat(res.data.data.posts);
-              setPosts(updatedPosts); // 更新posts
-              setPage(res.data.page + 1); // 更新page
+            if (!(res.statusCode === 200)) {
+              _context.next = 17;
+              break;
+            }
+            console.log(res.data);
+            prevPosts = posts;
+            updatedPosts = prevPosts.concat(res.data.data.posts);
+            setPosts(updatedPosts); // 更新posts
+            setPage(res.data.page + 1); // 更新page
 
-              setIsRefresh(false); // 允许下一次刷新
-            }
-            ;
+            setIsRefresh(false); // 允许下一次刷新
+            _context.next = 18;
+            break;
+          case 17:
+            throw new Error("Request failed with status code: ".concat(res.statusCode));
+          case 18:
+            // posts 被全部请求完后
             if (res.data.data.posts.length === 0) {
-              setSpacerText('你发现了世界的尽头');
-              setIsRefresh(true); // 所有内容都加载完毕，不再刷新
+              setContentLoaded(true);
             }
             ;
-          case 10:
+            _context.next = 27;
+            break;
+          case 22:
+            _context.prev = 22;
+            _context.t0 = _context["catch"](0);
+            setIsRefresh(false);
+            setContentLoaded(true);
+            _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().showToast({
+              title: '数据加载失败',
+              icon: 'error'
+            });
+          case 27:
+            ;
+          case 28:
           case "end":
             return _context.stop();
         }
-      }, _callee);
+      }, _callee, null, [[0, 22]]);
     }));
     return function getPosts() {
       return _ref.apply(this, arguments);
     };
   }();
 
-  // 将社区的基本数据渲染到页面上———————————————————————————————————————————————————————————————————————————
-  // 加载Tags
+  // 2. 重置 state 并刷新（切换 tag, order 或下拉刷新时调用）
+  // 切换 tag，order 或 下拉刷新的本质都是在新参数下请求新的数据或请求最新的数据，而不是在当前的参数下继续请求
+  // 因此，此处清空 posts，重置 page，解开 contentLoaded 锁，然后再请求数据，获取到的数据就是全新的数据
+  var resetAndRefresh = /*#__PURE__*/function () {
+    var _ref2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_10__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().mark(function _callee2() {
+      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            setPosts([]);
+            setPage(1);
+            setContentLoaded(false);
+            setShouldRefresh(true);
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function resetAndRefresh() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (shouldRefresh) {
+      getPosts();
+      setShouldRefresh(false);
+    }
+  }, [shouldRefresh]);
+  // 由于，state 更新是异步的，直接调用可能会出现值未更新就 getPosts 的情况，所以用 shouldRefresh 来确保 state 已经更新
+
+  // 页面数据初始化：将社区的基本数据渲染到页面上———————————————————————————————————————————————————————————————————————————
+  // 1. 加载Tags
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var newTags = postData.tags.map(function (tag, index) {
       return {
@@ -436,29 +494,30 @@ function TagContent() {
     setTags(newTags);
   }, [postData]);
 
-  // 管理 url 参数变化，刷新页面
+  // 2. 确保 tags 加载完毕后再请求 posts，
+  // 该方法同时承担了切换 tag 或 order 时的刷新功能
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (tags.length === 0 || !order) return;
-    getPosts();
+    if (tags.length === 0) return;
+    resetAndRefresh();
   }, [tags, order]);
 
-  // 注册刷新页面事件
+  // 2. 注册刷新页面事件（用于从某些页面返回后需要刷新数据，例如创建完帖子后，需要刷新）
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var refreshPageToken = pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().subscribe('refreshPage', function () {
-      getPosts();
+      resetAndRefresh();
     });
     return function () {
       pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().unsubscribe(refreshPageToken);
     };
-  }, [tags]);
+  }, []);
 
   // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
 
-  // 切换Tag
+  // A. 切换Tag
   function handleTagClick(tagName) {
     // 切换Tag显示
     var newtags = tags.map(function (tag) {
-      return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__["default"])((0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__["default"])({}, tag), {}, {
+      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__["default"])((0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__["default"])({}, tag), {}, {
         isCurrent: tag.tagName === tagName
       });
     });
@@ -544,6 +603,9 @@ function TagContent() {
         enableBackToTop: true,
         refresherEnabled: true // 开启下拉刷新
         ,
+        refresherThreshold: 45,
+        refresherTriggered: isRefresh,
+        onRefresherRefresh: resetAndRefresh,
         children: [posts.map(function (post) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.View, {
             className: "index-content-post",
@@ -597,7 +659,7 @@ function TagContent() {
           }, post._id);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.View, {
           className: "spacer",
-          children: spacerText
+          children: contentLoaded ? '你到达了世界的尽头' : '加载中...'
         })]
       })]
     })]
@@ -615,8 +677,8 @@ function TagContent() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ header; }
 /* harmony export */ });
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "webpack/container/remote/react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tarojs/taro */ "webpack/container/remote/@tarojs/taro");
@@ -640,7 +702,7 @@ function header() {
   var _useUser = (0,_store_userInfo__WEBPACK_IMPORTED_MODULE_3__["default"])(function (state) {
       return [state.isLogin, state.toLoginPage];
     }),
-    _useUser2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useUser, 2),
+    _useUser2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useUser, 2),
     isLogin = _useUser2[0],
     toLoginPage = _useUser2[1];
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
@@ -656,7 +718,7 @@ function header() {
       isCurrent: false,
       id: 'message'
     }]),
-    _useState2 = (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useState, 2),
+    _useState2 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_useState, 2),
     headerItems = _useState2[0],
     setHeaderItems = _useState2[1];
   function handleHeaderItemClick(id) {
@@ -665,7 +727,7 @@ function header() {
       return;
     }
     var newHeaderItems = headerItems.map(function (item) {
-      return (0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_6__["default"])((0,E_dev_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_6__["default"])({}, item), {}, {
+      return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_6__["default"])({}, item), {}, {
         isCurrent: item.id === id
       });
     });

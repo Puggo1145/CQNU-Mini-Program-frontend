@@ -10,7 +10,7 @@
   width: 64px;
   height: 64px;
   border-radius: 32px;
-  background-image: url("data:image/svg+xml,%3Csvg width%3D%2264%22 height%3D%2264%22 viewBox%3D%220 0 64 64%22 fill%3D%22none%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0D%3Ccircle cx%3D%2232%22 cy%3D%2232%22 r%3D%2232%22 fill%3D%22%234E6AFF%22%2F%3E%0D%3Crect x%3D%2218%22 y%3D%2230.25%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 fill%3D%22white%22%2F%3E%0D%3Crect x%3D%2233.75%22 y%3D%2218%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 transform%3D%22rotate%2890 33.75 18%29%22 fill%3D%22white%22%2F%3E%0D%3C%2Fsvg%3E%0D");
+  background-image: url("data:image/svg+xml,%3Csvg width%3D%2264%22 height%3D%2264%22 viewBox%3D%220 0 64 64%22 fill%3D%22none%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle cx%3D%2232%22 cy%3D%2232%22 r%3D%2232%22 fill%3D%22%234E6AFF%22%2F%3E%3Crect x%3D%2218%22 y%3D%2230.25%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 fill%3D%22white%22%2F%3E%3Crect x%3D%2233.75%22 y%3D%2218%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 transform%3D%22rotate%2890 33.75 18%29%22 fill%3D%22white%22%2F%3E%3C%2Fsvg%3E");
   background-size: contain;
   background-repeat: no-repeat;
 }

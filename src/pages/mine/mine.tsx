@@ -56,6 +56,10 @@ export default function Mine() {
         const ossAccessKeyId = accessKeyId; // 阿里云 RAM 用户 accessKeyId
         const signature = Taro.getStorageSync('signature'); // OSS 签名
 
+        Taro.showLoading({
+          title: '上传中',
+          mask: true
+        });
         // 上传图片到阿里 OSS
         const uploadRes = await Taro.uploadFile({
           url: 'https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com',

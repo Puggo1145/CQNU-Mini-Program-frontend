@@ -25,56 +25,86 @@ interface tagType {
 export default function TagContent() {
     // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
     const [user_id, isLogin, toLoginPage] = useUser((state) => [state.id, state.isLogin, state.toLoginPage]);
-
     const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl]);
-
     const postData = usePostData((state) => state) // 获取Tags
 
-    // 一些基本state——————————————————————————————————————————————————————————————————————————————————————
+    // 一些基本state ——————————————————————————————————————————————————————————————————————————————————————
     const [posts, setPosts] = useState<PostType[]>([]);
-
     const [tags, setTags] = useState<tagType[]>([]);
+    const [order, setOrder] = useState<'reply' | 'publish'>('reply'); // 阅读顺序
 
-    // 阅读顺序
-    const [order, setOrder] = useState<'reply' | 'publish'>('reply');
+    // 刷新相关state ——————————————————————————————————————————————————————————————————————————————————————
 
-    // page：当前所在的页数，用于下拉刷新
     // 分块传输内容，每次刷新5条，该 page 用于计算要跳过的内容的数量，以定位到正确的位置返回数据
-    const [page, setPage] = useState<number>(1);
-    const [spacerText, setSpacerText] = useState<string>('正在加载...');
+    const [page, setPage] = useState<number>(1); // page：接下来要请求的页数，用于下拉刷新时跳过已获取的数据，请求新数据
     const [isRefresh, setIsRefresh] = useState<boolean>(false); // 刷新锁，防止上一次刷新未完成就重复刷新
+    const [contentLoaded, setContentLoaded] = useState<boolean>(false); // 所有 posts 是否已经加载完毕，加载完毕则不再触发请求
+    const [shouldRefresh, setShouldRefresh] = useState<boolean>(false); // 在重置数据并刷新的方法中，检查以上state是否已经完成更新，完成更新后再刷新
 
-    // 核心方法：获取 posts 方法
+    // 核心方法：
+    // 1. 请求 posts
     const getPosts = async () => {
-        if (isRefresh) return; // 防止重复刷新
-        
-        const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
+        try {
+            if (isRefresh || contentLoaded) return; // 防止重复刷新
 
-        const res = await Taro.request({
-            method: 'GET',
-            url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}&page=${page}`,
-        });
-
-        if (res.statusCode === 200) {
-            console.log(res.data);
-
-            const prevPosts = posts;
-            const updatedPosts = prevPosts.concat(res.data.data.posts);    
-
-            setPosts(updatedPosts); // 更新posts
-            setPage(res.data.page + 1); // 更新page
-
-            setIsRefresh(false); // 允许下一次刷新
-        };
-
-        if (res.data.data.posts.length === 0) {
-            setSpacerText('你发现了世界的尽头');
-            setIsRefresh(true); // 所有内容都加载完毕，不再刷新
+            setIsRefresh(true); // 禁止下一次刷新
+    
+            // 获取当前选中的 tag 并请求
+            const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
+            const res = await Taro.request({
+                method: 'GET',
+                url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}&page=${page}`,
+                timeout: 5000 // 超时时间
+            });
+    
+            if (res.statusCode === 200) {
+                console.log(res.data);
+    
+                const prevPosts = posts;
+                const updatedPosts = prevPosts.concat(res.data.data.posts);
+    
+                setPosts(updatedPosts); // 更新posts
+                setPage(res.data.page + 1); // 更新page
+    
+                setIsRefresh(false); // 允许下一次刷新
+            } else {
+                throw new Error(`Request failed with status code: ${res.statusCode}`);
+            }
+    
+            // posts 被全部请求完后
+            if (res.data.data.posts.length === 0) {
+                setContentLoaded(true);
+            };
+        } catch (err) {
+            setIsRefresh(false);
+            setContentLoaded(true);
+            Taro.showToast({
+                title: '数据加载失败',
+                icon: 'error'
+            });
         };
     };
 
-    // 将社区的基本数据渲染到页面上———————————————————————————————————————————————————————————————————————————
-    // 加载Tags
+    // 2. 重置 state 并刷新（切换 tag, order 或下拉刷新时调用）
+    // 切换 tag，order 或 下拉刷新的本质都是在新参数下请求新的数据或请求最新的数据，而不是在当前的参数下继续请求
+    // 因此，此处清空 posts，重置 page，解开 contentLoaded 锁，然后再请求数据，获取到的数据就是全新的数据
+    const resetAndRefresh = async () => {
+        setPosts([]);
+        setPage(1);
+        setContentLoaded(false);
+        setShouldRefresh(true);
+    };
+    useEffect(() => {
+        if (shouldRefresh) {
+            getPosts();
+            setShouldRefresh(false);
+        }
+    }, [shouldRefresh]);
+    // 由于，state 更新是异步的，直接调用可能会出现值未更新就 getPosts 的情况，所以用 shouldRefresh 来确保 state 已经更新
+
+
+    // 页面数据初始化：将社区的基本数据渲染到页面上———————————————————————————————————————————————————————————————————————————
+    // 1. 加载Tags
     useEffect(() => {
         let newTags = postData.tags.map((tag, index) => {
             return {
@@ -85,30 +115,28 @@ export default function TagContent() {
         setTags(newTags)
     }, [postData]);
 
-
-    // 管理 url 参数变化，刷新页面
+    // 2. 确保 tags 加载完毕后再请求 posts，
+    // 该方法同时承担了切换 tag 或 order 时的刷新功能
     useEffect(() => {
-        if (tags.length === 0 || !order) return
+        if (tags.length === 0) return;
 
-        getPosts();
-
+        resetAndRefresh();
     }, [tags, order]);
 
-    // 注册刷新页面事件
+    // 2. 注册刷新页面事件（用于从某些页面返回后需要刷新数据，例如创建完帖子后，需要刷新）
     useEffect(() => {
         let refreshPageToken = PubSub.subscribe('refreshPage', () => {
-            getPosts();
+            resetAndRefresh();
         });
 
         return () => {
             PubSub.unsubscribe(refreshPageToken);
         };
-    
-    }, [tags]);
+    }, []);
 
     // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
 
-    // 切换Tag
+    // A. 切换Tag
     function handleTagClick(tagName: string) {
         // 切换Tag显示
         const newtags = tags.map((tag) => {
@@ -116,13 +144,13 @@ export default function TagContent() {
                 ...tag,
                 isCurrent: tag.tagName === tagName
             }
-        })
-        setTags(newtags)
+        });
+        setTags(newtags);
     };
 
     // 切换查看顺序
     function handleOrderSwitch(order: string): void {
-        setOrder(order as 'reply' | 'publish')
+        setOrder(order as 'reply' | 'publish');
     };
 
     // 跳转到帖子
@@ -186,8 +214,12 @@ export default function TagContent() {
                     enablePassive="true"
                     lowerThreshold={50}
                     onScrollToLower={() => getPosts()}
+
                     enableBackToTop={true}
                     refresherEnabled={true} // 开启下拉刷新
+                    refresherThreshold={45}
+                    refresherTriggered={isRefresh}
+                    onRefresherRefresh={resetAndRefresh}
                 >
                     {
                         posts.map((post) => {
@@ -222,7 +254,7 @@ export default function TagContent() {
                             )
                         })
                     }
-                    <View className="spacer">{spacerText}</View>
+                    <View className="spacer">{contentLoaded ? '你到达了世界的尽头' : '加载中...'}</View>
                 </ScrollView>
             </View>
         </Fragment>

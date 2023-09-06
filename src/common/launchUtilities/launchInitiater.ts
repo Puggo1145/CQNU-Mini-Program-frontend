@@ -60,15 +60,23 @@ class LaunchInitiater {
     };
 
     async getAllTags() {
-        const tags = await Taro.request({
-            method: 'GET',
-            url: this.requestUrl + '/v1/posts/tags',
-        });
+        try {
+            const tags = await Taro.request({
+                method: 'GET',
+                url: this.requestUrl + '/v1/posts/tags',
+                timeout: 5000
+            });
 
-        const tagsArray = tags.data.data.tags.map(item => item.name);
-        
-        // 将所有的tags存入 store
-        this.postData.setPostData({ tags: tagsArray })
+            const tagsArray = tags.data.data.tags.map(item => item.name);
+
+            // 将所有的tags存入 store
+            this.postData.setPostData({ tags: tagsArray })
+        } catch (err) {
+            Taro.showToast({
+                title: '数据加载失败',
+                icon: 'error'
+            });
+        };
     };
 };
 

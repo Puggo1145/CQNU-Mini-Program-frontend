@@ -30,6 +30,10 @@ export default function login() {
             const code = loginRes.code
 
             // 向后端发送 app_id / app_secret / code 
+            Taro.showLoading({
+                title: '登录中',
+                mask: true
+            });
             const toBackendRes = await Taro.request({
                 method: 'POST',
                 url: `${requestUrl}/v1/users/login`,

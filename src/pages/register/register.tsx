@@ -76,6 +76,10 @@ export default function register() {
         };
 
         // 发送注册请求
+        Taro.showLoading({
+            title: '注册中',
+            mask: true
+        });
         Taro.request({
             method: 'POST',
             url: `${requestUrl}/v1/users/register`,

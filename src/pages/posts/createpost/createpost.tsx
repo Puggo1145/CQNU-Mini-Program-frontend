@@ -129,7 +129,10 @@ export default function createpost() {
 
         console.log(uploadedImagePaths);
 
-
+        Taro.showLoading({
+          title: '发布中',
+          mask: true
+        });
         Taro.request({
           url: requestUrl + '/v1/posts/',
           method: 'POST',
