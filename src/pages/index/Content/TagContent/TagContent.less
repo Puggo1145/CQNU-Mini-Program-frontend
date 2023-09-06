@@ -13,8 +13,6 @@
 }
 
 .index-content-tags {
-    z-index: 1;
-    position: fixed;
     overflow-x: scroll;
     white-space: nowrap;
     width: 100%;
@@ -29,38 +27,40 @@
     .index-content-tag:last-child {
         margin-right: 20px;
     }
+
+    .index-content-tag {
+        padding: 0 18px;
+        margin-right: 8px;
+        height: 32px;
+        border-radius: 16px;
+        background-color: #efefef;
+        color: #8B8B8B;
+        line-height: 32px;
+        font-size: 14px;
+    }
 }
 
 .index-content-tags::-webkit-scrollbar {
     display: none;
 }
 
-.index-content-tag {
-    padding: 0 18px;
-    margin-right: 8px;
-    height: 32px;
-    border-radius: 16px;
-    background-color: #efefef;
-    color: #8B8B8B;
-    line-height: 32px;
-    font-size: 14px;
-}
+
 
 .index-tagContent {
-    z-index: 0;
     height: calc(100vh - 160px);
-    overflow-y: auto; /* 允许内容在垂直方向上滚动 */
-    position: relative;
-    top: 50px;
-    padding: 0 12px;
+    margin-top: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     .index-tagContent-order {
+        box-sizing: border-box;
         width: 100%;
-        height: 28px;
         margin-bottom: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 12px;
 
         Text {
             font-size: 12px;
@@ -101,98 +101,117 @@
             background-color: #fff;
         }
     }
-}
 
-.index-content-post {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 16px;
-    border-radius: 16px;
-    box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.30);
-    background-color: #fff;
-    margin-bottom: 12px;
+    .index-content-posts {
+        flex-grow: 1;
+        overflow-y: auto;
 
-    .post-texts {
-        display: flex;
-        flex-direction: column;
+        .index-content-post {
+            box-sizing: border-box;
+            width: 95vw;
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.30);
+            background-color: #fff;
+            margin: 0 auto;
+            margin-top: 12px;
 
-        .post-title {
-            color: #000;
-            font-feature-settings: 'clig' off, 'liga' off;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 100%;
-            margin-bottom: 6px;
-        }
+            .post-texts {
+                display: flex;
+                flex-direction: column;
 
-        .post-description {
-            overflow: hidden;
-            height: 14px;
-            color: #2C2C2C;
-            font-feature-settings: 'clig' off, 'liga' off;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 100%;
-        }
-    }
+                .post-title {
+                    color: #000;
+                    font-feature-settings: 'clig' off, 'liga' off;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 100%;
+                    margin-bottom: 6px;
+                }
 
-    .post-picture {
-        width: 100%;
-        margin-top: 12px;
-        border-radius: 8px;
-        background-color: #4E6AFF;
-    }
+                .post-description {
+                    overflow: hidden;
+                    height: 14px;
+                    color: #2C2C2C;
+                    font-feature-settings: 'clig' off, 'liga' off;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 100%;
+                }
+            }
 
-    .post-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 16px;
-
-        .post-info-user {
-            display: flex;
-            align-items: center;
-
-            .post-user-avatar {
-                width: 32px;
-                height: 32px;
-                border-radius: 16px;
+            .post-picture {
+                width: 100%;
+                margin-top: 12px;
+                border-radius: 8px;
                 background-color: #4E6AFF;
             }
 
-            Text {
-                margin-left: 8px;
+            .post-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 16px;
+
+                .post-info-user {
+                    display: flex;
+                    align-items: center;
+
+                    .post-user-avatar {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 16px;
+                        background-color: #4E6AFF;
+                    }
+
+                    Text {
+                        margin-left: 8px;
+                    }
+                }
+
+                .post-info-data {
+                    display: flex;
+                    align-items: center;
+                    color: #2C2C2C;
+                    font-feature-settings: 'clig' off, 'liga' off;
+                    font-size: 16px;
+
+                    Image {
+                        width: 16px;
+                        height: 16px;
+                        margin-right: 4px;
+                    }
+
+                    .post-like {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 12px;
+                    }
+
+                    .post-comment {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
             }
         }
 
-        .post-info-data {
-            display: flex;
-            align-items: center;
-            color: #2C2C2C;
-            font-feature-settings: 'clig' off, 'liga' off;
-            font-size: 16px;
-
-            Image {
-                width: 16px;
-                height: 16px;
-                margin-right: 4px;
-            }
-
-            .post-like {
-                display: flex;
-                align-items: center;
-                margin-right: 12px;
-            }
-
-            .post-comment {
-                display: flex;
-                align-items: center;
-            }
+        .spacer {
+            height: 14px;
+            text-align: center;
+            margin: 8px auto;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 0.8px;
         }
     }
 }
+
+
+
+
 
 @media screen and (min-width: 319px) {
     .index-tagContent {

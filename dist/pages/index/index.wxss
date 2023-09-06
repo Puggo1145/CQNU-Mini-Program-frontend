@@ -10,13 +10,11 @@
   width: 64px;
   height: 64px;
   border-radius: 32px;
-  background-image: url("data:image/svg+xml,%3Csvg width%3D%2264%22 height%3D%2264%22 viewBox%3D%220 0 64 64%22 fill%3D%22none%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle cx%3D%2232%22 cy%3D%2232%22 r%3D%2232%22 fill%3D%22%234E6AFF%22%2F%3E%3Crect x%3D%2218%22 y%3D%2230.25%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 fill%3D%22white%22%2F%3E%3Crect x%3D%2233.75%22 y%3D%2218%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 transform%3D%22rotate%2890 33.75 18%29%22 fill%3D%22white%22%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width%3D%2264%22 height%3D%2264%22 viewBox%3D%220 0 64 64%22 fill%3D%22none%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0D%3Ccircle cx%3D%2232%22 cy%3D%2232%22 r%3D%2232%22 fill%3D%22%234E6AFF%22%2F%3E%0D%3Crect x%3D%2218%22 y%3D%2230.25%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 fill%3D%22white%22%2F%3E%0D%3Crect x%3D%2233.75%22 y%3D%2218%22 width%3D%2228%22 height%3D%223.5%22 rx%3D%221.75%22 transform%3D%22rotate%2890 33.75 18%29%22 fill%3D%22white%22%2F%3E%0D%3C%2Fsvg%3E%0D");
   background-size: contain;
   background-repeat: no-repeat;
 }
 .index-content-tags {
-  z-index: 1;
-  position: fixed;
   overflow-x: scroll;
   white-space: nowrap;
   width: 100%;
@@ -34,10 +32,7 @@
 .index-content-tags .index-content-tag:last-child {
   margin-right: 20px;
 }
-.index-content-tags::-webkit-scrollbar {
-  display: none;
-}
-.index-content-tag {
+.index-content-tags .index-content-tag {
   padding: 0 18px;
   margin-right: 8px;
   height: 32px;
@@ -47,18 +42,24 @@
   line-height: 32px;
   font-size: 14px;
 }
+.index-content-tags::-webkit-scrollbar {
+  display: none;
+}
 .index-tagContent {
-  z-index: 0;
   height: calc(100vh - 160px);
-  overflow-y: auto;
-  /* 允许内容在垂直方向上滚动 */
-  position: relative;
-  top: 50px;
-  padding: 0 12px;
+  margin-top: 12px;
+  overflow: hidden;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .index-tagContent .index-tagContent-order {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 100%;
-  height: 28px;
   margin-bottom: 12px;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -69,6 +70,7 @@
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 0 12px;
 }
 .index-tagContent .index-tagContent-order Text {
   font-size: 12px;
@@ -113,18 +115,25 @@
   border-radius: 12px;
   background-color: #fff;
 }
-.index-content-post {
+.index-tagContent .index-content-posts {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-y: auto;
+}
+.index-tagContent .index-content-posts .index-content-post {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 100%;
+  width: 95vw;
   padding: 16px;
   border-radius: 16px;
   -webkit-box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.3);
   background-color: #fff;
-  margin-bottom: 12px;
+  margin: 0 auto;
+  margin-top: 12px;
 }
-.index-content-post .post-texts {
+.index-tagContent .index-content-posts .index-content-post .post-texts {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -132,7 +141,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.index-content-post .post-texts .post-title {
+.index-tagContent .index-content-posts .index-content-post .post-texts .post-title {
   color: #000;
   -webkit-font-feature-settings: 'clig' off, 'liga' off;
           font-feature-settings: 'clig' off, 'liga' off;
@@ -142,7 +151,7 @@
   line-height: 100%;
   margin-bottom: 6px;
 }
-.index-content-post .post-texts .post-description {
+.index-tagContent .index-content-posts .index-content-post .post-texts .post-description {
   overflow: hidden;
   height: 14px;
   color: #2C2C2C;
@@ -153,13 +162,13 @@
   font-weight: 400;
   line-height: 100%;
 }
-.index-content-post .post-picture {
+.index-tagContent .index-content-posts .index-content-post .post-picture {
   width: 100%;
   margin-top: 12px;
   border-radius: 8px;
   background-color: #4E6AFF;
 }
-.index-content-post .post-info {
+.index-tagContent .index-content-posts .index-content-post .post-info {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -171,7 +180,7 @@
           align-items: center;
   margin-top: 16px;
 }
-.index-content-post .post-info .post-info-user {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-user {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -179,16 +188,16 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.index-content-post .post-info .post-info-user .post-user-avatar {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-user .post-user-avatar {
   width: 32px;
   height: 32px;
   border-radius: 16px;
   background-color: #4E6AFF;
 }
-.index-content-post .post-info .post-info-user Text {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-user Text {
   margin-left: 8px;
 }
-.index-content-post .post-info .post-info-data {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-data {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -200,12 +209,12 @@
           font-feature-settings: 'clig' off, 'liga' off;
   font-size: 16px;
 }
-.index-content-post .post-info .post-info-data Image {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-data Image {
   width: 16px;
   height: 16px;
   margin-right: 4px;
 }
-.index-content-post .post-info .post-info-data .post-like {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-data .post-like {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -214,13 +223,21 @@
           align-items: center;
   margin-right: 12px;
 }
-.index-content-post .post-info .post-info-data .post-comment {
+.index-tagContent .index-content-posts .index-content-post .post-info .post-info-data .post-comment {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+}
+.index-tagContent .index-content-posts .spacer {
+  height: 14px;
+  text-align: center;
+  margin: 8px auto;
+  font-size: 12px;
+  color: #666;
+  letter-spacing: 0.8px;
 }
 @media screen and (min-width: 319px) {
   .index-tagContent {

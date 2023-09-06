@@ -38,6 +38,41 @@ export default function TagContent() {
     // 阅读顺序
     const [order, setOrder] = useState<'reply' | 'publish'>('reply');
 
+    // page：当前所在的页数，用于下拉刷新
+    // 分块传输内容，每次刷新5条，该 page 用于计算要跳过的内容的数量，以定位到正确的位置返回数据
+    const [page, setPage] = useState<number>(1);
+    const [spacerText, setSpacerText] = useState<string>('正在加载...');
+    const [isRefresh, setIsRefresh] = useState<boolean>(false); // 刷新锁，防止上一次刷新未完成就重复刷新
+
+    // 核心方法：获取 posts 方法
+    const getPosts = async () => {
+        if (isRefresh) return; // 防止重复刷新
+        
+        const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
+
+        const res = await Taro.request({
+            method: 'GET',
+            url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}&page=${page}`,
+        });
+
+        if (res.statusCode === 200) {
+            console.log(res.data);
+
+            const prevPosts = posts;
+            const updatedPosts = prevPosts.concat(res.data.data.posts);    
+
+            setPosts(updatedPosts); // 更新posts
+            setPage(res.data.page + 1); // 更新page
+
+            setIsRefresh(false); // 允许下一次刷新
+        };
+
+        if (res.data.data.posts.length === 0) {
+            setSpacerText('你发现了世界的尽头');
+            setIsRefresh(true); // 所有内容都加载完毕，不再刷新
+        };
+    };
+
     // 将社区的基本数据渲染到页面上———————————————————————————————————————————————————————————————————————————
     // 加载Tags
     useEffect(() => {
@@ -50,41 +85,25 @@ export default function TagContent() {
         setTags(newTags)
     }, [postData]);
 
+
     // 管理 url 参数变化，刷新页面
     useEffect(() => {
         if (tags.length === 0 || !order) return
 
-        const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
+        getPosts();
 
-        Taro.request({
-            method: 'GET',
-            url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}`,
-            success(res) {
-                console.log(res.data);
-
-                setPosts(res.data.data.posts)
-            }
-        });
     }, [tags, order]);
 
     // 注册刷新页面事件
     useEffect(() => {
         let refreshPageToken = PubSub.subscribe('refreshPage', () => {
-            const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
-            // 刷新页面
-            Taro.request({
-                method: 'GET',
-                url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}`,
-                success(res) {
-                    setPosts(res.data.data.posts)
-                }
-            });
+            getPosts();
         });
 
         return () => {
             PubSub.unsubscribe(refreshPageToken);
         };
-
+    
     }, [tags]);
 
     // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
@@ -120,9 +139,6 @@ export default function TagContent() {
         })
     };
 
-    // 下拉刷新
-    function handleScrollAndRefresh(event) {};
- 
     return (
         <Fragment>
             <View className="index-content-tags-createPost" onClick={
@@ -165,7 +181,14 @@ export default function TagContent() {
                     </View>
 
                 }
-                <View className="index-content-posts">
+                <ScrollView className="index-content-posts"
+                    scrollY={true}
+                    enablePassive="true"
+                    lowerThreshold={50}
+                    onScrollToLower={() => getPosts()}
+                    enableBackToTop={true}
+                    refresherEnabled={true} // 开启下拉刷新
+                >
                     {
                         posts.map((post) => {
                             return (
@@ -199,7 +222,8 @@ export default function TagContent() {
                             )
                         })
                     }
-                </View>
+                    <View className="spacer">{spacerText}</View>
+                </ScrollView>
             </View>
         </Fragment>
     )
