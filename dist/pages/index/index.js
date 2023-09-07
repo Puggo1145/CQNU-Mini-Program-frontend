@@ -340,6 +340,7 @@ function TagContent() {
   var postData = (0,_store_postData__WEBPACK_IMPORTED_MODULE_4__["default"])(function (state) {
     return state;
   }); // 获取Tags
+  var token = _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default().getStorageSync('token'); // JWT token
 
   // 一些基本state ——————————————————————————————————————————————————————————————————————————————————————
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
@@ -501,7 +502,8 @@ function TagContent() {
     resetAndRefresh();
   }, [tags, order]);
 
-  // 2. 注册刷新页面事件（用于从某些页面返回后需要刷新数据，例如创建完帖子后，需要刷新）
+  // 2. 注册页面事件（用于从某些页面返回后需要更新数据，例如创建完帖子后，需要刷新）
+  // A. 从页面返回后刷新
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var refreshPageToken = pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().subscribe('refreshPage', function () {
       resetAndRefresh();
@@ -510,6 +512,38 @@ function TagContent() {
       pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().unsubscribe(refreshPageToken);
     };
   }, []);
+  // B. 更新点赞数
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var updateLikeNum = pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().subscribe('updateLikeNum', /*#__PURE__*/function () {
+      var _ref3 = (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_10__["default"])( /*#__PURE__*/(0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().mark(function _callee3(msg, data) {
+        var newposts;
+        return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_11__["default"])().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              newposts = posts.map(function (post) {
+                if (post._id === data.post_id) {
+                  return (0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__["default"])((0,_Users_admin_Desktop_CQNU_Mini_Program_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2_js__WEBPACK_IMPORTED_MODULE_12__["default"])({}, post), {}, {
+                    likeNum: data.isLiked ? post.likeNum + 1 : post.likeNum - 1
+                  });
+                } else {
+                  return post;
+                }
+              });
+              setPosts(newposts);
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }));
+      return function (_x, _x2) {
+        return _ref3.apply(this, arguments);
+      };
+    }());
+    return function () {
+      pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().unsubscribe(updateLikeNum);
+    };
+  }, [posts]);
 
   // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -525,7 +559,7 @@ function TagContent() {
   }
   ;
 
-  // 切换查看顺序
+  // B. 切换查看顺序
   function handleOrderSwitch(order) {
     setOrder(order);
   }
@@ -644,14 +678,14 @@ function TagContent() {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.Image, {
                     src: _static_post_post_like_icon_png__WEBPACK_IMPORTED_MODULE_6__
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.Text, {
-                    children: post.likes_num
+                    children: post.likeNum
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.View, {
                   className: "post-comment",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.Image, {
                     src: _static_post_post_comment_icon_png__WEBPACK_IMPORTED_MODULE_7__
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tarojs_components__WEBPACK_IMPORTED_MODULE_13__.Text, {
-                    children: post.comments_num
+                    children: post.commentNnum
                   })]
                 })]
               })]

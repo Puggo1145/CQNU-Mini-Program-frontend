@@ -21,12 +21,12 @@ interface tagType {
     isCurrent: boolean
 }
 
-
 export default function TagContent() {
     // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
     const [user_id, isLogin, toLoginPage] = useUser((state) => [state.id, state.isLogin, state.toLoginPage]);
     const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl]);
     const postData = usePostData((state) => state) // 获取Tags
+    const token = Taro.getStorageSync('token'); // JWT token
 
     // 一些基本state ——————————————————————————————————————————————————————————————————————————————————————
     const [posts, setPosts] = useState<PostType[]>([]);
@@ -48,7 +48,7 @@ export default function TagContent() {
             if (isRefresh || contentLoaded) return; // 防止重复刷新
 
             setIsRefresh(true); // 禁止下一次刷新
-    
+
             // 获取当前选中的 tag 并请求
             const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
             const res = await Taro.request({
@@ -56,21 +56,21 @@ export default function TagContent() {
                 url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}&page=${page}`,
                 timeout: 5000 // 超时时间
             });
-    
+
             if (res.statusCode === 200) {
                 console.log(res.data);
-    
+
                 const prevPosts = posts;
                 const updatedPosts = prevPosts.concat(res.data.data.posts);
-    
+
                 setPosts(updatedPosts); // 更新posts
                 setPage(res.data.page + 1); // 更新page
-    
+
                 setIsRefresh(false); // 允许下一次刷新
             } else {
                 throw new Error(`Request failed with status code: ${res.statusCode}`);
             }
-    
+
             // posts 被全部请求完后
             if (res.data.data.posts.length === 0) {
                 setContentLoaded(true);
@@ -123,16 +123,38 @@ export default function TagContent() {
         resetAndRefresh();
     }, [tags, order]);
 
-    // 2. 注册刷新页面事件（用于从某些页面返回后需要刷新数据，例如创建完帖子后，需要刷新）
+    // 2. 注册页面事件（用于从某些页面返回后需要更新数据，例如创建完帖子后，需要刷新）
+    // A. 从页面返回后刷新
     useEffect(() => {
         let refreshPageToken = PubSub.subscribe('refreshPage', () => {
             resetAndRefresh();
         });
 
+
         return () => {
             PubSub.unsubscribe(refreshPageToken);
         };
     }, []);
+    // B. 更新点赞数
+    useEffect(() => {
+        let updateLikeNum = PubSub.subscribe('updateLikeNum', async (msg, data) => {
+            const newposts = posts.map((post) => {
+                if (post._id === data.post_id) {
+                    return {
+                        ...post,
+                        likeNum: data.isLiked ? post.likeNum + 1 : post.likeNum - 1
+                    }
+                } else {
+                    return post
+                }
+            });
+            setPosts(newposts);
+        });
+
+        return () => {
+            PubSub.unsubscribe(updateLikeNum);
+        };
+    }, [posts])
 
     // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -148,7 +170,7 @@ export default function TagContent() {
         setTags(newtags);
     };
 
-    // 切换查看顺序
+    // B. 切换查看顺序
     function handleOrderSwitch(order: string): void {
         setOrder(order as 'reply' | 'publish');
     };
@@ -242,11 +264,11 @@ export default function TagContent() {
                                         <View className="post-info-data">
                                             <View className="post-like">
                                                 <Image src={likeIcon} />
-                                                <Text>{post.likes_num}</Text>
+                                                <Text>{post.likeNum}</Text>
                                             </View>
                                             <View className="post-comment">
                                                 <Image src={commentIcon}></Image>
-                                                <Text>{post.comments_num}</Text>
+                                                <Text>{post.commentNnum}</Text>
                                             </View>
                                         </View>
                                     </View>

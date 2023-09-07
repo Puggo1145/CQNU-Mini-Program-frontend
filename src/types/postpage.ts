@@ -14,9 +14,12 @@ export interface PostType {
         user_exp?: number
         user_level?: number
     }
-    likes_num: number
-    comments_num: number
+    views: number
+    likeNum: number
+    commentNnum: number
     createdAt: string
+    repliedAt?: string
+    isTopped?: boolean
 }
 
 export interface commentType {
@@ -27,8 +30,7 @@ export interface commentType {
         user_level: number
         avatar: string
     }
-    comment_content: string
-    comment_likes: number
+    content: string
+    likes: number
     createdAt: string
-    isLiked: boolean
 }
