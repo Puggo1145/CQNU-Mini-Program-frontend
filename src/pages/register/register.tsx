@@ -25,6 +25,8 @@ export default function register() {
     const nickNameRef = useRef<HTMLInputElement>(null);
     const studentIdRef = useRef<HTMLInputElement>(null);
 
+    const [identity, setIdentity] = useState('undergraduate'); // 默认为本科生
+
     // 学院与专业
     const [faculties, setFaculties] = useState([
         {

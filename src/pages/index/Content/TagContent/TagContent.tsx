@@ -135,14 +135,15 @@ export default function TagContent() {
             PubSub.unsubscribe(refreshPageToken);
         };
     }, []);
-    // B. 更新点赞数
+    // B. 更新点赞数和评论数
     useEffect(() => {
-        let updateLikeNum = PubSub.subscribe('updateLikeNum', async (msg, data) => {
+        let updateLikeNum = PubSub.subscribe('updatePostData', async (msg, data) => {
             const newposts = posts.map((post) => {
                 if (post._id === data.post_id) {
                     return {
                         ...post,
-                        likeNum: data.isLiked ? post.likeNum + 1 : post.likeNum - 1
+                        likeNum: data.likeNum,
+                        commentNum: data.commentNum
                     }
                 } else {
                     return post
@@ -268,7 +269,7 @@ export default function TagContent() {
                                             </View>
                                             <View className="post-comment">
                                                 <Image src={commentIcon}></Image>
-                                                <Text>{post.commentNnum}</Text>
+                                                <Text>{post.commentNum}</Text>
                                             </View>
                                         </View>
                                     </View>

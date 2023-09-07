@@ -16,14 +16,15 @@ export interface PostType {
     }
     views: number
     likeNum: number
-    commentNnum: number
+    commentNum: number
+    comments?: commentType[]
     createdAt: string
     repliedAt?: string
     isTopped?: boolean
 }
 
 export interface commentType {
-    comment_id: string
+    _id: string
     user: {
         _id: string
         nick_name: string
@@ -31,6 +32,7 @@ export interface commentType {
         avatar: string
     }
     content: string
-    likes: number
+    likeNum: number
+    isLiked: boolean
     createdAt: string
 }
