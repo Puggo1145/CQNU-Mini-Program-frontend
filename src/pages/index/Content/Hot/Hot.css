@@ -14,6 +14,7 @@
 }
 .hot-tags {
   margin-top: 16px;
+  height: 70vh;
 }
 .hot-tags .hot-tag {
   box-sizing: border-box;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useLoad, getCurrentInstance } from '@tarojs/taro';
-import { View, Text, Image, Input } from '@tarojs/components';
+import { View, Text, Image, Input, ScrollView } from '@tarojs/components';
 import PubSub from 'pubsub-js';
 
 // stores
@@ -62,8 +62,10 @@ export default function postpage() {
         }
     }); // 帖子内容
 
-    const [comments, setComments] = useState<commentType []>([]); // 帖子评论
+    const [comments, setComments] = useState<commentType[]>([]); // 帖子评论
     const [commentContent, setCommentContent] = useState(''); // 评论内容
+
+    const [page, setPage] = useState<number>(1); // 上拉加载
 
     // 页面功能 states
     const [currentCommentView, setCurrentCommentView] = useState<number>(0) // 评论排序方式: 0 为热门，1 为时间
@@ -87,7 +89,7 @@ export default function postpage() {
 
         // 1. 获取帖子所有内容
         const postContent = await postpageFn.getPostContent();
-        const postComments = await postpageFn.getPostComments(0);
+        const postComments = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
 
         // 2. 更新页面内容
         setPostContent(postContent);
@@ -109,7 +111,7 @@ export default function postpage() {
     // 切换评论排序方式
     async function switchCommentOrder(currentCommentView: number) {
         setCurrentCommentView(currentCommentView);
-        const postComments = await postpageFn.getPostComments(currentCommentView);
+        const postComments = await postpageFn.getPostComments(currentCommentView, page);
         setComments(postComments);
     };
 
@@ -144,7 +146,7 @@ export default function postpage() {
             await postpageFn.sendComment(commentContent);
 
             // 重新获取评论内容
-            const postComments = await postpageFn.getPostComments(currentCommentView);
+            const postComments = await postpageFn.getPostComments(currentCommentView, page);
             setComments(postComments);
 
             // 清空评论框
@@ -190,6 +192,11 @@ export default function postpage() {
         });
     };
 
+    // E. 上拉加载
+    function updateComments() {
+        console.log("update");
+    }
+
 
     return (
         <View className='postpage-wrapper' style={{ paddingTop: statusBarHeight + 'px' }}>
@@ -204,9 +211,16 @@ export default function postpage() {
                 </View>
                 <View className='postpage-options' onClick={() => setMoreIsOpened(!moreIsOpened)}></View>
             </View>
+
             <View className='postpage-mainSection'>
 
-                <View className='postpage-mainSection-wrapper'>
+                <ScrollView 
+                    className='postpage-mainSection-wrapper'
+                    scrollY={true}
+                    enablePassive="true"
+                    lowerThreshold={50}
+                    onScrollToLower={updateComments}
+                >
 
                     <View className='postpage-content'>
                         <Text className='postpage-title' userSelect>{postContent.post.title}</Text>
@@ -250,9 +264,10 @@ export default function postpage() {
                             })
                         }
                     </View>
-                </View>
+                </ScrollView>
 
             </View>
+
             <View className='postpage-commentBar' style={{ bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px' }}>
                 <Input
                     className='postpage-commentInput'

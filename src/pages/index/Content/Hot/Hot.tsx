@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { View, Text } from "@tarojs/components"
+import { View, ScrollView } from "@tarojs/components"
 import Taro from "@tarojs/taro"
 
 import useUser from "@/store/userInfo"
@@ -51,7 +51,13 @@ export default function Hot() {
   return (
     <View className="hot-wrapper">
       <View className="hot-banner">Banner</View>
-      <View className="hot-tags">
+      <ScrollView 
+        className="hot-tags"
+        scrollY={true}
+        enablePassive="true"
+        enhanced={true}
+        showScrollbar={false}  
+      >
         {
           hotTags.map((item, index) => {
             return (
@@ -78,7 +84,7 @@ export default function Hot() {
             )
           })
         }
-      </View>
+      </ScrollView>
     </View>
   )
 }

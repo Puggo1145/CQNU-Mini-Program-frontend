@@ -30,10 +30,10 @@ class PostpageFn {
     }
 
     // 请求帖子评论
-    async getPostComments(sort: number) {
+    async getPostComments(sort: number, page: number) {
         const commentRes = await Taro.request({
             method: 'GET',
-            url: `${this.request_url}/v1/posts/getComments?post_id=${this.post_id}&sort=${sort}`,
+            url: `${this.request_url}/v1/posts/getComments?post_id=${this.post_id}&sort=${sort}&page=${page}`,
             header: {
                 authorization: this.token
             },
