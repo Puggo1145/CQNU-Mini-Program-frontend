@@ -8,6 +8,8 @@ import useUser from "@/store/userInfo"
 import usePostData from "@/store/postData"
 import useRequest from '@/store/request'
 
+import { makeRequest } from "@/common/utilities/requester";
+
 // types
 import { PostType } from "@/types/postpage";
 
@@ -51,9 +53,10 @@ export default function TagContent() {
 
             // 获取当前选中的 tag 并请求
             const currentTag = tags.find((tag) => tag.isCurrent)?.tagName;
-            const res = await Taro.request({
+            const res = await makeRequest({
                 method: 'GET',
-                url: `${requestUrl}/v1/posts/${currentTag}?sort=${order}&page=${page}`,
+                url: requestUrl,
+                path: `/api/v1/posts/${encodeURIComponent(currentTag as string)}?sort=${order}&page=${page}`,
                 timeout: 5000 // 超时时间
             });
 
@@ -254,7 +257,7 @@ export default function TagContent() {
                                     </View>
                                     {post.pictures.length !== 0 && post.pictures.map((picture) => {
                                         return (
-                                            <Image src={picture} className="post-picture" mode="widthFix" />
+                                            <Image src={picture} className="post-picture" mode="aspectFill" />
                                         )
                                     })}
                                     <View className="post-info">

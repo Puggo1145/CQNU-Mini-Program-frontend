@@ -1,5 +1,5 @@
 import { View, Text, Input, Picker, Form, Button } from "@tarojs/components";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Taro from "@tarojs/taro";
 import PubSub from 'pubsub-js';
 
@@ -11,6 +11,7 @@ import useUser from "@/store/userInfo";
 import Header from "@/common/Header/Header";
 
 import "./register.css";
+import { makeRequest } from "@/common/utilities/requester";
 
 export default function register() {
 
@@ -52,7 +53,7 @@ export default function register() {
         setMajorIndex(0);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // ts 收窄
         if (!nickNameRef.current || !studentIdRef.current) return;
 
@@ -82,9 +83,10 @@ export default function register() {
             title: '注册中',
             mask: true
         });
-        Taro.request({
+        const res = await makeRequest({
             method: 'POST',
-            url: `${requestUrl}/v1/users/register`,
+            url: requestUrl,
+            path: '/api/v1/users/register',
             data: {
                 openid: openid,
                 nick_name: nickName,
@@ -93,57 +95,64 @@ export default function register() {
                 major: major,
                 grade: grade
             }
-        }).then(res => {
-            // 处理注册 response            
-            if (res.data.status === 'success') {
-                Taro.showToast({
-                    title: '注册成功',
-                    icon: 'success'
-                });
-                console.log(res.data.data);
-                
-                // 存储 json web token
-                Taro.setStorageSync('token', res.data.token);
+        })
 
-                // 存储用户信息
-                const newUserInfo = res.data.data;
-                const userInfo = {
-                    id: newUserInfo.id,
-                    openid: newUserInfo.openid,
-                    avatar: newUserInfo.avatar,
-                    nick_name: newUserInfo.nick_name,
-                    student_id: newUserInfo.student_id,
-                    faculty: newUserInfo.faculty,
-                    major: newUserInfo.major,
-                    grade: newUserInfo.grade,
-                    user_exp: newUserInfo.user_exp,
-                    user_level: newUserInfo.user_level,
-                };
+        // 处理注册 response            
+        if (res.data.status === 'success') {
+            Taro.showToast({
+                title: '注册成功',
+                icon: 'success'
+            });
+            console.log(res.data.data);
+            
+            // 存储 json web token
+            Taro.setStorageSync('token', res.data.token);
 
-                // 持久化 userInfo
-                Object.keys(userInfo).forEach(key => {
-                    Taro.setStorageSync(key, userInfo[key]);
-                });
-                // 更新 userInfo
-                setUserInfo(userInfo);
-                // 加载 OSS 通行证
-                PubSub.publish('getOssParams');
+            // 存储用户信息
+            const newUserInfo = res.data.data;
+            const userInfo = {
+                id: newUserInfo.id,
+                openid: newUserInfo.openid,
+                avatar: newUserInfo.avatar,
+                nick_name: newUserInfo.nick_name,
+                student_id: newUserInfo.student_id,
+                faculty: newUserInfo.faculty,
+                major: newUserInfo.major,
+                grade: newUserInfo.grade,
+                user_exp: newUserInfo.user_exp,
+                user_level: newUserInfo.user_level,
+            };
 
-                // 跳转首页
-                setTimeout(() => {
-                    Taro.switchTab({
-                        url: '/pages/index/index'
-                    })
-                }, 2000);
+            // 持久化 userInfo
+            Object.keys(userInfo).forEach(key => {
+                Taro.setStorageSync(key, userInfo[key]);
+            });
+            // 更新 userInfo
+            setUserInfo(userInfo);
+            // 加载 OSS 通行证
+            PubSub.publish('getOssParams');
 
-            } else {
-                Taro.showToast({
-                    title: '注册失败',
-                    icon: 'error'
-                });
-            }
-        });
+            // 跳转首页
+            setTimeout(() => {
+                Taro.switchTab({
+                    url: '/pages/index/index'
+                })
+            }, 2000);
+
+        } else {
+            Taro.showToast({
+                title: '注册失败',
+                icon: 'error'
+            });
+        };
     };
+
+    // 用户如果从 register 页面返回，需要隐藏 loading
+    useEffect(() => {
+        return () => {
+            Taro.hideLoading();
+        }
+    }, []);
 
     return (
         <View className="register-wrapper">

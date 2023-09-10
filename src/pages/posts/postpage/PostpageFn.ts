@@ -1,6 +1,10 @@
 import Taro from "@tarojs/taro";
 import PubSub from "pubsub-js";
 
+import { makeRequest } from "@/common/utilities/requester";
+
+import { commentType } from "@/types/postpage";
+
 class PostpageFn {
     request_url: string
     post_id: string
@@ -16,9 +20,10 @@ class PostpageFn {
 
     // 请求帖子内容
     async getPostContent() {
-        const postRes = await Taro.request({
+        const postRes = await makeRequest({
             method: 'GET',
-            url: `${this.request_url}/v1/posts?post_id=${this.post_id}`,
+            url: this.request_url,
+            path: `/api/v1/posts?post_id=${this.post_id}`,
             header: {
                 authorization: this.token
             },
@@ -31,24 +36,26 @@ class PostpageFn {
 
     // 请求帖子评论
     async getPostComments(sort: number, page: number) {
-        const commentRes = await Taro.request({
+        const commentRes = await makeRequest({
             method: 'GET',
-            url: `${this.request_url}/v1/posts/getComments?post_id=${this.post_id}&sort=${sort}&page=${page}`,
+            url: this.request_url,
+            path: `/api/v1/posts/getComments?post_id=${this.post_id}&sort=${sort}&page=${page}`,
             header: {
                 authorization: this.token
             },
         });
 
-        console.log(commentRes.data.data);
+        console.log(commentRes.data);
 
-        return commentRes.data.data.comments;
+        return commentRes.data;
     }
 
     // 点赞与取消点赞，后端自动判断是否点赞
     async likePost() {
-        const likeRes = await Taro.request({
+        const likeRes = await makeRequest({
             method: 'POST',
-            url: `${this.request_url}/v1/posts/likePost`,
+            url: this.request_url,
+            path: '/api/v1/posts/likePost',
             header: {
                 authorization: this.token
             },
@@ -62,9 +69,10 @@ class PostpageFn {
 
     // 发送评论
     async sendComment(content: string) {
-        const res = await Taro.request({
+        const res = await makeRequest({
             method: 'POST',
-            url: `${this.request_url}/v1/posts/commentPost`,
+            url: this.request_url,
+            path: '/api/v1/posts/commentPost',
             header: {
                 authorization: this.token
             },
@@ -95,9 +103,10 @@ class PostpageFn {
 
     // 点赞评论
     async likeComment(comment_id: string) {
-        const res = await Taro.request({
+        const res = await makeRequest({
             method: 'POST',
-            url: `${this.request_url}/v1/posts/likeComment`,
+            url: this.request_url,
+            path: '/api/v1/posts/likeComment',
             header: {
                 authorization: this.token
             },
@@ -121,9 +130,10 @@ class PostpageFn {
             return "click again"
 
         } else if (this.deleteCheck === 1) {
-            const res = await Taro.request({
+            const res = await makeRequest({
                 method: 'DELETE',
-                url: `${this.request_url}/v1/posts/`,
+                url: this.request_url,
+                path: '/api/v1/posts/',
                 header: {
                     authorization: this.token,
                 },

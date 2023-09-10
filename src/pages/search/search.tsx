@@ -16,10 +16,7 @@ export default function search() {
 
     // 热词
     const [hotSearch, setHotSearch] = useState<string[]>([
-        '重磅！重师本升专！',
-        '你的20岁',
-        '你说得对',
-        '百京爷就是爷',
+        
     ])
 
     // 搜索框的热词 
@@ -71,8 +68,8 @@ export default function search() {
     // 清空历史记录
     function clearHistory() {
         setSearchHistory([])
-        Taro.setStorageSync('searchHistory', searchHistory)
-    }
+        Taro.setStorageSync('searchHistory', []);
+    };
 
     // 滚动热词
     useEffect(() => {

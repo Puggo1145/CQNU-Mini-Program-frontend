@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { View, ScrollView } from "@tarojs/components"
 import Taro from "@tarojs/taro"
 
+import { makeRequest } from "@/common/utilities/requester"
+
 import useUser from "@/store/userInfo"
 import useRequest from '@/store/request'
 
@@ -20,43 +22,42 @@ export default function Hot() {
 
 
   const [hotTags, setHotTags] = useState<hotTagtype[]>([
-    // {post_id: '1', title: '热榜1', hot_index: '1'},
-    // {post_id: '2', title: '热榜2', hot_index: '2'},
-    // {post_id: '3', title: '热榜3', hot_index: '3'},
-    // {post_id: '4', title: '热榜4', hot_index: '4'},
-    // {post_id: '5', title: '热榜5', hot_index: '5'},
   ])
 
   const [hotTagColor, setHotTagColor] = useState<string[]>(['#ee5551', '#fc8623', '#e7ac67', '#ec9b3a'])
 
   useEffect(() => {
     // 获取热榜
-    Taro.request({
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const res = await makeRequest({
       method: 'GET',
-      url: `${requestUrl}/v1/posts/getHotList`,
-      success: (res) => {
-        console.log(res);
-        const hotTags = res.data.data.posts.map(post => {
-          return {
-            post_id: post._id,
-            title: post.title,
-            hot_index: Math.round(post.heat)
-          }
-        });
-        setHotTags(hotTags);
+      url: requestUrl,
+      path: '/api/v1/posts/getHotList',
+    });
+
+    console.log(res);
+    const hotTags = res.data.data.posts.map(post => {
+      return {
+        post_id: post._id,
+        title: post.title,
+        hot_index: Math.round(post.heat)
       }
-    })
-  }, [])
+    });
+    setHotTags(hotTags);
+  };
 
   return (
     <View className="hot-wrapper">
       <View className="hot-banner">Banner</View>
-      <ScrollView 
+      <ScrollView
         className="hot-tags"
         scrollY={true}
         enablePassive="true"
         enhanced={true}
-        showScrollbar={false}  
+        showScrollbar={false}
       >
         {
           hotTags.map((item, index) => {

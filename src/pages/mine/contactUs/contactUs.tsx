@@ -2,6 +2,8 @@ import { View, Text, Button, Textarea } from "@tarojs/components"
 import { useRef } from "react";
 import Taro from "@tarojs/taro"
 
+import { makeRequest } from "@/common/utilities/requester";
+
 import useRequest from "@/store/request";
 
 import Header from "@/common/Header/Header"
@@ -32,9 +34,14 @@ export default function login() {
             return;
         };
         
-        const contactUsRes = await Taro.request({
+        Taro.showLoading({
+            title: '发送中',
+            mask: true
+        });
+        const contactUsRes = await makeRequest({
             method: 'POST',
-            url: `${requestUrl}/v1/users/feedback`,
+            url: requestUrl,
+            path: '/api/v1/users/feedback',
             header: {
                 authorization: token
             },

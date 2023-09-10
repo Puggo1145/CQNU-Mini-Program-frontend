@@ -41,18 +41,20 @@
   top: 72px;
 }
 .searchResult-resultPosts .searchResult-resultPosts-wrapper {
-  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
-  overflow-y: scroll;
   height: calc(100vh - 110px);
 }
 .searchResult-resultPost {
   box-sizing: border-box;
+  width: 90vw;
   padding: 16px;
   border-radius: 16px;
   box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.3);
   background-color: #fff;
-  margin-bottom: 12px;
+  margin: 0 auto;
+  margin-top: 12px;
 }
 .searchResult-resultPost .post-texts {
   display: flex;

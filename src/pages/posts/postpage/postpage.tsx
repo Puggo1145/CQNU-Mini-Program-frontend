@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useLoad, getCurrentInstance } from '@tarojs/taro';
 import { View, Text, Image, Input, ScrollView } from '@tarojs/components';
@@ -64,8 +64,10 @@ export default function postpage() {
 
     const [comments, setComments] = useState<commentType[]>([]); // 帖子评论
     const [commentContent, setCommentContent] = useState(''); // 评论内容
+    const [commentNum, setCommentNum] = useState<number>(0); // 评论数
 
     const [page, setPage] = useState<number>(1); // 上拉加载
+    const [loadLock, setLoadLock] = useState<boolean>(false); // 上拉加载锁
 
     // 页面功能 states
     const [currentCommentView, setCurrentCommentView] = useState<number>(0) // 评论排序方式: 0 为热门，1 为时间
@@ -80,6 +82,8 @@ export default function postpage() {
         }
     };
 
+    const initialRender = useRef(true); // 首次渲染，禁止部分 useEffect 的初次执行
+
     // 页面功能 ————————————————————————————————————————————————————————————————————————————————————
     // 实例化 postpageFn    
     const postpageFn = new PostpageFn(request_url, post_id as string);
@@ -89,12 +93,14 @@ export default function postpage() {
 
         // 1. 获取帖子所有内容
         const postContent = await postpageFn.getPostContent();
-        const postComments = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
+        const postCommentsRes = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
 
         // 2. 更新页面内容
         setPostContent(postContent);
-        setComments(postComments);
+        setComments(postCommentsRes.data.comments);
+        setCommentNum(postCommentsRes.length);
         setIsLiked(postContent.userFootPrint.isLiked ? true : false);
+        setPage( Number(postCommentsRes.page) + 1 );
     });
 
     // 监听键盘弹起事件
@@ -111,9 +117,14 @@ export default function postpage() {
     // 切换评论排序方式
     async function switchCommentOrder(currentCommentView: number) {
         setCurrentCommentView(currentCommentView);
-        const postComments = await postpageFn.getPostComments(currentCommentView, page);
-        setComments(postComments);
     };
+    useEffect(() => {
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            refreshComments();
+        }
+    }, [currentCommentView]);
 
     // A. 点赞帖子
     function likePost() {
@@ -146,8 +157,7 @@ export default function postpage() {
             await postpageFn.sendComment(commentContent);
 
             // 重新获取评论内容
-            const postComments = await postpageFn.getPostComments(currentCommentView, page);
-            setComments(postComments);
+            refreshComments();
 
             // 清空评论框
             setCommentContent('');
@@ -193,9 +203,34 @@ export default function postpage() {
     };
 
     // E. 上拉加载
-    function updateComments() {
+    async function updateComments() {
+        if (loadLock) return;
         console.log("update");
+
+        // 1. 上锁，防止在请求完成前重复请求
+        setLoadLock(true);
+        
+        // 2. 重新获取评论内容
+        const postComments = await postpageFn.getPostComments(currentCommentView, page);
+        const newComments = comments?.concat(postComments.data.comments);
+        setComments(newComments);
+        setPage(Number(postComments.page) + 1);
+
     }
+    // 3. 检查数据是否被请求完毕，否则解锁
+    useEffect(() => {
+        setLoadLock(comments.length === commentNum); // 当评论数等于评论总数时，上锁
+    }, [comments]);
+
+    // F. 刷新评论
+    async function refreshComments() {
+        console.log("refresh");
+        
+        const postCommentsRes = await postpageFn.getPostComments(currentCommentView, 1); // 刷新评论
+        setComments(postCommentsRes.data.comments);
+        setCommentNum(postCommentsRes.length);
+        setPage( Number(postCommentsRes.page) + 1 );
+    };
 
 
     return (
@@ -237,16 +272,16 @@ export default function postpage() {
 
                     <View className='postpage-comments'>
                         <View className='postpage-commentsTop'>
-                            <Text className='postpage-commentsNum'>共计{comments.length}条评论</Text>
+                            <Text className='postpage-commentsNum'>共计{commentNum}条评论</Text>
                             <View className='postpage-commentViewSwitcher'>
                                 <View className={currentCommentView === 0 ? 'currentCommentView' : ''} onClick={() => switchCommentOrder(0)}>热门</View>
                                 <View className={currentCommentView === 1 ? 'currentCommentView' : ''} onClick={() => switchCommentOrder(1)}>时间</View>
                             </View>
                         </View>
                         {
-                            comments?.map((item) => {
+                            comments.map((item, index) => {
                                 return (
-                                    <View className='postpage-comment' key={item._id}>
+                                    <View className='postpage-comment' key={index}>
                                         <View className='postpage-likecomment' onClick={() => likeComment(item._id)}>
                                             <Image src={item.isLiked ? likeActivated : likeImg} className='postpage-likecomment-icon'></Image>
                                             <Text className='postpage-likecomment-num'>{item.likeNum}</Text>
@@ -254,7 +289,7 @@ export default function postpage() {
                                         <View className='postpage-commentUserInfo'>
                                             <Image className='avatarStyle' src={item.user.avatar}></Image>
                                             <Text>{item.user.nick_name}</Text>
-                                            <View className='postpage-userLevel'>Lv.{item.user.user_level}</View>
+                                            {/* <View className='postpage-userLevel'>Lv.{item.user.user_level}</View> */}
                                             <View className='postpage-likeComment'></View>
                                         </View>
                                         <Text className='postpage-commentContent'>{item.content}</Text>

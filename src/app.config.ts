@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/classtable/classtable',
 
     'pages/mine/mine',
+    'pages/mine/myPosts/myposts',
     'pages/mine/contactUs/contactUs',
 
     'pages/service/service',

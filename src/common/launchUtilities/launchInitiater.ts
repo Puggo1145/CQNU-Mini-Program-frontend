@@ -1,4 +1,5 @@
 import Taro from "@tarojs/taro";
+import { makeRequest } from "../utilities/requester";
 
 class LaunchInitiater {
     requestUrl: string;
@@ -16,9 +17,11 @@ class LaunchInitiater {
 
     async initialLoginValidation() {
 
-        const loginValidateRes = await Taro.request({
+        const loginValidateRes = await makeRequest({
             method: 'POST',
-            url: this.requestUrl + '/v1/users/checkLoginStatus',
+            url: this.requestUrl,
+            path: '/api/v1/users/checkLoginStatus',
+
             header: {
                 Authorization: this.token,
             },
@@ -43,9 +46,10 @@ class LaunchInitiater {
 
     async getOssParams() {
         // 获取 OSS 的 parameters
-        const ossParamsRes = await Taro.request({
+        const ossParamsRes = await makeRequest({
             method: 'GET',
-            url: `${this.requestUrl}/v1/users/getOssParams`,
+            url: this.requestUrl,
+            path: '/api/v1/users/getOssParams',
             header: {
                 Authorization: this.token
             }
@@ -61,9 +65,10 @@ class LaunchInitiater {
 
     async getAllTags() {
         try {
-            const tags = await Taro.request({
+            const tags = await makeRequest({
                 method: 'GET',
-                url: this.requestUrl + '/v1/posts/tags',
+                url: this.requestUrl,
+                path: '/api/v1/posts/tags',
                 timeout: 5000
             });
 

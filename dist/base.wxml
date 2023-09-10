@@ -109,6 +109,14 @@
   </scroll-view>
 </template>
 
+<template name="tmpl_0_39">
+  <navigator url="{{i.p10}}" open-type="{{xs.b(i.p7,'navigate')}}" delta="{{xs.b(i.p1,1)}}" hover-class="{{xs.b(i.p3,'navigator-hover')}}" hover-stop-propagation="{{xs.b(i.p6,!1)}}" hover-start-time="{{xs.b(i.p4,50)}}" hover-stay-time="{{xs.b(i.p5,600)}}" bindsuccess="eh" bindfail="eh" bindcomplete="eh" target="{{xs.b(i.p9,'self')}}" app-id="{{i.p0}}" path="{{i.p8}}" extra-data="{{i.p2}}" version="{{xs.b(i.p11,'version')}}" style="{{i.st}}" class="{{i.cl}}" bindtap="eh"  id="{{i.uid||i.sid}}" data-sid="{{i.sid}}">
+    <block wx:for="{{i.cn}}" wx:key="sid">
+      <template is="{{xs.a(c, item.nn, l)}}" data="{{i:item,c:c+1,l:xs.f(l,item.nn)}}" />
+    </block>
+  </navigator>
+</template>
+
 <template name="tmpl_0_3">
   <image src="{{i.p3}}" mode="{{xs.b(i.p1,'scaleToFill')}}" lazy-load="{{xs.b(i.p0,!1)}}" webp="{{xs.b(i.p4,false)}}" show-menu-by-longpress="{{xs.b(i.p2,false)}}" style="{{i.st}}" class="{{i.cl}}"  id="{{i.uid||i.sid}}" data-sid="{{i.sid}}">
     <block wx:for="{{i.cn}}" wx:key="sid">

@@ -8,8 +8,9 @@ import useUser from './store/userInfo'
 import usePostData from './store/postData'
 import useRequest from './store/request'
 
-// launch Utilities
+// Utilities
 import LaunchInitiater from './common/launchUtilities/launchInitiater'
+import { initContainer } from './common/utilities/requester';
 
 // styles
 import './app.less'
@@ -24,16 +25,19 @@ function App({ children }: PropsWithChildren<any>) {
 
   // 请求初始数据————————————————————————————————————————————————————————————
 
-  useLaunch(async () => {
-    // 获取全局 statusBarHeight        
+  const initer = async () => {
+    // 1. 实例化云环境
+    await initContainer({
+      resourceEnv: 'prod-9gbm3fviea24ffc8', // 云环境
+      serviceName: 'cqnu-backend', // 云服务名
+    });
+
+    // 2. 获取全局 statusBarHeight        
     const systemInfoRes = await Taro.getSystemInfo();
     if (systemInfoRes.statusBarHeight) {
       setStatusBarHeight(systemInfoRes.statusBarHeight - 10)
     };
-  })
 
-  // 数据初始化：App 进入、登录、注册时
-  useEffect(() => {
     // launchInitiater
     let launchInitiater = new LaunchInitiater(requestUrl, userInfo, postData);
     // 第一次进入 APP ，全部加载一次
@@ -47,15 +51,18 @@ function App({ children }: PropsWithChildren<any>) {
     // 新用户注册 或 登录，需要重新加载一次，请在登录或注册成功后，发布此消息！！！
     const getOssParamsToken = PubSub.subscribe('getOssParams', () => {
       launchInitiater = new LaunchInitiater(requestUrl, userInfo, postData); // 传新数据
-      
+
       launchInitiater.getOssParams();
     });
+  };
 
-    return () => {
-      PubSub.unsubscribe(getOssParamsToken);
-    }
+  // 数据初始化：App 进入、登录、注册时
+  useEffect(() => {
+    
+    initer();
+    
   }, [])
-  
+
   // children 是将要会渲染的页面
   return children
 }

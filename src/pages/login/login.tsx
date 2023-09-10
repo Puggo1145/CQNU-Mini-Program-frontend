@@ -2,7 +2,8 @@ import { View, Text, Image, Button } from "@tarojs/components"
 import Taro from "@tarojs/taro"
 import PubSub from 'pubsub-js';
 
-import useStore from "@/store/store"
+import { makeRequest } from "@/common/utilities/requester";
+
 import useAppInfo from "@/store/appInfo"
 import useRequest from "@/store/request"
 import useUser from "@/store/userInfo"
@@ -15,11 +16,6 @@ import loginImg from '../../static/login/discover.png'
 
 export default function login() {
 
-    const statusBarHeight = useStore((state) => state.statusBarHeight)
-
-    const app_id = useAppInfo((state) => state.app_id)
-    const app_secret = useAppInfo((state) => state.app_secret)
-
     const setUserInfo = useUser((state) => state.setUserInfo) // 更新 userInfo
     const requestUrl = useRequest((state) => state.requestUrl) // 后端 url
 
@@ -28,18 +24,17 @@ export default function login() {
             // 获取登录校验凭证
             const loginRes = await Taro.login()
             const code = loginRes.code
-
+            
             // 向后端发送 app_id / app_secret / code 
             Taro.showLoading({
                 title: '登录中',
                 mask: true
             });
-            const toBackendRes = await Taro.request({
+            const toBackendRes = await makeRequest({
                 method: 'POST',
-                url: `${requestUrl}/v1/users/login`,
+                url: requestUrl,
+                path: '/api/v1/users/login',
                 data: {
-                    app_id: app_id,
-                    app_secret: app_secret,
                     code: code
                 }
             });

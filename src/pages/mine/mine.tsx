@@ -7,6 +7,7 @@ import useRequest from '@/store/request';
 import useAppInfo from '@/store/appInfo'; // 取 accessKeyId
 
 import compressImage from '@/common/launchUtilities/compressImage';
+import { makeRequest } from '@/common/utilities/requester';
 
 import './mine.css'
 
@@ -15,26 +16,51 @@ import profileImg from '../../static/mine/profile.png'
 import logoutImg from '../../static/mine/logout.png'
 import loginImg from '../../static/mine/login.png'
 import defaultAvatar from '../../static/mine/defaultAvatar.png'
+import usePostData from '@/store/postData';
 
 export default function Mine() {
 
   const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo]);
   const requestUrl = useRequest((state) => state.requestUrl);
   const accessKeyId = useAppInfo((state) => state.accessKey_id);
+  const [postData, setPostData] = usePostData((state) => [state, state.setPostData]);
 
-  useLoad(() => {
+  useLoad( async () => {
     if (!userInfo.isLogin) {
       Taro.navigateTo({
         url: '/pages/login/login'
       })
-    }
-  })
 
-  const postInfo = {
-    postNum: 0,
-    collectedNum: 0,
-    recentView: 0
-  }
+      return;
+    }
+
+    // 获取用户社区信息
+    const token = Taro.getStorageSync('token');
+
+    const res = await makeRequest({
+      method: 'GET',
+      url: requestUrl,
+      path: '/api/v1/users/communityInfo',
+      header: {
+        Authorization: token
+      },
+    });
+
+    if (res.statusCode === 200) {
+      console.log(res.data);
+      
+      setPostData({
+        myPosts: res.data.data.posts,
+        likesNum: res.data.data.likes,
+      });
+    } else {
+      Taro.showToast({
+        title: '信息获取失败',
+        icon: 'error',
+        duration: 2000
+      });
+    }
+  });
 
   // 修改头像
   const handleAvatarChange = async () => {
@@ -79,9 +105,10 @@ export default function Mine() {
         // 上传成功，将图片URL存入数据库
         if (uploadRes.statusCode === 204) {
           const avatarUrl = `https://cqnu-user-avatars.oss-cn-chengdu.aliyuncs.com/${key}`;
-          const updateAvatarRes = await Taro.request({
+          const updateAvatarRes = await makeRequest({
             method: 'PATCH',
-            url: `${requestUrl}/v1/users//updateAvatar`,
+            url: requestUrl,
+            path: '/api/v1/users//updateAvatar',
             header: {
               Authorization: token
             },
@@ -149,16 +176,16 @@ return (
           </View>
         </View>
         <View className='mine-postInfo'>
-          <View className='mine-postInfo-item'>
-            <Text className='mine-postInfo-item-num'>{postInfo.postNum}</Text>
+          <View className='mine-postInfo-item' onClick={() => Taro.navigateTo({url: '/pages/mine/myPosts/myposts'})}>
+            <Text className='mine-postInfo-item-num'>{postData.myPosts}</Text>
             <Text className='mine-postInfo-item-text'>发帖</Text>
           </View>
           <View className='mine-postInfo-item'>
-            <Text className='mine-postInfo-item-num'>{postInfo.collectedNum}</Text>
-            <Text className='mine-postInfo-item-text'>收藏</Text>
+            <Text className='mine-postInfo-item-num'>{postData.likesNum}</Text>
+            <Text className='mine-postInfo-item-text'>收到的赞</Text>
           </View>
           <View className='mine-postInfo-item'>
-            <Text className='mine-postInfo-item-num'>{postInfo.recentView}</Text>
+            <Text className='mine-postInfo-item-num'>未开通</Text>
             <Text className='mine-postInfo-item-text'>最近浏览</Text>
           </View>
         </View>

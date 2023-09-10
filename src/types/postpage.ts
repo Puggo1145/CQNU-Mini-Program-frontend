@@ -28,6 +28,7 @@ export interface commentType {
     user: {
         _id: string
         nick_name: string
+        user_exp: number
         user_level: number
         avatar: string
     }

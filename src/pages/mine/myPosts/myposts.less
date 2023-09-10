@@ -1,0 +1,30 @@
+/*postcss-pxtransform disable*/
+.myposts-content {
+    box-sizing: border-box;
+    height: calc(100vh - 100px);
+
+    .myposts-post {
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 16px;
+        border-bottom: 2px solid #eee;
+        background-color: #fff;
+        margin: 0 auto;
+
+        .myposts-post-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .myposts-post-content {
+            font-size: 16px;
+        }
+    
+        .myposts-post-createdAt {
+            font-size: 12px;
+            color: #999;
+        }
+    }
+}
