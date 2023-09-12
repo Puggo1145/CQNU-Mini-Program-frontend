@@ -25,7 +25,7 @@ export default function Mine() {
   const accessKeyId = useAppInfo((state) => state.accessKey_id);
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData]);
 
-  useLoad( async () => {
+  useLoad(async () => {
     if (!userInfo.isLogin) {
       Taro.navigateTo({
         url: '/pages/login/login'
@@ -48,7 +48,7 @@ export default function Mine() {
 
     if (res.statusCode === 200) {
       console.log(res.data);
-      
+
       setPostData({
         myPosts: res.data.data.posts,
         likesNum: res.data.data.likes,
@@ -100,7 +100,7 @@ export default function Mine() {
         });
 
         console.log(uploadRes);
-        
+
 
         // 上传成功，将图片URL存入数据库
         if (uploadRes.statusCode === 204) {
@@ -120,7 +120,7 @@ export default function Mine() {
           if (updateAvatarRes.statusCode === 200) {
             Taro.setStorageSync('avatar', avatarUrl); // 持久化 avatar
             setUserInfo({ avatar: avatarUrl }) // 同步到 userInfo
-            
+
             Taro.showToast({
               title: '上传成功',
               icon: 'success',
@@ -128,97 +128,98 @@ export default function Mine() {
             });
           };
 
-      } else {
-        Taro.showToast({
-          title: '上传失败',
-          icon: 'error',
-          duration: 2000
-        });
+        } else {
+          Taro.showToast({
+            title: '上传失败',
+            icon: 'error',
+            duration: 2000
+          });
+        };
       };
-    };
 
-  } catch (err) {
-    console.log(err);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 登出
+  const handleLogOut = () => {
+    console.log(userInfo);
+
+    setUserInfo({
+      id: '',
+      openid: '',
+      student_id: '',
+      nick_name: '',
+      avatar: 'none',
+      user_level: 1,
+      user_exp: 0,
+      faculty: '',
+      major: '',
+      grade: '',
+    });
+    Taro.removeStorageSync('token');
+  };
+
+  // 跳转功能页
+  const handleLinkToFns = (fnName: string) => {
+      Taro.navigateTo({
+        url: `/pages/mine/${fnName}/${fnName}`
+      })
   }
-};
 
-// 登出
-const handleLogOut = () => {
-  console.log(userInfo);
-
-  setUserInfo({
-    id: '',
-    openid: '',
-    student_id: '',
-    nick_name: '',
-    avatar: 'none',
-    user_level: 1,
-    user_exp: 0,
-    faculty: '',
-    major: '',
-    grade: '',
-  });
-  Taro.removeStorageSync('token');
-};
-
-return (
-  <View className='mine-wrapper'>
-    <View className='mine-content'>
-      <View className='mine-userInfo'>
-        <View className='mine-basicInfo'>
-          <Image src={userInfo.isLogin ? userInfo.avatar : defaultAvatar } className='mine-avatar' onClick={handleAvatarChange}></Image>
-          <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
-          <Text className='mine-schoolID'>{userInfo.student_id}</Text>
-          <View className='mine-moreInfo'>
-            <View className='mine-moreInfo-item'>Lv.{userInfo.user_level}</View>
-            <View className='mine-moreInfo-item'>{userInfo.grade}</View>
-            <View className='mine-moreInfo-item'>{userInfo.faculty}</View>
+  return (
+    <View className='mine-wrapper'>
+      <View className='mine-content'>
+        <View className='mine-userInfo'>
+          <View className='mine-basicInfo'>
+            <Image src={userInfo.isLogin ? userInfo.avatar : defaultAvatar} className='mine-avatar' onClick={handleAvatarChange}></Image>
+            <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
+            <Text className='mine-schoolID'>{userInfo.student_id}</Text>
+            <View className='mine-moreInfo'>
+              <View className='mine-moreInfo-item'>Lv.{userInfo.user_level}</View>
+              <View className='mine-moreInfo-item'>{userInfo.grade}</View>
+              <View className='mine-moreInfo-item'>{userInfo.faculty}</View>
+            </View>
+          </View>
+          <View className='mine-postInfo'>
+            <View className='mine-postInfo-item' onClick={() => Taro.navigateTo({ url: '/pages/mine/myPosts/myposts' })}>
+              <Text className='mine-postInfo-item-num'>{postData.myPosts}</Text>
+              <Text className='mine-postInfo-item-text'>发帖</Text>
+            </View>
+            <View className='mine-postInfo-item'>
+              <Text className='mine-postInfo-item-num'>{postData.likesNum}</Text>
+              <Text className='mine-postInfo-item-text'>收到的赞</Text>
+            </View>
+            <View className='mine-postInfo-item'>
+              <Text className='mine-postInfo-item-num'>未开通</Text>
+              <Text className='mine-postInfo-item-text'>最近浏览</Text>
+            </View>
           </View>
         </View>
-        <View className='mine-postInfo'>
-          <View className='mine-postInfo-item' onClick={() => Taro.navigateTo({url: '/pages/mine/myPosts/myposts'})}>
-            <Text className='mine-postInfo-item-num'>{postData.myPosts}</Text>
-            <Text className='mine-postInfo-item-text'>发帖</Text>
-          </View>
-          <View className='mine-postInfo-item'>
-            <Text className='mine-postInfo-item-num'>{postData.likesNum}</Text>
-            <Text className='mine-postInfo-item-text'>收到的赞</Text>
-          </View>
-          <View className='mine-postInfo-item'>
-            <Text className='mine-postInfo-item-num'>未开通</Text>
-            <Text className='mine-postInfo-item-text'>最近浏览</Text>
-          </View>
-        </View>
+        {userInfo.isLogin ?
+          <View className='mine-functions'>
+            <View className='mine-function mine-linkOfficial' onClick={() => handleLinkToFns('linkOfficial')}>
+              <Image src={profileImg}></Image>
+              绑定校园门户
+            </View>
+            <View className='mine-function mine-contactUs' onClick={() => handleLinkToFns('contactUs')}>
+              <Image src={chatImg}></Image>
+              联系我们
+            </View>
+            <View className='mine-function mine-logout' onClick={handleLogOut}>
+              <Image src={logoutImg}></Image>
+              退出登录
+            </View>
+          </View> :
+          <View className='mine-functions'>
+            <View className='mine-function mine-login' onClick={userInfo.toLoginPage}>
+              <Image src={loginImg}></Image>
+              登录
+            </View>
+          </View>}
       </View>
-      {userInfo.isLogin ?
-        <View className='mine-functions'>
-          <View className='mine-function mine-contactUs' onClick={
-            () => {
-              Taro.navigateTo({
-                url: '/pages/mine/contactUs/contactUs'
-              })
-            }
-          }>
-            <Image src={chatImg}></Image>
-            联系我们
-          </View>
-          <View className='mine-function mine-validation'>
-            <Image src={profileImg}></Image>
-            身份认证
-          </View>
-          <View className='mine-function mine-logout' onClick={handleLogOut}>
-            <Image src={logoutImg}></Image>
-            退出登录
-          </View>
-        </View> :
-        <View className='mine-functions'>
-          <View className='mine-function mine-login' onClick={userInfo.toLoginPage}>
-            <Image src={loginImg}></Image>
-            登录
-          </View>
-        </View>}
+      <View className='mine-topBackground'></View>
     </View>
-    <View className='mine-topBackground'></View>
-  </View>
-)
+  )
 }

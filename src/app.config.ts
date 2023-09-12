@@ -8,6 +8,7 @@ export default defineAppConfig({
     'pages/mine/mine',
     'pages/mine/myPosts/myposts',
     'pages/mine/contactUs/contactUs',
+    'pages/mine/linkOfficial/linkOfficial',
 
     'pages/service/service',
     'pages/service/classroomNav/classroomNav',

@@ -1,1 +1,2 @@
-@import "./app-origin.wxss";@import "./common.wxss";
+@import "./app-origin.wxss";
+@import "./common.wxss";

@@ -1,0 +1,50 @@
+/*postcss-pxtransform disable*/
+.linkOfficial-content {
+  padding: 0 20px;
+}
+.linkOfficial-content .linkOfficial-description {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #999;
+}
+.linkOfficial-content .linkOfficial-inputs-item {
+  margin-top: 20px;
+}
+.linkOfficial-content .linkOfficial-inputs-item Text {
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
+  letter-spacing: 0.56px;
+}
+.linkOfficial-content .linkOfficial-inputs-item .linkOfficial-input {
+  box-sizing: border-box;
+  margin-top: 4px;
+  height: 40px;
+  border-bottom: 1px solid #cecece;
+  padding: 0 10px;
+  font-size: 14px;
+  letter-spacing: 0.56px;
+  line-height: 40px;
+}
+.linkOfficial-content .linkOfficial-inputs-item:last-child .linkOfficial-auths {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.linkOfficial-content .linkOfficial-inputs-item:last-child .linkOfficial-auths Image {
+  width: 100px;
+  height: 40px;
+  background-color: #333;
+}
+.linkOfficial-content .auth-submit {
+  position: absolute;
+  left: 50%;
+  bottom: 36px;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 44px;
+  border-radius: 22px;
+  background: #4E6AFF;
+  color: #fff;
+  font-weight: 800;
+}
