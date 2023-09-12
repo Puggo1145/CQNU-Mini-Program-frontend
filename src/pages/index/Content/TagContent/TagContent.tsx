@@ -248,7 +248,11 @@ export default function TagContent() {
                     onRefresherRefresh={resetAndRefresh}
                 >
                     {
-                        posts.map((post) => {
+                        posts.sort((a, b) => {
+                            if (a.isTopped && !b.isTopped) return -1;
+                            if (!a.isTopped && b.isTopped) return 1;
+                            return 0;
+                        }).map((post) => {
                             return (
                                 <View className="index-content-post" key={post._id} onClick={() => enterPost(post._id)}>
                                     <View className="post-texts">
