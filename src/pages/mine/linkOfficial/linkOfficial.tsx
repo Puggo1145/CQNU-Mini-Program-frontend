@@ -11,75 +11,119 @@ import useUser from "@/store/userInfo"
 import useRequest from "@/store/request"
 
 import "./linkOfficial.css"
+import useCLasstable from "@/store/classTable"
 
 export default function linkOfficial() {
 
   const student_id = useUser(state => state.student_id);
   const authUrl = useRequest(state => state.authUrl);
+  const setClassTable = useCLasstable(state => state.setClassTable);
 
-  const [cookie, setCookie]= useState<string>('');
-  const [dataObj, setDataObj ]= useState<object>({});
+  const [cookie, setCookie] = useState<string>('');
+  const [dataObj, setDataObj] = useState<object>({});
   const [authCodeImg, setAuthCodeImg] = useState<string>('');
 
   const passwordRef = useRef<HTMLInputElement>(null);
   const authCodeRef = useRef<HTMLInputElement>(null);
 
-  useLoad( async () => {
-    // 1. 请求 authCode、会话 cookies、dataObj
-    const authInfo = await makeRequest({
-      method: 'GET',
-      url: authUrl,
-      path: '/',
-      timeout: 10000, // 10 秒超时
-    });
-
-    if (authInfo.statusCode === 200) {
-      console.log(authInfo.data);
-      setCookie(authInfo.data.data.cookie);
-      setDataObj(authInfo.data.data.dataObj);
-      setAuthCodeImg("data:image/jpeg;base64," + authInfo.data.data.authCodeImg);
-    }
+  useLoad(async () => {
+    handleRefreshAuthCode();
 
   });
 
-  const handleSubmit = async () => {
-    if (!passwordRef.current?.value || !authCodeRef.current?.value) {
+  // 请求 authCode、会话 cookies、dataObj
+  const handleRefreshAuthCode = async () => {
+    try {
+      Taro.showLoading({
+        title: '正在抓取验证码',
+      });
+      const authInfo = await makeRequest({
+        method: 'GET',
+        url: authUrl,
+        path: '/',
+        timeout: 10000, // 10 秒超时
+      });
+
+      Taro.hideLoading();
+
+      if (authInfo.statusCode === 200) {
+        console.log(authInfo.data);
+        setCookie(authInfo.data.data.cookie);
+        setDataObj(authInfo.data.data.dataObj);
+        setAuthCodeImg("data:image/jpeg;base64," + authInfo.data.data.authCodeImg);
+      } else {
+        Taro.showToast({
+          title: '网络错误',
+          icon: 'error',
+          duration: 2000
+        });
+      }
+    } catch (err) {
+      Taro.hideLoading();
       Taro.showToast({
-        title: '请填写完整信息',
+        title: '网络错误',
         icon: 'error',
         duration: 2000
       });
-
-      return;
     }
+  };
 
-    const username = student_id;
-    const password = passwordRef.current.value;
-    const authCode = authCodeRef.current.value;
+  const handleSubmit = async () => {
+    try {
+      if (!passwordRef.current?.value || !authCodeRef.current?.value) {
+        Taro.showToast({
+          title: '请填写完整信息',
+          icon: 'error',
+          duration: 2000
+        });
 
-    const res = await makeRequest({
-      method: 'POST',
-      url: authUrl,
-      path: '/',
-      data: {
-        username,
-        password,
-        cookie,
-        dataObj,
-        authCode
-      },
-    });
+        return;
+      }
 
-    if (res.statusCode === 200) {
-      console.log(res.data);
-      Taro.showToast({
-        title: '绑定成功',
-        icon: 'success',
-        duration: 2000
+      const username = student_id;
+      const password = passwordRef.current.value;
+      const authCode = authCodeRef.current.value;
+
+      Taro.showLoading({
+        title: '链接中，请稍后',
+      })
+      const res = await makeRequest({
+        method: 'POST',
+        url: authUrl,
+        path: '/',
+        data: {
+          username,
+          password,
+          cookie,
+          dataObj,
+          authCode
+        },
+        timeout: 60000, // 60 秒超时
       });
-    } else {
+      Taro.hideLoading();
+
+      if (res.statusCode === 200) {
+        console.log(res.data);
+        // 1. 将课表存入缓存与 store
+        const classTable = res.data.data.kbList;
+        Taro.setStorageSync('classTable', classTable);
+        setClassTable(classTable);
+
+        Taro.showToast({
+          title: '门户信息同步成功',
+          icon: 'success',
+          duration: 2000
+        });
+      } else {
+        Taro.showToast({
+          title: res.data.message,
+          icon: 'error',
+          duration: 2000
+        });
+      }
+    } catch (err) {
       Taro.showToast({
-        title: res.data.message,
+        title: '网络错误',
         icon: 'error',
         duration: 2000
       });
@@ -100,11 +144,11 @@ export default function linkOfficial() {
             <Text>密码</Text>
             <Input ref={passwordRef} className="linkOfficial-input" placeholder="官网校园门户密码"></Input>
           </View>
-          <View className="linkOfficial-inputs-item">
+          <View className="linkOfficial-inputs-item" >
             <Text>验证码</Text>
             <View className="linkOfficial-auths">
-              <Input ref={authCodeRef} className="linkOfficial-input" placeholder="请等待验证码抓取..."></Input>
-              <Image src={authCodeImg} className="linkOfficial-authCode"></Image>
+              <Input ref={authCodeRef} className="linkOfficial-input" placeholder={authCodeImg ? "请输入验证码" : "请等待验证码抓取..."}></Input>
+              <Image src={authCodeImg} className="linkOfficial-authCode" onClick={handleRefreshAuthCode}></Image>
             </View>
           </View>
         </View>

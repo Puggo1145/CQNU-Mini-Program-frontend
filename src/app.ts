@@ -14,15 +14,16 @@ import { initContainer } from './common/utilities/requester';
 
 // styles
 import './app.less'
+import useCLasstable from './store/classTable';
 
 function App({ children }: PropsWithChildren<any>) {
   // 数据 store ————————————————————————————————————————————————————————————
   const [statusBarHeight, setStatusBarHeight] = useStore((state) => [state.statusBarHeight, state.setStatusBarHeight])
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData])
   const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
-
+  
   const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo])
-
+  const [classTable, setClassTable] = useCLasstable((state) => [state, state.setClassTable])
   // 请求初始数据————————————————————————————————————————————————————————————
 
   const initer = async () => {
@@ -47,6 +48,9 @@ function App({ children }: PropsWithChildren<any>) {
     launchInitiater.getOssParams();
     // 获取所有Tags
     launchInitiater.getAllTags();
+
+    // 3. 缓存课表
+    const classTableRes = await Taro.getStorage({ key: 'classTable' });
 
     // 新用户注册 或 登录，需要重新加载一次，请在登录或注册成功后，发布此消息！！！
     const getOssParamsToken = PubSub.subscribe('getOssParams', () => {
