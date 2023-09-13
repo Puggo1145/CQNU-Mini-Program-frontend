@@ -85,7 +85,7 @@ export default function linkOfficial() {
       const authCode = authCodeRef.current.value;
 
       Taro.showLoading({
-        title: '链接中，请稍后',
+        title: '连接中，请稍后',
       })
       const res = await makeRequest({
         method: 'POST',
@@ -98,14 +98,16 @@ export default function linkOfficial() {
           dataObj,
           authCode
         },
-        timeout: 60000, // 60 秒超时
+        timeout: 15000, // 60 秒超时
       });
       Taro.hideLoading();
 
+      // 绑定成功
       if (res.statusCode === 200) {
         console.log(res.data);
-        // 1. 将课表存入缓存与 store
+        // 将课表存入缓存与 store
         const classTable = res.data.data.kbList;
+        
         Taro.setStorageSync('classTable', classTable);
         setClassTable(classTable);
 
@@ -114,12 +116,18 @@ export default function linkOfficial() {
           icon: 'success',
           duration: 2000
         });
+
+        Taro.navigateBack();
+
+      // 绑定失败, 验证码或密码错误，重新获取验证码
       } else {
         Taro.showToast({
           title: res.data.message,
           icon: 'error',
           duration: 2000
         });
+        
+        handleRefreshAuthCode();
       }
     } catch (err) {
       Taro.showToast({
@@ -135,6 +143,7 @@ export default function linkOfficial() {
       <Header title={"绑定校园门户"}></Header>
       <View className="linkOfficial-content">
         <Text className="linkOfficial-description">学习与服务的部分功能需要绑定校园门户才能使用哦</Text>
+        <Text className="linkOfficial-description">根据网络情况与访问量，连接校园门户的时间可能较长</Text>
         <View className="linkOfficial-inputs">
           <View className="linkOfficial-inputs-item">
             <Text>学号</Text>
@@ -144,8 +153,8 @@ export default function linkOfficial() {
             <Text>密码</Text>
             <Input ref={passwordRef} className="linkOfficial-input" placeholder="官网校园门户密码"></Input>
           </View>
-          <View className="linkOfficial-inputs-item" >
-            <Text>验证码</Text>
+          <View className="linkOfficial-inputs-item">
+            <Text>验证码(点击图片刷新)</Text>
             <View className="linkOfficial-auths">
               <Input ref={authCodeRef} className="linkOfficial-input" placeholder={authCodeImg ? "请输入验证码" : "请等待验证码抓取..."}></Input>
               <Image src={authCodeImg} className="linkOfficial-authCode" onClick={handleRefreshAuthCode}></Image>

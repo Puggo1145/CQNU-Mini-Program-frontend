@@ -49,9 +49,10 @@ function App({ children }: PropsWithChildren<any>) {
     // 获取所有Tags
     launchInitiater.getAllTags();
 
-    // 3. 缓存课表
+    // 从缓存查找课表
     const classTableRes = await Taro.getStorage({ key: 'classTable' });
-
+    setClassTable(classTableRes.data);
+    
     // 新用户注册 或 登录，需要重新加载一次，请在登录或注册成功后，发布此消息！！！
     const getOssParamsToken = PubSub.subscribe('getOssParams', () => {
       launchInitiater = new LaunchInitiater(requestUrl, userInfo, postData); // 传新数据
