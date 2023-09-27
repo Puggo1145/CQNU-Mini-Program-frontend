@@ -8,9 +8,9 @@ type State = {
 
 
 const useAppInfo = create<State>()(() => ({
-    app_id: "wx047f8dac6eb7516d",
-    app_secret: "458b7e087f98d02c671db3a8d57ec5fb",
-    accessKey_id: "LTAI5tCV9bSX9UBTMSx57UCi"
+    app_id: "wxb6daf8568298c129", // 小程序 app_id
+    app_secret: "17d8ebe6df34d443d493349c994cfa8a", // 小程序 app_secret
+    accessKey_id: "LTAI5tCV9bSX9UBTMSx57UCi" // 阿里云 accessKey_id
 }))
 
 export default useAppInfo;
