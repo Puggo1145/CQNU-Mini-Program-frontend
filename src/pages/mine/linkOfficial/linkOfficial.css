@@ -3,6 +3,7 @@
   padding: 0 20px;
 }
 .linkOfficial-content .linkOfficial-description {
+  display: block;
   margin-top: 16px;
   font-size: 14px;
   color: #999;
@@ -35,6 +36,10 @@
   width: 100px;
   height: 40px;
   background-color: #333;
+}
+.linkOfficial-content .linkOfficial-errMsg {
+  font-size: 14px;
+  color: #e10000;
 }
 .linkOfficial-content .auth-submit {
   position: absolute;

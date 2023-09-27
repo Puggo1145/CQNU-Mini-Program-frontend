@@ -29,9 +29,7 @@ export default function classtable() {
     const week = Math.ceil((date.getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24 * 7))
     setCurrentWeek(week)
 
-    console.log(lessons);
-
-  }, [])
+  }, []);
 
   // 切换周数
   function handleWeekSwitch(action: number) {
@@ -124,10 +122,10 @@ export default function classtable() {
                   }
                   return 0;  // 不更改顺序
                 })
-                .map((item) => (
+                .map((item, index) => (
                   <View
+                    key={item.lesson_id + index}
                     className={item.start_week <= currentWeek ? "classtable-lessons-item" : "classtable-lessons-item notThisWeek"}
-                    key={item.lesson_id}
                     style={{
                       backgroundColor: item.color,
                       gridColumnStart: item.day,

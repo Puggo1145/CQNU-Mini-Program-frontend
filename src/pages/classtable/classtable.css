@@ -63,6 +63,7 @@
   font-size: 10px;
 }
 .classtable-content .classtable-bottom .classtable-lessons {
+  opacity: 0.9;
   width: calc(100% - 50px);
   height: 80vh;
   display: grid;

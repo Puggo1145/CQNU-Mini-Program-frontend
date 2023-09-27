@@ -23,6 +23,8 @@ export default function linkOfficial() {
   const [dataObj, setDataObj] = useState<object>({});
   const [authCodeImg, setAuthCodeImg] = useState<string>('');
 
+  const [errMsg, setErrMsg] = useState<string>('');
+
   const passwordRef = useRef<HTMLInputElement>(null);
   const authCodeRef = useRef<HTMLInputElement>(null);
 
@@ -98,7 +100,7 @@ export default function linkOfficial() {
           dataObj,
           authCode
         },
-        timeout: 15000, // 60 秒超时
+        timeout: 15000, // 15 秒超时
       });
       Taro.hideLoading();
 
@@ -121,11 +123,7 @@ export default function linkOfficial() {
 
       // 绑定失败, 验证码或密码错误，重新获取验证码
       } else {
-        Taro.showToast({
-          title: res.data.message,
-          icon: 'error',
-          duration: 2000
-        });
+        setErrMsg(res.data.message);
         
         handleRefreshAuthCode();
       }
@@ -143,7 +141,7 @@ export default function linkOfficial() {
       <Header title={"绑定校园门户"}></Header>
       <View className="linkOfficial-content">
         <Text className="linkOfficial-description">学习与服务的部分功能需要绑定校园门户才能使用哦</Text>
-        <Text className="linkOfficial-description">根据网络情况与访问量，连接校园门户的时间可能较长</Text>
+        <Text className="linkOfficial-description">由于网络情况与访问量的影响，连接校园门户的时间可能较长</Text>
         <View className="linkOfficial-inputs">
           <View className="linkOfficial-inputs-item">
             <Text>学号</Text>
@@ -161,6 +159,7 @@ export default function linkOfficial() {
             </View>
           </View>
         </View>
+        <Text className="linkOfficial-errMsg">{errMsg}</Text>
         <Button className="auth-submit" onClick={handleSubmit}>绑定</Button>
       </View>
     </View>
