@@ -1,0 +1,82 @@
+"filename", "language", "TypeScript", "Less", "CSS", "TypeScript JSX", "HTML", "XML", "comment", "blank", "total"
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\app.config.ts", "TypeScript", 36, 0, 0, 0, 0, 0, 0, 7, 43
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\app.css", "CSS", 0, 0, 4, 0, 0, 0, 1, 1, 6
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\app.less", "Less", 0, 4, 0, 0, 0, 0, 1, 1, 6
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\app.ts", "TypeScript", 46, 0, 0, 0, 0, 0, 13, 18, 77
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\Header\Header.css", "CSS", 0, 0, 23, 0, 0, 0, 1, 1, 25
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\Header\Header.less", "Less", 0, 23, 0, 0, 0, 0, 1, 2, 26
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\Header\Header.tsx", "TypeScript JSX", 0, 0, 0, 15, 0, 0, 0, 6, 21
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\handlers\socketHandler.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 1, 2, 9
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\launchUtilities\compressImage.ts", "TypeScript", 21, 0, 0, 0, 0, 0, 1, 7, 29
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\launchUtilities\launchInitiater.ts", "TypeScript", 77, 0, 0, 0, 0, 0, 10, 22, 109
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\utilities\requester.ts", "TypeScript", 48, 0, 0, 0, 0, 0, 5, 11, 64
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\utilities\timeStampToDate.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 1, 5, 21
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\common\utilities\uploadImageToOss.ts", "TypeScript", 29, 0, 0, 0, 0, 0, 3, 8, 40
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\index.html", "HTML", 0, 0, 0, 0, 17, 0, 0, 1, 18
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\classtable\classtable.css", "CSS", 0, 0, 117, 0, 0, 0, 1, 1, 119
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\classtable\classtable.less", "Less", 0, 117, 0, 0, 0, 0, 1, 16, 134
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\classtable\classtable.tsx", "TypeScript JSX", 0, 0, 0, 130, 0, 0, 5, 18, 153
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Content.tsx", "TypeScript JSX", 0, 0, 0, 16, 0, 0, 0, 4, 20
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Hot\Hot.css", "CSS", 0, 0, 57, 0, 0, 0, 1, 1, 59
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Hot\Hot.less", "Less", 0, 57, 0, 0, 0, 0, 1, 7, 65
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Hot\Hot.tsx", "TypeScript JSX", 0, 0, 0, 74, 0, 0, 1, 17, 92
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Message\Message.css", "CSS", 0, 0, 45, 0, 0, 0, 1, 1, 47
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Message\Message.less", "Less", 0, 47, 0, 0, 0, 0, 1, 3, 51
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\Message\Message.tsx", "TypeScript JSX", 0, 0, 0, 33, 0, 0, 0, 6, 39
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\TagContent\TagContent.css", "CSS", 0, 0, 191, 0, 0, 0, 1, 1, 193
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\TagContent\TagContent.less", "Less", 0, 191, 0, 0, 0, 0, 1, 34, 226
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Content\TagContent\TagContent.tsx", "TypeScript JSX", 0, 0, 0, 226, 0, 0, 26, 41, 293
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\Header\Header.tsx", "TypeScript JSX", 0, 0, 0, 56, 0, 0, 0, 11, 67
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\index.config.ts", "TypeScript", 4, 0, 0, 0, 0, 0, 0, 1, 5
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\index.css", "CSS", 0, 0, 60, 0, 0, 0, 1, 1, 62
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\index.less", "Less", 0, 60, 0, 0, 0, 0, 1, 7, 68
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\index\index.tsx", "TypeScript JSX", 0, 0, 0, 17, 0, 0, 0, 6, 23
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\login\login.css", "CSS", 0, 0, 49, 0, 0, 0, 1, 1, 51
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\login\login.less", "Less", 0, 49, 0, 0, 0, 0, 1, 6, 56
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\login\login.tsx", "TypeScript JSX", 0, 0, 0, 73, 0, 0, 8, 19, 100
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\contactUs\contactUs.css", "CSS", 0, 0, 30, 0, 0, 0, 1, 1, 32
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\contactUs\contactUs.less", "Less", 0, 30, 0, 0, 0, 0, 1, 3, 34
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\contactUs\contactUs.tsx", "TypeScript JSX", 0, 0, 0, 75, 0, 0, 0, 13, 88
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\linkOfficial\linkOfficial.css", "CSS", 0, 0, 54, 0, 0, 0, 1, 1, 56
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\linkOfficial\linkOfficial.less", "Less", 0, 56, 0, 0, 0, 0, 1, 9, 66
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\linkOfficial\linkOfficial.tsx", "TypeScript JSX", 0, 0, 0, 138, 0, 0, 4, 26, 168
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\mine.css", "CSS", 0, 0, 100, 0, 0, 0, 1, 1, 102
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\mine.less", "Less", 0, 102, 0, 0, 0, 0, 1, 15, 118
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\mine.tsx", "TypeScript JSX", 0, 0, 0, 190, 0, 0, 8, 28, 226
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\myPosts\myposts.css", "CSS", 0, 0, 25, 0, 0, 0, 1, 1, 27
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\myPosts\myposts.less", "Less", 0, 25, 0, 0, 0, 0, 1, 4, 30
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\mine\myPosts\myposts.tsx", "TypeScript JSX", 0, 0, 0, 59, 0, 0, 1, 12, 72
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\createpost\createpost.css", "CSS", 0, 0, 134, 0, 0, 0, 2, 1, 137
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\createpost\createpost.less", "Less", 0, 134, 0, 0, 0, 0, 2, 18, 154
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\createpost\createpost.tsx", "TypeScript JSX", 0, 0, 0, 172, 0, 0, 22, 30, 224
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\postpage\PostpageFn.ts", "TypeScript", 142, 0, 0, 0, 0, 0, 6, 21, 169
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\postpage\postpage.css", "CSS", 0, 0, 277, 0, 0, 0, 1, 1, 279
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\postpage\postpage.less", "Less", 0, 278, 0, 0, 0, 0, 2, 42, 322
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\posts\postpage\postpage.tsx", "TypeScript JSX", 0, 0, 0, 256, 0, 0, 34, 52, 342
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\register\register.css", "CSS", 0, 0, 59, 0, 0, 0, 1, 1, 61
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\register\register.less", "Less", 0, 61, 0, 0, 0, 0, 1, 9, 71
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\register\register.tsx", "TypeScript JSX", 0, 0, 0, 154, 0, 0, 19, 25, 198
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\search\search.css", "CSS", 0, 0, 94, 0, 0, 0, 1, 1, 96
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\search\search.less", "Less", 0, 94, 0, 0, 0, 0, 1, 15, 110
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\search\search.tsx", "TypeScript JSX", 0, 0, 0, 91, 0, 0, 15, 23, 129
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\search\searchResult\searchResult.css", "CSS", 0, 0, 126, 0, 0, 0, 1, 1, 128
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\search\searchResult\searchResult.less", "Less", 0, 126, 0, 0, 0, 0, 1, 17, 144
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\search\searchResult\searchResult.tsx", "TypeScript JSX", 0, 0, 0, 111, 0, 0, 10, 22, 143
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\service\classroomNav\classroom.css", "CSS", 0, 0, 30, 0, 0, 0, 1, 1, 32
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\service\classroomNav\classroom.less", "Less", 0, 30, 0, 0, 0, 0, 1, 3, 34
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\service\classroomNav\classroomNav.tsx", "TypeScript JSX", 0, 0, 0, 48, 0, 0, 0, 9, 57
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\service\service.css", "CSS", 0, 0, 73, 0, 0, 0, 1, 1, 75
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\service\service.less", "Less", 0, 76, 0, 0, 0, 0, 1, 17, 94
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\service\service.tsx", "TypeScript JSX", 0, 0, 0, 59, 0, 0, 3, 9, 71
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\study\study.css", "CSS", 0, 0, 167, 0, 0, 0, 1, 1, 169
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\study\study.less", "Less", 0, 171, 0, 0, 0, 0, 1, 31, 203
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\pages\study\study.tsx", "TypeScript JSX", 0, 0, 0, 129, 0, 0, 5, 21, 155
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\static\post\createPost-icon.svg", "XML", 0, 0, 0, 0, 0, 5, 0, 1, 6
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\store\appInfo.ts", "TypeScript", 10, 0, 0, 0, 0, 0, 0, 4, 14
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\store\classTable.ts", "TypeScript", 231, 0, 0, 0, 0, 0, 1, 7, 239
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\store\postData.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 2, 7, 26
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\store\request.ts", "TypeScript", 16, 0, 0, 0, 0, 0, 2, 6, 24
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\store\store.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 4, 16
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\store\userInfo.ts", "TypeScript", 41, 0, 0, 0, 0, 0, 3, 8, 52
+"e:\产品\重师小程序\dev\CQNU-Mini-Program-frontend\src\types\postpage.ts", "TypeScript", 35, 0, 0, 0, 0, 0, 2, 2, 39
+"Total", "-", 786, 1731, 1715, 2122, 17, 5, 254, 819, 7449

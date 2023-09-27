@@ -3,8 +3,6 @@ import PubSub from "pubsub-js";
 
 import { makeRequest } from "@/common/utilities/requester";
 
-import { commentType } from "@/types/postpage";
-
 class PostpageFn {
     request_url: string
     post_id: string
@@ -68,7 +66,7 @@ class PostpageFn {
     };
 
     // 发送评论
-    async sendComment(content: string) {
+    async sendComment(content: string, target_user_id: string) {
         const res = await makeRequest({
             method: 'POST',
             url: this.request_url,
@@ -77,8 +75,9 @@ class PostpageFn {
                 authorization: this.token
             },
             data: {
+                target_user_id: target_user_id, // 评论的目标用户id，用于消息推送
                 post_id: this.post_id,
-                content: content
+                content: content,
             }
         });
 

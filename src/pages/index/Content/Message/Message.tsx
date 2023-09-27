@@ -1,36 +1,28 @@
-import { useState } from "react"
 import { View, Text } from "@tarojs/components"
+
+// store
+import useMessage from "@/store/messages"
 
 import "./Message.css"
 
-interface messageNumberType {
-    receivedLikes: string
-    reply: string
-    officialMessages: string
-}
-
 export default function Message() {
 
-    const [messageNumber, setMessageNumber] = useState<messageNumberType>({
-        receivedLikes: '28',
-        reply: '23',
-        officialMessages: '34'
-    })
+    const [likes, reply, officialMessages] = useMessage(state => [state.likes, state.reply, state.officialMessages])
 
     return (
         <View className="message-wrapper">
             <View className="messages">
                 <View className="message">
                     <Text className="message-name">收到的赞</Text>
-                    <View className="message-number">{messageNumber.receivedLikes}</View>
+                    {likes !== 0 && <View className="message-number">{likes}</View>}
                 </View>
                 <View className="message">
                     <Text className="message-name">评论回复</Text>
-                    <View className="message-number">{messageNumber.reply}</View>
+                    {reply !== 0 && <View className="message-number">{reply}</View>}
                 </View>
                 <View className="message">
                     <Text className="message-name">官方消息</Text>
-                    <View className="message-number">{messageNumber.officialMessages}</View>
+                    {officialMessages !== 0 && <View className="message-number">{officialMessages}</View>}
                 </View>
             </View>
         </View>

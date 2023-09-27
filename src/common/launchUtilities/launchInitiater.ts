@@ -1,12 +1,19 @@
 import Taro from "@tarojs/taro";
+import io from 'socket.io-client';  
 import { makeRequest } from "../utilities/requester";
+
+// handlers
+import socketHandler from "../handlers/socketHandler";
+
+import { UserInfoType } from "@/store/userInfo";
+import { MessageType } from "@/store/messages";
 
 class LaunchInitiater {
     requestUrl: string;
-    userInfo: any;
+    userInfo: UserInfoType;
     postData: any;
 
-    constructor(requestUrl: string, userInfo: any, postData: any) {
+    constructor(requestUrl: string, userInfo: UserInfoType, postData: any) {
         this.requestUrl = requestUrl;
         this.userInfo = userInfo;
         this.postData = postData;
@@ -38,9 +45,14 @@ class LaunchInitiater {
             // 创建 userInfo 的浅拷贝，防止方法被覆写
             const userInfoArray = Object.keys(this.userInfo).filter(key => typeof this.userInfo[key] !== 'function') // 防止方法被覆写
 
+            // 从缓存中读取用户信息
             userInfoArray.forEach((key) => {
                 this.userInfo.setUserInfo({ [key]: Taro.getStorageSync(key) });
             });
+            
+            return true;
+        } else {
+            return false;
         }
     };
 
@@ -83,6 +95,29 @@ class LaunchInitiater {
             });
         };
     };
+
+    webSocketInit() {
+
+        const socket = io(this.requestUrl);
+
+        // 建立 socket 私有连接
+        socket.emit('join', Taro.getStorageSync('id'));
+        // 处理 socket 事件
+        socketHandler(socket);
+    };
+
+    async getUnreadMessages() {
+        const messagesRes = await makeRequest({
+            method: 'GET',
+            url: this.requestUrl,
+            path: '/api/v1/messages/',
+            header: {
+                Authorization: this.token
+            }
+        })
+
+        if (messagesRes.statusCode === 200) return messagesRes.data.data;
+    }
 };
 
 export default LaunchInitiater;
