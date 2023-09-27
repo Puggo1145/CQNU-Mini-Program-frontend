@@ -4,7 +4,6 @@ import PubSub from 'pubsub-js';
 
 import { makeRequest } from "@/common/utilities/requester";
 
-import useAppInfo from "@/store/appInfo"
 import useRequest from "@/store/request"
 import useUser from "@/store/userInfo"
 
@@ -25,7 +24,7 @@ export default function login() {
             const loginRes = await Taro.login()
             const code = loginRes.code
             
-            // 向后端发送 app_id / app_secret / code 
+            // 向后端发送 code 
             Taro.showLoading({
                 title: '登录中',
                 mask: true
