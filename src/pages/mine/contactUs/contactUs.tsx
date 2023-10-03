@@ -42,6 +42,7 @@ export default function login() {
             method: 'POST',
             url: requestUrl,
             path: '/api/v1/users/feedback',
+            requestService: 'backend',
             header: {
                 authorization: token
             },

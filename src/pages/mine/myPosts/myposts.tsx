@@ -26,6 +26,7 @@ export default function myposts() {
             method: 'GET',
             url: requestUrl,
             path: '/api/v1/users/posts',
+            requestService: 'backend',
             header: {
                 Authorization: token
             },

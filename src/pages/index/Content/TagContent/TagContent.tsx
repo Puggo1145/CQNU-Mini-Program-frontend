@@ -56,6 +56,7 @@ export default function TagContent() {
                 method: 'GET',
                 url: requestUrl,
                 path: `/api/v1/posts/${encodeURIComponent(currentTag as string)}?sort=${order}&page=${page}`,
+                requestService: 'backend',
                 timeout: 5000 // 超时时间
             });
 

@@ -43,6 +43,7 @@ export default function linkOfficial() {
         method: 'GET',
         url: authUrl,
         path: '/',
+        requestService: "lkofficial",
         timeout: 10000, // 10 秒超时
       });
 
@@ -93,6 +94,7 @@ export default function linkOfficial() {
         method: 'POST',
         url: authUrl,
         path: '/',
+        requestService: 'lkofficial',
         data: {
           username,
           password,
@@ -106,20 +108,22 @@ export default function linkOfficial() {
 
       // 绑定成功
       if (res.statusCode === 200) {
-        console.log(res.data);
-        // 将课表存入缓存与 store
-        const classTable = res.data.data.kbList;
-        
-        Taro.setStorageSync('classTable', classTable);
-        setClassTable(classTable);
-
         Taro.showToast({
           title: '门户信息同步成功',
           icon: 'success',
           duration: 2000
         });
 
-        Taro.navigateBack();
+        console.log(res.data);
+        // 将课表存入缓存与 store
+        const classTable = res.data.data.kbList;
+        
+        Taro.setStorageSync('classTable', classTable);
+        setClassTable(classTable);
+        
+        setTimeout(() => {
+          Taro.navigateBack();
+        }, 2000);
 
       // 绑定失败, 验证码或密码错误，重新获取验证码
       } else {

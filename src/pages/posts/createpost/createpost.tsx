@@ -138,6 +138,7 @@ export default function createpost() {
           method: 'POST',
           url: requestUrl,
           path: '/api/v1/posts/',
+          requestService: 'backend',
           data: {
             title: title,
             content: content,
@@ -147,6 +148,7 @@ export default function createpost() {
           header: {
             authorization: Taro.getStorageSync('token')
           },
+          timeout: 8000
         });
 
         if (res.statusCode === 201) {

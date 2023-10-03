@@ -40,6 +40,7 @@ export default function Mine() {
       method: 'GET',
       url: requestUrl,
       path: '/api/v1/users/communityInfo',
+      requestService: 'backend',
       header: {
         Authorization: token
       },
@@ -107,6 +108,7 @@ export default function Mine() {
             method: 'PATCH',
             url: requestUrl,
             path: '/api/v1/users/updateAvatar',
+            requestService: 'backend',
             header: {
               Authorization: Taro.getStorageSync('token')
             },

@@ -33,6 +33,7 @@ export default function login() {
                 method: 'POST',
                 url: requestUrl,
                 path: '/api/v1/users/login',
+                requestService: 'backend',
                 data: {
                     code: code
                 }

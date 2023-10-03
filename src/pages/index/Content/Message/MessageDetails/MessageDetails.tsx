@@ -58,6 +58,7 @@ export default function MessageDetails() {
       method: 'PATCH',
       url: requestUrl,
       path: `/api/v1/messages/${setter[targetPage]['contentRef']}`,
+      requestService: 'backend',
       header: {
         'authorization': `${Taro.getStorageSync('token')}`
       },

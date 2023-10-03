@@ -130,7 +130,7 @@ export default function Study() {
         <View className='study-reading'>
           <View className='study-reading-top'>
             <Text>我的阅读(即将上线)</Text>
-            <View className='study-reading-toBook'>{"查看课表>"}</View>
+            <View className='study-reading-toBook'>{"我的书架>"}</View>
           </View>
           <View className='study-reading-bookShelf'>
             <View className='study-reading-books-xsbd'>

@@ -22,6 +22,7 @@ class PostpageFn {
             method: 'GET',
             url: this.request_url,
             path: `/api/v1/posts?post_id=${this.post_id}`,
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -38,6 +39,7 @@ class PostpageFn {
             method: 'GET',
             url: this.request_url,
             path: `/api/v1/posts/getComments?post_id=${this.post_id}&sort=${sort}&page=${page}`,
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -54,6 +56,7 @@ class PostpageFn {
             method: 'POST',
             url: this.request_url,
             path: '/api/v1/posts/likePost',
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -75,6 +78,7 @@ class PostpageFn {
             method: 'POST',
             url: this.request_url,
             path: '/api/v1/posts/commentPost',
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -106,6 +110,7 @@ class PostpageFn {
             method: 'POST',
             url: this.request_url,
             path: '/api/v1/posts/likeComment',
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -133,6 +138,7 @@ class PostpageFn {
                 method: 'DELETE',
                 url: this.request_url,
                 path: '/api/v1/posts/',
+                requestService: 'backend',
                 header: {
                     authorization: this.token,
                 },

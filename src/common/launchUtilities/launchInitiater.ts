@@ -25,7 +25,7 @@ class LaunchInitiater {
             method: 'POST',
             url: this.requestUrl,
             path: '/api/v1/users/checkLoginStatus',
-
+            requestService: 'backend',
             header: {
                 Authorization: this.token,
             },
@@ -59,6 +59,7 @@ class LaunchInitiater {
             method: 'GET',
             url: this.requestUrl,
             path: '/api/v1/users/getOssParams',
+            requestService: 'backend',
             header: {
                 Authorization: this.token
             }
@@ -78,6 +79,7 @@ class LaunchInitiater {
                 method: 'GET',
                 url: this.requestUrl,
                 path: '/api/v1/posts/tags',
+                requestService: 'backend',
                 timeout: 5000
             });
 
@@ -94,14 +96,14 @@ class LaunchInitiater {
     };
 
     webSocketInit() {
-        const socketUrl = 'ws' + this.requestUrl.slice(4);
+        // const socketUrl = 'ws' + this.requestUrl.slice(4);
         
-        const socket = io(socketUrl);
+        // const socket = io(socketUrl);
 
-        // 建立 socket 私有连接
-        socket.emit('join', Taro.getStorageSync('id'));
-        // 处理 socket 事件
-        socketHandler(socket);
+        // // 建立 socket 私有连接
+        // socket.emit('join', Taro.getStorageSync('id'));
+        // // 处理 socket 事件
+        // socketHandler(socket);
     };
 
     async getUnreadMessages() {
@@ -109,6 +111,7 @@ class LaunchInitiater {
             method: 'GET',
             url: this.requestUrl,
             path: '/api/v1/messages/',
+            requestService: 'backend',
             header: {
                 Authorization: this.token
             }

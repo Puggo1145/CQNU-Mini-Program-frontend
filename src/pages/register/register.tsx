@@ -161,6 +161,7 @@ export default function register() {
                 method: 'POST',
                 url: requestUrl,
                 path: '/api/v1/users/register',
+                requestService: 'backend',
                 timeout: 10000,
                 data: {
                     openid: openid,

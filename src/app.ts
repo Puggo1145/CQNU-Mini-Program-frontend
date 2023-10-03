@@ -28,14 +28,13 @@ function App({ children }: PropsWithChildren<any>) {
   const [classTable, setClassTable] = useCLasstable((state) => [state, state.setClassTable])
   const [messages, setMessageNum] = useMessage((state) => [state, state.setMessageNum])
 
-  const [resourceEnv, serviceName] = useAppInfo((state) => [state.resourceEnv, state.serviceName])
+  const resourceEnv = useAppInfo((state) => state.resourceEnv)
   
   // 请求初始数据 ————————————————————————————————————————————————————————————
   const initer = async () => {
     // 云函数实例化
     await initContainer({
       resourceEnv: resourceEnv,
-      serviceName: serviceName,
     });
     
     // 由于不同设备顶部状态栏高度不同，需要在进入时读取以便使其他页面能够保持相同的顶部距离

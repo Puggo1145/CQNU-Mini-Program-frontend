@@ -58,6 +58,7 @@ export default function searchResult() {
             method: 'GET',
             url: requestUrl,
             path: `/api/v1/posts/search/${encodeURIComponent(keyWord)}?page=${page}`,
+            requestService: 'backend',
         })
 
         if (searchRes.statusCode === 200) {

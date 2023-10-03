@@ -1,19 +1,18 @@
 import Taro from '@tarojs/taro';
 
-let resourceEnv = ''; // 云环境 id 
-let serviceName = ''; // 云服务名
-let container; // 云环境实例变量
+let resourceEnv: string = ''; // 云环境 id 
 
+let container; // 云环境实例变量
 
 interface containerType {
     resourceEnv: string;
-    serviceName: string;
 }
 
 interface paramsType {
     method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
     url: string;
     path: string;
+    requestService: 'backend' | 'lkofficial' // 在微信云托管要请求的服务
     header?: object;
     data?: object;
     timeout?: number;
@@ -22,8 +21,7 @@ interface paramsType {
 // 初始化云环境
 export const initContainer= async (containerParam: containerType) => {
     resourceEnv = containerParam.resourceEnv;
-    serviceName = containerParam.serviceName; 
-    
+
     // 初始化云环境
     container = new Taro.cloud.Cloud({
         resourceEnv: resourceEnv,
@@ -53,7 +51,7 @@ export const makeRequest = async (param: paramsType) => {
             method: param.method as any,
             path: param.path,
             header: {
-                'X-WX-SERVICE': serviceName,
+                'X-WX-SERVICE': `cqnumini-${param.requestService}`,
                 ...param.header
             },
             data: param.data
