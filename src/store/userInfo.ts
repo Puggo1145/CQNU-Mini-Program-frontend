@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import Taro from "@tarojs/taro";
 
-type UserInfoType = {
+export type UserInfoType = {
     isLogin: boolean,
     id: string,
     openid: string,
@@ -10,6 +10,7 @@ type UserInfoType = {
     avatar: string,
     user_level: number,
     user_exp: number,
+    identity: string
     faculty: string,
     major: string,
     grade: string,
@@ -26,9 +27,10 @@ const useUser = create<UserInfoType>((set) => ({
     student_id: '',
     nick_name: '',
     avatar: '',
-    user_level: 1,
+    user_level: 0,
     user_exp: 0,
     faculty: '',
+    identity: '',
     major: '',
     grade: '',
 
@@ -49,4 +51,3 @@ const useUser = create<UserInfoType>((set) => ({
 
 
 export default useUser;
-export type { UserInfoType };

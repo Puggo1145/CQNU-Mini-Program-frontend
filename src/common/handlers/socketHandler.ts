@@ -8,6 +8,9 @@ export interface dataType {
 }
 
 const socketHandler = (socket) => {
+    socket.on("connect", () => {
+        console.log(socket.connected);
+    });
 
     // 监听新消息
     socket.on('newMessage', (data: dataType) => {

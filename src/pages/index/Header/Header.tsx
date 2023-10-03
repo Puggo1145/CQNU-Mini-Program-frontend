@@ -22,7 +22,6 @@ export default function header() {
     { name: '消息', isCurrent: false, id: 'message' },
   ]);
 
-  // 未读消息总数
   const messages = useMessage(state => state);
 
   function handleHeaderItemClick(id: string): void {

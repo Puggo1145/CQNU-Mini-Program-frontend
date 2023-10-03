@@ -94,13 +94,15 @@ export default function Study() {
         <View className='study-timetable'>
           <View className='study-timetable-top'>
             <Text>我的课程</Text>
-            <View className='study-timetable-toTable' onClick={() => Taro.navigateTo({ url: '/pages/classtable/classtable' })}>查看课表></View>
+            <View className='study-timetable-toTable' onClick={() => Taro.navigateTo({ url: '/pages/classtable/classtable' })}>{"查看课表>"}</View>
           </View>
           <View className='study-timetable-items'>
             <View className='study-timetable-current'>
               <View className='study-timetable-left'>
                 <Text></Text>
-                <Text className='study-timetable-name'>{followingLessons[0].name}</Text>
+                <Text className='study-timetable-name'>
+                  {followingLessons[0].name.length > 10 ? `${followingLessons[0].name.slice(0,10)}...` : followingLessons[0].name}
+                </Text>
                 <Text>{followingLessons[0].place}</Text>
               </View>
               <View className='study-timetable-line'></View>
@@ -127,8 +129,8 @@ export default function Study() {
         </View>
         <View className='study-reading'>
           <View className='study-reading-top'>
-            <Text>我的阅读</Text>
-            <View className='study-reading-toBook'>查看书架></View>
+            <Text>我的阅读(即将上线)</Text>
+            <View className='study-reading-toBook'>{"查看课表>"}</View>
           </View>
           <View className='study-reading-bookShelf'>
             <View className='study-reading-books-xsbd'>
@@ -139,7 +141,7 @@ export default function Study() {
                   <Image src={bookCover} className='study0-reading-book-cover' mode='widthFix'></Image>
                   <View className='study-reading-book-right'>
                     <Text className='study-reading-book-title'>学生手册</Text>
-                    <Text className='study-reading-book-description'>学生手册是一种学生手册</Text>
+                    <Text className='study-reading-book-description'>即将上线...</Text>
                     <View className='study-reading-book-mark'>强烈推荐</View>
                   </View>
                 </View>

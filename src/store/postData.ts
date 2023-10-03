@@ -1,19 +1,15 @@
 import { create } from "zustand";
 
-import { PostType } from "@/types/postpage";
-
-type State = {
+export type PostDataType = {
     tags: string[],
     myPosts: number,
     likesNum: number,
-}
 
-type Action = {
-    setPostData: (userPostData: Partial<State>) => void // 使用Partial，可以部分更新用户信息
+    setPostData: (userPostData: Partial<PostDataType>) => void 
 }
 
 // 创建zustand store
-const usePostData = create<State & Action>((set) => ({
+const usePostData = create<PostDataType>((set) => ({
     tags: [],
     myPosts: 0,
     likesNum: 0,

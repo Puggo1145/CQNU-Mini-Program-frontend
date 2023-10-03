@@ -37,7 +37,7 @@ export default function linkOfficial() {
   const handleRefreshAuthCode = async () => {
     try {
       Taro.showLoading({
-        title: '正在抓取验证码',
+        title: '正在加载数据',
       });
       const authInfo = await makeRequest({
         method: 'GET',

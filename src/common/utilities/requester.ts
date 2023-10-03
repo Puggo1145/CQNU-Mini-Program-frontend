@@ -42,7 +42,7 @@ export const makeRequest = async (param: paramsType) => {
             url: param.url + param.path,
             header: param.header,
             data: param.data,
-            timeout: param.timeout
+            timeout: param.timeout || 10000
         })
 
         return res;

@@ -1,4 +1,4 @@
-import Taro, { useLoad } from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 import { View, Text, Image, ScrollView } from "@tarojs/components"
 import { useState, useEffect, Fragment } from "react"
 import PubSub from 'pubsub-js';
@@ -28,7 +28,6 @@ export default function TagContent() {
     const [user_id, isLogin, toLoginPage] = useUser((state) => [state.id, state.isLogin, state.toLoginPage]);
     const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl]);
     const postData = usePostData((state) => state) // 获取Tags
-    const token = Taro.getStorageSync('token'); // JWT token
 
     // 一些基本state ——————————————————————————————————————————————————————————————————————————————————————
     const [posts, setPosts] = useState<PostType[]>([]);
@@ -132,7 +131,6 @@ export default function TagContent() {
         let refreshPageToken = PubSub.subscribe('refreshPage', () => {
             resetAndRefresh();
         });
-
 
         return () => {
             PubSub.unsubscribe(refreshPageToken);

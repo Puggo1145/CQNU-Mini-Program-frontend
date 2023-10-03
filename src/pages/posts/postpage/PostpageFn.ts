@@ -67,6 +67,10 @@ class PostpageFn {
 
     // 发送评论
     async sendComment(content: string, target_user_id: string) {
+        Taro.showLoading({
+            title: '发送中',
+            mask: true
+        });
         const res = await makeRequest({
             method: 'POST',
             url: this.request_url,
@@ -81,10 +85,6 @@ class PostpageFn {
             }
         });
 
-        Taro.showLoading({
-            title: '发送中',
-            mask: true
-        });
         if (res.statusCode === 201) {
             Taro.showToast({
                 title: '评论成功',

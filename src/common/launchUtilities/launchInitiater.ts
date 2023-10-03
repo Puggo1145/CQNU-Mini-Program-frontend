@@ -1,28 +1,25 @@
 import Taro from "@tarojs/taro";
-import io from 'socket.io-client';  
+import io from 'socket.io-client';
 import { makeRequest } from "../utilities/requester";
 
 // handlers
 import socketHandler from "../handlers/socketHandler";
 
 import { UserInfoType } from "@/store/userInfo";
-import { MessageType } from "@/store/messages";
+import { PostDataType } from "@/store/postData";
+
 
 class LaunchInitiater {
     requestUrl: string;
-    userInfo: UserInfoType;
-    postData: any;
 
-    constructor(requestUrl: string, userInfo: UserInfoType, postData: any) {
+    constructor(requestUrl: string) {
         this.requestUrl = requestUrl;
-        this.userInfo = userInfo;
-        this.postData = postData;
     }
 
     // static properties
     token = Taro.getStorageSync('token');
 
-    async initialLoginValidation() {
+    async initialLoginValidation(userInfo: UserInfoType) {
 
         const loginValidateRes = await makeRequest({
             method: 'POST',
@@ -43,13 +40,13 @@ class LaunchInitiater {
         // 验证成功， 从本地缓存中读取信息 / 失败则不会读取， isLogin 为 false
         if (loginValidateRes.statusCode.toString().startsWith('2')) {
             // 创建 userInfo 的浅拷贝，防止方法被覆写
-            const userInfoArray = Object.keys(this.userInfo).filter(key => typeof this.userInfo[key] !== 'function') // 防止方法被覆写
+            const userInfoArray = Object.keys(userInfo).filter(key => typeof userInfo[key] !== 'function') // 防止方法被覆写
 
             // 从缓存中读取用户信息
             userInfoArray.forEach((key) => {
-                this.userInfo.setUserInfo({ [key]: Taro.getStorageSync(key) });
+                userInfo.setUserInfo({ [key]: Taro.getStorageSync(key) });
             });
-            
+
             return true;
         } else {
             return false;
@@ -75,7 +72,7 @@ class LaunchInitiater {
         }
     };
 
-    async getAllTags() {
+    async getAllTags(postData: PostDataType) {
         try {
             const tags = await makeRequest({
                 method: 'GET',
@@ -87,7 +84,7 @@ class LaunchInitiater {
             const tagsArray = tags.data.data.tags.map(item => item.name);
 
             // 将所有的tags存入 store
-            this.postData.setPostData({ tags: tagsArray })
+            postData.setPostData({ tags: tagsArray })
         } catch (err) {
             Taro.showToast({
                 title: '数据加载失败',
@@ -97,8 +94,9 @@ class LaunchInitiater {
     };
 
     webSocketInit() {
-
-        const socket = io(this.requestUrl);
+        const socketUrl = 'ws' + this.requestUrl.slice(4);
+        
+        const socket = io(socketUrl);
 
         // 建立 socket 私有连接
         socket.emit('join', Taro.getStorageSync('id'));

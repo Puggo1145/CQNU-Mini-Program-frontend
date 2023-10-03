@@ -1,3 +1,4 @@
+// 课表数据
 import { create } from "zustand";
 
 export interface LessonType {

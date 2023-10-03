@@ -130,7 +130,7 @@
   width: 100%;
   margin-top: 12px;
   border-radius: 8px;
-  background-color: #4E6AFF;
+  background-color: #BCBCBC;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info {
   display: flex;
@@ -146,7 +146,10 @@
   width: 32px;
   height: 32px;
   border-radius: 16px;
-  background-color: #4E6AFF;
+  background-image: url(../../../../static/mine/defaultAvatar.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info .post-info-user Text {
   margin-left: 8px;

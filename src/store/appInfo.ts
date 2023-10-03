@@ -1,3 +1,4 @@
+// 存储微信小程序 app_id 和阿里云 accessKey_id
 import { create } from "zustand";
 
 type State = {
