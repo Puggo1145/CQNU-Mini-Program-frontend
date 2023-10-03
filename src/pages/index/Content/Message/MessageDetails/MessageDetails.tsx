@@ -100,9 +100,9 @@ export default function MessageDetails() {
                 <View className="messageDetail-content-item-right">
                   <Text className="messageDetail-content-item-user-name">
                     <Text>{item.from_user_id.nick_name}</Text>
-                    <Text>{item.type === 'PostComment' ? '回复了我的评论' : '赞了我' }</Text>
+                    <Text>{item.type === 'PostComment' ? '回复了我' : '赞了我' }</Text>
                   </Text>
-                  <Text className="messageDetail-content-item-content">{item.type !== 'PostComment' && item.content.content}</Text>
+                  <Text className="messageDetail-content-item-content">{item.type === 'PostComment' && item.content.content}</Text>
                   <Text className="messageDetail-content-item-createdAt time">{timeStrToDate(item.content.createdAt)}</Text>
                 </View>
               </View>

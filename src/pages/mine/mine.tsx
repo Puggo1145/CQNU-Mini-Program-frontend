@@ -157,6 +157,10 @@ export default function Mine() {
       major: '',
       grade: '',
     });
+    setPostData({
+      myPosts: 0,
+      likesNum: 0,
+    });
     Taro.removeStorageSync('token');
   };
 
@@ -194,7 +198,7 @@ export default function Mine() {
       <View className='mine-content'>
         <View className='mine-userInfo'>
           <View className='mine-basicInfo'>
-            <Image src={userInfo.avatar} className='mine-avatar' onClick={handleAvatarChange}></Image>
+            <Image src={userInfo.avatar} className='mine-avatar' onClick={() => userInfo.isLogin ? handleAvatarChange : null}></Image>
             <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
             <Text className='mine-schoolID'>{userInfo.student_id}</Text>
             <View className='mine-moreInfo'>
@@ -204,7 +208,7 @@ export default function Mine() {
             </View>
           </View>
           <View className='mine-postInfo'>
-            <View className='mine-postInfo-item' onClick={() => Taro.navigateTo({ url: '/pages/mine/myPosts/myposts' })}>
+            <View className='mine-postInfo-item' onClick={() => userInfo.isLogin ? Taro.navigateTo({ url: '/pages/mine/myPosts/myposts' }) : null}>
               <Text className='mine-postInfo-item-num'>{postData.myPosts}</Text>
               <Text className='mine-postInfo-item-text'>发帖</Text>
             </View>

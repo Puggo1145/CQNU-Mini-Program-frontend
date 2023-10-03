@@ -2,13 +2,12 @@ import { PropsWithChildren, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import PubSub from 'pubsub-js';
 
-import { io } from 'socket.io-client';
-
 import useStore from './store/store'
 import useUser from './store/userInfo'
 import usePostData from './store/postData'
 import useRequest from './store/request'
 import useMessage from './store/messages';
+import useAppInfo from './store/appInfo';
 
 // Utilities
 import LaunchInitiater from './common/launchUtilities/launchInitiater'
@@ -28,13 +27,15 @@ function App({ children }: PropsWithChildren<any>) {
   const userInfo = useUser((state) => state)
   const [classTable, setClassTable] = useCLasstable((state) => [state, state.setClassTable])
   const [messages, setMessageNum] = useMessage((state) => [state, state.setMessageNum])
+
+  const [resourceEnv, serviceName] = useAppInfo((state) => [state.resourceEnv, state.serviceName])
   
   // 请求初始数据 ————————————————————————————————————————————————————————————
   const initer = async () => {
     // 云函数实例化
     await initContainer({
-      resourceEnv: 'prod-9gbm3fviea24ffc8',
-      serviceName: 'cqnu-backend',
+      resourceEnv: resourceEnv,
+      serviceName: serviceName,
     });
     
     // 由于不同设备顶部状态栏高度不同，需要在进入时读取以便使其他页面能够保持相同的顶部距离
@@ -60,23 +61,16 @@ function App({ children }: PropsWithChildren<any>) {
     const classTableRes = await Taro.getStorage({ key: 'classTable' });
     setClassTable(classTableRes.data);
     
-    // 7. 新用户注册 或 登录，需要重新加载一次OSS令牌，请在登录或注册成功后，发布此消息！！！
-    const getOssParamsToken = PubSub.subscribe('getOssParams', () => {
-      launchInitiater = new LaunchInitiater(requestUrl); // 传新数据
-
-      launchInitiater.getOssParams();
-    });
+    
 
     return () => {
-      PubSub.unsubscribe(getOssParamsToken);
     };
   };
   useEffect(() => {
     initer();
   }, [])
 
-
-  // 消息推送同步 ————————————————————————————————————————————————————————————
+  // 监听事件
   useEffect(() => {
     // 同步新消息
     const newMessageToken = PubSub.subscribe('newMessage', (msg: string, data: dataType) => {
@@ -89,8 +83,16 @@ function App({ children }: PropsWithChildren<any>) {
       setMessageNum({ all: messages.all + 1 });
     });
 
+    // 新用户注册 或 登录，需要重新加载一次OSS令牌，请在登录或注册成功后，发布此消息！！！
+    const getOssParamsToken = PubSub.subscribe('getOssParams', () => {
+      const launchInitiater = new LaunchInitiater(requestUrl); // 传新数据
+
+      launchInitiater.getOssParams();
+    });
+
     return () => {
       PubSub.unsubscribe(newMessageToken);
+      PubSub.unsubscribe(getOssParamsToken);
     };
   }, [messages])
 
