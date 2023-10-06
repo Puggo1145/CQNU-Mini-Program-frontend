@@ -5,6 +5,8 @@ import Header from "@/common/Header/Header"
 
 import useCLasstable from "@/store/classTable"
 
+import { newDateForIOS } from "@/common/utilities/newDateForIOS"
+
 import './classtable.css'
 
 export default function classtable() {
@@ -26,12 +28,8 @@ export default function classtable() {
     setCurrentDay(day);
 
     // 计算当前周数
-    const week = Math.ceil((date.getTime() - new Date(startDate.split('-').join('/')).getTime()) / (1000 * 60 * 60 * 24 * 7))
+    const week = Math.ceil((date.getTime() - newDateForIOS(startDate).getTime()) / (1000 * 60 * 60 * 24 * 7))
     setCurrentWeek(week)
-
-    console.log(week);
-    console.log(new Date(startDate.split('-').join('/')).getTime());
-    
   }, []);
 
   // 切换周数
