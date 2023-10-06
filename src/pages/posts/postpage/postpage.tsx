@@ -154,7 +154,7 @@ export default function postpage() {
             });
             return;
         } else {
-            await postpageFn.sendComment(commentContent);
+            await postpageFn.sendComment(commentContent, postContent.post.user._id);
 
             // 重新获取评论内容
             refreshComments();

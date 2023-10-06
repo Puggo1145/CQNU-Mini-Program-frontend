@@ -1,0 +1,49 @@
+/*postcss-pxtransform disable*/
+.messageDetail-content {
+  padding: 0 20px;
+}
+.messageDetail-content .messageDetail-content-item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #ececec;
+}
+.messageDetail-content .messageDetail-content-item .messageDetail-content-item-left .messageDetail-content-item-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+}
+.messageDetail-content .messageDetail-content-item .messageDetail-content-item-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.messageDetail-content .messageDetail-content-item .messageDetail-content-item-right .messageDetail-content-item-user-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #acacac;
+}
+.messageDetail-content .messageDetail-content-item .messageDetail-content-item-right .messageDetail-content-item-user-name Text:nth-child(1) {
+  color: #000;
+  margin-right: 8px;
+}
+.messageDetail-content .messageDetail-content-item .messageDetail-content-item-right .messageDetail-content-item-content {
+  font-size: 16px;
+}
+.messageDetail-content .messageDetail-noContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.messageDetail-content .messageDetail-noContent .messageDetail-noContent-icon {
+  box-sizing: border-box;
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+  border: 4px solid #ddd;
+}

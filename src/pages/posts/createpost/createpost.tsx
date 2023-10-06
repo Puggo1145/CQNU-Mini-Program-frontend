@@ -19,7 +19,7 @@ import './createpost.css'
 export default function createpost() {
 
   const statusBarHeight = useStore((state) => state.statusBarHeight);
-  const [requestUrl, ossUrl] = useRequest((state) => [state.requestUrl, state.OSSUrl]);
+  const [requestUrl, postImgsToOssUrl] = useRequest((state) => [state.requestUrl, state.PostImgsToOssUrl]);
   const userId = useUser((state) => state.id);
   const ossAccessKeyId = useAppInfo((state) => state.accessKey_id);
 
@@ -79,7 +79,7 @@ export default function createpost() {
             icon: 'error'
           })
           return
-        } else if (contentRef.current.value.length > 1000) {
+        } else if (contentRef.current.value.length > 2000) {
           Taro.showToast({
             title: '内容超出长度',
             icon: 'error'
@@ -106,9 +106,13 @@ export default function createpost() {
 
         // 处理图片上传 ///////////////////////////////
         const imagePaths: string[] = selectedImages;
-
+        
+        Taro.showLoading({
+          title: '发布中',
+          mask: true
+        });
         // 1. 上传图片到阿里 OSS
-        const uploadOssRes = await uploadImageToOss(ossAccessKeyId, userId, ossUrl, imagePaths); // uploadRes from oss
+        const uploadOssRes = await uploadImageToOss(ossAccessKeyId, userId, postImgsToOssUrl, imagePaths); // uploadRes from oss
 
         // 2. 检查上传结果，图片上传失败抛出错误，终止上传
         uploadOssRes.ossRes.forEach((res, index) => {
@@ -125,19 +129,16 @@ export default function createpost() {
 
         // 3. 获取图片链接
         const uploadedImagePaths = uploadOssRes.filenames.map(filename => {
-          return `${ossUrl}/${filename}`
+          return `${postImgsToOssUrl}/${filename}`
         });
 
         console.log(uploadedImagePaths);
 
-        Taro.showLoading({
-          title: '发布中',
-          mask: true
-        });
         const res = await makeRequest({
           method: 'POST',
           url: requestUrl,
           path: '/api/v1/posts/',
+          requestService: 'backend',
           data: {
             title: title,
             content: content,
@@ -147,6 +148,7 @@ export default function createpost() {
           header: {
             authorization: Taro.getStorageSync('token')
           },
+          timeout: 8000
         });
 
         if (res.statusCode === 201) {
@@ -154,11 +156,11 @@ export default function createpost() {
             title: '发布成功',
             icon: 'success'
           });
-          // 1.5秒后返回，刷新首页
+          // 2 秒后返回，刷新首页
           setTimeout(() => {
             Taro.navigateBack();
             PubSub.publish('refreshPage');
-          }, 1500);
+          }, 2000);
 
         } else {
 
@@ -182,7 +184,7 @@ export default function createpost() {
       </View>
       <form className='createpost-form'>
         <Input ref={titleRef} className='createpost-title' type="text" name='title' placeholder='填写标题会更受欢迎哦！（小于25字）' />
-        <textarea ref={contentRef} className='createpost-content' name="content" placeholder='添加正文（小于1000字）' maxLength={1000}></textarea>
+        <textarea ref={contentRef} className='createpost-content' name="content" placeholder='添加正文（小于2000字）' maxLength={1000}></textarea>
         <View className='createpost-uploadPic-area'>
           {
             selectedImages.map((image, index) => (

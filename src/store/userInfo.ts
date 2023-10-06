@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import Taro from "@tarojs/taro";
 
-type State = {
+export type UserInfoType = {
     isLogin: boolean,
     id: string,
     openid: string,
@@ -10,27 +10,27 @@ type State = {
     avatar: string,
     user_level: number,
     user_exp: number,
+    identity: string
     faculty: string,
     major: string,
     grade: string,
     toLoginPage: () => void
-}
 
-type Action = {
-    setUserInfo: (userInfo: Partial<State>) => void // 使用Partial，可以部分更新用户信息
+    setUserInfo: (userInfo: Partial<UserInfoType>) => void // 使用Partial，可以部分更新用户信息
 }
 
 // 创建zustand store
-const useUser = create<State & Action>((set) => ({
+const useUser = create<UserInfoType>((set) => ({
     isLogin: false,
     id: '',
     openid: '',
     student_id: '',
     nick_name: '',
     avatar: '',
-    user_level: 1,
+    user_level: 0,
     user_exp: 0,
     faculty: '',
+    identity: '',
     major: '',
     grade: '',
 
@@ -48,8 +48,6 @@ const useUser = create<State & Action>((set) => ({
         set((state) => ({ ...state, ...userInfo }))
     }
 }))
-
-
 
 
 export default useUser;

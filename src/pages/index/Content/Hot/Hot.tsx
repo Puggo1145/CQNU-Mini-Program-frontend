@@ -36,6 +36,7 @@ export default function Hot() {
       method: 'GET',
       url: requestUrl,
       path: '/api/v1/posts/getHotList',
+      requestService: 'backend',
     });
 
     console.log(res);

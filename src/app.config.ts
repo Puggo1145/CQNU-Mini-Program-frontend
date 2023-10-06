@@ -1,6 +1,7 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
+    'pages/index/Content/Message/MessageDetails/MessageDetails',
 
     'pages/study/study',
     'pages/classtable/classtable',
@@ -39,4 +40,5 @@ export default defineAppConfig({
       {pagePath: 'pages/mine/mine', text: '我的', iconPath: './static/tabBar/mine-icon.png', selectedIconPath: './static/tabBar/mine-selectedIcon.png'}
     ],
   },
+  lazyCodeLoading: 'requiredComponents',
 })

@@ -50,6 +50,9 @@
   margin-top: 32px;
   margin-bottom: 16px;
 }
+.service-content .service-items .service-item Text {
+  color: #fff;
+}
 .service-content .service-items .service-classroomNav {
   background-color: #9356F7;
 }

@@ -3,3 +3,8 @@ page {
   overflow: hidden;
   height: 100vh;
 }
+.time {
+  color: #BCBCBC;
+  font-size: 12px;
+  font-weight: 400;
+}

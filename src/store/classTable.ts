@@ -1,3 +1,4 @@
+// 课表数据
 import { create } from "zustand";
 
 export interface LessonType {
@@ -19,7 +20,7 @@ type State = {
 }
 
 type Action = {
-    setClassTable: (classTable: LessonType[]) => void // 使用Partial，可以部分更新用户信息
+    setClassTable: (classTable: LessonType[]) => void
 }
 
 // 创建zustand store

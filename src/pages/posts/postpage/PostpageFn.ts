@@ -3,8 +3,6 @@ import PubSub from "pubsub-js";
 
 import { makeRequest } from "@/common/utilities/requester";
 
-import { commentType } from "@/types/postpage";
-
 class PostpageFn {
     request_url: string
     post_id: string
@@ -24,6 +22,7 @@ class PostpageFn {
             method: 'GET',
             url: this.request_url,
             path: `/api/v1/posts?post_id=${this.post_id}`,
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -40,6 +39,7 @@ class PostpageFn {
             method: 'GET',
             url: this.request_url,
             path: `/api/v1/posts/getComments?post_id=${this.post_id}&sort=${sort}&page=${page}`,
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -56,6 +56,7 @@ class PostpageFn {
             method: 'POST',
             url: this.request_url,
             path: '/api/v1/posts/likePost',
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -68,24 +69,26 @@ class PostpageFn {
     };
 
     // 发送评论
-    async sendComment(content: string) {
-        const res = await makeRequest({
-            method: 'POST',
-            url: this.request_url,
-            path: '/api/v1/posts/commentPost',
-            header: {
-                authorization: this.token
-            },
-            data: {
-                post_id: this.post_id,
-                content: content
-            }
-        });
-
+    async sendComment(content: string, target_user_id: string) {
         Taro.showLoading({
             title: '发送中',
             mask: true
         });
+        const res = await makeRequest({
+            method: 'POST',
+            url: this.request_url,
+            path: '/api/v1/posts/commentPost',
+            requestService: 'backend',
+            header: {
+                authorization: this.token
+            },
+            data: {
+                target_user_id: target_user_id, // 评论的目标用户id，用于消息推送
+                post_id: this.post_id,
+                content: content,
+            }
+        });
+
         if (res.statusCode === 201) {
             Taro.showToast({
                 title: '评论成功',
@@ -107,6 +110,7 @@ class PostpageFn {
             method: 'POST',
             url: this.request_url,
             path: '/api/v1/posts/likeComment',
+            requestService: 'backend',
             header: {
                 authorization: this.token
             },
@@ -134,6 +138,7 @@ class PostpageFn {
                 method: 'DELETE',
                 url: this.request_url,
                 path: '/api/v1/posts/',
+                requestService: 'backend',
                 header: {
                     authorization: this.token,
                 },
