@@ -21,14 +21,17 @@ export default function classtable() {
 
   // 计算当前周数
   useEffect(() => {
-    const date = new Date()
-    const day = date.getDay()
-    setCurrentDay(day)
+    const date = new Date();
+    const day = date.getDay();
+    setCurrentDay(day);
 
     // 计算当前周数
-    const week = Math.ceil((date.getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24 * 7))
+    const week = Math.ceil((date.getTime() - new Date(startDate.split('-').join('/')).getTime()) / (1000 * 60 * 60 * 24 * 7))
     setCurrentWeek(week)
 
+    console.log(week);
+    console.log(new Date(startDate.split('-').join('/')).getTime());
+    
   }, []);
 
   // 切换周数
