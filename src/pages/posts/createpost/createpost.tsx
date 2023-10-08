@@ -128,7 +128,6 @@ export default function createpost() {
           },
           timeout: 8000
         });
-        console.log(res);
 
         if (res.statusCode === 201) {
           // 2. 上传图片到阿里 OSS
@@ -150,7 +149,6 @@ export default function createpost() {
           const uploadedImagePaths = uploadOssRes.filenames.map(filename => {
             return `${postImgsToOssUrl}/${filename}`
           });
-          console.log(uploadedImagePaths);
           
           Taro.showToast({
             title: '发布成功',

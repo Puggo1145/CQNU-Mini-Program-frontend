@@ -1,5 +1,5 @@
 import { View, Text, Button, Textarea } from "@tarojs/components"
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import Taro from "@tarojs/taro"
 
 import { makeRequest } from "@/common/utilities/requester";
@@ -10,10 +10,22 @@ import Header from "@/common/Header/Header"
 
 import './contactUs.css'
 
+interface ContributorType {
+    role: string
+    name: string
+}
+
 export default function login() {
 
     const requestUrl = useRequest((state) => state.requestUrl);
     const token = Taro.getStorageSync('token');
+
+    const [contributors, setContributors] = useState<ContributorType[]>([
+        { role: "开发", name: "赵一蔚" },
+        { role: "开发", name: "高梓竣" },
+        { role: "Logo设计", name: "李文婷" },
+        { role: "赞助", name: "马承旭" }
+    ]);
 
     const contentRef = useRef<HTMLTextAreaElement>(null);
 
@@ -33,7 +45,7 @@ export default function login() {
             })
             return;
         };
-        
+
         Taro.showLoading({
             title: '发送中',
             mask: true
@@ -81,8 +93,21 @@ export default function login() {
                     placeholder="请输入(5~600字)"
                 >
                 </Textarea>
-                <Button onClick={handleSubmit}>发送</Button>
             </View>
+            <View className="contactUs-contributors">
+                <Text className="contactUs-contributors-title">小程序贡献者</Text>
+                <View className="contactUs-contributors-items">
+                    {
+                        contributors.map((contributor, index) => (
+                            <View className="contactUs-contributors-item" key={index}>
+                                <Text className="contactUs-contributors-item-role">{contributor.role}</Text>
+                                <Text className="contactUs-contributors-item-name">{contributor.name}</Text>
+                            </View>
+                        ))
+                    }
+                </View>
+            </View>
+            <Button onClick={handleSubmit}>发送</Button>
         </View>
     )
 }

@@ -33,7 +33,6 @@ export default function myposts() {
         });
 
         if (res.statusCode === 200) {
-            console.log(res.data);
             setPosts(res.data.data.posts);
         } else {
             Taro.showToast({

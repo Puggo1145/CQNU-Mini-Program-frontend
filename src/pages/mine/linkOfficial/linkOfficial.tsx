@@ -50,7 +50,6 @@ export default function linkOfficial() {
       Taro.hideLoading();
 
       if (authInfo.statusCode === 200) {
-        console.log(authInfo.data);
         setCookie(authInfo.data.data.cookie);
         setDataObj(authInfo.data.data.dataObj);
         setAuthCodeImg("data:image/jpeg;base64," + authInfo.data.data.authCodeImg);
@@ -114,7 +113,6 @@ export default function linkOfficial() {
           duration: 2000
         });
 
-        console.log(res.data);
         // 将课表存入缓存与 store
         const classTable = res.data.data.kbList;
         

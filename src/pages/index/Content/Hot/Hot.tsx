@@ -39,7 +39,6 @@ export default function Hot() {
       requestService: 'backend',
     });
 
-    console.log(res);
     const hotTags = res.data.data.posts.map(post => {
       return {
         post_id: post._id,

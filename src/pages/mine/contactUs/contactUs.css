@@ -1,15 +1,15 @@
 /*postcss-pxtransform disable*/
-.contactUs-content {
+.contactUs-wrapper .contactUs-content {
   padding: 0 20px;
   margin-top: 8px;
 }
-.contactUs-content .contactUs-description {
+.contactUs-wrapper .contactUs-content .contactUs-description {
   margin-left: 8px;
   font-size: 14px;
   color: #333;
   letter-spacing: 0.7px;
 }
-.contactUs-content .contactUs-textarea {
+.contactUs-wrapper .contactUs-content .contactUs-textarea {
   margin-top: 14px;
   box-sizing: border-box;
   padding: 16px;
@@ -18,7 +18,37 @@
   border-radius: 18px;
   background-color: #EFEFEF;
 }
-.contactUs-content Button {
+.contactUs-wrapper .contactUs-contributors {
+  margin-top: 16px;
+  padding: 0 20px;
+}
+.contactUs-wrapper .contactUs-contributors .contactUs-contributors-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+.contactUs-wrapper .contactUs-contributors .contactUs-contributors-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+.contactUs-wrapper .contactUs-contributors .contactUs-contributors-items .contactUs-contributors-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #f6f6f6;
+}
+.contactUs-wrapper .contactUs-contributors .contactUs-contributors-items .contactUs-contributors-item .contactUs-contributors-item-role {
+  font-weight: 700;
+  font-size: 18px;
+  color: #333;
+}
+.contactUs-wrapper .contactUs-contributors .contactUs-contributors-items .contactUs-contributors-item .contactUs-contributors-item-name {
+  font-size: 16px;
+}
+.contactUs-wrapper Button {
   position: absolute;
   left: 50%;
   bottom: 36px;

@@ -63,8 +63,6 @@ export default function TagContent() {
             });
 
             if (res.statusCode === 200) {
-                console.log(res.data);
-
                 const prevPosts = posts;
                 const updatedPosts = prevPosts.concat(res.data.data.posts);
 

@@ -28,8 +28,6 @@ class PostpageFn {
             },
         })
 
-        console.log(postRes.data.data);
-
         return postRes.data.data;
     }
 
@@ -44,8 +42,6 @@ class PostpageFn {
                 authorization: this.token
             },
         });
-
-        console.log(commentRes.data);
 
         return commentRes.data;
     }
@@ -64,8 +60,6 @@ class PostpageFn {
                 post_id: this.post_id
             }
         });
-
-        console.log(likeRes.data);
     };
 
     // 发送评论
@@ -118,8 +112,6 @@ class PostpageFn {
                 comment_id: comment_id
             }
         });
-
-        console.log(res.data);
     };
 
     // 删除帖子

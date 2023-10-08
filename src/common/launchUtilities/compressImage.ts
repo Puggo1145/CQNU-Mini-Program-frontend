@@ -11,10 +11,6 @@ const compressImage = async (filePath: string, quality: number = 90): Promise<st
         });
 
         imagePath = imageRes.tempFilePath;
-
-        console.log("压缩后图片路径：", imagePath);
-        
-
     } catch (err) {
         Taro.showToast({
             title: "图片处理失败",

@@ -65,7 +65,6 @@ export default function MessageDetails() {
     });
 
     if (messagesRes.statusCode === 200) {
-      console.log(messagesRes.data.data.messages);
       setData(messagesRes.data.data.messages);
     };
   });

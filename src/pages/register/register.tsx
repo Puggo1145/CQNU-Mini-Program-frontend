@@ -180,7 +180,6 @@ export default function register() {
                     title: '注册成功',
                     icon: 'success'
                 });
-                console.log(res.data.data);
 
                 // 存储 json web token
                 Taro.setStorageSync('token', res.data.token);

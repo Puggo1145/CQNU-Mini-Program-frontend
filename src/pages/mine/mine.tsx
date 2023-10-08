@@ -47,8 +47,6 @@ export default function Mine() {
     });
 
     if (res.statusCode === 200) {
-      console.log(res.data);
-
       setPostData({
         myPosts: res.data.data.posts,
         likesNum: res.data.data.likes,
@@ -98,9 +96,6 @@ export default function Mine() {
           },
         });
 
-        console.log(uploadRes);
-
-
         // 上传成功，将图片URL存入数据库
         if (uploadRes.statusCode === 204) {
           const avatarUrl = `${avatarToOssUrl}/${key}`;
@@ -144,8 +139,6 @@ export default function Mine() {
 
   // 登出
   const handleLogOut = () => {
-    console.log(userInfo);
-
     setUserInfo({
       id: '',
       openid: '',
@@ -219,7 +212,7 @@ export default function Mine() {
               <Text className='mine-postInfo-item-text'>收到的赞</Text>
             </View>
             <View className='mine-postInfo-item'>
-              <Text className='mine-postInfo-item-num'>敬请期待</Text>
+              <Text className='mine-postInfo-item-num'>即将上线</Text>
               <Text className='mine-postInfo-item-text'>最近浏览</Text>
             </View>
           </View>

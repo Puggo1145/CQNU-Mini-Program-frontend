@@ -66,7 +66,6 @@ export default function searchResult() {
             
             setPosts(newPosts);
             setPage(page + 1);
-            console.log(searchRes.data);
             
         } else {
             Taro.showToast({

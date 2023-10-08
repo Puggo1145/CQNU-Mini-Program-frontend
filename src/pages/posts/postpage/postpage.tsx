@@ -167,9 +167,7 @@ export default function postpage() {
 
     // C. 删除帖子
     async function deletePost() {
-        const deletePostRes = await postpageFn.deletePost();
-
-        console.log(deletePostRes);
+        await postpageFn.deletePost();
     };
 
     // D. 点赞评论
@@ -206,7 +204,6 @@ export default function postpage() {
     // E. 上拉加载
     async function updateComments() {
         if (loadLock) return;
-        console.log("update");
 
         // 1. 上锁，防止在请求完成前重复请求
         setLoadLock(true);
@@ -225,8 +222,6 @@ export default function postpage() {
 
     // F. 刷新评论
     async function refreshComments() {
-        console.log("refresh");
-
         const postCommentsRes = await postpageFn.getPostComments(currentCommentView, 1); // 刷新评论
         setComments(postCommentsRes.data.comments);
         setCommentNum(postCommentsRes.length);
