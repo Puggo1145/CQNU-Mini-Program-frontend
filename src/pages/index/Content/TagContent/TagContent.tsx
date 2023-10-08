@@ -15,8 +15,10 @@ import { PostType } from "@/types/postpage";
 
 import './TagContent.css'
 
-import likeIcon from "../../../../static/post/post-like-icon.png"
-import commentIcon from "../../../../static/post/post-comment-icon.png"
+import likeIcon from "../../../../static/post/post-like-icon.png";
+import commentIcon from "../../../../static/post/post-comment-icon.png";
+import contentReviwing from "../../../../static/common/contentReviewing.png";
+import contentUnpass from "../../../../static/common/ContentUnpass.png";
 
 interface tagType {
     tagName: string
@@ -259,8 +261,13 @@ export default function TagContent() {
                                         <Text className="post-description">{post.content}</Text>
                                     </View>
                                     {post.pictures.length !== 0 && post.pictures.map((picture) => {
+                                        let picturePath;
+                                        if (picture === 'reviewing') picturePath = contentReviwing;
+                                        else if (picture === 'block') picturePath = contentUnpass;
+                                        else picturePath = picture;
+
                                         return (
-                                            <Image src={picture} className="post-picture" mode="aspectFill" />
+                                            <Image src={picturePath} className="post-picture" mode="aspectFill" />
                                         )
                                     })}
                                     <View className="post-info">

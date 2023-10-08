@@ -23,7 +23,8 @@ import './postpage.css';
 import likeImg from '../../../static/post/post-like-icon.png';
 import likeActivated from '../../../static/post/post-like-activated-icon.png';
 import deleteImg from '../../../static/post/delete.png';
-
+import contentReviwing from "../../../static/common/contentReviewing.png";
+import contentUnpass from "../../../static/common/ContentUnpass.png";
 
 
 export default function postpage() {
@@ -100,7 +101,7 @@ export default function postpage() {
         setComments(postCommentsRes.data.comments);
         setCommentNum(postCommentsRes.length);
         setIsLiked(postContent.userFootPrint.isLiked ? true : false);
-        setPage( Number(postCommentsRes.page) + 1 );
+        setPage(Number(postCommentsRes.page) + 1);
     });
 
     // 监听键盘弹起事件
@@ -209,7 +210,7 @@ export default function postpage() {
 
         // 1. 上锁，防止在请求完成前重复请求
         setLoadLock(true);
-        
+
         // 2. 重新获取评论内容
         const postComments = await postpageFn.getPostComments(currentCommentView, page);
         const newComments = comments?.concat(postComments.data.comments);
@@ -225,11 +226,11 @@ export default function postpage() {
     // F. 刷新评论
     async function refreshComments() {
         console.log("refresh");
-        
+
         const postCommentsRes = await postpageFn.getPostComments(currentCommentView, 1); // 刷新评论
         setComments(postCommentsRes.data.comments);
         setCommentNum(postCommentsRes.length);
-        setPage( Number(postCommentsRes.page) + 1 );
+        setPage(Number(postCommentsRes.page) + 1);
     };
 
 
@@ -249,7 +250,7 @@ export default function postpage() {
 
             <View className='postpage-mainSection'>
 
-                <ScrollView 
+                <ScrollView
                     className='postpage-mainSection-wrapper'
                     scrollY={true}
                     enablePassive="true"
@@ -261,9 +262,14 @@ export default function postpage() {
                         <Text className='postpage-title' userSelect>{postContent.post.title}</Text>
                         <Text className='postpage-description' userSelect>{postContent.post.content}</Text>
                         {
-                            postContent.post.pictures?.map((item, index) => {
+                            postContent.post.pictures?.map((picture, index) => {
+                                let picturePath;
+                                if (picture === 'reviewing') picturePath = contentReviwing;
+                                else if (picture === 'block') picturePath = contentUnpass;
+                                else picturePath = picture;
+
                                 return (
-                                    <Image className='postpage-image' src={item} key={index} mode="widthFix"></Image>
+                                    <Image className='postpage-image' src={picturePath} key={index} mode="widthFix"></Image>
                                 )
                             })
                         }

@@ -106,34 +106,12 @@ export default function createpost() {
 
         // 处理图片上传 ///////////////////////////////
         const imagePaths: string[] = selectedImages;
-        
+
         Taro.showLoading({
           title: '发布中',
           mask: true
         });
-        // 1. 上传图片到阿里 OSS
-        const uploadOssRes = await uploadImageToOss(ossAccessKeyId, userId, postImgsToOssUrl, imagePaths); // uploadRes from oss
-
-        // 2. 检查上传结果，图片上传失败抛出错误，终止上传
-        uploadOssRes.ossRes.forEach((res, index) => {
-          if (res.statusCode !== 204) {
-
-            Taro.showToast({
-              title: `上传失败: ${index + 1}`,
-              icon: 'error'
-            });
-
-            throw new Error("image upload failed");
-          };
-        });
-
-        // 3. 获取图片链接
-        const uploadedImagePaths = uploadOssRes.filenames.map(filename => {
-          return `${postImgsToOssUrl}/${filename}`
-        });
-
-        console.log(uploadedImagePaths);
-
+        // 1. 发布帖子
         const res = await makeRequest({
           method: 'POST',
           url: requestUrl,
@@ -142,7 +120,7 @@ export default function createpost() {
           data: {
             title: title,
             content: content,
-            pictures: uploadedImagePaths,
+            pictures: imagePaths.map(path => { return 'reviewing' }),
             tag: tag,
           },
           header: {
@@ -150,11 +128,34 @@ export default function createpost() {
           },
           timeout: 8000
         });
+        console.log(res);
 
         if (res.statusCode === 201) {
+          // 2. 上传图片到阿里 OSS
+          const uploadOssRes = await uploadImageToOss(ossAccessKeyId, res.data.data.post_id, postImgsToOssUrl, imagePaths); // uploadRes from oss
+          // 检查上传结果，图片上传失败抛出错误，终止上传
+          uploadOssRes.ossRes.forEach((res, index) => {
+            if (res.statusCode !== 204) {
+
+              Taro.showToast({
+                title: `上传失败: ${index + 1}`,
+                icon: 'error'
+              });
+
+              throw new Error("image upload failed");
+            };
+          });
+
+          // 3. 获取图片链接
+          const uploadedImagePaths = uploadOssRes.filenames.map(filename => {
+            return `${postImgsToOssUrl}/${filename}`
+          });
+          console.log(uploadedImagePaths);
+          
           Taro.showToast({
             title: '发布成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 2000
           });
           // 2 秒后返回，刷新首页
           setTimeout(() => {
