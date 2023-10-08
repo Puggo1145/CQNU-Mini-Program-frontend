@@ -1,25 +1,63 @@
 /*postcss-pxtransform disable*/
-.contactUs-content {
-    padding: 0 20px;
-    margin-top: 8px;
-
-    .contactUs-description {
-        margin-left: 8px;
-        font-size: 14px;
-        color: #333;
-        letter-spacing: 0.7px;
+.contactUs-wrapper {
+    .contactUs-content {
+        padding: 0 20px;
+        margin-top: 8px;
+    
+        .contactUs-description {
+            margin-left: 8px;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 0.7px;
+        }
+    
+        .contactUs-textarea {
+            margin-top: 14px;
+            box-sizing: border-box;
+            padding: 16px;
+            width: 100%;
+            height: 40vh;
+            border-radius: 18px;
+            background-color: #EFEFEF;
+        }
     }
 
-    .contactUs-textarea {
-        margin-top: 14px;
-        box-sizing: border-box;
-        padding: 16px;
-        width: 100%;
-        height: 40vh;
-        border-radius: 18px;
-        background-color: #EFEFEF;
-    }
+    .contactUs-contributors {
+        margin-top: 16px;
+        padding: 0 20px;
 
+        .contactUs-contributors-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .contactUs-contributors-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+
+            .contactUs-contributors-item {
+                display: flex;
+                flex-direction: column;
+                padding: 8px;
+                border-radius: 8px;
+                background-color: #f6f6f6;
+
+                .contactUs-contributors-item-role {
+                    font-weight: 700;
+                    font-size: 18px;
+                    color: #333;
+                }
+
+                .contactUs-contributors-item-name {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    
     Button {
         position: absolute;
         left: 50%;
