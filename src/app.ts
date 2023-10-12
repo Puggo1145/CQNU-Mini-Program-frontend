@@ -40,7 +40,7 @@ function App({ children }: PropsWithChildren<any>) {
     // 由于不同设备顶部状态栏高度不同，需要在进入时读取以便使其他页面能够保持相同的顶部距离
     const systemInfoRes = await Taro.getSystemInfo();
     if (systemInfoRes.statusBarHeight) {
-      setStatusBarHeight(systemInfoRes.statusBarHeight - 10)
+      setStatusBarHeight(systemInfoRes.statusBarHeight - 8)
     };
 
     // launchInitiater: APP 数据初始化（Tags，登陆状态，OSS令牌，建立WebSocket，获取未读消息）

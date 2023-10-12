@@ -2,7 +2,10 @@ import { View, Text, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react';
 
+import { recordClickData } from '@/common/utilities/recordClickData';
+
 import useStore from '@/store/store'
+import useRequest from '@/store/request';
 
 import './service.css'
 
@@ -35,32 +38,31 @@ export default function Service() {
     { name: '跑腿代取', icon: runErrandsImg, page: 'none', type: 'toPage', color: '#9e9e9e' },
   ]);
 
-  const statusBarHeight = useStore((state) => state.statusBarHeight)
+  const statusBarHeight = useStore((state) => state.statusBarHeight);
+  const requestUrl = useRequest(state => state.requestUrl);
 
-  function toServicePage(page: string) {
-    if (page === 'none') {
+  const toServicePage = async (target: {type: string, page: string, name: string}) => {
+    if (target.page === 'none') {
       return Taro.showToast({
         title: '暂未上线，敬请期待',
         icon: 'none'
       })
     }
-    Taro.navigateTo({
-      url: `/pages/service/${page}/${page}`
-    })
+
+    // 记录点击数据
+    await recordClickData({url: requestUrl, page: target.name});
+
+    if (target.type === 'toPage') {
+      Taro.navigateTo({
+        url: `/pages/service/${target.page}/${target.page}`
+      })
+    } else {
+      Taro.navigateToMiniProgram({
+        appId: target.page,
+        path: '',
+      });
+    }
   }
-
-  function toMiniProgram(page: string) {
-    if (page === 'none') {
-      return Taro.showToast({
-        title: '暂未上线，敬请期待',
-        icon: 'none'
-      })
-    }
-    Taro.navigateToMiniProgram({
-      appId: page,
-      path: '',
-    });
-  };
 
   return (
     <View className='service-wrapper' style={{ paddingTop: statusBarHeight + 'px' }}>
@@ -72,7 +74,7 @@ export default function Service() {
             {
               studyServices.map((item, index) => {
                 return (
-                  <View className='service-item' key={index} onClick={() => item.type === 'toPage' ? toServicePage(item.page) : toMiniProgram(item.page)} style={{ backgroundColor: item.color }}>
+                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name})} style={{ backgroundColor: item.color }}>
                     <Image src={item.icon}></Image>
                     <Text>{item.name}</Text>
                   </View>
@@ -88,7 +90,7 @@ export default function Service() {
             {
               lifeServices.map((item, index) => {
                 return (
-                  <View className='service-item' key={index} onClick={() => item.type === 'toPage' ? toServicePage(item.page) : toMiniProgram(item.page)} style={{ backgroundColor: item.color }}>
+                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name})} style={{ backgroundColor: item.color }}>
                     <Image src={item.icon}></Image>
                     <Text>{item.name}</Text>
                   </View>
