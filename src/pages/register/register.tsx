@@ -57,17 +57,17 @@ export default function register() {
         },
         {
             name: "外国语学院",
-            majorsForUndergraduates: ["翻译", "日语", "英语（师范）", "僧伽罗语"],
+            majorsForUndergraduates: ["翻译", "日语", "英语（师范）", "英语"],
             majorsForPostgraduates: ["英语语言学", "英语文学", "翻译理论", "英语教学理论及应用", "语言测试", "英语文体学", "英语国家文化研究", "日语语言文化"]
         },
         {
             name: "音乐学院",
-            majorsForUndergraduates: ["音乐学", "音乐表演", "音乐与舞蹈学类"],
+            majorsForUndergraduates: ["音乐学", "音乐表演", "音乐与舞蹈学类", "舞蹈学", "舞蹈表演"],
             majorsForPostgraduates: ["音乐与舞蹈学", "艺术硕士（音乐）"]
         },
         {
             name: "美术学院",
-            majorsForUndergraduates: ["环境设计", "视觉传达设计", "服装与服饰设计", "产品设计", "美术学", "绘画", "服装设计与工程"],
+            majorsForUndergraduates: ["环境设计", "视觉传达设计", "服装与服饰设计", "产品设计", "美术学", "绘画", "服装设计与工程", "书法学"],
             majorsForPostgraduates: ["艺术设计", "学科美术"]
         },
         {
@@ -109,6 +109,11 @@ export default function register() {
             name: "计算机与信息科学学院",
             majorsForUndergraduates: ["智能科学与技术", "软件工程", "电子商务", "计算机科学与技术", "信息管理与信息系统"],
             majorsForPostgraduates: ["现代教育技术", "职业技术教育（信息技术）", "计算机系统结构", "计算机软件与理论", "计算机应用技术", "教育技术学", "软件工程", "计算机技术", "农业信息化"]
+        },
+        {
+            name: "初等教育学院",
+            majorsForUndergraduates: ["小学教育", "小学教育", "科学教育", "音乐学"],
+            majorsForPostgraduates: []
         }
     ]);
 
