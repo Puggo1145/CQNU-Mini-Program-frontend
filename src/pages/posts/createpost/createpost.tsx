@@ -7,7 +7,7 @@ import PubSub from 'pubsub-js';
 import useStore from '@/store/store'
 import useRequest from '@/store/request'
 import useAppInfo from '@/store/appInfo';
-import useUser from '@/store/userInfo';
+import usePostData from '@/store/postData';
 
 // utilities
 import { uploadImageToOss } from '@/common/utilities/uploadImageToOss';
@@ -20,12 +20,9 @@ export default function createpost() {
 
   const statusBarHeight = useStore((state) => state.statusBarHeight);
   const [requestUrl, postImgsToOssUrl] = useRequest((state) => [state.requestUrl, state.PostImgsToOssUrl]);
-  const userId = useUser((state) => state.id);
   const ossAccessKeyId = useAppInfo((state) => state.accessKey_id);
 
-  const [tags, setTags] = useState<string[]>([
-    "校园日常", "新生", "求助", "交友", "考研", "实习兼职"
-  ]);
+  const tags = usePostData((state) => state.tags);
 
   const [selectedTag, setSelectedTag] = useState<string>();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);

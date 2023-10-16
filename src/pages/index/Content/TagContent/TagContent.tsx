@@ -256,6 +256,7 @@ export default function TagContent() {
                         }).map((post) => {
                             return (
                                 <View className="index-content-post" key={post._id} onClick={() => enterPost(post._id)}>
+                                    {post.isTopped && <Text className="post-top">置顶</Text>}
                                     <View className="post-texts">
                                         <Text className="post-title">{post.title}</Text>
                                         <Text className="post-description">{post.content}</Text>
