@@ -194,8 +194,8 @@
   background-color: #fff;
 }
 .postpage-commentBar .postpage-commentInput {
+  flex: 0.9;
   box-sizing: border-box;
-  width: 242px;
   height: 32px;
   flex-shrink: 0;
   border-radius: 16px;

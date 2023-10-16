@@ -91,7 +91,9 @@ export default function postpage() {
 
     // 页面内容初始化
     useLoad(async () => {
-
+        Taro.showShareMenu({
+            withShareTicket: true,
+        });
         // 1. 获取帖子所有内容
         const postContent = await postpageFn.getPostContent();
         const postCommentsRes = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
@@ -325,7 +327,6 @@ export default function postpage() {
                                 <Image src={isLiked ? likeActivated : likeImg}></Image>
                                 {postContent.post.likeNum > 99 ? '99+' : postContent.post.likeNum}
                             </View>
-                            <View className='postpage-sharePost'></View>
                         </View>
                 }
             </View>
