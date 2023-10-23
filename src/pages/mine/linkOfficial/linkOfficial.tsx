@@ -44,7 +44,7 @@ export default function linkOfficial() {
         url: authUrl,
         path: '/',
         requestService: "lkofficial",
-        timeout: 10000, // 10 秒超时
+        // timeout: 10000, // 10 秒超时
       });
 
       Taro.hideLoading();
@@ -108,7 +108,7 @@ export default function linkOfficial() {
       // 绑定成功
       if (res.statusCode === 200) {
         Taro.showToast({
-          title: '门户信息同步成功',
+          title: '门户信息已同步',
           icon: 'success',
           duration: 2000
         });
@@ -140,10 +140,10 @@ export default function linkOfficial() {
 
   return (
     <View className="linkOfficial-wrapper">
-      <Header title={"绑定校园门户"}></Header>
+      <Header title={"连接校园门户"}></Header>
       <View className="linkOfficial-content">
-        <Text className="linkOfficial-description">学习与服务的部分功能需要绑定校园门户才能使用哦</Text>
-        <Text className="linkOfficial-description">由于网络情况与访问量的影响，连接校园门户的时间可能较长</Text>
+        <Text className="linkOfficial-description">学习与服务的部分功能需要绑定校园门户才能使用（目前仅同步课表，其他信息的同步将在后续更新中支持）</Text>
+        <Text className="linkOfficial-description">受网络情况与访问量的影响，连接时间可能较长</Text>
         <View className="linkOfficial-inputs">
           <View className="linkOfficial-inputs-item">
             <Text>学号</Text>

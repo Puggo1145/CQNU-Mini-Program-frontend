@@ -116,3 +116,29 @@
   transform: rotate(180deg);
   margin-left: 12px;
 }
+.classtable-getTable {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 220px;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
+  background-color: #fff;
+  padding: 16px;
+  box-shadow: 0 0 16px -4px #bdbdbd;
+}
+.classtable-getTable .classtable-getTable-desc {
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.classtable-getTable .classtable-getTable-sync {
+  height: 36px;
+  border-radius: 18px;
+  border: none;
+  background-color: #4e6aff;
+  line-height: 36px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+}
