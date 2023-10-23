@@ -24,13 +24,6 @@ export default function classtable() {
 
   console.log(lessons);
 
-
-  useEffect(() => {
-    
-  })
-
-
-
   // 计算当前周数
   useEffect(() => {
     const date = new Date();
