@@ -13,13 +13,23 @@ export default function classtable() {
 
   const startDate = useCLasstable((state) => state.startDate) // 开学日期
 
-  const [currentWeek, setCurrentWeek] = useState<number>(1) // 当前周数
+
   const [maxWeek, setMaxWeek] = useState<number>(20) // 最大周数
   const [weekList, setWeekList] = useState<string[]>(['周一', '周二', '周三', '周四', '周五', '周六', '周日'])
 
-  const [currentDay, setCurrentDay] = useState<number>(1) // 当前星期几
+  const [currentDay, setCurrentDay] = useState<number>(1) // 当前星期几 useState钩子函数 并定义了一个名为 currentDay 的状态及其对应的更新函数 setCurrentDay 在调用 useState 时 我们传入了一个初始值 1 表示当前星期一
+  const [currentWeek, setCurrentWeek] = useState<number>(1) // 当前周数
 
   const lessons = useCLasstable(state => state.classTable); // 课程表
+
+  console.log(lessons);
+
+
+  useEffect(() => {
+    
+  })
+
+
 
   // 计算当前周数
   useEffect(() => {
@@ -31,6 +41,7 @@ export default function classtable() {
     const week = Math.ceil((date.getTime() - newDateForIOS(startDate).getTime()) / (1000 * 60 * 60 * 24 * 7))
     setCurrentWeek(week)
   }, []);
+
 
   // 切换周数
   function handleWeekSwitch(action: number) {
@@ -109,32 +120,19 @@ export default function classtable() {
           <View className="classtable-lessons">
             {
               lessons
-                .filter(item => currentWeek <= item.end_week)  // 首先过滤掉结束日期在当前周之前的课程
-                .sort((a, b) => {
-                  // 如果两个课程的开始时间相同
-                  if (a.start_time === b.start_time) {
-                    // 优先显示本周的课程
-                    if (a.start_week <= currentWeek && b.start_week > currentWeek) {
-                      return 1;
-                    }
-                    if (b.start_week <= currentWeek && a.start_week > currentWeek) {
-                      return -1;
-                    }
-                  }
-                  return 0;  // 不更改顺序
-                })
+                .filter(item => item.include_week.includes(currentWeek))
                 .map((item, index) => (
                   <View
                     key={item.lesson_id + index}
-                    className={item.start_week <= currentWeek ? "classtable-lessons-item" : "classtable-lessons-item notThisWeek"}
+                    className={ item.include_week[0] <= currentWeek ? "classtable-lessons-item" : "classtable-lessons-item notThisWeek" }
                     style={{
                       backgroundColor: item.color,
                       gridColumnStart: item.day,
                       gridColumnEnd: item.day + 1,
                       gridRowStart: item.start_time,
-                      gridRowEnd: item.end_time + 1
+                      gridRowEnd: item.end_time + 1 , 
                     }}>
-                    {item.start_week > currentWeek && <Text className="classtable-lessons-item-notThisWeek">非本周</Text>}
+                    {item.include_week[0] > currentWeek && <Text className="classtable-lessons-item-notThisWeek">非本周</Text>}
                     <Text className="classtable-lessons-item-name">{item.name}</Text>
                     <Text className="classtable-lessons-item-place">{item.place.split('-')[1]}</Text>
                   </View>
