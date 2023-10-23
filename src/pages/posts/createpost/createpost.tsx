@@ -163,7 +163,7 @@ export default function createpost() {
         } else {
 
           Taro.showToast({
-            title: '发布失败',
+            title: '发布失败，请重试',
             icon: 'none'
           });
         };

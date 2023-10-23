@@ -228,7 +228,7 @@ export default function Mine() {
           <View className='mine-functions'>
             <View className='mine-function mine-linkOfficial' onClick={() => handleLinkToFns('linkOfficial')}>
               <Image src={profileImg}></Image>
-              绑定校园门户
+              连接校园门户
             </View>
             <View className='mine-function mine-contactUs' onClick={() => handleLinkToFns('contactUs')}>
               <Image src={chatImg}></Image>

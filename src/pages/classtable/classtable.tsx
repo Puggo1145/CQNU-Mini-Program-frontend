@@ -1,5 +1,6 @@
-import { View, Text } from "@tarojs/components"
+import { View, Text, Button } from "@tarojs/components"
 import { useState, useEffect } from "react"
+import Taro from "@tarojs/taro"
 
 import Header from "@/common/Header/Header"
 
@@ -21,8 +22,6 @@ export default function classtable() {
   const [currentWeek, setCurrentWeek] = useState<number>(1) // 当前周数
 
   const lessons = useCLasstable(state => state.classTable); // 课程表
-
-  console.log(lessons);
 
   // 计算当前周数
   useEffect(() => {
@@ -117,13 +116,13 @@ export default function classtable() {
                 .map((item, index) => (
                   <View
                     key={item.lesson_id + index}
-                    className={ item.include_week[0] <= currentWeek ? "classtable-lessons-item" : "classtable-lessons-item notThisWeek" }
+                    className={item.include_week[0] <= currentWeek ? "classtable-lessons-item" : "classtable-lessons-item notThisWeek"}
                     style={{
                       backgroundColor: item.color,
                       gridColumnStart: item.day,
                       gridColumnEnd: item.day + 1,
                       gridRowStart: item.start_time,
-                      gridRowEnd: item.end_time + 1 , 
+                      gridRowEnd: item.end_time + 1,
                     }}>
                     {item.include_week[0] > currentWeek && <Text className="classtable-lessons-item-notThisWeek">非本周</Text>}
                     <Text className="classtable-lessons-item-name">{item.name}</Text>
@@ -139,6 +138,13 @@ export default function classtable() {
         <View className="classtable-switchWeek-item" onClick={() => handleWeekSwitch(0)}></View>
         <View className="classtable-switchWeek-item" onClick={() => handleWeekSwitch(1)}></View>
       </View>
+      {
+        lessons.length === 0 && 
+        <View className="classtable-getTable">
+          <View className="classtable-getTable-desc">没有同步课程？点击去同步！</View>
+          <Button className="classtable-getTable-sync" onClick={() => Taro.navigateTo({url: '/pages/mine/linkOfficial/linkOfficial'})}>一键同步</Button>
+        </View>
+      }
     </View>
   )
 }
