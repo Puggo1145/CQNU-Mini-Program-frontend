@@ -44,7 +44,7 @@ export default function linkOfficial() {
         url: authUrl,
         path: '/',
         requestService: "lkofficial",
-        timeout: 10000, // 10 秒超时
+        // timeout: 10000, // 10 秒超时
       });
 
       Taro.hideLoading();

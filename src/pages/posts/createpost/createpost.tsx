@@ -22,7 +22,7 @@ export default function createpost() {
   const [requestUrl, postImgsToOssUrl] = useRequest((state) => [state.requestUrl, state.PostImgsToOssUrl]);
   const ossAccessKeyId = useAppInfo((state) => state.accessKey_id);
 
-  const tags = usePostData((state) => state.tags);
+  const tags = usePostData((state) => state.tags.filter(item => item !== "热门"));
 
   const [selectedTag, setSelectedTag] = useState<string>();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
