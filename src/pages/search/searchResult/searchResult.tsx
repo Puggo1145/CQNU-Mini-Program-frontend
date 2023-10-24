@@ -14,6 +14,7 @@ import './searchResult.css'
 
 import likeIcon from "../../../static/post/post-like-icon.png"
 import commentIcon from "../../../static/post/post-comment-icon.png"
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
 
 export default function searchResult() {
 // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
@@ -116,7 +117,7 @@ export default function searchResult() {
                                     {post.pictures.length !== 0 && <Image src={post.pictures[0]} className="post-picture" mode="aspectFill" />}
                                     <View className="post-info">
                                         <View className="post-info-user">
-                                            <Image src={post.user.avatar} className="post-user-avatar" />
+                                            <Image src={post.user.avatar || defaultAvatar} className="post-user-avatar" />
                                             <Text>{post.user.nick_name}</Text>
                                         </View>
                                         <View className="post-info-data">

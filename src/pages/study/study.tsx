@@ -18,8 +18,8 @@ interface LessonType {
   start_time: number, // 在第几节课开始
   end_time: number, // 在第几节课结束
   day: number, // 星期几
-  start_week: number, // 从第几周开始
-  end_week: number, // 到第几周结束
+  // start_week: number, // 从第几周开始
+  // end_week: number, // 到第几周结束
   color: string, // 课程颜色
 }
 
@@ -39,7 +39,7 @@ export default function Study() {
   ])
 
   const [followingLessons, setFollowingLessons] = useState<LessonType[]>([
-    {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, start_week: 1, end_week: 16, color: '',},
+    {lesson_id: 1001, name: '今日有课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, start_week: 1, end_week: 16, color: '',},
     {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, start_week: 1, end_week: 16, color: '',},
   ])
 
@@ -53,34 +53,39 @@ export default function Study() {
     const hours = date.getHours(); // 几点
     const minutes = date.getMinutes(); // 几分
 
-    const classTableToday = classTable.filter(item => item.day === day && item.start_week <= currentWeek); // 今日课程  
+    console.log("今天星期：",day)
+    console.log("当前周：",currentWeek)
+    
+    const classTableToday = classTable.filter(item => item.day === day && item.include_week[0] <= currentWeek); // 今日课程 
     
     // 获取今日剩余课程
     if (hours * 60 + minutes < 20 * 60 + 25) {
       const nextStartTime = timeTable.find(item => item[0] * 60 + item[1] > hours * 60 + minutes) as number[];
       const nextStartTimeIndex = timeTable.indexOf(nextStartTime) + 1;
       const followingLessonsToday = classTableToday.filter(item => item.start_time >= nextStartTimeIndex);
+
+      console.log("长度为：" + followingLessonsToday.length);
   
       // 当只有一节课时
       if (followingLessonsToday.length === 1) {
         setFollowingLessons([
           followingLessonsToday[0],
-          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, start_week: 1, end_week: 16, color: '',},
+          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, color: '',},
         ]);
       } 
       // 当没有课时
       else if (followingLessonsToday.length === 0) {
         setFollowingLessons([
-          {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, start_week: 1, end_week: 16, color: '',},
-          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, start_week: 1, end_week: 16, color: '',},
+          {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, color: '',},
+          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, color: '',},
         ]);
       } else {
         setFollowingLessons(followingLessonsToday);
       }
     } else {
       setFollowingLessons([
-        {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, start_week: 1, end_week: 16, color: '',},
-        {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, start_week: 1, end_week: 16, color: '',},
+        {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, color: '',},
+        {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, color: '',},
       ]);
     }
   

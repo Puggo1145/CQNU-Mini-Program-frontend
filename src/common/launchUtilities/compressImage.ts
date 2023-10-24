@@ -7,7 +7,7 @@ const compressImage = async (filePath: string, quality: number = 90): Promise<st
         const imageRes = await Taro.compressImage({
             src: filePath,
             quality: quality,
-            compressedWidth: 300,
+            compressedWidth: 900,
         });
 
         imagePath = imageRes.tempFilePath;

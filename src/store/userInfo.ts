@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import Taro from "@tarojs/taro";
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
 
 export type UserInfoType = {
     isLogin: boolean,
@@ -26,7 +27,7 @@ const useUser = create<UserInfoType>((set) => ({
     openid: '',
     student_id: '',
     nick_name: '',
-    avatar: '',
+    avatar: '' || defaultAvatar,
     user_level: 0,
     user_exp: 0,
     faculty: '',

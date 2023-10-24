@@ -59,7 +59,7 @@ export default function myposts() {
                                 })
                             }>
                                 <Text className="myposts-post-title">{post.title}</Text>
-                                <Text className="myposts-post-content">{post.content}</Text>
+                                <Text className="myposts-post-content">{post.content.length > 25 ? `${post.content.slice(0, 25)}...` : post.content}</Text>
                                 <Text className="myposts-post-createdAt">{timeStampToDate(post.createdAt)}</Text>
                             </View>
                         )

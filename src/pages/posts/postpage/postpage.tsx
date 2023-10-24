@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useLoad, getCurrentInstance } from '@tarojs/taro';
-import { View, Text, Image, Input, ScrollView } from '@tarojs/components';
+import { View, Text, Image, Input, ScrollView, Textarea } from '@tarojs/components';
 import PubSub from 'pubsub-js';
 
 // stores
@@ -19,12 +19,16 @@ import { PostType, commentType } from '@/types/postpage';
 // css
 import './postpage.css';
 
+
 // images
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
 import likeImg from '../../../static/post/post-like-icon.png';
 import likeActivated from '../../../static/post/post-like-activated-icon.png';
 import deleteImg from '../../../static/post/delete.png';
 import contentReviwing from "../../../static/common/contentReviewing.png";
 import contentUnpass from "../../../static/common/ContentUnpass.png";
+
+console.log("头像：" + defaultAvatar);
 
 
 export default function postpage() {
@@ -48,7 +52,7 @@ export default function postpage() {
             user: {
                 _id: '',
                 nick_name: '加载中...',
-                avatar: '',
+                avatar: '' || defaultAvatar,
                 user_level: 0,
                 user_exp: 0,
             },
@@ -94,6 +98,7 @@ export default function postpage() {
         Taro.showShareMenu({
             withShareTicket: true,
         });
+        
         // 1. 获取帖子所有内容
         const postContent = await postpageFn.getPostContent();
         const postCommentsRes = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
@@ -193,6 +198,16 @@ export default function postpage() {
 
     // F. 返回上一页
     function navigateBack() {
+        const pages = Taro.getCurrentPages();
+
+        // 从分享链接进入帖子页面后，小程序栈只会存在一个页面，无法直接navigateBack，则返回首页
+        if (pages.length === 1) {
+            Taro.switchTab({
+                url: '/pages/index/index'
+            });
+            return;
+        };
+        
         Taro.navigateBack();
 
         // 1. 更新上一页的点赞和评论数
@@ -237,7 +252,7 @@ export default function postpage() {
                 <View className='postpage-header-left'>
                     <View className='postpage-back' onClick={navigateBack}></View>
                     <View className='postpage-userInfo'>
-                        <Image className='postpage-avatar avatarStyle' src={postContent.post.user.avatar}></Image>
+                        <Image className='postpage-avatar avatarStyle' src={postContent.post.user.avatar || defaultAvatar}></Image>
                         <Text className='postpage-nickname'>{postContent.post.user.nick_name}</Text>
                         <View className='postpage-userLevel'>Lv.{postContent.post.user.user_level}</View>
                     </View>
@@ -290,7 +305,7 @@ export default function postpage() {
                                             <Text className='postpage-likecomment-num'>{item.likeNum}</Text>
                                         </View>
                                         <View className='postpage-commentUserInfo'>
-                                            <Image className='avatarStyle' src={item.user.avatar}></Image>
+                                            <Image className='avatarStyle' src={item.user.avatar || defaultAvatar}></Image>
                                             <Text>{item.user.nick_name}</Text>
                                             {/* <View className='postpage-userLevel'>Lv.{item.user.user_level}</View> */}
                                             <View className='postpage-likeComment'></View>
@@ -307,15 +322,16 @@ export default function postpage() {
             </View>
 
             <View className='postpage-commentBar' style={{ bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px' }}>
-                <Input
+                <Textarea
                     className='postpage-commentInput'
                     placeholder='发一条友善的评论'
                     value={commentContent}
                     adjustPosition={false}
                     onInput={e => { setCommentContent(e.detail.value) }}
                     onConfirm={sendComment}
+                    style={{ height: keyboardHeight === 0 ? '30px' : '60px' }}
                 >
-                </Input>
+                </Textarea>
                 {
                     keyboardHeight >= 30 ?
                         <View className='postpage-send'

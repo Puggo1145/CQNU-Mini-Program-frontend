@@ -15,6 +15,9 @@ import useRequest from "@/store/request";
 
 import './MessageDetails.less';
 
+//images
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
+
 interface MessagesType {
   _id: string
   type: 'PostLike' | 'CommentLike' | 'PostComment' | 'OfficialMessage'
@@ -95,7 +98,7 @@ export default function MessageDetails() {
                 )}
               >
                 <View className="messageDetail-content-item-left">
-                  <Image className="messageDetail-content-item-user-avatar" src={item.from_user_id.avatar} mode="widthFix" />
+                  <Image className="messageDetail-content-item-user-avatar" src={item.from_user_id.avatar || defaultAvatar} mode="aspectFill" />
                 </View>
                 <View className="messageDetail-content-item-right">
                   <Text className="messageDetail-content-item-user-name">
