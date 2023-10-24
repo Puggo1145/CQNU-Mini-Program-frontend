@@ -18,6 +18,7 @@ interface LessonType {
   start_time: number, // 在第几节课开始
   end_time: number, // 在第几节课结束
   day: number, // 星期几
+  include_week: number[]
   // start_week: number, // 从第几周开始
   // end_week: number, // 到第几周结束
   color: string, // 课程颜色
@@ -39,8 +40,8 @@ export default function Study() {
   ])
 
   const [followingLessons, setFollowingLessons] = useState<LessonType[]>([
-    {lesson_id: 1001, name: '今日有课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, start_week: 1, end_week: 16, color: '',},
-    {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, start_week: 1, end_week: 16, color: '',},
+    {lesson_id: 1001, name: '今日有课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, include_week: [], color: '',},
+    {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, include_week: [], color: '',},
   ])
 
   useEffect(() => {
@@ -70,22 +71,22 @@ export default function Study() {
       if (followingLessonsToday.length === 1) {
         setFollowingLessons([
           followingLessonsToday[0],
-          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, color: '',},
+          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, include_week: [], color: '',},
         ]);
       } 
       // 当没有课时
       else if (followingLessonsToday.length === 0) {
         setFollowingLessons([
-          {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, color: '',},
-          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, color: '',},
+          {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, include_week: [], color: '',},
+          {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, include_week: [], color: '',},
         ]);
       } else {
         setFollowingLessons(followingLessonsToday);
       }
     } else {
       setFollowingLessons([
-        {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, color: '',},
-        {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, color: '',},
+        {lesson_id: 1001, name: '今日无课', place: '',  teacher: '', start_time: 1, end_time: 2, day: 0, include_week: [], color: '',},
+        {lesson_id: 1002, name: '今日无课', place: '',  teacher: '', start_time: 3, end_time: 4, day: 0, include_week: [], color: '',},
       ]);
     }
   
@@ -94,7 +95,7 @@ export default function Study() {
 
   return (
     <View className='study-wrapper' style={{ paddingTop: statusBarHeight + 'px' }}>
-      <View className='study-header'>{userInfo.major}</View>
+      <View className='study-header'>{userInfo.major || "请登录"}</View>
       <View className='study-content'>
         <View className='study-timetable'>
           <View className='study-timetable-top'>
