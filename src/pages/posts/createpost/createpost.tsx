@@ -154,9 +154,12 @@ export default function createpost() {
             icon: 'success',
             duration: 2000
           });
-          // 2 秒后返回，刷新首页
+          // 2 秒后转入发送的帖子，刷新首页
           setTimeout(() => {
             Taro.navigateBack();
+            Taro.navigateTo({
+              url: '/pages/posts/postpage/postpage?' + `post_id=${res.data.data.post_id}`
+            });
             PubSub.publish('refreshPage');
           }, 2000);
 

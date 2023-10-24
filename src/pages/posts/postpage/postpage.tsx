@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useLoad, getCurrentInstance } from '@tarojs/taro';
-import { View, Text, Image, Input, ScrollView } from '@tarojs/components';
+import { View, Text, Image, Input, ScrollView, Textarea } from '@tarojs/components';
 import PubSub from 'pubsub-js';
 
 // stores
@@ -98,6 +98,7 @@ export default function postpage() {
         Taro.showShareMenu({
             withShareTicket: true,
         });
+        
         // 1. 获取帖子所有内容
         const postContent = await postpageFn.getPostContent();
         const postCommentsRes = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
@@ -131,8 +132,6 @@ export default function postpage() {
         } else {
             refreshComments();
         }
-
-        console.log(defaultAvatar);
     }, [currentCommentView]);
 
     // A. 点赞帖子
@@ -201,6 +200,16 @@ export default function postpage() {
 
     // F. 返回上一页
     function navigateBack() {
+        const pages = Taro.getCurrentPages();
+
+        // 从分享链接进入帖子页面后，小程序栈只会存在一个页面，无法直接navigateBack，则返回首页
+        if (pages.length === 1) {
+            Taro.switchTab({
+                url: '/pages/index/index'
+            });
+            return;
+        };
+        
         Taro.navigateBack();
 
         // 1. 更新上一页的点赞和评论数
@@ -318,15 +327,16 @@ export default function postpage() {
             </View>
 
             <View className='postpage-commentBar' style={{ bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px' }}>
-                <Input
+                <Textarea
                     className='postpage-commentInput'
                     placeholder='发一条友善的评论'
                     value={commentContent}
                     adjustPosition={false}
                     onInput={e => { setCommentContent(e.detail.value) }}
                     onConfirm={sendComment}
+                    style={{ height: keyboardHeight === 0 ? '30px' : '60px' }}
                 >
-                </Input>
+                </Textarea>
                 {
                     keyboardHeight >= 30 ?
                         <View className='postpage-send'

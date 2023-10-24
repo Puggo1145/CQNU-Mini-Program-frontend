@@ -227,7 +227,7 @@ export default function register() {
 
             } else {
                 Taro.showToast({
-                    title: '注册失败',
+                    title: '注册失败，请重试',
                     icon: 'error'
                 });
             };

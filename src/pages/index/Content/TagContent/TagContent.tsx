@@ -260,7 +260,7 @@ export default function TagContent() {
                                     {post.isTopped && <Text className="post-top">置顶</Text>}
                                     <View className="post-texts">
                                         <Text className="post-title">{post.title}</Text>
-                                        <Text className="post-description">{post.content}</Text>
+                                        <Text className="post-description">{post.content.length > 23 ? `${post.content.slice(0, 23)}...` : post.content}</Text>
                                     </View>
                                     {post.pictures.length !== 0 && post.pictures.map((picture) => {
                                         let picturePath;
