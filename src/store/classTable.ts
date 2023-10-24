@@ -34,6 +34,8 @@ const useCLasstable = create<State & Action>((set) => ({
 
 export default useCLasstable;
 
+
+// mock数据
 // {
 //     lesson_id: 1,
 //     name: "Vue前端框架", // 课程名称
@@ -65,13 +67,44 @@ export default useCLasstable;
 //     include_week: [1, 3, 5, 7, 8],
 //     color: "#000000", // 课程颜色
 // },{
+//     lesson_id: 5,
+//     name: "网络安全与技术", // 课程名称
+//     place: "13302", // 上课地点
+//     teacher: "文向波", // 教师
+//     start_time: 1, // 在第几节课开始
+//     end_time: 2, // 在第几节课结束
+//     day: 2, // 星期几
+//     include_week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//     color: "#a2b231", // 课程颜色
+// },{
 //     lesson_id: 4,
 //     name: "编译原理", // 课程名称
 //     place: "15201", // 上课地点
 //     teacher: "訾玲玲", // 教师
+//     start_time: 3, // 在第几节课开始
+//     end_time: 4, // 在第几节课结束
+//     day: 2, // 星期几
+//     include_week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//     color: "#a2b231", // 课程颜色
+// },{
+//     lesson_id: 5,
+//     name: "网络通信与组网", // 课程名称
+//     place: "105实验室", // 上课地点
+//     teacher: "肖颗", // 教师
 //     start_time: 5, // 在第几节课开始
 //     end_time: 6, // 在第几节课结束
-//     day: 1, // 星期几
+//     day: 2, // 星期几
+//     include_week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//     color: "#a2b231", // 课程颜色
+// },{
+//     lesson_id: 6,
+//     name: "形式与政策", // 课程名称
+//     place: "T2208", // 上课地点
+//     teacher: "董军", // 教师
+//     start_time: 7, // 在第几节课开始
+//     end_time: 8, // 在第几节课结束
+//     day: 2, // 星期几
 //     include_week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 //     color: "#a2b231", // 课程颜色
 // }
+

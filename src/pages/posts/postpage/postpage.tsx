@@ -19,12 +19,16 @@ import { PostType, commentType } from '@/types/postpage';
 // css
 import './postpage.css';
 
+
 // images
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
 import likeImg from '../../../static/post/post-like-icon.png';
 import likeActivated from '../../../static/post/post-like-activated-icon.png';
 import deleteImg from '../../../static/post/delete.png';
 import contentReviwing from "../../../static/common/contentReviewing.png";
 import contentUnpass from "../../../static/common/ContentUnpass.png";
+
+console.log("头像：" + defaultAvatar);
 
 
 export default function postpage() {
@@ -48,7 +52,7 @@ export default function postpage() {
             user: {
                 _id: '',
                 nick_name: '加载中...',
-                avatar: '',
+                avatar: '' || defaultAvatar,
                 user_level: 0,
                 user_exp: 0,
             },
@@ -127,6 +131,8 @@ export default function postpage() {
         } else {
             refreshComments();
         }
+
+        console.log(defaultAvatar);
     }, [currentCommentView]);
 
     // A. 点赞帖子
@@ -242,7 +248,7 @@ export default function postpage() {
                 <View className='postpage-header-left'>
                     <View className='postpage-back' onClick={navigateBack}></View>
                     <View className='postpage-userInfo'>
-                        <Image className='postpage-avatar avatarStyle' src={postContent.post.user.avatar}></Image>
+                        <Image className='postpage-avatar avatarStyle' src={postContent.post.user.avatar || defaultAvatar}></Image>
                         <Text className='postpage-nickname'>{postContent.post.user.nick_name}</Text>
                         <View className='postpage-userLevel'>Lv.{postContent.post.user.user_level}</View>
                     </View>
@@ -295,7 +301,7 @@ export default function postpage() {
                                             <Text className='postpage-likecomment-num'>{item.likeNum}</Text>
                                         </View>
                                         <View className='postpage-commentUserInfo'>
-                                            <Image className='avatarStyle' src={item.user.avatar}></Image>
+                                            <Image className='avatarStyle' src={item.user.avatar || defaultAvatar}></Image>
                                             <Text>{item.user.nick_name}</Text>
                                             {/* <View className='postpage-userLevel'>Lv.{item.user.user_level}</View> */}
                                             <View className='postpage-likeComment'></View>

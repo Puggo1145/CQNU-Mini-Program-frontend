@@ -10,6 +10,9 @@ import useUser from "@/store/userInfo";
 // components
 import Header from "@/common/Header/Header";
 
+// images
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
+
 import "./register.css";
 import { makeRequest } from "@/common/utilities/requester";
 
@@ -195,7 +198,7 @@ export default function register() {
                 const userInfo = {
                     id: newUserInfo.id,
                     openid: newUserInfo.openid,
-                    avatar: newUserInfo.avatar,
+                    avatar: newUserInfo.avatar || defaultAvatar,
                     nick_name: newUserInfo.nick_name,
                     student_id: newUserInfo.student_id,
                     identity: newUserInfo.identity,

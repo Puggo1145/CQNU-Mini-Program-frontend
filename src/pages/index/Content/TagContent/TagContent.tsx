@@ -19,6 +19,7 @@ import likeIcon from "../../../../static/post/post-like-icon.png";
 import commentIcon from "../../../../static/post/post-comment-icon.png";
 import contentReviwing from "../../../../static/common/contentReviewing.png";
 import contentUnpass from "../../../../static/common/ContentUnpass.png";
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
 
 interface tagType {
     tagName: string
@@ -273,7 +274,7 @@ export default function TagContent() {
                                     })}
                                     <View className="post-info">
                                         <View className="post-info-user">
-                                            <Image src={post.user.avatar} className="post-user-avatar" />
+                                            <Image src={post.user.avatar || defaultAvatar} className="post-user-avatar" />
                                             <Text>{post.user.nick_name}</Text>
                                         </View>
                                         <View className="post-info-data">

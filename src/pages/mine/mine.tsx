@@ -11,11 +11,13 @@ import { makeRequest } from '@/common/utilities/requester';
 
 import './mine.css'
 
+import defaultAvatar from '@/static/mine/defaultAvatar.png'
 import chatImg from '../../static/mine/chat.png'
 import profileImg from '../../static/mine/profile.png'
 import logoutImg from '../../static/mine/logout.png'
 import loginImg from '../../static/mine/login.png'
 import usePostData from '@/store/postData';
+
 
 export default function Mine() {
 
@@ -200,7 +202,7 @@ export default function Mine() {
       <View className='mine-content'>
         <View className='mine-userInfo'>
           <View className='mine-basicInfo'>
-            <Image src={userInfo.avatar} className='mine-avatar' onClick={() => userInfo.isLogin ? handleAvatarChange() : null}></Image>
+            <Image src={userInfo.avatar || defaultAvatar} className='mine-avatar' onClick={() => userInfo.isLogin ? handleAvatarChange() : null}></Image>
             <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
             <Text className='mine-schoolID'>{userInfo.student_id}</Text>
             <View className='mine-moreInfo'>

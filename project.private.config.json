@@ -5,5 +5,18 @@
     "compileHotReLoad": true,
     "urlCheck": false
   },
-  "libVersion": "3.1.1"
+  "libVersion": "3.1.1",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }
