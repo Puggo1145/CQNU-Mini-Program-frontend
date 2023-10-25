@@ -318,7 +318,12 @@ export default function postpage() {
 
             </View>
 
-            <View className='postpage-commentBar' style={{ bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px' }}>
+            <View className='postpage-commentBar' 
+                style={{ 
+                    bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px', 
+                    height: keyboardHeight === 0 ? '60px' : '90px' 
+                }}
+            >
                 <Textarea
                     className='postpage-commentInput'
                     placeholder='发一条友善的评论'
