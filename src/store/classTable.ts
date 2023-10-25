@@ -27,7 +27,7 @@ type Action = {
 // 创建zustand store
 const useCLasstable = create<State & Action>((set) => ({
     classTable: [],
-    startDate: '2023-9-4', // 开学时间
+    startDate: '2023/9/4', // 开学时间
 
     setClassTable: (classTable) => set((state) => ({ ...state, classTable }))
 }))
