@@ -28,9 +28,6 @@ import deleteImg from '../../../static/post/delete.png';
 import contentReviwing from "../../../static/common/contentReviewing.png";
 import contentUnpass from "../../../static/common/ContentUnpass.png";
 
-console.log("头像：" + defaultAvatar);
-
-
 export default function postpage() {
 
     // 数据store ————————————————————————————————————————————————————————————————————————————————————

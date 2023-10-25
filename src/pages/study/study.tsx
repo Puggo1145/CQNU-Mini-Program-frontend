@@ -54,9 +54,6 @@ export default function Study() {
     const hours = date.getHours(); // 几点
     const minutes = date.getMinutes(); // 几分
 
-    console.log("今天星期：",day)
-    console.log("当前周：",currentWeek)
-    
     const classTableToday = classTable.filter(item => item.day === day && item.include_week[0] <= currentWeek); // 今日课程 
     
     // 获取今日剩余课程
@@ -65,8 +62,6 @@ export default function Study() {
       const nextStartTimeIndex = timeTable.indexOf(nextStartTime) + 1;
       const followingLessonsToday = classTableToday.filter(item => item.start_time >= nextStartTimeIndex);
 
-      console.log("长度为：" + followingLessonsToday.length);
-  
       // 当只有一节课时
       if (followingLessonsToday.length === 1) {
         setFollowingLessons([
