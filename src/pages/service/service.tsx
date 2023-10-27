@@ -6,11 +6,13 @@ import { recordClickData } from '@/common/utilities/recordClickData';
 
 import useStore from '@/store/store'
 import useRequest from '@/store/request';
+import useUser from '@/store/userInfo';
 
 import './service.css'
 
 import classRoomNavImg from '../../static/service/classroomNav.png'
 import mtAppointmentImg from '../../static/service/appointment.png'
+import examScoresImg from '../../static/service/examScores.png'
 import chooseClassImg from '../../static/service/chooseClass.png'
 import getWaterImg from '../../static/service/getWater.png'
 import paymentImg from '../../static/service/payment.png'
@@ -22,17 +24,18 @@ interface serviceType {
   page: string
   type: 'toPage' | 'toMiniProgram'
   color: string
+  requireLogin?: boolean
 }
 
 export default function Service() {
 
-  const [studyServices, setStudyServices] = useState<serviceType[]>([
+  const [studyServices] = useState<serviceType[]>([
     { name: '教室导航', icon: classRoomNavImg, page: 'classroomNav', type: 'toPage', color: '#9356f7' },
-    { name: '梦厅预约', icon: mtAppointmentImg, page: 'none', type: 'toPage', color: '#9e9e9e' },
-    { name: '快捷选课', icon: chooseClassImg, page: 'none', type: 'toPage', color: '#9e9e9e' },
+    { name: '梦厅预约', icon: mtAppointmentImg, page: 'none', type: 'toPage', color: '#9e9e9e', requireLogin: true },
+    { name: '成绩查询', icon: examScoresImg, page: 'examScores', type: 'toPage', color: '#43CCF8', requireLogin: true },
   ]);
 
-  const [lifeServices, setLifeServices] = useState<serviceType[]>([
+  const [lifeServices] = useState<serviceType[]>([
     { name: '送水服务', icon: getWaterImg, page: 'wx600e85d92f102852', type: 'toMiniProgram', color: '#4e6aff' },
     { name: '生活缴费', icon: paymentImg, page: 'none', type: 'toPage', color: '#9e9e9e' },
     { name: '跑腿代取', icon: runErrandsImg, page: 'none', type: 'toPage', color: '#9e9e9e' },
@@ -40,8 +43,9 @@ export default function Service() {
 
   const statusBarHeight = useStore((state) => state.statusBarHeight);
   const requestUrl = useRequest(state => state.requestUrl);
+  const officialPwd = useUser(state => state.officialPwd);
 
-  const toServicePage = async (target: {type: string, page: string, name: string}) => {
+  const toServicePage = async (target: {type: string, page: string, name: string, requireLogin: boolean}) => {
     if (target.page === 'none') {
       return Taro.showToast({
         title: '暂未上线，敬请期待',
@@ -53,9 +57,13 @@ export default function Service() {
     await recordClickData({url: requestUrl, page: target.name});
 
     if (target.type === 'toPage') {
+      // 1. 检查是否已登录到校园门户
+      if (target.requireLogin && !officialPwd) Taro.navigateTo({url: `/pages/mine/linkOfficial/linkOfficial?action=`});
+
       Taro.navigateTo({
         url: `/pages/service/${target.page}/${target.page}`
       })
+    
     } else {
       Taro.navigateToMiniProgram({
         appId: target.page,
@@ -74,7 +82,7 @@ export default function Service() {
             {
               studyServices.map((item, index) => {
                 return (
-                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name})} style={{ backgroundColor: item.color }}>
+                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name, requireLogin: item.requireLogin || false})} style={{ backgroundColor: item.color }}>
                     <Image src={item.icon}></Image>
                     <Text>{item.name}</Text>
                   </View>
@@ -90,7 +98,7 @@ export default function Service() {
             {
               lifeServices.map((item, index) => {
                 return (
-                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name})} style={{ backgroundColor: item.color }}>
+                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name, requireLogin: item.requireLogin || false})} style={{ backgroundColor: item.color }}>
                     <Image src={item.icon}></Image>
                     <Text>{item.name}</Text>
                   </View>

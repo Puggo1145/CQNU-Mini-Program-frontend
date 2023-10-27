@@ -10,7 +10,7 @@
 }
 
 .postpage-userLevel {
-    padding: 3px 8px 3px 8px;
+    padding: 4px 8px;
     border-radius: 27px;
     background: #4E6AFF;
     font-size: 8px;
@@ -55,6 +55,7 @@
             margin-left: 12px;
 
             .postpage-nickname {
+                font-size: 14px;
                 margin-right: 8px;
             }
 
@@ -62,8 +63,8 @@
     }
 
     .postpage-options {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         background-image: url('../../../static/post/postOptions.png');
         background-size: contain;
         background-position: center;
@@ -96,14 +97,15 @@
             font-size: 20px;
             font-weight: 700;
             letter-spacing: 0.5px;
+            margin-bottom: 16px;
         }
 
         .postpage-description {
             color: #2C2C2C;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
-            margin-top: 8px;
             letter-spacing: 0.5px;
+            line-height: 150%;
         }
 
         .postpage-image {
@@ -114,6 +116,7 @@
         }
 
         .postpage-editTime {
+            font-size: 12px;
             margin-top: 24px;
         }
     }
@@ -138,10 +141,11 @@
         align-items: center;
         justify-content: space-around;
         width: 100px;
-        height: 28px;
-        border-radius: 14px;
+        height: 32px;
+        border-radius: 16px;
         background-color: #efefef;
         font-size: 12px;
+        letter-spacing: 1.2px;
         color: #BCBCBC;
 
         .currentCommentView {
@@ -158,8 +162,8 @@
             transform: translate(-50%, -50%);
             display: block;
             width: 46px;
-            height: 24px;
-            border-radius: 12px;
+            height: 28px;
+            border-radius: 14px;
             background-color: #fff;
         }
     }
@@ -169,6 +173,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    padding: 8px 0;
 
     .postpage-likecomment {
         position: absolute;
@@ -187,6 +192,7 @@
     .postpage-commentUserInfo {
         display: flex;
         align-items: center;
+        margin-bottom: 8px;
 
         Text {
             color: #2C2C2C;
@@ -203,9 +209,11 @@
         letter-spacing: 1px;
         margin-left: 44px;
         margin-bottom: 16px;
+        line-height: 150%;
     }
 
     .postpage-editTime {
+        font-size: 12px;
         margin-left: 44px;
         padding-bottom: 16px;
         border-bottom: 0.5px solid #ececec;
@@ -230,15 +238,14 @@
     .postpage-commentInput {
         flex: 1;
         box-sizing: border-box;
-        height: 32px;
-        flex-shrink: 0;
         border-radius: 16px;
         background: #EFEFEF;
-        padding: 6px 12px;
+        padding: 9px 16px;
 
         color: #2C2C2C;
         font-size: 12px;
         font-weight: 400;
+        letter-spacing: 1.4px;
     }
 
     .postpage-likePost{
@@ -271,6 +278,7 @@
         line-height: 32px;
         color: #fff;
         font-size: 12px;
+        letter-spacing: 1.2px;
     }
 }
 

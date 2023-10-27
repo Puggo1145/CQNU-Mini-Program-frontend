@@ -157,6 +157,12 @@ export default function register() {
                 icon: 'error'
             })
             return
+        } else if (nickName.length > 10) {
+            Taro.showToast({
+                title: '昵称过长',
+                icon: 'error'
+            })
+            return
         };
 
         try {
@@ -255,11 +261,11 @@ export default function register() {
                     <Form>
                         <View className="register-content-formata-item">
                             <Text className="register-content-formata-item-text">昵称：</Text>
-                            <Input className="register-content-formata-item-input" ref={nickNameRef} name="nick_name" placeholder="请输入昵称" />
+                            <Input className="register-content-formata-item-input" ref={nickNameRef} name="nick_name" placeholder="昵称不能超过10个字符" />
                         </View>
                         <View className="register-content-formata-item">
                             <Text className="register-content-formata-item-text">学号：</Text>
-                            <Input className="register-content-formata-item-input" ref={studentIdRef} name="student_id" placeholder="请输入13位学号" />
+                            <Input className="register-content-formata-item-input" ref={studentIdRef} name="student_id" placeholder="请输入13位学号（注册后无法修改）" />
                         </View>
                         <View className="register-content-formata-item">
                             <Text className="register-content-formata-item-text">身份：</Text>

@@ -15,6 +15,10 @@ export type UserInfoType = {
     faculty: string,
     major: string,
     grade: string,
+
+    officialPwd: string,
+    headerCookie: any,
+
     toLoginPage: () => void
 
     setUserInfo: (userInfo: Partial<UserInfoType>) => void // 使用Partial，可以部分更新用户信息
@@ -34,6 +38,10 @@ const useUser = create<UserInfoType>((set) => ({
     identity: '',
     major: '',
     grade: '',
+
+    // 校园门户
+    officialPwd: '',
+    headerCookie: null, // 登入教务系统的请求头cookie
 
     toLoginPage: () => {
         Taro.navigateTo({

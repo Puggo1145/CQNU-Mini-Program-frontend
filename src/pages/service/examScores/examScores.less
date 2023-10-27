@@ -1,0 +1,154 @@
+/*postcss-pxtransform disable*/
+.examScores-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding: 0 20px;
+    padding-top: 20px;
+    background-color: #f4f4f6;
+    height: 100vh;
+
+    .examScores-gpa {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        padding: 16px;
+        background: linear-gradient(90deg, #3957ff 0%, #4e6aff 100%) no-repeat;
+        border-radius: 16px;
+
+        Text {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .examScores-gpa-text {
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 100%;
+        }
+    }
+
+    .examScore-studyDetail {
+        display: flex;
+        justify-content: space-around;
+        padding: 16px;
+        background-color: #fff;
+        border-radius: 16px;
+
+        .examScore-studyDetail-item {
+            display: flex;
+            row-gap: 4px;
+            flex-direction: column;
+            align-items: center;
+
+            Text:first-child {
+                font-size: 20px;
+                font-weight: 700;
+                color: #000;
+            }
+
+            Text:last-child {
+                font-size: 12px;
+                color: #555;
+            }
+        }
+    }
+
+    .examScores-scores {
+        overflow: hidden;
+        height: calc(100vh - 386px);
+        background-color: #fff;
+        border-radius: 16px;
+        padding: 16px 0;
+
+        .examScores-scores-queryies {
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 16px;
+
+            .examScores-scores-picker {
+                display: flex;
+                align-items: center;
+
+                Text {
+                    width: 42px;
+                    font-size: 14px;
+                    font-weight: 800;
+                }
+
+                Picker {
+                    flex: 1;
+                    height: 36px;
+                    border-radius: 8px;
+                    background-color: #ececec;
+                    line-height: 36px;
+                    padding-left: 12px;
+                }
+            }
+        }
+
+        .examScores-scores-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: calc(100% - 100px);
+
+            .examScores-scores-result-noData {
+                margin-top: 16px;
+
+                Text {
+                    font-size: 14px;
+                    color: #555;
+                }
+            }
+
+            .examScores-scores-result-headerRow {
+                box-sizing: border-box;
+                display: flex;
+                justify-content: space-between;
+                padding: 12px 16px;
+                width: 100%;
+                font-size: 14px;
+                border-bottom: 1px solid #ddd;
+                background-color: #ececec;
+                font-weight: 700;
+
+                Text:nth-child(1) {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: 50%;
+                }
+            }
+
+            .examScores-scores-result-data {
+                width: 100%;
+                overflow-y: scroll;
+
+                .examScores-scores-result-item {
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 12px 16px;
+                    width: 100%;
+                    font-size: 14px;
+                    border-bottom: 1px solid #ddd;
+
+                    Text:nth-child(1) {
+                        overflow: hidden;
+                        white-space: nowrap;
+                        width: 50%;
+                    }
+
+                    Text:last-child {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+
+    }
+}

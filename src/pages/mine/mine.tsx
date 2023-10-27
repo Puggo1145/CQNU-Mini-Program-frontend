@@ -17,6 +17,7 @@ import profileImg from '../../static/mine/profile.png'
 import logoutImg from '../../static/mine/logout.png'
 import loginImg from '../../static/mine/login.png'
 import usePostData from '@/store/postData';
+import useStore from '@/store/store';
 
 
 export default function Mine() {
@@ -25,6 +26,7 @@ export default function Mine() {
   const [requestUrl, avatarToOssUrl] = useRequest((state) => [state.requestUrl, state.avatarToOssUrl]);
   const accessKeyId = useAppInfo((state) => state.accessKey_id);
   const [postData, setPostData] = usePostData((state) => [state, state.setPostData]);
+  const statusBarHeight = useStore((state) => state.statusBarHeight);
 
   useLoad(async () => {
     if (!userInfo.isLogin) {
@@ -163,10 +165,10 @@ export default function Mine() {
 
   // 跳转功能页
   const handleLinkToFns = (fnName: string) => {
-      Taro.navigateTo({
-        url: `/pages/mine/${fnName}/${fnName}`
-      })
-  }
+    Taro.navigateTo({
+      url: `/pages/mine/${fnName}/${fnName}`
+    });
+  };
 
   const gradeToChinese = () => {
     const setter = {
@@ -182,9 +184,9 @@ export default function Mine() {
     if (currentYear - grade > 4 && currentYear - grade < 1000) {
       return '已毕业';
     } else if (currentYear - grade <= 4 && userInfo.identity === '本科生') {
-      return `大${setter[currentYear - grade + 1]}` 
+      return `大${setter[currentYear - grade + 1]}`
     } else if (currentYear - grade <= 3 && userInfo.identity === '研究生') {
-      return `研${setter[currentYear - grade + 1]}` 
+      return `研${setter[currentYear - grade + 1]}`
     } else {
       return '年级'
     };
@@ -192,16 +194,20 @@ export default function Mine() {
 
   return (
     <View className='mine-wrapper'>
-      <View className='mine-content'>
+      <View className='mine-content' style={{ paddingTop: statusBarHeight + 64 + 'px' }}>
         <View className='mine-userInfo'>
           <View className='mine-basicInfo'>
-            <Image src={userInfo.avatar || defaultAvatar} className='mine-avatar' onClick={() => userInfo.isLogin ? handleAvatarChange() : null}></Image>
-            <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
-            <Text className='mine-schoolID'>{userInfo.student_id}</Text>
-            <View className='mine-moreInfo'>
-              <View className='mine-moreInfo-item'>{userInfo.user_level === 0 ? '等级' : `Lv.${userInfo.user_level}`}</View>
-              <View className='mine-moreInfo-item'>{gradeToChinese()}</View>
-              <View className='mine-moreInfo-item'>{userInfo.faculty ? userInfo.faculty : '学院'}</View>
+            <View className='mine-basicInfo-left'>
+              <Image src={userInfo.avatar || defaultAvatar} className='mine-avatar' onClick={() => userInfo.isLogin ? handleAvatarChange() : null}></Image>
+            </View>
+            <View className='mine-basicInfo-right'>
+              <Text className='mine-nickname'>{userInfo.isLogin ? userInfo.nick_name : '请登录'}</Text>
+              <Text className='mine-schoolID'>{userInfo.student_id}</Text>
+              <View className='mine-moreInfo'>
+                <View className='mine-moreInfo-item'>{userInfo.user_level === 0 ? '等级' : `Lv.${userInfo.user_level}`}</View>
+                <View className='mine-moreInfo-item'>{gradeToChinese()}</View>
+                <View className='mine-moreInfo-item'>{userInfo.faculty ? userInfo.faculty : '学院'}</View>
+              </View>
             </View>
           </View>
           <View className='mine-postInfo'>
@@ -214,16 +220,16 @@ export default function Mine() {
               <Text className='mine-postInfo-item-text'>收到的赞</Text>
             </View>
             <View className='mine-postInfo-item'>
-              <Text className='mine-postInfo-item-num'>即将上线</Text>
+              <Text className='mine-postInfo-item-num'>-</Text>
               <Text className='mine-postInfo-item-text'>最近浏览</Text>
             </View>
           </View>
         </View>
         {userInfo.isLogin ?
           <View className='mine-functions'>
-            <View className='mine-function mine-linkOfficial' onClick={() => handleLinkToFns('linkOfficial')}>
+            <View className='mine-function mine-linkOfficial' onClick={!userInfo.officialPwd ? () => handleLinkToFns('linkOfficial') : () => {}}>
               <Image src={profileImg}></Image>
-              连接校园门户
+              { !userInfo.officialPwd ? '连接校园门户' : '校园门户已连接' }
             </View>
             <View className='mine-function mine-contactUs' onClick={() => handleLinkToFns('contactUs')}>
               <Image src={chatImg}></Image>
@@ -241,7 +247,6 @@ export default function Mine() {
             </View>
           </View>}
       </View>
-      <View className='mine-topBackground'></View>
     </View>
   )
 }

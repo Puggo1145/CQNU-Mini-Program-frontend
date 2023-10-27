@@ -112,6 +112,16 @@
   background-position: 10px center;
   box-shadow: 0 0 16px -4px #bdbdbd;
 }
+.classtable-switchWeek .classTable-update {
+  height: 100%;
+  padding: 0 16px;
+  background-color: #fff;
+  margin-right: 16px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 16px -4px #bdbdbd;
+}
 .classtable-switchWeek .classtable-switchWeek-item:last-child {
   transform: rotate(180deg);
   margin-left: 12px;

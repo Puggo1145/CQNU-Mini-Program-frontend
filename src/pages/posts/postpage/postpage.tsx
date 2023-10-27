@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useLoad, getCurrentInstance } from '@tarojs/taro';
-import { View, Text, Image, Input, ScrollView, Textarea } from '@tarojs/components';
+import { View, Text, Image, ScrollView, Textarea } from '@tarojs/components';
 import PubSub from 'pubsub-js';
 
 // stores
@@ -36,7 +36,7 @@ export default function postpage() {
     const post_id = getCurrentInstance().router?.params.post_id; // 目标 post_id
     const user_id = useUser((state) => state.id) // 本机用户 id
 
-    const [request_url, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
+    const [request_url] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
     // 基本 states ————————————————————————————————————————————————————————————————————————————————————
     const [postContent, setPostContent] = useState<postContent>({
@@ -95,7 +95,7 @@ export default function postpage() {
         Taro.showShareMenu({
             withShareTicket: true,
         });
-        
+
         // 1. 获取帖子所有内容
         const postContent = await postpageFn.getPostContent();
         const postCommentsRes = await postpageFn.getPostComments(0, 1); // 第一次请求默认参数 - sort: 0, page: 1
@@ -159,13 +159,14 @@ export default function postpage() {
             });
             return;
         } else {
-            await postpageFn.sendComment(commentContent, postContent.post.user._id);
+            const res = await postpageFn.sendComment(commentContent, postContent.post.user._id);
 
-            // 重新获取评论内容
-            refreshComments();
 
-            // 清空评论框
-            setCommentContent('');
+
+            if (res) {
+                refreshComments(); // 重新获取评论内容
+                setCommentContent(''); // 清空评论框
+            }
         }
     };
 
@@ -204,7 +205,7 @@ export default function postpage() {
             });
             return;
         };
-        
+
         Taro.navigateBack();
 
         // 1. 更新上一页的点赞和评论数
@@ -318,10 +319,10 @@ export default function postpage() {
 
             </View>
 
-            <View className='postpage-commentBar' 
-                style={{ 
-                    bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px', 
-                    height: keyboardHeight === 0 ? '60px' : '90px' 
+            <View className='postpage-commentBar'
+                style={{
+                    bottom: keyboardHeight === 0 ? '30px' : keyboardHeight + 'px',
+                    height: keyboardHeight === 0 ? '60px' : '90px'
                 }}
             >
                 <Textarea
@@ -331,7 +332,7 @@ export default function postpage() {
                     adjustPosition={false}
                     onInput={e => { setCommentContent(e.detail.value) }}
                     onConfirm={sendComment}
-                    style={{ height: keyboardHeight === 0 ? '30px' : '60px' }}
+                    style={{ height: keyboardHeight === 0 ? '32px' : '64px' }}
                 >
                 </Textarea>
                 {

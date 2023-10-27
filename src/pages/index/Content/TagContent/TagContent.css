@@ -18,6 +18,7 @@
   height: 42px;
   display: flex;
   align-items: center;
+  padding-bottom: 12px;
 }
 .index-content-tags .index-content-tag:first-child {
   margin-left: 20px;
@@ -26,21 +27,20 @@
   margin-right: 20px;
 }
 .index-content-tags .index-content-tag {
-  padding: 0 18px;
+  padding: 2px 20px;
   margin-right: 8px;
-  height: 32px;
-  border-radius: 16px;
+  border-radius: 20px;
   background-color: #efefef;
   color: #8B8B8B;
   line-height: 32px;
   font-size: 14px;
+  letter-spacing: 1.4px;
 }
 .index-content-tags::-webkit-scrollbar {
   display: none;
 }
 .index-tagContent {
-  height: calc(100vh - 160px);
-  margin-top: 12px;
+  height: calc(100vh - 158px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -92,6 +92,7 @@
 .index-tagContent .index-content-posts {
   flex-grow: 1;
   overflow-y: auto;
+  background-color: #f2f1f6;
 }
 .index-tagContent .index-content-posts .index-content-post {
   position: relative;
@@ -99,7 +100,6 @@
   width: 95vw;
   padding: 16px;
   border-radius: 16px;
-  box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.3);
   background-color: #fff;
   margin: 0 auto;
   margin-top: 12px;
@@ -110,22 +110,19 @@
 }
 .index-tagContent .index-content-posts .index-content-post .post-texts .post-title {
   color: #000;
-  font-feature-settings: 'clig' off, 'liga' off;
   font-size: 20px;
-  font-style: normal;
   font-weight: 700;
   line-height: 100%;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .index-tagContent .index-content-posts .index-content-post .post-texts .post-description {
   overflow: hidden;
-  height: 14px;
   color: #2C2C2C;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%;
+  line-height: 130%;
 }
 .index-tagContent .index-content-posts .index-content-post .post-picture {
   width: 100%;
@@ -153,6 +150,7 @@
   background-position: center;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info .post-info-user Text {
+  font-size: 14px;
   margin-left: 8px;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info .post-info-data {
@@ -161,20 +159,23 @@
   color: #2C2C2C;
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 16px;
+  margin-right: 8px;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info .post-info-data Image {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   margin-right: 4px;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info .post-info-data .post-like {
   display: flex;
   align-items: center;
+  font-size: 14px;
   margin-right: 12px;
 }
 .index-tagContent .index-content-posts .index-content-post .post-info .post-info-data .post-comment {
   display: flex;
   align-items: center;
+  font-size: 14px;
 }
 .index-tagContent .index-content-posts .spacer {
   height: 14px;
@@ -188,22 +189,20 @@
   position: absolute;
   right: 16px;
   top: 16px;
-  width: 32px;
-  height: 32px;
+  padding: 8px 12px;
   border-radius: 24px;
-  background-color: #9ba8ff;
+  background-color: #4e6aff;
   text-align: center;
-  line-height: 32px;
   color: #fff;
   font-size: 10px;
 }
 @media screen and (min-width: 319px) {
   .index-tagContent {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 108px);
   }
 }
 @media screen and (min-width: 376px) {
   .index-tagContent {
-    height: calc(100vh - 160px);
+    height: calc(100vh - 158px);
   }
 }

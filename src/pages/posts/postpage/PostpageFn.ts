@@ -89,12 +89,16 @@ class PostpageFn {
                 icon: 'success',
                 duration: 1500
             });
+
+            return true;
         } else {
             Taro.showToast({
-                title: '评论失败',
+                title: '评论失败，请重试',
                 icon: 'none',
                 duration: 1500
             });
+
+            return false;
         }
     };
 

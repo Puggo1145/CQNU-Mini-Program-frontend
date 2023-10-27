@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { View, Text, Input, Image, Button } from "@tarojs/components"
 import { useLoad } from "@tarojs/taro"
-import Taro from "@tarojs/taro"
+import Taro, { getCurrentInstance } from "@tarojs/taro"
 
 import { makeRequest } from "@/common/utilities/requester"
 
@@ -11,13 +11,14 @@ import useUser from "@/store/userInfo"
 import useRequest from "@/store/request"
 
 import "./linkOfficial.css"
-import useCLasstable from "@/store/classTable"
 
 export default function linkOfficial() {
 
+  // 请求行为：获取课表、查询成绩
   const student_id = useUser(state => state.student_id);
+  const setUserInfo = useUser(state => state.setUserInfo);
+
   const authUrl = useRequest(state => state.authUrl);
-  const setClassTable = useCLasstable(state => state.setClassTable);
 
   const [cookie, setCookie] = useState<string>('');
   const [dataObj, setDataObj] = useState<object>({});
@@ -30,7 +31,6 @@ export default function linkOfficial() {
 
   useLoad(async () => {
     handleRefreshAuthCode();
-
   });
 
   // 请求 authCode、会话 cookies、dataObj
@@ -44,7 +44,7 @@ export default function linkOfficial() {
         url: authUrl,
         path: '/',
         requestService: "lkofficial",
-        // timeout: 10000, // 10 秒超时
+        timeout: 5000, // 5 秒超时
       });
 
       Taro.hideLoading();
@@ -99,34 +99,30 @@ export default function linkOfficial() {
           password,
           cookie,
           dataObj,
-          authCode
+          authCode,
         },
-        timeout: 15000, // 15 秒超时
+        timeout: 5000, // 5 秒超时
       });
       Taro.hideLoading();
 
-      // 绑定成功
       if (res.statusCode === 200) {
+        // 将密码和教务系统cookie存储进本次小程序使用期间的 store 内
+        setUserInfo({ officialPwd: password, headerCookie: res.data.data });
+        
         Taro.showToast({
-          title: '门户信息已同步',
+          title: '连接成功',
           icon: 'success',
-          duration: 2000
+          duration: 1000
         });
 
-        // 将课表存入缓存与 store
-        const classTable = res.data.data.kbList;
-        
-        Taro.setStorageSync('classTable', classTable);
-        setClassTable(classTable);
-        
         setTimeout(() => {
           Taro.navigateBack();
-        }, 2000);
+        }, 1000);
 
-      // 绑定失败, 验证码或密码错误，重新获取验证码
+        // 绑定失败, 验证码或密码错误，重新获取验证码
       } else {
         setErrMsg(res.data.message);
-        
+
         handleRefreshAuthCode();
       }
     } catch (err) {
@@ -142,11 +138,11 @@ export default function linkOfficial() {
     <View className="linkOfficial-wrapper">
       <Header title={"连接校园门户"}></Header>
       <View className="linkOfficial-content">
-        <Text className="linkOfficial-description">学习与服务的部分功能需要绑定校园门户才能使用（目前仅同步课表，其他信息的同步将在后续更新中支持）</Text>
+        <Text className="linkOfficial-description">为保护用户隐私，小程序不会主动存储您的密码，密码仅在本次小程序使用期间有效</Text>
         <Text className="linkOfficial-description">受网络情况与访问量的影响，连接时间可能较长</Text>
         <View className="linkOfficial-inputs">
           <View className="linkOfficial-inputs-item">
-            <Text>学号</Text>
+            <Text>学号（暂时无法修改）</Text>
             <View className="linkOfficial-input" style={{ fontWeight: 'bold', color: '#ccc' }}>{student_id}</View>
           </View>
           <View className="linkOfficial-inputs-item">

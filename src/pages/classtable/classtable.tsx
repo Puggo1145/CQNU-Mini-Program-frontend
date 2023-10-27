@@ -1,10 +1,13 @@
 import { View, Text, Button } from "@tarojs/components"
 import { useState, useEffect } from "react"
 import Taro from "@tarojs/taro"
+import { makeRequest } from "@/common/utilities/requester"
 
 import Header from "@/common/Header/Header"
 
 import useCLasstable from "@/store/classTable"
+import useUser from "@/store/userInfo"
+import useRequest from "@/store/request"
 
 import { newDateForIOS } from "@/common/utilities/newDateForIOS"
 
@@ -12,11 +15,13 @@ import './classtable.css'
 
 export default function classtable() {
 
-  const startDate = useCLasstable((state) => state.startDate) // 开学日期
+  const headerCookie = useUser(state => state.headerCookie); // 链接校园门户后获得的教务系统 cookie
+  const authUrl = useRequest(state => state.authUrl);
+  const setClassTable = useCLasstable(state => state.setClassTable);
+  const startDate = useCLasstable((state) => state.startDate); // 开学日期
 
-
-  const [maxWeek, setMaxWeek] = useState<number>(20) // 最大周数
-  const [weekList, setWeekList] = useState<string[]>(['周一', '周二', '周三', '周四', '周五', '周六', '周日'])
+  const [maxWeek] = useState<number>(20) // 最大周数
+  const [weekList] = useState<string[]>(['周一', '周二', '周三', '周四', '周五', '周六', '周日'])
 
   const [currentDay, setCurrentDay] = useState<number>(1) // 当前星期几 useState钩子函数 并定义了一个名为 currentDay 的状态及其对应的更新函数 setCurrentDay 在调用 useState 时 我们传入了一个初始值 1 表示当前星期一
   const [currentWeek, setCurrentWeek] = useState<number>(1) // 当前周数
@@ -48,6 +53,44 @@ export default function classtable() {
     }
 
     action === 0 ? setCurrentWeek(currentWeek - 1) : setCurrentWeek(currentWeek + 1)
+  };
+
+  // 请求课表
+  async function getTimeTable() {
+    if (!headerCookie) return Taro.navigateTo({url: '/pages/mine/linkOfficial/linkOfficial?action=getTimeTable'});
+
+    Taro.showLoading({
+      title: '正在同步',
+    });
+
+    const res = await makeRequest({
+      method: 'POST',
+      url: `${authUrl}`,
+      path: '/withCookie',
+      requestService: "lkofficial",
+      data: {
+        action: 'getTimeTable',
+        headerCookie,
+      },
+      timeout: 10000
+    });
+
+    if (res.statusCode === 200) {
+      setClassTable(res.data.data);
+      Taro.setStorageSync('classTable', res.data.data);
+      
+      Taro.showToast({
+        title: '同步成功',
+        icon: 'success',
+        duration: 1000
+      });
+    } else {
+      Taro.showToast({
+        title: '同步失败，请重试',
+        icon: 'none',
+        duration: 2000
+      });
+    }
   }
 
   return (
@@ -135,6 +178,7 @@ export default function classtable() {
         </View>
       </View>
       <View className="classtable-switchWeek">
+        {lessons.length !== 0 && <View className="classTable-update" onClick={getTimeTable}>更新课表</View>}
         <View className="classtable-switchWeek-item" onClick={() => handleWeekSwitch(0)}></View>
         <View className="classtable-switchWeek-item" onClick={() => handleWeekSwitch(1)}></View>
       </View>
@@ -142,7 +186,7 @@ export default function classtable() {
         lessons.length === 0 && 
         <View className="classtable-getTable">
           <View className="classtable-getTable-desc">没有同步课程？点击去同步！</View>
-          <Button className="classtable-getTable-sync" onClick={() => Taro.navigateTo({url: '/pages/mine/linkOfficial/linkOfficial'})}>一键同步</Button>
+          <Button className="classtable-getTable-sync" onClick={getTimeTable}>一键同步</Button>
         </View>
       }
     </View>

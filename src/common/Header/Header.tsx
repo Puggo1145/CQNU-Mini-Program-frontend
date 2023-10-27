@@ -5,7 +5,7 @@ import useStore from "@/store/store"
 
 import './Header.css'
 
-export default function Header(props) {
+export default function Header({title}: {title: string}) {
     
     const statusBarHeight = useStore((state) => state.statusBarHeight)
 
@@ -14,7 +14,7 @@ export default function Header(props) {
             <View className='header-back' onClick={() => {
                 Taro.navigateBack()
             }}></View>
-            <Text className='header-title'>{props.title}</Text>
+            <Text className='header-title'>{title}</Text>
         </View>
     )
 }
