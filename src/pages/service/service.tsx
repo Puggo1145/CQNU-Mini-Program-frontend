@@ -44,8 +44,9 @@ export default function Service() {
   const statusBarHeight = useStore((state) => state.statusBarHeight);
   const requestUrl = useRequest(state => state.requestUrl);
   const officialPwd = useUser(state => state.officialPwd);
+  const isLogin = useUser(state => state.isLogin);
 
-  const toServicePage = async (target: {type: string, page: string, name: string, requireLogin: boolean}) => {
+  const toServicePage = async (target: { type: string, page: string, name: string, requireLogin: boolean }) => {
     if (target.page === 'none') {
       return Taro.showToast({
         title: '暂未上线，敬请期待',
@@ -54,16 +55,22 @@ export default function Service() {
     }
 
     // 记录点击数据
-    await recordClickData({url: requestUrl, page: target.name});
+    await recordClickData({ url: requestUrl, page: target.name });
 
     if (target.type === 'toPage') {
       // 1. 检查是否已登录到校园门户
-      if (target.requireLogin && !officialPwd) Taro.navigateTo({url: `/pages/mine/linkOfficial/linkOfficial?action=`});
+      if (!isLogin) {
+        Taro.navigateTo({url: `/pages/login/login`});
+      } else if (target.requireLogin && !officialPwd) {
+        Taro.navigateTo({ url: `/pages/mine/linkOfficial/linkOfficial?action=` });
+      };
+
 
       Taro.navigateTo({
         url: `/pages/service/${target.page}/${target.page}`
-      })
-    
+      });
+
+      
     } else {
       Taro.navigateToMiniProgram({
         appId: target.page,
@@ -82,7 +89,7 @@ export default function Service() {
             {
               studyServices.map((item, index) => {
                 return (
-                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name, requireLogin: item.requireLogin || false})} style={{ backgroundColor: item.color }}>
+                  <View className='service-item' key={index} onClick={() => toServicePage({ type: item.type, page: item.page, name: item.name, requireLogin: item.requireLogin || false })} style={{ backgroundColor: item.color }}>
                     <Image src={item.icon}></Image>
                     <Text>{item.name}</Text>
                   </View>
@@ -98,7 +105,7 @@ export default function Service() {
             {
               lifeServices.map((item, index) => {
                 return (
-                  <View className='service-item' key={index} onClick={() => toServicePage({type: item.type, page: item.page, name: item.name, requireLogin: item.requireLogin || false})} style={{ backgroundColor: item.color }}>
+                  <View className='service-item' key={index} onClick={() => toServicePage({ type: item.type, page: item.page, name: item.name, requireLogin: item.requireLogin || false })} style={{ backgroundColor: item.color }}>
                     <Image src={item.icon}></Image>
                     <Text>{item.name}</Text>
                   </View>

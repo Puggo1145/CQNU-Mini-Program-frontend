@@ -28,8 +28,8 @@ interface tagType {
 
 export default function TagContent() {
     // store数据 ————————————————————————————————————————————————————————————————————————————————————————————————
-    const [user_id, isLogin, toLoginPage] = useUser((state) => [state.id, state.isLogin, state.toLoginPage]);
-    const [requestUrl, setRequestUrl] = useRequest((state) => [state.requestUrl, state.setRequestUrl]);
+    const [isLogin, toLoginPage] = useUser((state) => [state.isLogin, state.toLoginPage]);
+    const requestUrl = useRequest((state) => state.requestUrl);
     const postData = usePostData((state) => state) // 获取Tags
 
     // 一些基本state ——————————————————————————————————————————————————————————————————————————————————————
@@ -70,13 +70,10 @@ export default function TagContent() {
                 setPosts(updatedPosts); // 更新posts
                 setPage(res.data.page + 1); // 更新page
 
-                setIsRefresh(false); // 允许下一次刷新
-            } else {
-                throw new Error(`Request failed with status code: ${res.statusCode}`);
-            }
-
+                setIsRefresh(false); // 根据当前post总数和实际总数对比判断是否允许下一次刷新
+            };
             // posts 被全部请求完后
-            if (res.data.data.posts.length === 0) {
+            if (res.data.data.postsNum - posts.length <= 5) {
                 setContentLoaded(true);
             };
         } catch (err) {
@@ -153,7 +150,7 @@ export default function TagContent() {
                 }
             });
             setPosts(newposts);
-        });
+        });        
 
         return () => {
             PubSub.unsubscribe(updateLikeNum);
@@ -248,11 +245,7 @@ export default function TagContent() {
                     onRefresherRefresh={resetAndRefresh}
                 >
                     {
-                        posts.sort((a, b) => {
-                            if (a.isTopped && !b.isTopped) return -1;
-                            if (!a.isTopped && b.isTopped) return 1;
-                            return 0;
-                        }).map((post) => {
+                        posts.map((post) => {
                             return (
                                 <View className="index-content-post" key={post._id} onClick={() => enterPost(post._id)}>
                                     {post.isTopped && <Text className="post-top">置顶</Text>}

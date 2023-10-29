@@ -26,7 +26,7 @@ interface LessonType {
 
 export default function Study() {
 
-  const [userInfo, setUserInfo] = useUser((state) => [state, state.setUserInfo]) // 用户信息
+  const userInfo = useUser((state) => state) // 用户信息
 
   const statusBarHeight = useStore(state => state.statusBarHeight)
   const classTable = useCLasstable(state => state.classTable)
@@ -35,7 +35,7 @@ export default function Study() {
   const [currentWeek, setCurrentWeek] = useState<number>(1) // 当前周数
 
   // 课程时间对照表: [hour, minute]
-  const [timeTable, setTimeTable] = useState([
+  const [timeTable] = useState([
     [8, 30], [9, 25], [10, 30], [11, 25], [14, 30], [15, 25], [16, 30], [17, 25], [19, 30], [20, 25] 
   ])
 
@@ -95,7 +95,7 @@ export default function Study() {
         <View className='study-timetable'>
           <View className='study-timetable-top'>
             <Text>我的课程</Text>
-            <View className='study-timetable-toTable' onClick={() => Taro.navigateTo({ url: '/pages/classtable/classtable' })}>{"查看课表>"}</View>
+            <View className='study-timetable-toTable' onClick={() => Taro.navigateTo({ url: userInfo.isLogin ? '/pages/classtable/classtable' : '/pages/login/login' })}>{"查看课表>"}</View>
           </View>
           <View className='study-timetable-items'>
             <View className='study-timetable-current'>

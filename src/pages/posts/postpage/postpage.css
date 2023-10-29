@@ -209,7 +209,8 @@
   box-sizing: border-box;
   border-radius: 16px;
   background: #EFEFEF;
-  padding: 9px 16px;
+  padding: 0px 16px;
+  padding-top: 9px;
   color: #2C2C2C;
   font-size: 12px;
   font-weight: 400;

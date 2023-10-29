@@ -77,7 +77,6 @@ export default function examScores() {
         });
 
         if (res.statusCode === 200) {
-            setGpa(res.data.data.gpa);
             setStudyDetail(res.data.data.studyDetail);
             Taro.hideLoading();
         };
