@@ -1,6 +1,0 @@
-/*postcss-pxtransform disable*/
-page {
-  padding-top: 38px;
-  height: calc(100vh - 48px);
-  overflow: hidden;
-}
