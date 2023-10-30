@@ -44,7 +44,17 @@ export default useCLasstable;
 //     start_time: 7, // 在第几节课开始
 //     end_time: 8, // 在第几节课结束
 //     day: 1, // 星期几
-//     include_week: [1, 3, 5, 7, 8],
+//     include_week: [1, 3, 5, 7, 9],
+//     color: "#ffa500", // 课程颜色
+// },{
+//     lesson_id: 7,
+//     name: "HTML前端", // 课程名称
+//     place: "12301", // 上课地点
+//     teacher: "楼英浩", // 教师
+//     start_time: 7, // 在第几节课开始
+//     end_time: 8, // 在第几节课结束
+//     day: 1, // 星期几
+//     include_week: [2, 4, 6, 8, 10],
 //     color: "#ffa500", // 课程颜色
 // },{
 //     lesson_id: 2,
@@ -107,4 +117,3 @@ export default useCLasstable;
 //     include_week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 //     color: "#a2b231", // 课程颜色
 // }
-
