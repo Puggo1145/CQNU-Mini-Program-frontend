@@ -36,6 +36,7 @@ export default function TagContent() {
     const [posts, setPosts] = useState<PostType[]>([]);
     const [tags, setTags] = useState<tagType[]>([]);
     const [order, setOrder] = useState<'reply' | 'publish'>('reply'); // 阅读顺序
+    const [isTagUnfold, setIsTagUnfold] = useState<boolean>(false);
 
     // 刷新相关state ——————————————————————————————————————————————————————————————————————————————————————
 
@@ -161,6 +162,7 @@ export default function TagContent() {
 
     // A. 切换Tag
     function handleTagClick(tagName: string) {
+        setIsTagUnfold(false);
         // 切换Tag显示
         const newtags = tags.map((tag) => {
             return {
@@ -178,13 +180,6 @@ export default function TagContent() {
 
     // 跳转到帖子
     function enterPost(post_id: string) {
-
-        if (!isLogin) {
-            toLoginPage()
-
-            return
-        }
-
         Taro.navigateTo({
             url: '/pages/posts/postpage/postpage?' + `post_id=${post_id}`
         })
@@ -213,19 +208,25 @@ export default function TagContent() {
             <View className="index-content-tags-createPost" onClick={handleCreatePost}></View>
             {tags.find((tag) => tag.isCurrent)?.tagName === '猫猫星球' && <View className="index-content-tags-catBook" onClick={handleCatBook}></View>}
             <View className="index-content-tags">
-                {
-                    tags.map((tag) => {
-                        return (
-                            <View
-                                className="index-content-tag"
-                                style={tag.isCurrent ? { backgroundColor: '#4e6aff', color: '#fff' } : {}}
-                                onClick={() => handleTagClick(tag.tagName)}
-                            >
-                                {tag.tagName}
-                            </View>
-                        )
-                    })
-                }
+                <View className={`index-content-tags-container ${isTagUnfold ? 'index-content-tags-container-unfold' : ''}`} >
+                    {
+                        tags.map((tag) => {
+                            return (
+                                <View
+                                    className="index-content-tag"
+                                    style={tag.isCurrent ? { backgroundColor: '#4e6aff', color: '#fff' } : {}}
+                                    onClick={() => handleTagClick(tag.tagName)}
+                                >
+                                    {tag.tagName}
+                                </View>
+                            )
+                        })
+                    }
+                </View>
+                <View className="index-content-tags-unfoldTags"
+                    onClick={() => setIsTagUnfold(!isTagUnfold)}
+                    style={isTagUnfold ? { transform: 'rotate(180deg)' } : {}}
+                ></View>
             </View>
             <View className="index-tagContent">
                 {

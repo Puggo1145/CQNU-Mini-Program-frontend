@@ -54,7 +54,9 @@ export default function Study() {
     const hours = date.getHours(); // 几点
     const minutes = date.getMinutes(); // 几分
 
-    const classTableToday = classTable.filter(item => item.day === day && item.include_week[0] <= currentWeek); // 今日课程 
+    const classTableToday = classTable
+                                .filter(item => item.include_week.includes(week))
+                                .filter(item => item.day === day && item.include_week[0] <= currentWeek); // 今日课程 
     
     // 获取今日剩余课程
     if (hours * 60 + minutes < 20 * 60 + 25) {

@@ -34,7 +34,7 @@ export default function postpage() {
     const statusBarHeight = useStore((state) => state.statusBarHeight)
 
     const post_id = getCurrentInstance().router?.params.post_id; // 目标 post_id
-    const user_id = useUser((state) => state.id) // 本机用户 id
+    const [user_id, isLogin] = useUser((state) => [state.id, state.isLogin]);
 
     const [request_url] = useRequest((state) => [state.requestUrl, state.setRequestUrl])
 
@@ -133,6 +133,8 @@ export default function postpage() {
 
     // A. 点赞帖子
     function likePost() {
+        // 0. 判断是否登录
+        if (!isLogin) return Taro.navigateTo({url: '/pages/login/login'});
         // 1. 客户端先反馈
         const updatedLikeNum = postContent.post.likeNum + (isLiked ? -1 : 1);
         setPostContent({
@@ -152,6 +154,8 @@ export default function postpage() {
 
     // B. 发送评论
     async function sendComment() {
+        if (!isLogin) return Taro.navigateTo({url: '/pages/login/login'});
+
         if (commentContent === '') {
             Taro.showToast({
                 title: '评论不能为空',
@@ -177,6 +181,8 @@ export default function postpage() {
 
     // D. 点赞评论
     async function likeComment(comment_id: string) {
+        if (!isLogin) return Taro.navigateTo({url: '/pages/login/login'});
+        
         // 1. 客户端先反馈
         const updatedComments = comments?.map((item) => {
             if (item._id === comment_id) {
