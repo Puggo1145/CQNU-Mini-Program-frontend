@@ -150,7 +150,7 @@ export default function TagContent() {
                 }
             });
             setPosts(newposts);
-        });        
+        });
 
         return () => {
             PubSub.unsubscribe(updateLikeNum);
@@ -190,20 +190,28 @@ export default function TagContent() {
         })
     };
 
+    // 创建帖子
+    const handleCreatePost = () => {
+        if (!isLogin) {
+            toLoginPage()
+        }
+
+        Taro.navigateTo({
+            url: '/pages/posts/createpost/createpost'
+        })
+    };
+
+    // 跳转到猫猫图鉴
+    const handleCatBook = () => {
+        Taro.navigateTo({
+            url: '/pages/service/catBook/catBook'
+        });
+    };
+
     return (
         <Fragment>
-            <View className="index-content-tags-createPost" onClick={
-                () => {
-
-                    if (!isLogin) {
-                        toLoginPage()
-                    }
-
-                    Taro.navigateTo({
-                        url: '/pages/posts/createpost/createpost'
-                    })
-                }}
-            ></View>
+            <View className="index-content-tags-createPost" onClick={handleCreatePost}></View>
+            {tags.find((tag) => tag.isCurrent)?.tagName === '猫猫星球' && <View className="index-content-tags-catBook" onClick={handleCatBook}></View>}
             <View className="index-content-tags">
                 {
                     tags.map((tag) => {

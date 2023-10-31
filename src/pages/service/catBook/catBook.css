@@ -1,0 +1,88 @@
+/*postcss-pxtransform disable*/
+.catBook-wrapper {
+  height: 100vh;
+}
+.catBook-wrapper .catBook-preface {
+  padding: 0 20px;
+  box-sizing: border-box;
+  padding: 20px;
+  padding-top: 0;
+  background-color: #fff;
+}
+.catBook-wrapper .catBook-preface .catBook-contribution {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 16px;
+}
+.catBook-wrapper .catBook-preface .catBook-contribution .catBook-contribution-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1.6px;
+}
+.catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributors {
+  overflow-x: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  column-gap: 16px;
+  max-width: 100%;
+}
+.catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+}
+.catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributor Text {
+  font-size: 12px;
+}
+.catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributor Image {
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 2px solid #000;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats {
+  overflow: hidden;
+  color: #fff;
+  letter-spacing: 1.6px;
+  padding: 20px 0 48px 0;
+  box-sizing: border-box;
+  border: 2px solid #232323;
+  border-radius: 24px 0 24px 24px;
+  background-color: #3ab9eb;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-title {
+  font-weight: 700;
+  margin-left: 20px;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container {
+  margin-top: 20px;
+  box-sizing: border-box;
+  overflow-x: scroll;
+  width: 100%;
+  display: flex;
+  column-gap: 16px;
+  padding: 0 20px;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item {
+  width: 128px;
+  height: 164px;
+  border-radius: 16px;
+  border: 2px solid #000;
+  background-color: #fff;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item Image {
+  width: 128px;
+  height: 128px;
+  border-radius: 16px 16px 0 0;
+  background-color: #f3efe3;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item Text {
+  color: #000;
+  font-size: 12px;
+  margin-left: 14px;
+}

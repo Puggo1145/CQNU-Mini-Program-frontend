@@ -14,6 +14,7 @@ export default defineAppConfig({
     'pages/service/service',
     'pages/service/classroomNav/classroomNav',
     'pages/service/examScores/examScores',
+    'pages/service/catBook/catBook',
 
     'pages/posts/createpost/createpost',
     'pages/posts/postpage/postpage',
