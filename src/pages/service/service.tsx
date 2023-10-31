@@ -52,16 +52,16 @@ export default function Service() {
         title: '暂未上线，敬请期待',
         icon: 'none'
       })
-    }
+    } else if (!isLogin) {
+      return Taro.navigateTo({url: `/pages/login/login`});
+    };
 
     // 记录点击数据
     await recordClickData({ url: requestUrl, page: target.name });
 
     if (target.type === 'toPage') {
       // 1. 检查是否已登录到校园门户
-      if (!isLogin) {
-        Taro.navigateTo({url: `/pages/login/login`});
-      } else if (target.requireLogin && !officialPwd) {
+      if (target.requireLogin && !officialPwd) {
         Taro.navigateTo({ url: `/pages/mine/linkOfficial/linkOfficial?action=` });
       };
 

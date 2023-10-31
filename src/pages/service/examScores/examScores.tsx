@@ -39,7 +39,7 @@ export default function examScores() {
     const [gradeQuery, setGradeQuery] = useState<number[]>([]);
     const [gradeIndex, setGradeIndex] = useState<number>(0);
 
-    const [termQuery, setTermQuery] = useState<string[]>(['第一学期', '第二学期']);
+    const [termQuery] = useState<string[]>(['第一学期', '第二学期']);
     const [termIndex, setTermIndex] = useState<number>(0);
 
     const [totalPage, setTotalPage] = useState<number>(1);
@@ -77,6 +77,7 @@ export default function examScores() {
         });
 
         if (res.statusCode === 200) {
+            setGpa(res.data.data.gpa);
             setStudyDetail(res.data.data.studyDetail);
             Taro.hideLoading();
         };
@@ -121,8 +122,6 @@ export default function examScores() {
         });
 
         if (res.statusCode === 200) {
-            console.log(res.data.data);
-
             setScores(scores.concat(res.data.data.items));
 
             setTotalPage(res.data.data.totalPage);
