@@ -203,6 +203,7 @@ export default function register() {
                 const userInfo = {
                     id: newUserInfo.id,
                     openid: newUserInfo.openid,
+                    role: newUserInfo.role,
                     avatar: newUserInfo.avatar || defaultAvatar,
                     nick_name: newUserInfo.nick_name,
                     student_id: newUserInfo.student_id,
@@ -227,7 +228,7 @@ export default function register() {
                 setTimeout(() => {
                     Taro.switchTab({
                         url: '/pages/index/index'
-                    })
+                    });
                 }, 2000);
 
             } else {

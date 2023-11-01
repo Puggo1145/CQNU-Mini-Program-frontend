@@ -1,0 +1,39 @@
+/*postcss-pxtransform disable*/
+.catPage-content {
+  padding-top: 20px;
+  height: 100vh;
+  background-color: #f5f2ea;
+}
+.catPage-content .catPage-pics {
+  overflow-x: scroll;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+.catPage-content .catPage-pics .catPage-pics-item {
+  box-sizing: border-box;
+  width: 180px;
+  height: 180px;
+  padding: 8px;
+  background-color: #fff;
+  border: 2px solid #232323;
+  border-radius: 24px;
+}
+.catPage-content .catPage-pics .catPage-pics-item Image {
+  border-radius: 16px;
+  width: 100%;
+  height: 100%;
+}
+.catPage-content .catPage-pics .catPage-pics-addCat {
+  width: 180px;
+  height: 180px;
+  background-color: #f5f2ea;
+}
+.catPage-content .catPage-info {
+  margin-top: -48px;
+  padding: 0 20px;
+  min-height: 70vh;
+  border: 2px solid #232323;
+  background-color: #fff;
+  border-top-left-radius: 24px;
+}

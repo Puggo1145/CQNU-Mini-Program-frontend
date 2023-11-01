@@ -71,7 +71,7 @@ export default function login() {
                 setTimeout(() => {
                     Taro.switchTab({
                         url: '/pages/index/index'
-                    })
+                    });
                 }, 2000);
             } else {
                 Taro.showToast({

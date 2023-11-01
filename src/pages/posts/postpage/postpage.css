@@ -216,21 +216,27 @@
   font-weight: 400;
   letter-spacing: 1.4px;
 }
-.postpage-commentBar .postpage-likePost {
+.postpage-commentBar .postpage-right {
+  display: flex;
+  align-items: center;
+}
+.postpage-commentBar .postpage-right .postpage-likePost {
   display: flex;
   align-items: center;
   width: 36px;
 }
-.postpage-commentBar .postpage-likePost Image {
+.postpage-commentBar .postpage-right .postpage-likePost Image {
   width: 20px;
   height: 20px;
   margin-right: 4px;
 }
-.postpage-commentBar .postpage-sharePost {
+.postpage-commentBar .postpage-right .postpage-sharePost {
+  padding: 0;
   width: 20px;
   height: 20px;
+  border: none;
   background-image: url(../../../static/post/post-share-icon.png);
-  background-size: 100%;
+  background-size: contain;
   background-repeat: no-repeat;
   margin-left: 12px;
 }

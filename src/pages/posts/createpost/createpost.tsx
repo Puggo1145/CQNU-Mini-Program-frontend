@@ -128,25 +128,13 @@ export default function createpost() {
 
         if (res.statusCode === 201) {
           // 2. 上传图片到阿里 OSS
-          const uploadOssRes = await uploadImageToOss(ossAccessKeyId, res.data.data.post_id, postImgsToOssUrl, imagePaths); // uploadRes from oss
-          // 检查上传结果，图片上传失败抛出错误，终止上传
-          uploadOssRes.ossRes.forEach((res, index) => {
-            if (res.statusCode !== 204) {
-
-              Taro.showToast({
-                title: `上传失败: ${index + 1}`,
-                icon: 'error'
-              });
-
-              throw new Error("image upload failed");
-            };
-          });
+          await uploadImageToOss(ossAccessKeyId, res.data.data.post_id, postImgsToOssUrl, imagePaths);
 
           // 3. 获取图片链接
-          const uploadedImagePaths = uploadOssRes.filenames.map(filename => {
-            return `${postImgsToOssUrl}/${filename}`
-          });
-          
+          // const uploadedImagePaths = uploadOssRes.filenames.map(filename => {
+          //   return `${postImgsToOssUrl}/${filename}`
+          // });
+
           Taro.showToast({
             title: '发布成功',
             icon: 'success',

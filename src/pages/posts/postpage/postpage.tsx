@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { useLoad, getCurrentInstance } from '@tarojs/taro';
-import { View, Text, Image, ScrollView, Textarea } from '@tarojs/components';
+import { View, Text, Image, ScrollView, Textarea, Button } from '@tarojs/components';
 import PubSub from 'pubsub-js';
 
 // stores
@@ -27,6 +27,7 @@ import likeActivated from '../../../static/post/post-like-activated-icon.png';
 import deleteImg from '../../../static/post/delete.png';
 import contentReviwing from "../../../static/common/contentReviewing.png";
 import contentUnpass from "../../../static/common/ContentUnpass.png";
+import share from '../../../static/post/post-share-icon.png';
 
 export default function postpage() {
 
@@ -352,6 +353,7 @@ export default function postpage() {
                                 <Image src={isLiked ? likeActivated : likeImg}></Image>
                                 {postContent.post.likeNum > 99 ? '99+' : postContent.post.likeNum}
                             </View>
+                            <Button className=".postpage-sharePost" openType='share' plain></Button>
                         </View>
                 }
             </View>

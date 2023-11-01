@@ -20,15 +20,15 @@ import { dataType } from './common/handlers/socketHandler';
 
 function App({ children }: PropsWithChildren<any>) {
   // 数据 store ————————————————————————————————————————————————————————————
-  const setStatusBarHeight = useStore((state) => state.setStatusBarHeight)
-  const [postData, setPostData] = usePostData((state) => [state, state.setPostData])
-  const requestUrl = useRequest((state) => state.requestUrl)
+  const setStatusBarHeight = useStore((state) => state.setStatusBarHeight);
+  const postData = usePostData((state) => state);
+  const requestUrl = useRequest((state) => state.requestUrl);
   
-  const userInfo = useUser((state) => state)
-  const [classTable, setClassTable] = useCLasstable((state) => [state, state.setClassTable])
-  const [messages, setMessageNum] = useMessage((state) => [state, state.setMessageNum])
+  const userInfo = useUser((state) => state);
+  const setClassTable = useCLasstable((state) => state.setClassTable);
+  const [messages, setMessageNum] = useMessage((state) => [state, state.setMessageNum]);
 
-  const resourceEnv = useAppInfo((state) => state.resourceEnv)
+  const resourceEnv = useAppInfo((state) => state.resourceEnv);
   
   // 请求初始数据 ————————————————————————————————————————————————————————————
   const initer = async () => {

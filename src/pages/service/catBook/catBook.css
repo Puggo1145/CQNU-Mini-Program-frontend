@@ -1,59 +1,113 @@
 /*postcss-pxtransform disable*/
 .catBook-wrapper {
+  overflow-y: scroll;
   height: 100vh;
+  background-color: #f5f2ea;
+}
+.catBook-wrapper .header {
+  background-color: #fff;
+}
+.catBook-wrapper .catBook-fns {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 64px;
+  border: 2px solid #232323;
+  border-radius: 32px;
+  background-color: #fa784a;
+}
+.catBook-wrapper .catBook-fns .catBook-fn {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 42px;
+  border-radius: 21px;
+  border: 2px solid #232323;
+  background-color: #fdc00f;
+}
+.catBook-wrapper .catBook-fns .catBook-fn Image {
+  width: 24px;
+  height: 24px;
+}
+.catBook-wrapper .catBook-fns .catBook-fn Text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  margin-left: 8px;
+}
+.catBook-wrapper .catBook-fns .catBook-createCat {
+  height: 48px;
+  border-radius: 48px;
+  padding: 8px;
+}
+.catBook-wrapper .catBook-fns .catBook-createCat Image {
+  width: 32px;
+  height: 32px;
 }
 .catBook-wrapper .catBook-preface {
   padding: 0 20px;
   box-sizing: border-box;
   padding: 20px;
   padding-top: 0;
-  background-color: #fff;
 }
 .catBook-wrapper .catBook-preface .catBook-contribution {
   display: flex;
   align-items: center;
   column-gap: 16px;
   row-gap: 16px;
+  background-color: #fff;
+  border-radius: 24px;
+  border: 2px solid #232323;
+  border-bottom: 8px solid #232323;
+  padding: 16px;
+  padding-right: 0;
+  margin-top: 20px;
 }
 .catBook-wrapper .catBook-preface .catBook-contribution .catBook-contribution-title {
+  width: 78px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 1.6px;
 }
 .catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributors {
+  flex: 1;
   overflow-x: scroll;
   display: flex;
   align-items: center;
-  justify-content: space-around;
   column-gap: 16px;
   max-width: 100%;
+  padding-right: 16px;
 }
 .catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributor {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 8px;
 }
-.catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributor Text {
-  font-size: 12px;
-}
 .catBook-wrapper .catBook-preface .catBook-contribution .catBook-contributor Image {
   box-sizing: border-box;
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: 24px;
   border: 2px solid #000;
 }
 .catBook-wrapper .catBook-content .catBook-trendingCats {
-  overflow: hidden;
   color: #fff;
-  letter-spacing: 1.6px;
-  padding: 20px 0 48px 0;
-  box-sizing: border-box;
-  border: 2px solid #232323;
-  border-radius: 24px 0 24px 24px;
-  background-color: #3ab9eb;
+  padding: 16px 0 36px 0;
+  background-color: #fa784a;
+  background-image: url(../../../static/catBook/bgOrange.png);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: top -40px left -40px;
 }
 .catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-title {
   font-weight: 700;
@@ -70,19 +124,123 @@
 }
 .catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item {
   width: 128px;
-  height: 164px;
   border-radius: 16px;
   border: 2px solid #000;
+  background-color: #fff;
+  padding: 4px;
+  padding-bottom: 8px;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item .catBook-trendingCats-item-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item .catBook-trendingCats-item-info Text {
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item .catBook-trendingCats-item-info .catBook-trendingCats-item-like {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item .catBook-trendingCats-item-info .catBook-trendingCats-item-like Image {
+  width: 16px;
+  height: 16px;
   background-color: #fff;
 }
 .catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item Image {
   width: 128px;
   height: 128px;
-  border-radius: 16px 16px 0 0;
+  border-radius: 12px;
   background-color: #f3efe3;
 }
-.catBook-wrapper .catBook-content .catBook-trendingCats .catBook-trendingCats-container .catBook-trendingCats-item Text {
-  color: #000;
+.catBook-wrapper .catBook-content .catBook-wiki {
+  margin-top: -20px;
+  padding-bottom: 216px;
+  background-color: #fff9e8;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-title {
+  color: #220e02;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 16px;
+  row-gap: 16px;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 2px solid #232323;
+  border-radius: 24px;
+  padding: 4px;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item Image {
+  border-radius: 18px;
+  width: 100%;
+  height: 156px;
+  background-color: #f3efe3;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info {
+  padding: 8px;
+  display: flex;
   font-size: 12px;
-  margin-left: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-left {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-left .catBook-wiki-item-name_sex {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-left .catBook-wiki-item-name_sex Image {
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-left .catBook-wiki-item-position {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-left .catBook-wiki-item-position Image {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-like {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+.catBook-wrapper .catBook-content .catBook-wiki .catBook-wiki-container .catBook-wiki-item .catBook-wiki-item-info .catBook-wiki-item-like Image {
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+}
+.catBook-wrapper .catBook-module {
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 20px;
+  border: 2px solid #232323;
+  background-color: #fff;
+  border-top-left-radius: 24px;
+}
+.catBook-wrapper .catBook-module-title {
+  font-weight: 700;
+  letter-spacing: 1.6px;
 }

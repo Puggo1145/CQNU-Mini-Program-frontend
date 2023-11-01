@@ -249,26 +249,36 @@
         letter-spacing: 1.4px;
     }
 
-    .postpage-likePost{
+    .postpage-right {
         display: flex;
         align-items: center;
-        width: 36px;
+        .postpage-likePost{
+            display: flex;
+            align-items: center;
+            width: 36px;
+    
+            Image {
+                width: 20px;
+                height: 20px;
+                margin-right: 4px;
+            }
+        } 
 
-        Image {
+        .postpage-sharePost {
+            padding: 0;
             width: 20px;
             height: 20px;
-            margin-right: 4px;
+            border: none;
+            background-image: url(../../../static/post/post-share-icon.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-left: 12px;
         }
-    } 
-
-    .postpage-sharePost {
-        width: 20px;
-        height: 20px;
-        background-image: url(../../../static/post/post-share-icon.png);
-        background-size: 100%;
-        background-repeat: no-repeat;
-        margin-left: 12px;
     }
+
+
+
+
 
     .postpage-send {
         width: 58px;
