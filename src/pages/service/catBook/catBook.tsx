@@ -1,6 +1,6 @@
-import { View, Text, Image, ITouchEvent } from '@tarojs/components';
+import { View, Text, Image, ITouchEvent, ScrollView } from '@tarojs/components';
 import { useState, useEffect } from 'react';
-import Taro, {useLoad} from '@tarojs/taro';
+import Taro, { useLoad } from '@tarojs/taro';
 import { makeRequest } from '@/common/utilities/requester';
 import PubSub from 'pubsub-js';
 
@@ -35,15 +35,12 @@ export default function catBook() {
     const userInfo = useUser((state) => state);
     const requestUrl = useRequest((state) => state.requestUrl);
 
-    const [cats, setCats] = useState<Partial<CatType & { isLiked: boolean }>[]>([
-    ]);
+    const [cats, setCats] = useState<Partial<CatType & { isLiked: boolean }>[]>([]);
+    const [contributors, setContributors] = useState<contributorType[]>([]);
+    const [trendingCats, setTrendingCats] = useState<Partial<CatType>[]>([]);
 
-    const [contributors, setContributors] = useState<contributorType[]>([
-
-    ]);
-
-    const [trendingCats, setTrendingCats] = useState<Partial<CatType>[]>([
-    ]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [requestLock, setRequestLock] = useState<boolean>(false);
 
     useLoad(() => {
         Taro.showShareMenu({
@@ -60,17 +57,51 @@ export default function catBook() {
         };
     }, []);
     const init = async () => {
+        setRequestLock(true);
         const res = await makeRequest({
             method: 'GET',
             url: requestUrl,
-            path: '/api/v1/cats?page=1',
+            path: `/api/v1/cats?page=${currentPage}`,
             requestService: 'backend',
+            timeout: 5000,
         });
 
         if (res.statusCode === 200) {
             setCats(res.data.cats);
+            setCurrentPage(currentPage + 1);
             setTrendingCats(res.data.trendingCats);
             setContributors(res.data.contributors);
+
+            if (res.data.catsNum - cats.length <= 6) return setRequestLock(true);
+
+            setRequestLock(false);
+        } else {
+            Taro.showToast({ title: "网络错误", icon: 'none' });
+            setRequestLock(false);
+        }
+    };
+
+    const newCats = async () => {
+        if (requestLock) return;
+        setRequestLock(true);
+        
+        const res = await makeRequest({
+            method: 'GET',
+            url: requestUrl,
+            path: `/api/v1/cats?page=${currentPage}`,
+            requestService: 'backend',
+        });
+
+        if (res.statusCode === 200) {
+            setCats(cats.concat(res.data.cats));
+            setCurrentPage(currentPage + 1);
+
+            if (res.data.catsNum - cats.length <= 6) return setRequestLock(true);
+
+            setRequestLock(false);
+        } else {
+            Taro.showToast({ title: "网络错误", icon: 'none' });
+            setRequestLock(false);
         };
     };
 
@@ -122,100 +153,109 @@ export default function catBook() {
     };
 
     return (
-        <>
+        <View className='catBook'>
             <Header title="重师猫猫图鉴" />
-            <View className='catBook-wrapper'>
-                <View className='catBook-fns'>
-                    <View className='catBook-feedCat catBook-fn' onClick={() => Taro.showToast({title: "即将上线", icon: 'none'})}>
-                        <Image src={productImg} />
-                        <Text>猫猫文创</Text>
-                    </View>
-                    <View className='catBook-createCat catBook-fn' onClick={enterCreateCat}>
-                        <Image src={createCatImg} />
-                    </View>
-                    <View className='catBook-feedCat catBook-fn' onClick={() => Taro.showToast({title: "即将上线", icon: 'none'})}>
-                        <Image src={feedCatImg} />
-                        <Text>投喂罐头</Text>
-                    </View>
-                </View>
-                <View className='catBook-preface'>
-                    <View className='catBook-contribution'>
-                        <Text className='catBook-contribution-title'>图鉴贡献者</Text>
-                        <View className='catBook-contributors'>
-                            {
-                                contributors.map((item) => {
-                                    return (
-                                        <View className='catBook-contributor' key={item._id}>
-                                            <Image src={item.avatar || defaultAvatar} className='catBook-contributor-avatar' mode="aspectFill" />
-                                            {/* <Text className='catBook-contributor-name'>{item.nick_name}</Text> */}
-                                        </View>
-                                    )
-                                })
-                            }
-                        </View>
-                    </View>
-                </View>
-                <View className='catBook-content'>
-                    <View className='catBook-trendingCats catBook-module'>
-                        <Text className='catBook-trendingCats-title catBook-module-title'>猫猫榜</Text>
-                        <View className='catBook-trendingCats-container'>
-                            {
-                                trendingCats.length > 0 ?
-                                trendingCats.map((item) => {
-                                    return (
-                                        <View className='catBook-trendingCats-item' key={item._id}>
-                                            <Image src={item.pics![0]} mode='aspectFill' />
-                                            <View className='catBook-trendingCats-item-info'>
-                                                <Text className='catBook-trendingCats-name'>{item.name}</Text>
-                                                <View className='catBook-trendingCats-item-like'>
-                                                    <Image src={like_activate} />
-                                                    <Text>{item.like}</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    );
-                                })
-                                :
-                                <View className='catBook-noCats'>暂无猫猫</View>
-                            }
-                        </View>
-                    </View>
-                    <View className='catBook-wiki catBook-module'>
-                        <Text className='catBook-wiki-title catBook-module-title'>猫猫百科</Text>
-                        <View className='catBook-wiki-container'>
-                            {
-                                cats.length > 0 ?
-                                cats.map((item, index) => {
-                                    return (
-                                        <View className='catBook-wiki-item' key={item._id} onClick={() => enterCat(item._id!, item.name!)}>
-                                            <Image src={item.pics![0]} mode='aspectFill' />
-                                            <View className='catBook-wiki-item-info'>
-                                                <View className='catBook-wiki-item-left'>
-                                                    <View className='catBook-wiki-item-name_sex'>
-                                                        <Text>{item.name}</Text>
-                                                        <Image src={item.sex === 'm' ? maleImg : femaleImg} />
-                                                    </View>
-                                                    <View className='catBook-wiki-item-position'>
-                                                        <Image src={positionImg} />
-                                                        <Text>{item.position}</Text>
-                                                    </View>
-                                                </View>
-                                                <View className='catBook-wiki-item-like' onClick={(event) => likeCat(item._id!, index, event)}>
-                                                    <Image src={item.isLiked ? like_activate : like} />
-                                                    <Text>{item.like}</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    );
-                                })
-                                :
-                                <View className='catBook-noCats'>暂无猫猫</View>
-                            }
-                        </View>
-                    </View>
-                </View>
-            </View>
-        </>
+            <ScrollView
+                scrollY
+                enablePassive='true'
+                lowerThreshold={50}
+                onScrollToLower={() => newCats()}
 
+                enableFlex
+            >
+                <View className='catBook-wrapper'>
+                    <View className='catBook-fns'>
+                        <View className='catBook-feedCat catBook-fn' onClick={() => Taro.showToast({ title: "即将上线", icon: 'none' })}>
+                            <Image src={productImg} />
+                            <Text>猫猫文创</Text>
+                        </View>
+                        <View className='catBook-createCat catBook-fn' onClick={enterCreateCat}>
+                            <Image src={createCatImg} />
+                        </View>
+                        <View className='catBook-feedCat catBook-fn' onClick={() => Taro.showToast({ title: "即将上线", icon: 'none' })}>
+                            <Image src={feedCatImg} />
+                            <Text>投喂罐头</Text>
+                        </View>
+                    </View>
+                    <View className='catBook-preface'>
+                        <View className='catBook-contribution'>
+                            <Text className='catBook-contribution-title'>图鉴贡献者</Text>
+                            <View className='catBook-contributors'>
+                                {
+                                    contributors.map((item) => {
+                                        return (
+                                            <View className='catBook-contributor' key={item._id}>
+                                                <Image src={item.avatar || defaultAvatar} className='catBook-contributor-avatar' mode="aspectFill" />
+                                                {/* <Text className='catBook-contributor-name'>{item.nick_name}</Text> */}
+                                            </View>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </View>
+                    </View>
+                    <View className='catBook-content'>
+                        <View className='catBook-trendingCats catBook-module'>
+                            <Text className='catBook-trendingCats-title catBook-module-title'>猫猫榜</Text>
+                            <View className='catBook-trendingCats-container'>
+                                {
+                                    trendingCats.length > 0 ?
+                                        trendingCats.map((item) => {
+                                            return (
+                                                <View className='catBook-trendingCats-item' key={item._id}>
+                                                    <Image src={item.pics![0]} mode='aspectFill' />
+                                                    <View className='catBook-trendingCats-item-info'>
+                                                        <Text className='catBook-trendingCats-name'>{item.name}</Text>
+                                                        <View className='catBook-trendingCats-item-like'>
+                                                            <Image src={like_activate} />
+                                                            <Text>{item.like}</Text>
+                                                        </View>
+                                                    </View>
+                                                </View>
+                                            );
+                                        })
+                                        :
+                                        <View className='catBook-noCats'>暂无猫猫</View>
+                                }
+                            </View>
+                        </View>
+                        <View className='catBook-wiki catBook-module'>
+                            <Text className='catBook-wiki-title catBook-module-title'>猫猫百科</Text>
+                            <View className='catBook-wiki-container'>
+                                {
+                                    cats.length > 0 ?
+                                        cats.map((item, index) => {
+                                            return (
+                                                <View className='catBook-wiki-item' key={item._id} onClick={() => enterCat(item._id!, item.name!)}>
+                                                    <Image src={item.pics![0]} mode='aspectFill' />
+                                                    <View className='catBook-wiki-item-info'>
+                                                        <View className='catBook-wiki-item-left'>
+                                                            <View className='catBook-wiki-item-name_sex'>
+                                                                <Text>{item.name}</Text>
+                                                                <Image src={item.sex === 'm' ? maleImg : femaleImg} />
+                                                            </View>
+                                                            <View className='catBook-wiki-item-position'>
+                                                                <Image src={positionImg} />
+                                                                <Text>{item.position}</Text>
+                                                            </View>
+                                                        </View>
+                                                        <View className='catBook-wiki-item-like' onClick={(event) => likeCat(item._id!, index, event)}>
+                                                            <Image src={item.isLiked ? like_activate : like} />
+                                                            <Text>{item.like}</Text>
+                                                        </View>
+                                                    </View>
+                                                </View>
+                                            );
+                                        })
+                                        :
+                                        <View className='catBook-noCats'>暂无猫猫</View>
+                                }
+                            </View>
+                            {requestLock && <Text className='catBook-allcats'>猫猫全都在这了</Text>}
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
+        </View>
     )
 }

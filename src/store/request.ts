@@ -17,7 +17,7 @@ const useRequest = create<State & Action>((set) => ({
     requestUrl: 'http://127.0.0.1:3000', // local: http://127.0.0.1:3000/api, server: https://cqnu-backend-69914-4-1320770356.sh.run.tcloudbase.com/api
     PostImgsToOssUrl: 'https://cqnumini-posts-img.oss-cn-shanghai.aliyuncs.com',
     avatarToOssUrl: 'https://cqnumini-user-avatar.oss-cn-shanghai.aliyuncs.com',
-    catImgToOssUrl: 'https://cqnumini-cats-img.oss-cn-chengdu.aliyuncs.com',
+    catImgToOssUrl: 'https://cqnumini-cats-img.oss-cn-chengdu.aliyuncs.com/',
     authUrl: 'http://127.0.0.1:8000',
 
     // 定义setUserInfo操作，它将用户信息合并到当前状态

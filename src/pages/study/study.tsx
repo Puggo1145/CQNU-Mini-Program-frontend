@@ -100,7 +100,7 @@ export default function Study() {
             <View className='study-timetable-toTable' onClick={() => Taro.navigateTo({ url: userInfo.isLogin ? '/pages/classtable/classtable' : '/pages/login/login' })}>{"查看课表>"}</View>
           </View>
           <View className='study-timetable-items'>
-            <View className='study-timetable-current'>
+            <View className='study-timetable-current' onClick={() => Taro.navigateTo({ url: userInfo.isLogin ? '/pages/classtable/classtable' : '/pages/login/login' })}>
               <View className='study-timetable-left'>
                 <Text></Text>
                 <Text className='study-timetable-name'>

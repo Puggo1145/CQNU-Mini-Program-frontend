@@ -40,7 +40,8 @@ export default function createCat() {
 
     const handleSubmit = async (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
         event.preventDefault();
-        const nullFieldsNum = Object.entries(event.detail.value!).filter(([key, value]) => value === "" && key !== 'nick_name').length;
+        const catInfo = event.detail.value as CatType;
+        const nullFieldsNum = Object.entries(catInfo!).filter(([key, value]) => value === "" && key !== 'nick_name').length;
 
         if (nullFieldsNum > 0) {
             return Taro.showToast({
@@ -54,19 +55,28 @@ export default function createCat() {
                 icon: "error",
                 duration: 2000,
             });
+        } else if (catInfo.position.length > 8) {
+            return Taro.showToast({
+                title: "常驻地点最多8个字",
+                duration: 2000,
+            });
+        } else if (catInfo.health_condition.length > 8) {
+            return Taro.showToast({
+                title: "健康状况最多8个字",
+                duration: 2000,
+            });
         };
 
-        const catInfo = event.detail.value as CatType;
+        Taro.showLoading({
+            title: "创建中...",
+            mask: true,
+        });
 
         // 上传图片到oss
         const imgRes = await uploadImageToOss(accessKeyId, `${catInfo.name}-${Date.now()}`, catImgToOssUrl, [catImg]);
         Object.assign(catInfo, { pics: "https://cqnumini-cats-img.oss-cn-chengdu.aliyuncs.com/" + imgRes.filenames });
         Object.assign(catInfo, { sex: catSex[currentCatSex] === '男猫猫' ? 'm' : 'f' });
 
-        Taro.showLoading({
-            title: "创建中...",
-            mask: false,
-        });
         // 创建猫猫
         const res = await makeRequest({
             method: "POST",
@@ -77,7 +87,7 @@ export default function createCat() {
             header: {
                 authorization: Taro.getStorageSync('token')
             },
-            timeout: 8000,
+            timeout: 5000,
         });
 
         if (res.statusCode === 201) {
@@ -123,8 +133,8 @@ export default function createCat() {
                             </Picker>
                         </View>
                         <View className="createCat-form-item">
-                            <Text>常出入地</Text>
-                            <Input className="createCat-input" name="position" placeholder="得找得到" />
+                            <Text>常驻地点</Text>
+                            <Input className="createCat-input" name="position" placeholder="最长8个字" />
                         </View>
                         <View className="createCat-form-item">
                             <Text>性格特征</Text>
@@ -136,7 +146,7 @@ export default function createCat() {
                         </View>
                         <View className="createCat-form-item">
                             <Text>健康状况</Text>
-                            <Input className="createCat-input" name="health_condition" placeholder="身体健康，万事如意" />
+                            <Input className="createCat-input" name="health_condition" placeholder="最长8个字" />
                         </View>
                         <View className="createCat-form-item">
                             <Text>撸猫指南</Text>

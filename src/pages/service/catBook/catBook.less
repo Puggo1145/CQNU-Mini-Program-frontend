@@ -1,7 +1,11 @@
 /*postcss-pxtransform disable*/
+.catBook {
+    scroll-view {
+        height: 100vh;
+    }
+}
 .catBook-wrapper {
     overflow-y: scroll;
-    height: 100vh;
     background-color: #f5f2ea;
 
     .header {
@@ -13,6 +17,7 @@
         justify-content: space-evenly;
         align-items: center;
         box-sizing: border-box;
+        z-index: 1;
         position: fixed;
         bottom: 36px;
         left: 50%;
@@ -203,6 +208,7 @@
                 color: #220e02;
             }
 
+
             .catBook-wiki-container {
                 margin-top: 20px;
                 display: grid;
@@ -301,5 +307,13 @@
     .catBook-module-title {
         font-weight: 700;
         letter-spacing: 1.6px;
+    }
+
+    .catBook-allcats {
+        margin-top: 12px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
     }
 }

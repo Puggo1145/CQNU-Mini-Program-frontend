@@ -2,10 +2,12 @@ import { View, Image, Text } from "@tarojs/components"
 import { useEffect, useState } from "react"
 import Taro from "@tarojs/taro"
 import { makeRequest } from "@/common/utilities/requester"
+import { uploadImageToOss } from "@/common/utilities/uploadImageToOss"
 
 import Header from "@/common/Header/Header"
 
 import useRequest from "@/store/request"
+import useAppInfo from "@/store/appInfo"
 
 import CatType from "../types"
 
@@ -13,11 +15,11 @@ import './catPage.css'
 
 import maleImg from '@/static/catBook/Male.png';
 import femaleImg from '@/static/catBook/Female.png'
-import like2 from '@/static/catBook/like2.png'
 
 export default function catPage() {
 
-  const requestUrl = useRequest((state) => state.requestUrl);
+  const [requestUrl, catImgToOssUrl] = useRequest((state) => [state.requestUrl, state.catImgToOssUrl]);
+  const accessKey_id = useAppInfo((state) => state.accessKey_id);
   const [catInfo, setCatInfo] = useState<CatType>();
 
   useEffect(() => {
@@ -40,11 +42,38 @@ export default function catPage() {
     }
   };
 
-  const addImg = () => {
-    Taro.showToast({
-      title: "功能暂未上线",
-      icon: 'error'
+  const addImg = async (cat_id: string) => {
+    const selectedImage = await Taro.chooseImage({
+      count: 1,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+    });
+
+
+    Taro.showLoading({
+      title: "上传中",
+    });
+    const imgRes = await uploadImageToOss(accessKey_id, cat_id, catImgToOssUrl, selectedImage.tempFilePaths);
+
+    const res = await makeRequest({
+      method: 'PATCH',
+      url: requestUrl,
+      path: `/api/v1/cats/${cat_id}/img`,
+      requestService: 'backend',
+      header: {
+        authorization: Taro.getStorageSync('token')
+      },
+      data: {
+        img: catImgToOssUrl + imgRes.filenames[0]
+      }
     })
+
+    if (res.statusCode === 200) {
+      Taro.showToast({
+        title: "上传成功"
+      });
+      init();
+    }
   };
 
   return (
@@ -53,20 +82,13 @@ export default function catPage() {
       <View className="catPage-content">
         <View className="catPage-pics" >
           {
-            catInfo?.pics.map((item, index) => {
-              return (
-                <View
-                  className="catPage-pics-item"
-                  key={index}
-                >
-                  <Image
-                    src={item}
-                    mode="aspectFill"
-                    className="catPage-pics-item-img"
-                  />
-                </View>
-              )
-            })
+            <View className="catPage-pics-item">
+              <Image
+                src={catInfo?.pics[0]!}
+                mode="aspectFill"
+                className="catPage-pics-item-img"
+              />
+            </View>
           }
         </View>
         <View className="catPage-info">
@@ -109,18 +131,18 @@ export default function catPage() {
         <View className="catPage-catImgs">
           <View className="catPage-catImgs-header">
             <Text className="catPage-catImgs-title">猫猫相册</Text>
-            <View className="catPage-addPic" onClick={addImg}>+</View>
+            <View className="catPage-addPic" onClick={() => addImg(catInfo?._id!)}>+</View>
           </View>
           <View className="catPage-catImgs-content">
             {
               catInfo?.pics.map((item, index) => {
                 return (
-                    <Image
-                      src={item}
-                      mode="aspectFill"
-                      className="catPage-catImgs-item"
-                      key={index}
-                    />
+                  <Image
+                    src={item}
+                    mode="aspectFill"
+                    className="catPage-catImgs-item"
+                    key={index}
+                  />
                 )
               })
             }
