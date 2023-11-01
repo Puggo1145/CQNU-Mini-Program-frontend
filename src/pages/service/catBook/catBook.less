@@ -158,8 +158,12 @@
                         justify-content: space-between;
                         padding: 4px 8px;
 
-                        Text {
+                        
+                        .catBook-trendingCats-name {
+                            overflow: hidden;
+                            max-width: 80px;
                             color: #000;
+                            white-space: nowrap;
                             font-size: 12px;
                             font-weight: 700;
                         }
@@ -168,6 +172,9 @@
                             display: flex;
                             align-items: center;
                             column-gap: 4px;
+                            font-size: 12px;
+                            font-weight: 700;
+                            color: #000;
                             
                             Image {
                                 width: 16px;
@@ -238,6 +245,12 @@
                                 font-size: 16px;
                                 font-weight: 700;
                                 line-height: 100%;
+
+                                Text {
+                                    max-width: 96px;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                }
 
                                 Image {
                                     width: 16px;

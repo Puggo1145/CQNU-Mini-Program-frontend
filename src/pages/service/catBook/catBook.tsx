@@ -1,6 +1,6 @@
 import { View, Text, Image, ITouchEvent } from '@tarojs/components';
 import { useState, useEffect } from 'react';
-import Taro from '@tarojs/taro';
+import Taro, {useLoad} from '@tarojs/taro';
 import { makeRequest } from '@/common/utilities/requester';
 import PubSub from 'pubsub-js';
 
@@ -36,7 +36,6 @@ export default function catBook() {
     const requestUrl = useRequest((state) => state.requestUrl);
 
     const [cats, setCats] = useState<Partial<CatType & { isLiked: boolean }>[]>([
-        { _id: "xxx1", pics: ppImg, name: "屁屁", sex: "m", position: "xxx", like: 0, isLiked: false },
     ]);
 
     const [contributors, setContributors] = useState<contributorType[]>([
@@ -44,8 +43,13 @@ export default function catBook() {
     ]);
 
     const [trendingCats, setTrendingCats] = useState<Partial<CatType>[]>([
-        { _id: "xxx1", pics: ppImg, name: "屁屁" },
     ]);
+
+    useLoad(() => {
+        Taro.showShareMenu({
+            withShareTicket: true
+        });
+    });
 
     useEffect(() => {
         init();
@@ -162,7 +166,7 @@ export default function catBook() {
                                         <View className='catBook-trendingCats-item' key={item._id}>
                                             <Image src={item.pics![0]} mode='aspectFill' />
                                             <View className='catBook-trendingCats-item-info'>
-                                                <Text>{item.name}</Text>
+                                                <Text className='catBook-trendingCats-name'>{item.name}</Text>
                                                 <View className='catBook-trendingCats-item-like'>
                                                     <Image src={like_activate} />
                                                     <Text>{item.like}</Text>
