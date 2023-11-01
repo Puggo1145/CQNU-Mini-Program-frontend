@@ -1,9 +1,12 @@
 /*postcss-pxtransform disable*/
+.createCat {
+    height: 100vh;
+    background-color: #f5f2ea;
+}
 .createCat-content {
     overflow-y: scroll;
     padding: 20px;
-    height: calc(100vh - 98px);
-    background-color: #f5f2ea;
+    height: calc(100% - 224px);
 
     .createCat-form {
         display: flex;
@@ -42,7 +45,7 @@
             Text {
                 padding-left: 16px;
                 display: block;
-                width: 68px;
+                width: 96px;
                 height: 100%;
                 font-size: 14px;
                 color: #fff;
@@ -53,7 +56,8 @@
             }
 
             .createCat-input {
-                padding-left: 12px;
+                width: 100%;
+                padding: 12px;
                 font-size: 14px;
                 letter-spacing: 0.56px;
                 font-weight: 700;

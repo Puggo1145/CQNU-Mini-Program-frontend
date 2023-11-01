@@ -52,6 +52,7 @@ export default function login() {
                 Taro.setStorageSync('token', toBackendRes.data.token);
 
                 const userInfo = toBackendRes.data.data;
+                
                 // 持久化 userInfo
                 Object.keys(userInfo).forEach(key => {
                     Taro.setStorageSync(key, userInfo[key]);

@@ -1,19 +1,23 @@
 /*postcss-pxtransform disable*/
 .catPage-content {
+  position: relative;
+  overflow-y: scroll;
   padding-top: 20px;
-  height: 100vh;
-  background-color: #f5f2ea;
+  height: calc(100vh - 98px);
+  background-color: #ecc45d;
+  background-image: url(../../../../static/catBook/bgYellow.png);
+  background-size: 24%;
 }
 .catPage-content .catPage-pics {
-  overflow-x: scroll;
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-}
-.catPage-content .catPage-pics .catPage-pics-item {
-  box-sizing: border-box;
   width: 180px;
   height: 180px;
+  margin: 0 auto;
+}
+.catPage-content .catPage-pics .catPage-pics-item {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 164px;
+  height: 164px;
   padding: 8px;
   background-color: #fff;
   border: 2px solid #232323;
@@ -24,16 +28,124 @@
   width: 100%;
   height: 100%;
 }
-.catPage-content .catPage-pics .catPage-pics-addCat {
-  width: 180px;
-  height: 180px;
-  background-color: #f5f2ea;
-}
 .catPage-content .catPage-info {
-  margin-top: -48px;
-  padding: 0 20px;
-  min-height: 70vh;
+  padding: 0 24px;
+  padding-top: 72px;
+  padding-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  margin-top: -72px;
   border: 2px solid #232323;
   background-color: #fff;
   border-top-left-radius: 24px;
+}
+.catPage-content .catPage-info .catPage-info-row1 {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.catPage-content .catPage-info .catPage-info-row1 .catPage-info-name {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+.catPage-content .catPage-info .catPage-info-row1 .catPage-info-name Image {
+  width: 20px;
+  height: 20px;
+}
+.catPage-content .catPage-info .catPage-info-row1 .catPage-info-name Text {
+  font-size: 24px;
+  font-weight: 700;
+}
+.catPage-content .catPage-info .catPage-info-row1 .catPage-info-item {
+  flex-direction: row !important;
+  align-items: center;
+  color: #666;
+}
+.catPage-content .catPage-info .catPage-info-row1 .catPage-info-item Text:last-child {
+  font-size: 14px;
+}
+.catPage-content .catPage-info .catPage-info-row2 {
+  box-sizing: border-box;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 36px;
+  border: 2px solid #232323;
+}
+.catPage-content .catPage-info .catPage-info-row2 .catPage-info-item {
+  flex: 0.5;
+  align-items: center;
+}
+.catPage-content .catPage-info .catPage-info-row2 .catPage-info-item:first-child {
+  border-right: 2px solid #232323;
+}
+.catPage-content .catPage-info .catPage-info-row3 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+  row-gap: 12px;
+}
+.catPage-content .catPage-info .catPage-info-item {
+  display: flex;
+  flex-direction: column;
+}
+.catPage-content .catPage-info .catPage-info-item Text:first-child {
+  font-size: 14px;
+}
+.catPage-content .catPage-info .catPage-info-item Text:last-child {
+  font-size: 16px;
+  font-weight: 700;
+}
+.catPage-content .catPage-catImgs {
+  margin-top: -32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top-left-radius: 24px;
+  border: 2px solid #232323;
+  background-color: #f4f2eb;
+}
+.catPage-content .catPage-catImgs .catPage-catImgs-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.catPage-content .catPage-catImgs .catPage-catImgs-header .catPage-catImgs-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.catPage-content .catPage-catImgs .catPage-catImgs-header .catPage-addPic {
+  margin-top: -48px;
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  border: 2px solid #232323;
+  background-color: #ea7f56;
+  text-align: center;
+  line-height: 52px;
+  font-size: 36px;
+  color: #232323;
+}
+.catPage-content .catPage-catImgs .catPage-catImgs-content {
+  padding: 20px;
+  height: 100%;
+  min-height: 25vh;
+  padding-top: 0;
+  padding-bottom: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.catPage-content .catPage-catImgs .catPage-catImgs-content .catPage-catImgs-item {
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  border: 2px solid #232323;
 }

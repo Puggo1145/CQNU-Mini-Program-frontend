@@ -8,6 +8,7 @@ export default interface CatType {
     character: string, // 性格
     appearance: string, // 外貌
     health_condition: string, // 健康状况
+    guideline: string
 
     like: number, // 点赞数
 }

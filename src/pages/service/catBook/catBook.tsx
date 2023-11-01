@@ -1,4 +1,4 @@
-import { View, Text, Image } from '@tarojs/components';
+import { View, Text, Image, ITouchEvent } from '@tarojs/components';
 import { useState, useEffect } from 'react';
 import Taro from '@tarojs/taro';
 import { makeRequest } from '@/common/utilities/requester';
@@ -64,16 +64,15 @@ export default function catBook() {
         });
 
         if (res.statusCode === 200) {
-            console.log(res.data);
             setCats(res.data.cats);
             setTrendingCats(res.data.trendingCats);
             setContributors(res.data.contributors);
-        }
+        };
     };
 
     const enterCreateCat = () => {
         if (!userInfo.isLogin) return Taro.navigateTo({ url: '/pages/login/login' });
-        if (!['admin', 'manager-cat'].includes(userInfo.role)) return Taro.showToast({ title: '您没有权限', icon: 'error' });
+        if (!['admin', 'manager-cat'].includes(userInfo.role)) return Taro.showToast({ title: '您不是图鉴管理员' });
 
         Taro.navigateTo({ url: '/pages/service/catBook/createCat/createCat' });
     };
@@ -84,7 +83,9 @@ export default function catBook() {
         Taro.navigateTo({ url: `/pages/service/catBook/catPage/catPage?id=${catId}&name=${name}` });
     };
 
-    const likeCat = async (catId: string, index: number) => {
+    const likeCat = async (catId: string, index: number, event: ITouchEvent) => {
+        event.stopPropagation();
+
         if (!userInfo.isLogin) return Taro.navigateTo({ url: '/pages/login/login' });
 
         const newCats = [...cats];
@@ -121,14 +122,14 @@ export default function catBook() {
             <Header title="重师猫猫图鉴" />
             <View className='catBook-wrapper'>
                 <View className='catBook-fns'>
-                    <View className='catBook-feedCat catBook-fn'>
+                    <View className='catBook-feedCat catBook-fn' onClick={() => Taro.showToast({title: "即将上线", icon: 'none'})}>
                         <Image src={productImg} />
                         <Text>猫猫文创</Text>
                     </View>
                     <View className='catBook-createCat catBook-fn' onClick={enterCreateCat}>
                         <Image src={createCatImg} />
                     </View>
-                    <View className='catBook-feedCat catBook-fn'>
+                    <View className='catBook-feedCat catBook-fn' onClick={() => Taro.showToast({title: "即将上线", icon: 'none'})}>
                         <Image src={feedCatImg} />
                         <Text>投喂罐头</Text>
                     </View>
@@ -155,6 +156,7 @@ export default function catBook() {
                         <Text className='catBook-trendingCats-title catBook-module-title'>猫猫榜</Text>
                         <View className='catBook-trendingCats-container'>
                             {
+                                trendingCats.length > 0 ?
                                 trendingCats.map((item) => {
                                     return (
                                         <View className='catBook-trendingCats-item' key={item._id}>
@@ -169,6 +171,8 @@ export default function catBook() {
                                         </View>
                                     );
                                 })
+                                :
+                                <View className='catBook-noCats'>暂无猫猫</View>
                             }
                         </View>
                     </View>
@@ -176,6 +180,7 @@ export default function catBook() {
                         <Text className='catBook-wiki-title catBook-module-title'>猫猫百科</Text>
                         <View className='catBook-wiki-container'>
                             {
+                                cats.length > 0 ?
                                 cats.map((item, index) => {
                                     return (
                                         <View className='catBook-wiki-item' key={item._id} onClick={() => enterCat(item._id!, item.name!)}>
@@ -191,7 +196,7 @@ export default function catBook() {
                                                         <Text>{item.position}</Text>
                                                     </View>
                                                 </View>
-                                                <View className='catBook-wiki-item-like' onClick={() => likeCat(item._id!, index)}>
+                                                <View className='catBook-wiki-item-like' onClick={(event) => likeCat(item._id!, index, event)}>
                                                     <Image src={item.isLiked ? like_activate : like} />
                                                     <Text>{item.like}</Text>
                                                 </View>
@@ -199,6 +204,8 @@ export default function catBook() {
                                         </View>
                                     );
                                 })
+                                :
+                                <View className='catBook-noCats'>暂无猫猫</View>
                             }
                         </View>
                     </View>

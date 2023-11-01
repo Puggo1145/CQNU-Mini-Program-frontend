@@ -156,7 +156,7 @@ export default function TagContent() {
         return () => {
             PubSub.unsubscribe(updateLikeNum);
         };
-    }, [posts])
+    }, [posts]);
 
     // 页面功能——————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -274,8 +274,8 @@ export default function TagContent() {
                                     })}
                                     <View className="post-info">
                                         <View className="post-info-user">
-                                            <Image src={post.user.avatar || defaultAvatar} className="post-user-avatar" />
-                                            <Text>{post.user.nick_name}</Text>
+                                            <Image src={post.user?.avatar || defaultAvatar} className="post-user-avatar" />
+                                            <Text>{post.user?.nick_name}</Text>
                                         </View>
                                         <View className="post-info-data">
                                             <View className="post-like">

@@ -20,7 +20,6 @@ export default function createCat() {
 
     const accessKeyId = useAppInfo((state) => state.accessKey_id);
     const [requestUrl, catImgToOssUrl] = useRequest((state) => [state.requestUrl, state.catImgToOssUrl]);
-    const userId = useUser((state) => state.id);
 
     const [catSex] = useState(["男猫猫", "女猫猫"]);
     const [currentCatSex, setCurrentCatSex] = useState(0);
@@ -138,6 +137,10 @@ export default function createCat() {
                         <View className="createCat-form-item">
                             <Text>健康状况</Text>
                             <Input className="createCat-input" name="health_condition" placeholder="身体健康，万事如意" />
+                        </View>
+                        <View className="createCat-form-item">
+                            <Text>撸猫指南</Text>
+                            <Input className="createCat-input" name="guideline" placeholder="防抓指南" />
                         </View>
                         <Button className="createCat-submit" formType="submit">创建</Button>
                     </View>
