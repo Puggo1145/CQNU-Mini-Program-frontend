@@ -25,6 +25,16 @@ export default function classroomNav() {
         {mark: '', name: '致用楼', address: '重庆市沙坪坝区虎溪镇大学城中路37号', latitude: 29.61083, longitude: 106.300463},
     ])
 
+    const [courierStation, setcourierStation] = useState<locationType[]>([
+        {mark: '北门', name: '北门菜鸟驿站', address: '重庆市沙坪坝区虎溪镇大学城中路37号', latitude: 29.614076, longitude: 106.305222},
+        {mark: '南门', name: '南门菜鸟驿站', address: '重庆市沙坪坝区虎溪镇大学城中路37号', latitude: 29.614076, longitude: 106.305222},
+        {mark: '南门', name: '新东方驿站', address: '重庆市沙坪坝区虎溪镇大学城中路37号', latitude: 29.614076, longitude: 106.305222},
+        {mark: '三食堂', name: '三食堂菜鸟驿站', address: '重庆市沙坪坝区虎溪镇大学城中路37号', latitude: 29.614076, longitude: 106.305222},
+        {mark: '北五', name: '京东快递驿站', address: '重庆市沙坪坝区虎溪镇大学城中路37号', latitude: 29.614076, longitude: 106.305222},
+        
+        
+    ])
+
 
     function navigate(navInfo: locationType) {
         Taro.openLocation({
@@ -38,19 +48,46 @@ export default function classroomNav() {
 
     return (
         <View className="classroomNav-wrapper">
-            <Header title={"教室导航"} />
-            <View className="classroomNav-content">
-                {
-                    classroom.map((item, index) => {
-                        return (
-                            <View className="classroom-item" key={item.mark} onClick={() => navigate(item)}>
-                                <Text className='classroom-item-name'>{item.name}</Text>
-                                <Text className='classroom-item-mark'>教室号：{item.mark}</Text>
-                            </View>
-                        )
-                    })
-                }
-            </View>
+            <Header title={"校园导航"} />
+
+                <View className="classroomNav-content">
+                    <Text className="title">教室导航</Text>
+                        <View className="classroom-list">
+                        {
+                            classroom.map((item, index) => {
+                                return (
+                                    <View className="classroom-item" key={item.mark} onClick={() => navigate(item)}>
+                                        <View className="classroom-item-text">
+                                            <Text className='classroom-item-name'>{item.name}</Text>
+                                            <Text className='classroom-item-mark'>教室号：{item.mark}</Text>
+                                        </View>
+                                    </View>
+                                )
+                            })
+                        }
+                        </View>
+
+
+                        <Text className="title">快递点导航</Text>
+                        <View className="classroom-list">
+                        {
+                            courierStation.map((item, index) => {
+                                return (
+                                    <View className="classroom-item" key={item.mark} onClick={() => navigate(item)}>
+                                        <View className="classroom-item-text">
+                                            <Text className='classroom-item-name'>{item.name}</Text>
+                                            <Text className='classroom-item-mark'>临近区域：{item.mark}</Text>
+                                        </View>
+                                    </View>
+                                )
+                            })
+                        }
+                        </View> 
+                </View>
+
+               
+
+                
         </View>
     )
 }

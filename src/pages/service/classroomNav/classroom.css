@@ -1,31 +1,51 @@
 /*postcss-pxtransform disable*/
-.classroomNav-content {
+.classroomNav-wrapper .classroomNav-content {
+  margin-top: 10px;
+  height: 1400rpx;
+  overflow-y: scroll;
+}
+.classroomNav-wrapper .classroomNav-content .title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 25px;
+  margin-top: 10px;
+}
+.classroomNav-wrapper .classroomNav-content .classroom-list {
   margin-top: 12px;
   padding: 0 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.classroomNav-content .classroom-item {
-  padding: 0 12px;
+.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item {
+  flex-basis: 45%;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  width: 100%;
-  height: 80px;
   border-radius: 16px;
   background-color: #000;
   color: #fff;
   text-align: center;
-  line-height: 80px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  position: relative;
 }
-.classroomNav-content .classroom-item Text:nth-child(1) {
-  font-size: 20px;
+.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item .classroom-item-text {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item Text:nth-child(1) {
+  padding-top: 10px;
+  font-size: 15px;
   font-weight: 800;
 }
-.classroomNav-content .classroom-item Text:nth-child(2) {
+.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item Text:nth-child(2) {
   font-size: 14px;
   font-weight: 400;
+  position: absolute;
+  bottom: 30px;
 }

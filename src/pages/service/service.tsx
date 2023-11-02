@@ -30,7 +30,7 @@ interface serviceType {
 export default function Service() {
 
   const [studyServices] = useState<serviceType[]>([
-    { name: '教室导航', icon: classRoomNavImg, page: 'classroomNav', type: 'toPage', color: '#9356f7' },
+    { name: '校园导航', icon: classRoomNavImg, page: 'classroomNav', type: 'toPage', color: '#9356f7' },
     { name: '梦厅预约', icon: mtAppointmentImg, page: 'none', type: 'toPage', color: '#9e9e9e', requireLogin: true },
     { name: '成绩查询', icon: examScoresImg, page: 'examScores', type: 'toPage', color: '#43CCF8', requireLogin: true },
   ]);
