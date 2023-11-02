@@ -8,6 +8,22 @@
   background-image: url(../../../../static/catBook/bgYellow.png);
   background-size: 24%;
 }
+.catPage-content .catPage-share {
+  box-sizing: border-box;
+  z-index: 1;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  border: 2px solid #232323;
+  border-radius: 32px;
+  background-color: #ecc45d;
+  background-image: url(../../../../static/catBook/share.png);
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .catPage-content .catPage-pics {
   width: 180px;
   height: 180px;
@@ -135,12 +151,12 @@
 }
 .catPage-content .catPage-catImgs .catPage-catImgs-content {
   padding: 20px;
-  height: 100%;
   min-height: 25vh;
   padding-top: 0;
   padding-bottom: 56px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  row-gap: 12px;
 }
 .catPage-content .catPage-catImgs .catPage-catImgs-content .catPage-catImgs-item {
   box-sizing: border-box;

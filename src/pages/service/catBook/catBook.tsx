@@ -202,7 +202,7 @@ export default function catBook() {
                                     trendingCats.length > 0 ?
                                         trendingCats.map((item) => {
                                             return (
-                                                <View className='catBook-trendingCats-item' key={item._id}>
+                                                <View className='catBook-trendingCats-item' key={item._id} onClick={() => enterCat(item._id!, item.name!)}>
                                                     <Image src={item.pics![0]} mode='aspectFill' />
                                                     <View className='catBook-trendingCats-item-info'>
                                                         <Text className='catBook-trendingCats-name'>{item.name}</Text>

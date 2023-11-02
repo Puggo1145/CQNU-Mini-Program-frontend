@@ -1,4 +1,4 @@
-import { View, Image, Text } from "@tarojs/components"
+import { View, Image, Text, Button } from "@tarojs/components"
 import { useEffect, useState } from "react"
 import Taro from "@tarojs/taro"
 import { makeRequest } from "@/common/utilities/requester"
@@ -23,6 +23,10 @@ export default function catPage() {
   const [catInfo, setCatInfo] = useState<CatType>();
 
   useEffect(() => {
+    Taro.showShareMenu({
+      withShareTicket: true,
+    });
+
     init();
   }, []);
 
@@ -53,7 +57,7 @@ export default function catPage() {
     Taro.showLoading({
       title: "上传中",
     });
-    const imgRes = await uploadImageToOss(accessKey_id, cat_id, catImgToOssUrl, selectedImage.tempFilePaths);
+    const imgRes = await uploadImageToOss(accessKey_id, `${cat_id}-${Date.now()}`, catImgToOssUrl, selectedImage.tempFilePaths);
 
     const res = await makeRequest({
       method: 'PATCH',
@@ -80,6 +84,7 @@ export default function catPage() {
     <View className="catPage">
       <Header title={Taro.getCurrentInstance().router?.params.name!} />
       <View className="catPage-content">
+        <Button className="catPage-share" openType="share" plain></Button>
         <View className="catPage-pics" >
           {
             <View className="catPage-pics-item">

@@ -12,7 +12,7 @@ export const uploadImageToOss = async (accessKeyId: string, id: string, ossUrl: 
 
     // 1. 创建多个 promise 上传任务
     const uploadTask = imagePaths.map(async (imagePath, index) => {
-        const key = `postImage-${id}-${index}.jpg`; // 上传的文件名
+        const key = `${id}-${index}.jpg`; // 上传的文件名
         filenames.push(key);
 
         const imagePromise = Taro.uploadFile({

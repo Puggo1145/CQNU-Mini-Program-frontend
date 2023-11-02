@@ -1,4 +1,5 @@
 /*postcss-pxtransform disable*/
+
 .catPage-content {
     position: relative;
     overflow-y: scroll;
@@ -7,6 +8,23 @@
     background-color: #ecc45d;
     background-image: url(../../../../static/catBook/bgYellow.png);
     background-size: 24%;
+
+    .catPage-share {
+        box-sizing: border-box;
+        z-index: 1;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+        border: 2px solid #232323;
+        border-radius: 32px;
+        background-color: #ecc45d;
+        background-image: url(../../../../static/catBook/share.png);
+        background-size: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 
     .catPage-pics {
         width: 180px;
@@ -156,12 +174,12 @@
 
         .catPage-catImgs-content {
             padding: 20px;
-            height: 100%;
             min-height: 25vh;
             padding-top: 0;
             padding-bottom: 56px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            row-gap: 12px;
 
             .catPage-catImgs-item {
                 box-sizing: border-box;
