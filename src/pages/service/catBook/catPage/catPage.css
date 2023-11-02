@@ -8,21 +8,31 @@
   background-image: url(../../../../static/catBook/bgYellow.png);
   background-size: 24%;
 }
-.catPage-content .catPage-share {
-  box-sizing: border-box;
+.catPage-content .catPage-fns {
+  display: flex;
+  column-gap: 8px;
   z-index: 1;
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 48px;
-  height: 48px;
+}
+.catPage-content .catPage-fns .catPage-fn {
+  box-sizing: border-box;
+  width: 42px;
+  height: 42px;
   border: 2px solid #232323;
   border-radius: 32px;
-  background-color: #ecc45d;
-  background-image: url(../../../../static/catBook/share.png);
   background-size: 50%;
   background-position: center;
   background-repeat: no-repeat;
+}
+.catPage-content .catPage-fns .catPage-share {
+  background-color: #ecc45d;
+  background-image: url(../../../../static/catBook/share.png);
+}
+.catPage-content .catPage-fns .catPage-edit {
+  background-color: #ea7f56;
+  background-image: url(../../../../static/catBook/edit.png);
 }
 .catPage-content .catPage-pics {
   width: 180px;

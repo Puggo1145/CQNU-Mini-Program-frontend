@@ -8,6 +8,7 @@ import Header from "@/common/Header/Header"
 
 import useRequest from "@/store/request"
 import useAppInfo from "@/store/appInfo"
+import useUser from "@/store/userInfo"
 
 import CatType from "../types"
 
@@ -20,6 +21,8 @@ export default function catPage() {
 
   const [requestUrl, catImgToOssUrl] = useRequest((state) => [state.requestUrl, state.catImgToOssUrl]);
   const accessKey_id = useAppInfo((state) => state.accessKey_id);
+  const role = useUser((state) => state.role);
+
   const [catInfo, setCatInfo] = useState<CatType>();
 
   useEffect(() => {
@@ -80,11 +83,21 @@ export default function catPage() {
     }
   };
 
+  const previewImg = (url: string) => {
+    Taro.previewImage({
+      current: url,
+      urls: [url]
+    });
+  };
+
   return (
     <View className="catPage">
       <Header title={Taro.getCurrentInstance().router?.params.name!} />
       <View className="catPage-content">
-        <Button className="catPage-share" openType="share" plain></Button>
+        <View className="catPage-fns">
+          <Button className="catPage-share catPage-fn" openType="share" plain></Button>
+          {['manager-cat', 'admin'].includes(role) && <Button className="catPage-edit catPage-fn" plain></Button>}
+        </View>
         <View className="catPage-pics" >
           {
             <View className="catPage-pics-item">
@@ -147,6 +160,7 @@ export default function catPage() {
                     mode="aspectFill"
                     className="catPage-catImgs-item"
                     key={index}
+                    onClick={() => previewImg(item)}
                   />
                 )
               })

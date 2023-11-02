@@ -8,7 +8,6 @@ import { uploadImageToOss } from "@/common/utilities/uploadImageToOss";
 
 import useAppInfo from "@/store/appInfo";
 import useRequest from "@/store/request";
-import useUser from "@/store/userInfo";
 
 import Header from "@/common/Header/Header"
 
@@ -17,6 +16,8 @@ import CatType from "../types";
 import "./createCat.less"
 
 export default function createCat() {
+
+    const action = Taro.getCurrentInstance().router?.params.action; // 创建或编辑模式
 
     const accessKeyId = useAppInfo((state) => state.accessKey_id);
     const [requestUrl, catImgToOssUrl] = useRequest((state) => [state.requestUrl, state.catImgToOssUrl]);
@@ -40,6 +41,7 @@ export default function createCat() {
 
     const handleSubmit = async (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
         event.preventDefault();
+        
         const catInfo = event.detail.value as CatType;
         const nullFieldsNum = Object.entries(catInfo!).filter(([key, value]) => value === "" && key !== 'nick_name').length;
 
