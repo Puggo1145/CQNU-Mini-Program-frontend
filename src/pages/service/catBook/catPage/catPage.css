@@ -2,7 +2,6 @@
 .catPage-content {
   position: relative;
   overflow-y: scroll;
-  padding-top: 20px;
   height: calc(100vh - 98px);
   background-color: #ecc45d;
   background-image: url(../../../../static/catBook/bgYellow.png);
@@ -38,6 +37,7 @@
   width: 180px;
   height: 180px;
   margin: 0 auto;
+  margin-top: 20px;
 }
 .catPage-content .catPage-pics .catPage-pics-item {
   display: inline-block;
@@ -89,8 +89,6 @@
   flex-direction: row !important;
   align-items: center;
   color: #666;
-}
-.catPage-content .catPage-info .catPage-info-row1 .catPage-info-item Text:last-child {
   font-size: 14px;
 }
 .catPage-content .catPage-info .catPage-info-row2 {
@@ -120,10 +118,10 @@
   flex-direction: column;
 }
 .catPage-content .catPage-info .catPage-info-item Text:first-child {
-  font-size: 14px;
+  font-size: 12px;
 }
 .catPage-content .catPage-info .catPage-info-item Text:last-child {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 .catPage-content .catPage-catImgs {

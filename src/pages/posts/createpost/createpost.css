@@ -45,9 +45,8 @@
   line-height: 150%;
 }
 .createpost-form .createpost-uploadPic-area {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .createpost-form .createpost-uploadPic-btn {
   display: flex;

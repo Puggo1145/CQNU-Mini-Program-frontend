@@ -1,8 +1,7 @@
 /*postcss-pxtransform disable*/
 .classroomNav-wrapper .classroomNav-content {
-  margin-top: 10px;
-  height: 1400rpx;
   overflow-y: scroll;
+  height: calc(100vh - 98px);
 }
 .classroomNav-wrapper .classroomNav-content .title {
   font-size: 20px;
@@ -10,42 +9,34 @@
   padding-left: 25px;
   margin-top: 10px;
 }
-.classroomNav-wrapper .classroomNav-content .classroom-list {
-  margin-top: 12px;
+.classroomNav-wrapper .classroomNav-content .classroomNav-content-list {
+  margin: 12px 0;
   padding: 0 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 16px;
+  row-gap: 12px;
 }
-.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item {
-  flex-basis: 45%;
+.classroomNav-wrapper .classroomNav-content .classroomNav-content-list .classroom-item {
   box-sizing: border-box;
   border-radius: 16px;
   background-color: #000;
   color: #fff;
-  text-align: center;
-  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  height: 140px;
+  padding: 14px;
   position: relative;
 }
-.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item .classroom-item-text {
-  text-align: left;
+.classroomNav-wrapper .classroomNav-content .classroomNav-content-list .classroom-item .classroom-item-text {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  padding: 0 10px;
+  row-gap: 8px;
 }
-.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item Text:nth-child(1) {
-  padding-top: 10px;
-  font-size: 15px;
+.classroomNav-wrapper .classroomNav-content .classroomNav-content-list .classroom-item Text:nth-child(1) {
+  font-size: 14px;
   font-weight: 800;
 }
-.classroomNav-wrapper .classroomNav-content .classroom-list .classroom-item Text:nth-child(2) {
-  font-size: 14px;
+.classroomNav-wrapper .classroomNav-content .classroomNav-content-list .classroom-item Text:nth-child(2) {
+  font-size: 12px;
   font-weight: 400;
-  position: absolute;
-  bottom: 30px;
 }

@@ -2,9 +2,8 @@
 .classroomNav-wrapper{
 
     .classroomNav-content {
-        margin-top: 10px;
-        height: 1400rpx;
         overflow-y: scroll;
+        height: calc(100vh - 98px);
 
         .title{
             font-size: 20px;
@@ -13,47 +12,38 @@
             margin-top: 10px;
         }
     
-        .classroom-list{
-            margin-top: 12px;
+        .classroomNav-content-list {
+            margin: 12px 0;
             padding: 0 20px;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-    
-    
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 16px;
+            row-gap: 12px;
+            
             .classroom-item {
-                flex-basis: 45%;
                 box-sizing: border-box;
                 border-radius: 16px;
                 background-color: #000;
                 color: #fff;
-                text-align: center;
-                margin-bottom: 10px;
                 display: flex;
                 flex-direction: column;
-                height: 140px;
+                padding: 14px;
                 position: relative;
         
                 .classroom-item-text{
-                    text-align: left;
                     display: flex;
                     flex-direction: column;
-                    margin-top: 20px;
-                    padding: 0 10px;
+                    row-gap: 8px;
                 }
         
                 Text:nth-child(1) {
-                    padding-top: 10px;
-                    font-size: 15px;
+                    font-size: 14px;
                     font-weight: 800;
                 }
         
                 Text:nth-child(2) {
-                    font-size: 14px;
+                    font-size: 12px;
                     font-weight: 400;
-                    position: absolute;
-                    bottom: 30px;
                 }
             }
         }

@@ -1,4 +1,4 @@
-import { View, Image, Text, Button } from "@tarojs/components"
+import { View, Image, Text, Button, ScrollView } from "@tarojs/components"
 import { useEffect, useState } from "react"
 import Taro from "@tarojs/taro"
 import { makeRequest } from "@/common/utilities/requester"
@@ -23,21 +23,37 @@ export default function catPage() {
   const accessKey_id = useAppInfo((state) => state.accessKey_id);
   const role = useUser((state) => state.role);
 
-  const [catInfo, setCatInfo] = useState<CatType>();
+  const [catInfo, setCatInfo] = useState<CatType & {picsLength: number}>({
+    _id: "",
+    name: "加载中...",
+    pics: [],
+    sex: "m",
+    position: "加载中...",
+    character: "加载中...",
+    appearance: "加载中...",
+    health_condition: "加载中...",
+    guideline: "加载中...",
+    like: 0,
+    picsLength: 0
+  });
+  const [page, setPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     Taro.showShareMenu({
       withShareTicket: true,
     });
 
-    init();
+    getCat();
   }, []);
 
-  const init = async () => {
+  const getCat = async () => {
+    if (isLoading) return;
+
     const res = await makeRequest({
       method: 'GET',
       url: requestUrl,
-      path: '/api/v1/cats/' + Taro.getCurrentInstance().router?.params.id,
+      path: `/api/v1/cats/${Taro.getCurrentInstance().router?.params.id}?page=${page}`,
       requestService: 'backend',
       header: {
         'Authorization': Taro.getStorageSync('token')
@@ -45,7 +61,9 @@ export default function catPage() {
     });
 
     if (res.statusCode === 200) {
-      setCatInfo(res.data.cat);
+      setCatInfo({...res.data.cat, pics: catInfo?.pics.concat(res.data.cat.pics)});
+      setPage(page + 1);
+      setIsLoading(res.data.cat.picsLength - catInfo.picsLength < 5);
     }
   };
 
@@ -79,7 +97,7 @@ export default function catPage() {
       Taro.showToast({
         title: "上传成功"
       });
-      init();
+      setCatInfo({...catInfo, pics: catInfo?.pics.concat(catImgToOssUrl + imgRes.filenames[0])});
     }
   };
 
@@ -90,10 +108,21 @@ export default function catPage() {
     });
   };
 
+  const newCatImg = async () => {
+    getCat();
+  };
+
   return (
     <View className="catPage">
       <Header title={Taro.getCurrentInstance().router?.params.name!} />
-      <View className="catPage-content">
+      <ScrollView
+        scrollY
+        enablePassive="true"
+        lowerThreshold={50}
+        onScrollToLower={() => newCatImg()}
+
+        className="catPage-content"
+      >
         <View className="catPage-fns">
           <Button className="catPage-share catPage-fn" openType="share" plain></Button>
           {['manager-cat', 'admin'].includes(role) && <Button className="catPage-edit catPage-fn" plain></Button>}
@@ -167,7 +196,7 @@ export default function catPage() {
             }
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   )
 }
