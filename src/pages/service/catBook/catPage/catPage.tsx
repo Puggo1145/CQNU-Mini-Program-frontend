@@ -61,7 +61,6 @@ export default function catPage() {
     });
 
     if (res.statusCode === 200) {
-      console.log(res.data.cat.pics);
       setCatInfo({...res.data.cat, pics: catInfo?.pics.concat(res.data.cat.pics)});
       setPage(page + 1);
       setIsLoading(res.data.cat.picsLength - catInfo.pics.length < 6);
